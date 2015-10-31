@@ -15,10 +15,10 @@ namespace AGEPRO_struct
         //bootstrap
         public List <Recruitment> recruitList { get; set; }
         public AGEPRO_inputAgeTable stockWeight { get; set; }
-        public AGEPRO_inputAgeTable SSBWeight { get; set; }
-        public AGEPRO_inputAgeTable meanWeight { get; set; }
-        public AGEPRO_inputAgeTable catchWeight { get; set; }
-        public AGEPRO_inputAgeTable naturalMortality { get; set; }
+        public AGEPRO_weightAgeTable SSBWeight { get; set; }
+        public AGEPRO_weightAgeTable meanWeight { get; set; }
+        public AGEPRO_weightAgeTable catchWeight { get; set; }
+        public AGEPRO_weightAgeTable naturalMortality { get; set; }
         //biologoical
         public AGEPRO_inputAgeTable maturity { get; set; }
         public AGEPRO_inputAgeTable fishery { get; set; }
@@ -111,7 +111,11 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[SSB_WEIGHT]"))
                 {
-
+                    this.SSBWeight.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges());
+                }
+                else if (line.Equals("[MEAN_WEIGHT]"))
+                {
+                    this.meanWeight.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges());
                 }
             }
 

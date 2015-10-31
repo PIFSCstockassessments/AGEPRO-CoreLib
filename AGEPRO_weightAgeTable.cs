@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace AGEPRO_struct
 {
-    class AGEPRO_weightAgeTable : AGEPRO_inputAgeTable
+    public class AGEPRO_weightAgeTable : AGEPRO_inputAgeTable
     {
         public int weightOpt { get; set; }  //Weight Option
         public int [] validOpt { get; set;  }
