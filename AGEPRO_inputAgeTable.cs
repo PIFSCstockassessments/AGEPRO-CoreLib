@@ -10,19 +10,17 @@ namespace AGEPRO_struct
 {
     public class AGEPRO_inputAgeTable : AGEPRO_input
     {
-        public bool fromFile { get; set; }
+        public bool? fromFile { get; set; }
         public bool timeVarying { get; set; }
         public DataTable byAgeData { get; set; }
         public DataTable byAgeCV { get; set; }
         public string dataFile { get; set; }
 
-        public AGEPRO_inputAgeTable() : base (0,1)
+        public AGEPRO_inputAgeTable()
         {
-            this.nFleets = 1;
-            int numFleets = this.nFleets;
-            int numYears = this.nYears;
+          
         }
-        public AGEPRO_inputAgeTable(string file) : base (0,1)
+        public AGEPRO_inputAgeTable(string file) 
         {
 
         }
@@ -41,10 +39,11 @@ namespace AGEPRO_struct
                 ageHeader[i] = "Age " + (i+1).ToString();
             }
 
+            //Input Age Option
             string line = sr.ReadLine();
             string[] swLine = line.Split(' ');
             string optStock = swLine[0];
-            ReadInputAgeOption(optStock);
+            ReadInputAgeOption(optStock);  //Input Age Option may vary if this a weightAgeTable
 
             //Time Varying
             string optTimeVarying = swLine[1];
@@ -57,48 +56,53 @@ namespace AGEPRO_struct
                 this.timeVarying = false;
             }
 
-            if (!this.fromFile)
+            //check fromFile has non-null value. Do nothing if so.
+            if (this.fromFile.HasValue)
             {
-                DataTable ageTable = new DataTable();
-                if (this.timeVarying)
+                if (!(bool)this.fromFile) //User spec by user
                 {
-                    N = this.nYears * numFleets;  
+                    DataTable ageTable = new DataTable();
+                    if (this.timeVarying)
+                    {
+                        N = this.nYears * numFleets;
+                    }
+                    else
+                    {
+                        N = numFleets;
+                    }
+                    //byAge
+                    for (int i = 0; i < N; i++)
+                    {
+                        line = sr.ReadLine();
+                        DataRow dr = ageTable.NewRow();
+                        string[] ageLine = line.Split(' ');
+                        for (int j = 0; j < ageLine.Length; j++)
+                        {
+                            dr[j] = ageLine[j];
+                        }
+                        ageTable.Rows.Add(dr);
+                    }
+                    this.byAgeData = ageTable;
+                    //CV
+                    DataTable cvTable = new DataTable();
+                    for (int K = 0; K < numFleets; K++)
+                    {
+                        line = sr.ReadLine();
+                        DataRow dr = cvTable.NewRow();
+                        string[] cvLine = line.Split(' ');
+                        for (int j = 0; j < numAges; j++)
+                        {
+                            dr[j] = cvLine[j];
+                        }
+                        cvTable.Rows.Add(dr);
+                    }
+                    this.byAgeCV = cvTable;
                 }
                 else
                 {
-                    N = numFleets;
+                    //From File
+                    ReadInputAgeFromFileOption(sr);
                 }
-                //byAge
-                for(int i=0; i < N; i++)
-                {   
-                    line = sr.ReadLine();
-                    DataRow dr = ageTable.NewRow();
-                    string [] ageLine = line.Split(' ');
-                    for (int j = 0; j < ageLine.Length; j++)
-                    {
-                        dr[j] = ageLine[j];
-                    }
-                    ageTable.Rows.Add(dr);
-                }
-                this.byAgeData = ageTable;
-                //CV
-                DataTable cvTable = new DataTable();
-                for(int K = 0; K < numFleets; K++ )
-                {
-                    line = sr.ReadLine();
-                    DataRow dr = cvTable.NewRow();
-                    string[] cvLine = line.Split(' ');
-                    for (int j = 0; j < numAges; j++)
-                    {
-                        dr[j] = cvLine[j];
-                    }
-                    cvTable.Rows.Add(dr);
-                }
-                this.byAgeCV = cvTable;
-            }
-            else
-            {
-                ReadInputAgeFromFileOption(sr);
             }
 
         }

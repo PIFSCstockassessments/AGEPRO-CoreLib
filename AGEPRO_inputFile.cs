@@ -15,10 +15,10 @@ namespace AGEPRO_struct
         //bootstrap
         public List <Recruitment> recruitList { get; set; }
         public AGEPRO_inputAgeTable stockWeight { get; set; }
-        public AGEPRO_weightAgeTable SSBWeight { get; set; }
-        public AGEPRO_weightAgeTable meanWeight { get; set; }
-        public AGEPRO_weightAgeTable catchWeight { get; set; }
-        public AGEPRO_weightAgeTable naturalMortality { get; set; }
+        public AGEPRO_weightAgeTable SSBWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1});
+        public AGEPRO_weightAgeTable meanWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1,-2});
+        public AGEPRO_weightAgeTable catchWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1,-2,-3} );
+        public AGEPRO_weightAgeTable naturalMortality = new AGEPRO_weightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 });
         //biologoical
         public AGEPRO_inputAgeTable maturity { get; set; }
         public AGEPRO_inputAgeTable fishery { get; set; }
@@ -33,7 +33,7 @@ namespace AGEPRO_struct
         //refpoint
         //rebuild
         //pstar
-
+        
         public void ReadInputFile(string file)
         {
             try
@@ -116,6 +116,30 @@ namespace AGEPRO_struct
                 else if (line.Equals("[MEAN_WEIGHT]"))
                 {
                     this.meanWeight.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges());
+                }
+                else if (line.Equals("[CATCH_WEIGHT]"))
+                {
+                    this.catchWeight.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges(), this.general.numFleets);
+                }
+                else if (line.Equals("[DISC_WEIGHT]"))
+                {
+                    this.discardWeight.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges(), this.general.numFleets);
+                }
+                else if (line.Equals("[NATMORT]"))
+                {
+                    this.naturalMortality.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges());
+                }
+                else if (line.Equals("[MATURITY]"))
+                {
+                    this.maturity.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges());
+                }
+                else if (line.Equals("[FISHERY]"))
+                {
+                    this.fishery.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges(), this.general.numFleets);
+                }
+                else if (line.Equals("[DISCARD]"))
+                {
+                    this.discardFraction.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges(), this.general.numFleets)
                 }
             }
 

@@ -11,6 +11,10 @@ namespace AGEPRO_struct
         public int nYears { get; set; }
         public int nFleets { get; set; }
 
+        public AGEPRO_input()
+        {
+           
+        }
         public AGEPRO_input(int numYears, int numFleets)
         {
             this.nYears = numYears;

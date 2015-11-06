@@ -10,11 +10,11 @@ namespace AGEPRO_struct
     public class AGEPRO_weightAgeTable : AGEPRO_inputAgeTable
     {
         public int weightOpt { get; set; }  //Weight Option
-        public int [] validOpt { get; set;  }
+        public int [] validOpt { get; set;  } //Valid weight options
 
         public AGEPRO_weightAgeTable()
         {
-            validOpt = new int[] {-1,-2,-3,-4};
+            validOpt = new int[] {1,0,-1,-2,-3,-4};
         }
         public AGEPRO_weightAgeTable(int[] validOptions)
         {
@@ -35,13 +35,14 @@ namespace AGEPRO_struct
             }
             else
             {
+                this.fromFile = null;
                 if (this.validOpt.Contains(Convert.ToInt32(optParam)))
                 {
                     this.weightOpt = Convert.ToInt32(optParam);
                 }
                 else
                 {
-                    //Throw warning/error
+                    //TODO: Throw warning/error
                 }
             }
         }
