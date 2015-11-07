@@ -41,7 +41,11 @@ namespace AGEPRO_struct
             int nAges = Math.Abs(this.ageBegin - this.ageEnd) + 1;
             return nAges;
         }
-        
+
+        public int[] seqYears()
+        {
+            return Enumerable.Range(this.projYearStart, this.projYearEnd).ToArray();
+        }
 
         private void readInputFile(string file)
         {

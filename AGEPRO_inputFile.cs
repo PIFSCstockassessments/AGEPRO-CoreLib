@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.IO;
 
 namespace AGEPRO_struct
@@ -19,7 +20,7 @@ namespace AGEPRO_struct
         public AGEPRO_weightAgeTable meanWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1,-2});
         public AGEPRO_weightAgeTable catchWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1,-2,-3} );
         public AGEPRO_weightAgeTable naturalMortality = new AGEPRO_weightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 });
-        //biologoical
+        public AGEPRO_biological biological = new AGEPRO_biological();
         public AGEPRO_inputAgeTable maturity { get; set; }
         public AGEPRO_inputAgeTable fishery { get; set; }
         public AGEPRO_inputAgeTable discardWeight { get; set; }
@@ -139,7 +140,11 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[DISCARD]"))
                 {
-                    this.discardFraction.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges(), this.general.numFleets)
+                    this.discardFraction.ReadInputAgeData(sr, this.general.numYears(), this.general.numAges(), this.general.numFleets);
+                }
+                else if (line.Equals("[BIOLOGICAL]"))
+                {
+                    this.biological.ReadBiologicalData(sr, this.general.seqYears());
                 }
             }
 

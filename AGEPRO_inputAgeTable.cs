@@ -61,6 +61,7 @@ namespace AGEPRO_struct
             {
                 if (!(bool)this.fromFile) //User spec by user
                 {
+                    //byAge
                     DataTable ageTable = new DataTable();
                     if (this.timeVarying)
                     {
@@ -70,12 +71,13 @@ namespace AGEPRO_struct
                     {
                         N = numFleets;
                     }
-                    //byAge
+                    //i:N rows (years (and fleets))
                     for (int i = 0; i < N; i++)
                     {
                         line = sr.ReadLine();
                         DataRow dr = ageTable.NewRow();
                         string[] ageLine = line.Split(' ');
+                        //j: Age Columns 
                         for (int j = 0; j < ageLine.Length; j++)
                         {
                             dr[j] = ageLine[j];
@@ -83,7 +85,7 @@ namespace AGEPRO_struct
                         ageTable.Rows.Add(dr);
                     }
                     this.byAgeData = ageTable;
-                    //CV
+                    //byCV
                     DataTable cvTable = new DataTable();
                     for (int K = 0; K < numFleets; K++)
                     {
