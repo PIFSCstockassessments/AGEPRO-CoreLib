@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AGEPRO_struct
 {
-    public class EmpericalRecruitment : Recruitment
+    public class EmpericalRecruitment : AGEPRO_Recruitment
     {
         public EmpericalRecruitment(int typeNum)
         {

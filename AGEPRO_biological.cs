@@ -41,11 +41,11 @@ namespace AGEPRO_struct
 
             if (this.timeVarying)
             {
-                //TF
+                //TFemale
                 line = sr.ReadLine();
                 string[] TFLine = line.Split(' ');
 
-                //TM
+                //TMale
                 line = sr.ReadLine();
                 string[] TMLine = line.Split(' ');
 
@@ -56,7 +56,7 @@ namespace AGEPRO_struct
                 tSpawnTable.Rows.Add(TFLine);
                 tSpawnTable.Rows.Add(TMLine);
             }
-            else
+            else //All Years
             {
                 line = sr.ReadLine();
                 string TFLine = line;

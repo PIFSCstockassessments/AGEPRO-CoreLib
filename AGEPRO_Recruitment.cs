@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.IO;
 
 namespace AGEPRO_struct
 {
-    public class Recruitment
+    public class AGEPRO_Recruitment
     {
         public int recruitScalingFactor { get; set; }
         public int SSBScalingFactor { get; set; }
@@ -15,11 +16,11 @@ namespace AGEPRO_struct
         public string recruitType { get; set; }
         public DataTable recruitProb { get; set; }
 
-        public Recruitment()
+        public AGEPRO_Recruitment()
         {
         }
         
-        public void ReadRecruitmentData(string[] inputFile, int nyears)
+        public void ReadRecruitmentData(StreamReader sr, int nyears)
         {
             //for (int i = 0; i < inputFile.Length; i++ )
             //{
