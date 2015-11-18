@@ -8,13 +8,13 @@ using System.IO;
 
 namespace AGEPRO_struct 
 {
-    public class AGEPRO_biological : AGEPRO_input
+    public class AGEPRO_Biological : AGEPRO_Input
     {
         public bool timeVarying { get; set; }
         public DataTable TSpawn { get; set; } //Fraction Mortality Prior To Spawning
 
 
-        public AGEPRO_biological()
+        public AGEPRO_Biological()
         {
 
         }

@@ -8,17 +8,17 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
-    public class AGEPRO_harvestScenario
+    public class AGEPRO_HarvestScenario
     {
         public DataTable harvestScenarioTable { get; set; }
         public int targetYear { get; set; }
 
-        public AGEPRO_harvestScenario()
+        public AGEPRO_HarvestScenario()
         {
 
         }
 
-        public class Rebuild : AGEPRO_harvestScenario
+        public class Rebuild : AGEPRO_HarvestScenario
         {
             public double targetValue { get; set; }
             public int targetType { get; set; } //rebuild target type (cboRebuild.SelectedIndex)
@@ -38,7 +38,7 @@ namespace AGEPRO_struct
             }
         }
 
-        public class PStar : AGEPRO_harvestScenario
+        public class PStar : AGEPRO_HarvestScenario
         {
             public int pStarLevels { get; set; }
             public DataTable pStarTable = new DataTable();

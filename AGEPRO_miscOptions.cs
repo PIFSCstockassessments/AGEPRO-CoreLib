@@ -7,7 +7,7 @@ using System.Data;
 
 namespace AGEPRO_struct
 {
-    public class AGEPRO_miscOptions
+    public class AGEPRO_MiscOptions
     {
         public bool enableSummaryReport { get; set; }
         public bool enableDataFiles { get; set; }
@@ -19,7 +19,7 @@ namespace AGEPRO_struct
         public static bool enableBounds { get; set; }
         public static bool enableRetroAdjustmentFactors { get; set; }
 
-        public AGEPRO_miscOptions()
+        public AGEPRO_MiscOptions()
         {
             enableRefpoint = false;
             enablePercentileReport = false;

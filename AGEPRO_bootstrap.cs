@@ -7,13 +7,13 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
-    public class AGEPRO_bootstrap
+    public class AGEPRO_Bootstrap
     {
         public int numBootstraps { get; set; }
         public double popScaleFactor { get; set; }
         public string bootstrapFile { get; set; }
 
-        public AGEPRO_bootstrap()
+        public AGEPRO_Bootstrap()
         {
 
         }

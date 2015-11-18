@@ -7,16 +7,16 @@ using System.Collections.ObjectModel;
 
 namespace AGEPRO_struct
 {
-    public class AGEPRO_weightAgeTable : AGEPRO_inputAgeTable
+    public class AGEPRO_WeightAgeTable : AGEPRO_InputAgeTable
     {
         public int weightOpt { get; set; }  //Weight Option
         public int [] validOpt { get; set;  } //Valid weight options
 
-        public AGEPRO_weightAgeTable()
+        public AGEPRO_WeightAgeTable()
         {
             validOpt = new int[] {1,0,-1,-2,-3,-4};
         }
-        public AGEPRO_weightAgeTable(int[] validOptions)
+        public AGEPRO_WeightAgeTable(int[] validOptions)
         {
             validOpt = validOptions;
         }

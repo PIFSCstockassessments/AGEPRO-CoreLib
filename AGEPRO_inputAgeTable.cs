@@ -8,7 +8,7 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
-    public class AGEPRO_inputAgeTable : AGEPRO_input
+    public class AGEPRO_InputAgeTable : AGEPRO_Input
     {
         public bool? fromFile { get; set; }
         public bool timeVarying { get; set; }
@@ -16,11 +16,11 @@ namespace AGEPRO_struct
         public DataTable byAgeCV { get; set; }
         public string dataFile { get; set; }
 
-        public AGEPRO_inputAgeTable()
+        public AGEPRO_InputAgeTable()
         {
           
         }
-        public AGEPRO_inputAgeTable(string file) 
+        public AGEPRO_InputAgeTable(string file) 
         {
 
         }

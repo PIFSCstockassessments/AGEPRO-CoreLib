@@ -7,7 +7,7 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
-    public class AGEPRO_general
+    public class AGEPRO_General
     {
         public int projYearStart { get; set; }    //First Year in Projection
         public int projYearEnd { get; set; }     //Last Year in Projection
@@ -20,11 +20,11 @@ namespace AGEPRO_struct
         public int seed { get; set; }            //Random Number Seed
         public string inputFile { get; set; }
 
-        public AGEPRO_general()
+        public AGEPRO_General()
         {
         }
 
-        public AGEPRO_general(string file)
+        public AGEPRO_General(string file)
         {
             this.inputFile = file;
             //readin file contents

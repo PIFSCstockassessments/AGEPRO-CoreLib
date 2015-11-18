@@ -8,32 +8,32 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
-    public class AGEPRO_inputFile
+    public class AGEPRO_InputFile
     {
         public string version { get; set; }
         public string caseID { get; set; }
-        public AGEPRO_general general { get; set; }
-        public AGEPRO_bootstrap bootstrap = new AGEPRO_bootstrap();
+        public AGEPRO_General general { get; set; }
+        public AGEPRO_Bootstrap bootstrap = new AGEPRO_Bootstrap();
         public List <AGEPRO_Recruitment> recruitList { get; set; }
-        public AGEPRO_inputAgeTable stockWeight { get; set; }
-        public AGEPRO_weightAgeTable SSBWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1});
-        public AGEPRO_weightAgeTable meanWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1,-2});
-        public AGEPRO_weightAgeTable catchWeight = new AGEPRO_weightAgeTable (new int[] {1,0,-1,-2,-3} );
-        public AGEPRO_weightAgeTable naturalMortality = new AGEPRO_weightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 });
-        public AGEPRO_biological biological = new AGEPRO_biological();
-        public AGEPRO_inputAgeTable maturity { get; set; }
-        public AGEPRO_inputAgeTable fishery { get; set; }
-        public AGEPRO_inputAgeTable discardWeight { get; set; }
-        public AGEPRO_miscOptions.retroAdjustmentFactors retroAdjust = new AGEPRO_miscOptions.retroAdjustmentFactors(); //retroAdjust
-        public AGEPRO_harvestScenario harvestScenario { get; set; }
-        public AGEPRO_inputAgeTable discardFraction { get; set; }
-        public AGEPRO_miscOptions.Bounds bounds = new AGEPRO_miscOptions.Bounds(); //bounds
-        public AGEPRO_miscOptions options = new AGEPRO_miscOptions(); //options
-        public AGEPRO_miscOptions.ScaleFactors scale = new AGEPRO_miscOptions.ScaleFactors(); //scale
-        public AGEPRO_miscOptions.ReportPercentile reportPercentile = new AGEPRO_miscOptions.ReportPercentile(); //reportPercentile
-        public AGEPRO_miscOptions.Refpoint refpoint = new AGEPRO_miscOptions.Refpoint(); //refpoint
-        public AGEPRO_harvestScenario.Rebuild rebuild = new AGEPRO_harvestScenario.Rebuild();
-        public AGEPRO_harvestScenario.PStar pstar = new AGEPRO_harvestScenario.PStar(); 
+        public AGEPRO_InputAgeTable stockWeight { get; set; }
+        public AGEPRO_WeightAgeTable SSBWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1});
+        public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
+        public AGEPRO_WeightAgeTable catchWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2,-3} );
+        public AGEPRO_WeightAgeTable naturalMortality = new AGEPRO_WeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 });
+        public AGEPRO_Biological biological = new AGEPRO_Biological();
+        public AGEPRO_InputAgeTable maturity { get; set; }
+        public AGEPRO_InputAgeTable fishery { get; set; }
+        public AGEPRO_InputAgeTable discardWeight { get; set; }
+        public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjust = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
+        public AGEPRO_HarvestScenario harvestScenario { get; set; }
+        public AGEPRO_InputAgeTable discardFraction { get; set; }
+        public AGEPRO_MiscOptions.Bounds bounds = new AGEPRO_MiscOptions.Bounds(); //bounds
+        public AGEPRO_MiscOptions options = new AGEPRO_MiscOptions(); //options
+        public AGEPRO_MiscOptions.ScaleFactors scale = new AGEPRO_MiscOptions.ScaleFactors(); //scale
+        public AGEPRO_MiscOptions.ReportPercentile reportPercentile = new AGEPRO_MiscOptions.ReportPercentile(); //reportPercentile
+        public AGEPRO_MiscOptions.Refpoint refpoint = new AGEPRO_MiscOptions.Refpoint(); //refpoint
+        public AGEPRO_HarvestScenario.Rebuild rebuild = new AGEPRO_HarvestScenario.Rebuild();
+        public AGEPRO_HarvestScenario.PStar pstar = new AGEPRO_HarvestScenario.PStar(); 
         
         public void ReadInputFile(string file)
         {
@@ -160,7 +160,7 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
-                    AGEPRO_miscOptions.enableRefpoint = true;
+                    AGEPRO_MiscOptions.enableRefpoint = true;
                     line = sr.ReadLine();
                     string[] refpointOpt = line.Split(' ');
                     this.refpoint.refSSB = Convert.ToDouble(refpointOpt[0]);
@@ -170,7 +170,7 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[BOUNDS]"))
                 {
-                    AGEPRO_miscOptions.enableBounds = true;
+                    AGEPRO_MiscOptions.enableBounds = true;
                     line = sr.ReadLine();
                     string[] boundsOpt = line.Split(' ');
                     this.bounds.maxWeight = Convert.ToDouble(boundsOpt[0]);
@@ -178,7 +178,7 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[RETROADJUST]"))
                 {
-                    AGEPRO_miscOptions.enableRetroAdjustmentFactors = true;
+                    AGEPRO_MiscOptions.enableRetroAdjustmentFactors = true;
                     line = sr.ReadLine();
                     string[] rafLine = line.Split(' ');
                     DataTable retroAdjTable = new DataTable();
@@ -200,7 +200,7 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[SCALE]"))
                 {
-                    AGEPRO_miscOptions.enableScaleFactors = true;
+                    AGEPRO_MiscOptions.enableScaleFactors = true;
                     line = sr.ReadLine();
                     string[] scaleOpt = line.Split(' ');
                     this.scale.scaleBio = Convert.ToDouble(scaleOpt[0]);
@@ -209,7 +209,7 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[PERC]"))
                 {
-                    AGEPRO_miscOptions.enablePercentileReport = true;
+                    AGEPRO_MiscOptions.enablePercentileReport = true;
                     this.reportPercentile.percentile = Convert.ToDouble(sr.ReadLine());
                 }
                 else if (line.Equals("[PSTAR]"))
