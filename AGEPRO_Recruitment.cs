@@ -13,40 +13,51 @@ namespace AGEPRO_struct
         public int recruitScalingFactor { get; set; }
         public int SSBScalingFactor { get; set; }
         public int maxRecuitObs { get; set; }
-        public string recruitType { get; set; }
+        public int[] recruitType { get; set; }
         public DataTable recruitProb { get; set; }
+        public int recruitmentCategory { get; set; }
 
         public AGEPRO_Recruitment()
         {
         }
         
-        public void ReadRecruitmentData(StreamReader sr, int nyears)
+        public void ReadRecruitmentData(StreamReader sr, int nyears, int numRecruitModels)
         {
-            //for (int i = 0; i < inputFile.Length; i++ )
-            //{
+            string line;
+
+            line = sr.ReadLine();
+            string[] recruitOpt = line.Split(' ');
+            this.recruitScalingFactor = Convert.ToInt32(recruitOpt[0]); //Recruitment Scaling Factor
+            this.SSBScalingFactor = Convert.ToInt32(recruitOpt[1]); //SSB Scaling Factor
+            this.maxRecuitObs = Convert.ToInt32(recruitOpt[2]);
+
+            //Recruit Methods
+            line = sr.ReadLine();
+            string[] recruitModels = line.Split();
+            this.recruitType = Array.ConvertAll<string, int>(recruitModels, int.Parse);
+
+            //Recruit Prob
+            for (int i = 0; i < nyears; i++)
+            {
+                line = sr.ReadLine();
+                string[] nyearRecruitProb = line.Split(' ');
+                //TODO:Check Recruitment Probability of Year sums to 1.0
+                for (int j=0; j < numRecruitModels; j++)
+                {
+                    this.recruitProb.Rows[i][j] = nyearRecruitProb[j];
+                }
                 
-            //    //line1
-            //    if(i == 1)
-            //    {
-            //        string[] tokens = inputFile[i].Split(' ');
-            //        this.recruitScalingFactor = Convert.ToInt32(tokens[0]); //Recruitment Scaling Factor
-            //        this.SSBScalingFactor = Convert.ToInt32(tokens[1]); //SSB Scaling Factor
-            //        this.maxRecuitObs = Convert.ToInt32(tokens[2]);
-            //    }
-            //    else if (i == 2)
-            //    {
-            //        //Recruitment Model(s)
-            //        this.recruitType = inputFile[i];
-            //    }
-            //    else if (i >= 3 || i <= 3+nyears )
-            //    {
-            //        this.recruitProb.Rows.Add(inputFile[i]);
-            //    }
-  
-            //    //Recruitment type
+            }
+            
+            
+            //Recruitment type
+            for (int i = 0; i < numRecruitModels; i++)
+            {
+                //TODO:Check for multiple Markov Matrix Recuitments. (Only one is allowed)
+            }
 
-            //}
-
+            //return list of recruitments
+            
         }
 
         public bool ValidateModel()

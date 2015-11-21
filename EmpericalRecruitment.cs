@@ -8,9 +8,11 @@ namespace AGEPRO_struct
 {
     public class EmpericalRecruitment : AGEPRO_Recruitment
     {
-        public EmpericalRecruitment(int typeNum)
+   
+
+        public class TwoStageEmpericalRecruitment : EmpericalRecruitment
         {
-            this.recruitType = typeNum.ToString();
+
         }
     }
 }

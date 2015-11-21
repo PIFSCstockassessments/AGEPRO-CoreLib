@@ -24,7 +24,7 @@ namespace AGEPRO_struct
         public AGEPRO_InputAgeTable maturity { get; set; }
         public AGEPRO_InputAgeTable fishery { get; set; }
         public AGEPRO_InputAgeTable discardWeight { get; set; }
-        public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjust = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
+        public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustFactor = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
         public AGEPRO_HarvestScenario harvestScenario { get; set; }
         public AGEPRO_InputAgeTable discardFraction { get; set; }
         public AGEPRO_MiscOptions.Bounds bounds = new AGEPRO_MiscOptions.Bounds(); //bounds
@@ -189,6 +189,8 @@ namespace AGEPRO_struct
                     {
                         retroAdjTable.Rows.Add(rafLine[i]);
                     }
+
+                    this.retroAdjustFactor.retroAdjust = retroAdjTable;
                 }
                 else if (line.Equals("[OPTIONS]"))
                 {
