@@ -41,7 +41,9 @@ namespace AGEPRO_struct
             {
                 line = sr.ReadLine();
                 string[] nyearRecruitProb = line.Split(' ');
-                //TODO:Check Recruitment Probability of Year sums to 1.0
+                
+                //TODO: Check Recruitment Probability for all selections of each year sums to 1.0
+                
                 for (int j=0; j < numRecruitModels; j++)
                 {
                     this.recruitProb.Rows[i][j] = nyearRecruitProb[j];
@@ -54,6 +56,15 @@ namespace AGEPRO_struct
             for (int i = 0; i < numRecruitModels; i++)
             {
                 //TODO:Check for multiple Markov Matrix Recuitments. (Only one is allowed)
+
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
             //return list of recruitments
