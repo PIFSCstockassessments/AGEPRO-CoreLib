@@ -30,7 +30,6 @@ namespace AGEPRO_struct
         {
             string line;
             
-
             //numObs
             line = sr.ReadLine();
             this.numObs = Convert.ToInt32(line);
@@ -114,6 +113,30 @@ namespace AGEPRO_struct
             }
         }
 
-        
+        public class EmpericalCDFZero : EmpericalRecruitment
+        {
+            public double? SSBHinge { get; set; } 
+
+            public EmpericalCDFZero()
+            {
+                this.recruitCategory = 1;
+                this.withSSB = false;  
+                this.SSBHinge = null;
+            }
+
+            protected override void ReadRecruitmentModel(StreamReader sr)
+            {
+                string line;
+
+                //numObs and obsTable w/ base EmpiricalRecruitment function
+                base.ReadRecruitmentModel(sr);
+                
+                //SSB Hinge (MT*1000)
+                line = sr.ReadLine();
+                this.SSBHinge = Convert.ToDouble(line);
+
+            }
+            
+        }
     } 
  }
