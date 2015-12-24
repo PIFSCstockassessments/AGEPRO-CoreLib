@@ -119,8 +119,8 @@ namespace AGEPRO_struct
                 
             }
 
-
-            return new DataTable();
+            
+            return G;
         }
 
 
