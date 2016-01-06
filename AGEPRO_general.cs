@@ -47,6 +47,8 @@ namespace AGEPRO_struct
             return Enumerable.Range(this.projYearStart, this.projYearEnd).ToArray();
         }
 
+        //TODO:Remove this function? Replace it with a 'ReadGeneralOptionsData' function and 
+        //move "general option" centric functionality from AGEPRO_InputFile.ReadInputDataFile() to here? 
         private void ReadInputFile(string file)
         {
             try
