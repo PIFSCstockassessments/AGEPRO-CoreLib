@@ -34,7 +34,15 @@ namespace AGEPRO_struct
             //Recruit Methods
             line = sr.ReadLine();
             string[] recruitModels = line.Split();
-            this.recruitType = Array.ConvertAll<string, int>(recruitModels, int.Parse);
+            //TODO:Keep Recruit Type int or string?
+            this.recruitType = Array.ConvertAll<string, int>(recruitModels, int.Parse);  
+
+            //Check numRecruitModels matches actual count
+            if (this.recruitType.Count() != numRecruitModels)
+            {
+                throw new System.InvalidOperationException("numRecruitModels does not match input file recruitModel count");
+            }
+
 
             //Recruit Prob
             for (int i = 0; i < nyears; i++)

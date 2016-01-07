@@ -30,5 +30,11 @@ namespace AGEPRO_struct
             //TODO: Should throw exception or do nothing?
             throw new Exception("Recruitment Model is not a valid AGEPRO Recruitment model.");
         }
+
+        protected virtual void ReadRecruitmentModel(StreamReader sr, int nyears)
+        {
+            //Throw to generic ReadRecruitmentModel method 
+            ReadRecruitmentModel(sr);
+        }
     }
 }
