@@ -114,7 +114,8 @@ namespace AGEPRO_struct
 
                 for (int i = 0; i < nyears; i++)
                 {
-                    G.Rows[i][k + 1] = Convert.ToDouble(harvestValueLineFleet[i]);
+                    //Add Harvest Value Column values to existing data table
+                    G.Rows[i][k + 1] = Convert.ToDouble(harvestValueLineFleet[i]); 
                 }
                 
             }
