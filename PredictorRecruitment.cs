@@ -16,6 +16,12 @@ namespace AGEPRO_struct
         public DataTable coefficientTable { get; set; }
         public DataTable observationTable { get; set; }
 
+        public PredictorRecruitment()
+        {
+            this.recruitCategory = 3;
+        }
+        
+        
         protected override void ReadRecruitmentModel(StreamReader sr, int nyears)
         {
             //16, 17, 18, 19
@@ -31,7 +37,7 @@ namespace AGEPRO_struct
             DataTable inputTable = new DataTable();
             line = sr.ReadLine();
             string[] predictorCoefficents = line.Split(' ');
-            for (int i = 1; i < this.numRecruitPredictors; i++)
+            for (int i = 0; i < this.numRecruitPredictors; i++)
             {
                 //TODO? How to handle multiple recruits? Or oo class is sufficencent?
                 inputTable.Rows.Add(Convert.ToDouble(predictorCoefficents[i]));
@@ -48,7 +54,7 @@ namespace AGEPRO_struct
                 {
                     inputTable.Rows[i][j] = Convert.ToDouble(observationsLine[i]);
                 }
-
+                
 
             }
 

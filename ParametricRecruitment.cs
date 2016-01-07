@@ -16,10 +16,12 @@ namespace AGEPRO_struct
         
         public ParametricRecruitment()
         {
+            this.recruitCategory = 2;
             this.autocorrelated = false;  
         }
         public ParametricRecruitment(bool isAutocorrelated)
         {
+            this.recruitCategory = 2;
             this.autocorrelated = isAutocorrelated;
         }
 
