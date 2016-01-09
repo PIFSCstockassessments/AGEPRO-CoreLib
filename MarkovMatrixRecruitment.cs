@@ -21,7 +21,7 @@ namespace AGEPRO_struct
             this.recruitCategory = 4; //TODO: Check if MarkovMatrix Category is 4
         }
 
-        protected override void ReadRecruitmentModel(StreamReader sr)
+        public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
             line = sr.ReadLine();

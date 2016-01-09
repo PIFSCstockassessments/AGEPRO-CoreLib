@@ -7,15 +7,12 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
-    public class RecruitmentModel
+    abstract public class RecruitmentModel
     {
         public int recruitModelNum { get; set; }
         public int recruitCategory { get; set; }
+        public abstract void ReadRecruitmentModel(StreamReader sr);
 
-        public RecruitmentModel()
-        {
-
-        }
 
         public string GetRecruitModelName(int modelType)
         {
@@ -24,17 +21,17 @@ namespace AGEPRO_struct
             return "";
         }
 
-        protected virtual void ReadRecruitmentModel(StreamReader sr)
-        {
-            //Generic Recruitment Model does not have inupt file strucutre. 
-            //TODO: Should throw exception or do nothing?
-            throw new Exception("Recruitment Model is not a valid AGEPRO Recruitment model.");
-        }
+        //public virtual void ReadRecruitmentModel(StreamReader sr)
+        //{
+        //    //Generic Recruitment Model does not have inupt file strucutre. 
+        //    //TODO: Should throw exception or do nothing?
+        //    throw new NotImplementedException();
+        //}
 
-        protected virtual void ReadRecruitmentModel(StreamReader sr, int nyears)
-        {
-            //Throw to generic ReadRecruitmentModel method 
-            ReadRecruitmentModel(sr);
-        }
+        //public virtual void ReadRecruitmentModel(StreamReader sr, int nyears)
+        //{
+        //    //Throw to generic ReadRecruitmentModel method 
+        //     throw new NotImplementedException();
+        //}
     }
 }

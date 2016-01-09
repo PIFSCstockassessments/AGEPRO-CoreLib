@@ -16,15 +16,17 @@ namespace AGEPRO_struct
         public int[] recruitType { get; set; }
         public DataTable recruitProb { get; set; }
         public int recruitmentCategory { get; set; }
+        public List<RecruitmentModel> recruitList { get; set; }
 
         public AGEPRO_Recruitment()
         {
+            List<RecruitmentModel> recruitList = new List<RecruitmentModel>();
         }
         
         public void ReadRecruitmentData(StreamReader sr, int nyears, int numRecruitModels)
         {
-            string line;
-
+            string line; 
+            
             line = sr.ReadLine();
             string[] recruitOpt = line.Split(' ');
             this.recruitScalingFactor = Convert.ToInt32(recruitOpt[0]); //Recruitment Scaling Factor
@@ -34,7 +36,7 @@ namespace AGEPRO_struct
             //Recruit Methods
             line = sr.ReadLine();
             string[] recruitModels = line.Split();
-            //TODO:Keep Recruit Type int or string?
+            //TODO:Keep Recruit Type a int array for switch-case
             this.recruitType = Array.ConvertAll<string, int>(recruitModels, int.Parse);  
 
             //Check numRecruitModels matches actual count
@@ -67,16 +69,39 @@ namespace AGEPRO_struct
 
                 try
                 {
-
+                    
+                    //recruitList.Add();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
+                
             }
 
             //return list of recruitments
             
+        }
+
+        private void ReadRecruitmentTypeData(StreamReader sr, int recruitType, List<RecruitmentModel> recruitList)
+        {
+            
+            switch (recruitType)
+            {
+                case 1:
+                    break;
+                case 2:
+                    EmpericalRecruitment RecruitModel_02 = new EmpericalRecruitment(false);
+                    RecruitModel_02.recruitModelNum = 2;
+                    RecruitModel_02.ReadRecruitmentModel(sr);
+                    
+
+                    break;
+                case 3:
+                    break;
+
+            }
+            //return RecruitmentModel
         }
 
         public bool ValidateModel()

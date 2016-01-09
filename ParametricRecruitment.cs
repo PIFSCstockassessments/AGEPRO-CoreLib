@@ -24,6 +24,10 @@ namespace AGEPRO_struct
             this.recruitCategory = 2;
             this.autocorrelated = isAutocorrelated;
         }
+        public override void ReadRecruitmentModel(StreamReader sr)
+        {
+            throw new NotImplementedException();
+        }
 
 
         protected void ReadAutocorrelatedValues(StreamReader sr)
@@ -48,7 +52,7 @@ namespace AGEPRO_struct
                 this.autocorrelated = isAutocorrelated;
             }
 
-            protected override void ReadRecruitmentModel(StreamReader sr)
+            public override void ReadRecruitmentModel(StreamReader sr)
             {
                 string line;
                 line = sr.ReadLine();
@@ -93,7 +97,7 @@ namespace AGEPRO_struct
                 this.autocorrelated = isAutocorrelated;
             }
 
-            protected override void ReadRecruitmentModel(StreamReader sr)
+            public override void ReadRecruitmentModel(StreamReader sr)
             {
                 string line;
                 line = sr.ReadLine();

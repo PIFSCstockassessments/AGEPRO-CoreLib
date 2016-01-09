@@ -20,9 +20,13 @@ namespace AGEPRO_struct
         {
             this.recruitCategory = 3;
         }
-        
-        
-        protected override void ReadRecruitmentModel(StreamReader sr, int nyears)
+
+        public override void ReadRecruitmentModel(StreamReader sr)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadRecruitmentModel(StreamReader sr, int nyears)
         {
             //16, 17, 18, 19
             string line;

@@ -12,21 +12,21 @@ namespace AGEPRO_struct
     {
         public string version { get; set; }
         public string caseID { get; set; }
-        public AGEPRO_General general { get; set; }
+        public AGEPRO_General general = new AGEPRO_General();
         public AGEPRO_Bootstrap bootstrap = new AGEPRO_Bootstrap();
         public List <AGEPRO_Recruitment> recruitList { get; set; }
-        public AGEPRO_InputAgeTable stockWeight { get; set; }
+        public AGEPRO_InputAgeTable stockWeight = new AGEPRO_InputAgeTable();
         public AGEPRO_WeightAgeTable SSBWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1});
         public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
         public AGEPRO_WeightAgeTable catchWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2,-3} );
         public AGEPRO_WeightAgeTable naturalMortality = new AGEPRO_WeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 });
         public AGEPRO_Biological biological = new AGEPRO_Biological();
-        public AGEPRO_InputAgeTable maturity { get; set; }
-        public AGEPRO_InputAgeTable fishery { get; set; }
-        public AGEPRO_InputAgeTable discardWeight { get; set; }
+        public AGEPRO_InputAgeTable maturity = new AGEPRO_InputAgeTable();
+        public AGEPRO_InputAgeTable fishery = new AGEPRO_InputAgeTable();
+        public AGEPRO_InputAgeTable discardWeight = new AGEPRO_InputAgeTable(); //discard weight
         public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustFactor = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
-        public AGEPRO_HarvestScenario harvestScenario { get; set; }
-        public AGEPRO_InputAgeTable discardFraction { get; set; }
+        public AGEPRO_HarvestScenario harvestScenario = new AGEPRO_HarvestScenario();
+        public AGEPRO_InputAgeTable discardFraction = new AGEPRO_InputAgeTable(); //discard fraction
         public AGEPRO_MiscOptions.Bounds bounds = new AGEPRO_MiscOptions.Bounds(); //bounds
         public AGEPRO_MiscOptions options = new AGEPRO_MiscOptions(); //options
         public AGEPRO_MiscOptions.ScaleFactors scale = new AGEPRO_MiscOptions.ScaleFactors(); //scale

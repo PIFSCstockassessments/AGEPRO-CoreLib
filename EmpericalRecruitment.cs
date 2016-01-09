@@ -26,7 +26,7 @@ namespace AGEPRO_struct
             this.withSSB = useSSB;
         }
 
-        protected override void ReadRecruitmentModel(StreamReader sr)
+        public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
             
@@ -91,7 +91,7 @@ namespace AGEPRO_struct
             }
 
 
-            protected override void ReadRecruitmentModel(StreamReader sr)
+            public override void ReadRecruitmentModel(StreamReader sr)
             {
                 string line;
                 DataTable inputTable = new DataTable();
@@ -124,7 +124,7 @@ namespace AGEPRO_struct
                 this.SSBHinge = null;
             }
 
-            protected override void ReadRecruitmentModel(StreamReader sr)
+            public override void ReadRecruitmentModel(StreamReader sr)
             {
                 string line;
 
