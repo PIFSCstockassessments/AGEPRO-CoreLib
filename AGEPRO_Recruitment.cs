@@ -20,7 +20,7 @@ namespace AGEPRO_struct
 
         public AGEPRO_Recruitment()
         {
-            List<RecruitmentModel> recruitList = new List<RecruitmentModel>();
+            
         }
         
         public void ReadRecruitmentData(StreamReader sr, int nyears, int numRecruitModels)
@@ -60,7 +60,9 @@ namespace AGEPRO_struct
                 }
                 
             }
-            
+
+            //Instanciate recuitList Object
+            recruitList = new List<RecruitmentModel>();
             
             //Recruitment type
             for (int i = 0; i < numRecruitModels; i++)
@@ -70,7 +72,7 @@ namespace AGEPRO_struct
                 try
                 {
                     
-                    //recruitList.Add();
+                    //Call Function AddToRecruitList here
                 }
                 catch (Exception ex)
                 {
@@ -82,25 +84,62 @@ namespace AGEPRO_struct
             //return list of recruitments
             
         }
-
-        private void ReadRecruitmentTypeData(StreamReader sr, int recruitType, List<RecruitmentModel> recruitList)
+        
+        
+        private void AddToRecruitList(int recruitType, List<RecruitmentModel> recruitList)
         {
             
             switch (recruitType)
             {
                 case 1:
+                    recruitList.Add(new MarkovMatrixRecruitment());
                     break;
                 case 2:
-                    EmpericalRecruitment RecruitModel_02 = new EmpericalRecruitment(2,false);
-                    RecruitModel_02.recruitModelNum = 2;
-                    RecruitModel_02.ReadRecruitmentModel(sr);
+                    recruitList.Add(new EmpericalRecruitment(recruitType, useSSB: true)); 
+                    break;
+                case 3: 
+                case 14:
+                case 20:
+                    recruitList.Add(new EmpericalRecruitment(recruitType, useSSB: false));
+                    break;
+                case 4:
                     
-
+                    recruitList.Add(new EmpericalRecruitment.TwoStageEmpericalRecruitment(recruitType, useSSB: true));
                     break;
-                case 3:
+                case 5:
+                case 6:
+                case 7:
+                    recruitList.Add(new ParametricRecruitment.ParametricCurve(recruitType, isAutocorrelated: false));
                     break;
+                case 8:
+                    recruitList.Add(new ParametricRecruitment.ParametricLognormal(recruitType, isAutocorrelated: false));
+                    break;
+                case 10:
+                case 11:
+                case 12:
+                    recruitList.Add(new ParametricRecruitment.ParametricCurve(recruitType, isAutocorrelated: true));
+                    break;
+                case 13:
+                    recruitList.Add(new ParametricRecruitment.ParametricLognormal(recruitType, isAutocorrelated: true));
+                    break;
+                case 15:
+                    recruitList.Add(new EmpericalRecruitment.TwoStageEmpericalRecruitment(recruitType, useSSB: false));
+                    break;
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                    recruitList.Add(new PredictorRecruitment(recruitType));
+                    break;
+                case 21:
+                    recruitList.Add(new EmpericalRecruitment.EmpericalCDFZero(recruitType));
+                    break;
+                case 0:
+                default:
+                    throw new ArgumentException();  
+            }//end switch
 
-            }
+            
             //return RecruitmentModel
         }
 
