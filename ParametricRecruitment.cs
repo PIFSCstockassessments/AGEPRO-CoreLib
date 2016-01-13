@@ -40,70 +40,73 @@ namespace AGEPRO_struct
             this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
         }
 
-        public class ParametricCurve : ParametricRecruitment
+        
+        
+    }
+
+    public class ParametricCurve : ParametricRecruitment
+    {
+        public double alpha { get; set; }
+        public double beta { get; set; }
+        public double variance { get; set; }
+        public double? kParm { get; set; }
+
+        public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
+
+        public override void ReadRecruitmentModel(StreamReader sr)
         {
-            public double alpha { get; set; }
-            public double beta { get; set; }
-            public double variance { get; set; }
-            public double? kParm { get; set; }
+            string line;
+            line = sr.ReadLine();
+            string[] parametricLine = line.Split(' ');
 
-            public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
 
-            public override void ReadRecruitmentModel(StreamReader sr)
+            if (parametricLine.Length == 3)
             {
-                string line;
-                line = sr.ReadLine();
-                string[] parametricLine = line.Split(' ');
+                //TODO: Verify if this Parametric Model should have 3 parameters
+                this.alpha = Convert.ToDouble(parametricLine[0]);
+                this.beta = Convert.ToDouble(parametricLine[1]);
+                this.variance = Convert.ToDouble(parametricLine[2]);
+                this.kParm = null; //TODO:Leave null value?
+            }
+            else if (parametricLine.Length == 4)
+            {
+                //TODO: Verify if this Parametric Model should have 4 parameters 
+                this.alpha = Convert.ToDouble(parametricLine[0]);
+                this.beta = Convert.ToDouble(parametricLine[1]);
+                this.kParm = Convert.ToDouble(parametricLine[2]);
+                this.variance = Convert.ToDouble(parametricLine[3]);
+            }
+            else
+            {
+                //throw error
+            }
 
-
-                if (parametricLine.Length == 3)
-                {
-                    //TODO: Verify if this Parametric Model should have 3 parameters
-                    this.alpha = Convert.ToDouble(parametricLine[0]);
-                    this.beta = Convert.ToDouble(parametricLine[1]);
-                    this.variance = Convert.ToDouble(parametricLine[2]);
-                    this.kParm = null; //TODO:Leave null value?
-                }
-                else if (parametricLine.Length == 4)
-                {
-                    //TODO: Verify if this Parametric Model should have 4 parameters 
-                    this.alpha = Convert.ToDouble(parametricLine[0]);
-                    this.beta = Convert.ToDouble(parametricLine[1]);
-                    this.kParm = Convert.ToDouble(parametricLine[2]);
-                    this.variance = Convert.ToDouble(parametricLine[3]);
-                }
-                else
-                {
-                    //throw error
-                }
-
-                if (this.autocorrelated)
-                {
-                    ReadAutocorrelatedValues(sr);
-                }
+            if (this.autocorrelated)
+            {
+                ReadAutocorrelatedValues(sr);
             }
         }
+    }
 
-        public class ParametricLognormal : ParametricRecruitment
+    public class ParametricLognormal : ParametricRecruitment
+    {
+        public double mean { get; set; }
+        public double stdDev { get; set; }
+
+        public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
+
+        public override void ReadRecruitmentModel(StreamReader sr)
         {
-            public double mean { get; set; }
-            public double stdDev { get; set; }
+            string line;
+            line = sr.ReadLine();
+            string[] logParamLine = line.Split(' ');
 
-            public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
+            this.mean = Convert.ToDouble(logParamLine[0]);
+            this.stdDev = Convert.ToDouble(logParamLine[1]);
 
-            public override void ReadRecruitmentModel(StreamReader sr)
+            if (this.autocorrelated)
             {
-                string line;
-                line = sr.ReadLine();
-                string[] logParamLine = line.Split(' ');
-
-                this.mean = Convert.ToDouble(logParamLine[0]);
-                this.stdDev = Convert.ToDouble(logParamLine[1]);
-
-                if (this.autocorrelated)
-                {
-                    ReadAutocorrelatedValues(sr);
-                }
+                ReadAutocorrelatedValues(sr);
             }
         }
     }

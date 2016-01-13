@@ -104,26 +104,26 @@ namespace AGEPRO_struct
                     break;
                 case 4:
                     
-                    recruitList.Add(new EmpericalRecruitment.TwoStageEmpericalRecruitment(recruitType, useSSB: true));
+                    recruitList.Add(new TwoStageEmpericalRecruitment(recruitType, useSSB: true));
                     break;
                 case 5:
                 case 6:
                 case 7:
-                    recruitList.Add(new ParametricRecruitment.ParametricCurve(recruitType, isAutocorrelated: false));
+                    recruitList.Add(new ParametricCurve(recruitType, isAutocorrelated: false));
                     break;
                 case 8:
-                    recruitList.Add(new ParametricRecruitment.ParametricLognormal(recruitType, isAutocorrelated: false));
+                    recruitList.Add(new ParametricLognormal(recruitType, isAutocorrelated: false));
                     break;
                 case 10:
                 case 11:
                 case 12:
-                    recruitList.Add(new ParametricRecruitment.ParametricCurve(recruitType, isAutocorrelated: true));
+                    recruitList.Add(new ParametricCurve(recruitType, isAutocorrelated: true));
                     break;
                 case 13:
-                    recruitList.Add(new ParametricRecruitment.ParametricLognormal(recruitType, isAutocorrelated: true));
+                    recruitList.Add(new ParametricLognormal(recruitType, isAutocorrelated: true));
                     break;
                 case 15:
-                    recruitList.Add(new EmpericalRecruitment.TwoStageEmpericalRecruitment(recruitType, useSSB: false));
+                    recruitList.Add(new TwoStageEmpericalRecruitment(recruitType, useSSB: false));
                     break;
                 case 16:
                 case 17:
@@ -132,7 +132,7 @@ namespace AGEPRO_struct
                     recruitList.Add(new PredictorRecruitment(recruitType));
                     break;
                 case 21:
-                    recruitList.Add(new EmpericalRecruitment.EmpericalCDFZero(recruitType));
+                    recruitList.Add(new EmpericalCDFZero(recruitType));
                     break;
                 case 0:
                 default:
