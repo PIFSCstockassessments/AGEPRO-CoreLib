@@ -91,7 +91,7 @@ namespace AGEPRO_struct
                 case 1:
                     break;
                 case 2:
-                    EmpericalRecruitment RecruitModel_02 = new EmpericalRecruitment(false);
+                    EmpericalRecruitment RecruitModel_02 = new EmpericalRecruitment(2,false);
                     RecruitModel_02.recruitModelNum = 2;
                     RecruitModel_02.ReadRecruitmentModel(sr);
                     

@@ -14,14 +14,14 @@ namespace AGEPRO_struct
         public double? lastResidual { get; set; }
         public bool autocorrelated { get; set; }
         
-        public ParametricRecruitment()
+        public ParametricRecruitment(int modelNum)
         {
+            this.recruitModelNum = modelNum;
             this.recruitCategory = 2;
             this.autocorrelated = false;  
         }
-        public ParametricRecruitment(bool isAutocorrelated)
+        public ParametricRecruitment(int modelNum, bool isAutocorrelated) : this(modelNum)
         {
-            this.recruitCategory = 2;
             this.autocorrelated = isAutocorrelated;
         }
         public override void ReadRecruitmentModel(StreamReader sr)
@@ -47,10 +47,7 @@ namespace AGEPRO_struct
             public double variance { get; set; }
             public double? kParm { get; set; }
 
-            public ParametricCurve(bool isAutocorrelated)
-            {
-                this.autocorrelated = isAutocorrelated;
-            }
+            public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
 
             public override void ReadRecruitmentModel(StreamReader sr)
             {
@@ -87,15 +84,12 @@ namespace AGEPRO_struct
             }
         }
 
-        public class LognormalDistribution : ParametricRecruitment
+        public class ParametricLognormal : ParametricRecruitment
         {
             public double mean { get; set; }
             public double stdDev { get; set; }
 
-            public LognormalDistribution(bool isAutocorrelated)
-            {
-                this.autocorrelated = isAutocorrelated;
-            }
+            public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
 
             public override void ReadRecruitmentModel(StreamReader sr)
             {

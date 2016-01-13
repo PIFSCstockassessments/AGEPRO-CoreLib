@@ -16,8 +16,9 @@ namespace AGEPRO_struct
         public DataTable coefficientTable { get; set; }
         public DataTable observationTable { get; set; }
 
-        public PredictorRecruitment()
+        public PredictorRecruitment(int modelNum)
         {
+            this.recruitModelNum = modelNum;
             this.recruitCategory = 3;
         }
 
@@ -26,7 +27,7 @@ namespace AGEPRO_struct
             throw new NotImplementedException();
         }
 
-        public void ReadRecruitmentModel(StreamReader sr, int nyears)
+        public void ReadRecruitmentModel(StreamReader sr, int nyears) 
         {
             //16, 17, 18, 19
             string line;

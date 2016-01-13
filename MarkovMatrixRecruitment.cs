@@ -18,6 +18,7 @@ namespace AGEPRO_struct
 
         public MarkovMatrixRecruitment()
         {
+            this.recruitModelNum = 1; //Model 1 only for MarkovMatrix
             this.recruitCategory = 4; //TODO: Check if MarkovMatrix Category is 4
         }
 

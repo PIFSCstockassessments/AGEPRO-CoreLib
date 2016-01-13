@@ -9,8 +9,8 @@ namespace AGEPRO_struct
 {
     abstract public class RecruitmentModel
     {
-        public int recruitModelNum { get; set; }
-        public int recruitCategory { get; set; }
+        public int recruitModelNum;
+        public int recruitCategory;
         public abstract void ReadRecruitmentModel(StreamReader sr);
 
 
