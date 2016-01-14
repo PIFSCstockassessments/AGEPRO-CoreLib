@@ -15,6 +15,7 @@ namespace AGEPRO_struct
         public int intercept { get; set; }
         public DataTable coefficientTable { get; set; }
         public DataTable observationTable { get; set; }
+        
 
         public PredictorRecruitment(int modelNum)
         {
@@ -22,12 +23,7 @@ namespace AGEPRO_struct
             this.recruitCategory = 3;
         }
 
-        public override void ReadRecruitmentModel(StreamReader sr)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReadRecruitmentModel(StreamReader sr, int nyears) 
+        public override void ReadRecruitmentModel(StreamReader sr) 
         {
             //16, 17, 18, 19
             string line;
@@ -55,7 +51,8 @@ namespace AGEPRO_struct
             {
                 line = sr.ReadLine();
                 string[] observationsLine = line.Split(' ');
-                for (int j = 0; j < nyears; j++)
+                int obsYears = observationsLine.Count(); //Number of values in a single observationLine = nyears 
+                for (int j = 0; j < obsYears; j++)
                 {
                     inputTable.Rows[i][j] = Convert.ToDouble(observationsLine[i]);
                 }

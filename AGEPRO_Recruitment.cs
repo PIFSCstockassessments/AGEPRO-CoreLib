@@ -67,12 +67,13 @@ namespace AGEPRO_struct
             //Recruitment type
             for (int i = 0; i < numRecruitModels; i++)
             {
-                //TODO:Check for multiple Markov Matrix Recuitments. (Only one is allowed)
-
+                
                 try
                 {
+                    AddToRecruitList(this.recruitType[i], recruitList);
+                    //TODO:Check for multiple Markov Matrix Recuitments. (Only one is allowed)
                     
-                    //Call Function AddToRecruitList here
+
                 }
                 catch (Exception ex)
                 {
@@ -81,7 +82,13 @@ namespace AGEPRO_struct
                 
             }
 
-            //return list of recruitments
+            //Read Recruitment Data
+            foreach (var nrecruit in recruitList)
+            {
+                nrecruit.ReadRecruitmentModel(sr);
+            }
+
+            //Return RecuritList
             
         }
         
