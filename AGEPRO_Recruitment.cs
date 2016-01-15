@@ -67,20 +67,14 @@ namespace AGEPRO_struct
             //Recruitment type
             for (int i = 0; i < numRecruitModels; i++)
             {
-                
-                try
-                {
-                    AddToRecruitList(this.recruitType[i], recruitList);
-                    //TODO:Check for multiple Markov Matrix Recuitments. (Only one is allowed)
-                    
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                
+                AddToRecruitList(this.recruitType[i], recruitList);
             }
+
+            //Check for multiple Markov Matrix Recuitments. (Only one is allowed)
+            if (recruitList.Count(r => r.recruitModelNum == 1) > 1)
+            {
+                throw new ArgumentException();
+            }   
 
             //Read Recruitment Data
             foreach (var nrecruit in recruitList)
@@ -143,7 +137,7 @@ namespace AGEPRO_struct
                     break;
                 case 0:
                 default:
-                    throw new ArgumentException();  
+                    throw new ArgumentOutOfRangeException("recruitType","Must be a vaild recruitType model number.");  
             }//end switch
 
             
