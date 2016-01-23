@@ -28,7 +28,7 @@ namespace AGEPRO_struct
             {
                 string line;
                 line = sr.ReadLine();
-                string[] rebuildOptionLine = line.Split(' ');
+                string[] rebuildOptionLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 
                 this.targetYear = Convert.ToInt32(rebuildOptionLine[0]);
                 this.targetValue = Convert.ToDouble(rebuildOptionLine[1]);
@@ -53,7 +53,7 @@ namespace AGEPRO_struct
                 
                 //pStar Level Values
                 line = sr.ReadLine();
-                string[] pStarLevelData = line.Split(' ');
+                string[] pStarLevelData = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 DataRow pStarLevelRow = pStarTable.NewRow();
                 for (int i = 0; i < this.pStarLevels; i++)
                 {
@@ -77,9 +77,9 @@ namespace AGEPRO_struct
             string line;
             DataTable G = new DataTable();
             line = sr.ReadLine();
-            string[] harvestSpecLine = line.Split(' ');
+            string[] harvestSpecLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             line = sr.ReadLine();
-            string[] harvestValueLine = line.Split(' ');
+            string[] harvestValueLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             
             DataRow dr = G.NewRow();
             

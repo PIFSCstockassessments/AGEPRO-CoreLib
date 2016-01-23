@@ -29,7 +29,7 @@ namespace AGEPRO_struct
             string line;
 
             line = sr.ReadLine();
-            string[] predictorParamLine = line.Split(' ');
+            string[] predictorParamLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             this.numRecruitPredictors = Convert.ToInt32(predictorParamLine[0]);
             this.variance = Convert.ToInt32(predictorParamLine[1]);
             this.intercept = Convert.ToInt32(predictorParamLine[2]);
@@ -37,7 +37,7 @@ namespace AGEPRO_struct
             //Coefficents
             DataTable inputTable = new DataTable();
             line = sr.ReadLine();
-            string[] predictorCoefficents = line.Split(' ');
+            string[] predictorCoefficents = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < this.numRecruitPredictors; i++)
             {
                 //TODO? How to handle multiple recruits? Or oo class is sufficencent?
@@ -50,7 +50,7 @@ namespace AGEPRO_struct
             for (int i = 0; i < this.numRecruitPredictors; i++)
             {
                 line = sr.ReadLine();
-                string[] observationsLine = line.Split(' ');
+                string[] observationsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 int obsYears = observationsLine.Count(); //Number of values in a single observationLine = nyears 
                 for (int j = 0; j < obsYears; j++)
                 {

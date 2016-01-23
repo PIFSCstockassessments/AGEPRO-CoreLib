@@ -34,7 +34,7 @@ namespace AGEPRO_struct
         {
             string line;
             line = sr.ReadLine();
-            string[] autoCorrLine = line.Split(' ');
+            string[] autoCorrLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             this.phi = Convert.ToDouble(autoCorrLine[0]);
             this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
@@ -57,7 +57,7 @@ namespace AGEPRO_struct
         {
             string line;
             line = sr.ReadLine();
-            string[] parametricLine = line.Split(' ');
+            string[] parametricLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
 
             if (parametricLine.Length == 3)
@@ -99,7 +99,7 @@ namespace AGEPRO_struct
         {
             string line;
             line = sr.ReadLine();
-            string[] logParamLine = line.Split(' ');
+            string[] logParamLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             this.mean = Convert.ToDouble(logParamLine[0]);
             this.stdDev = Convert.ToDouble(logParamLine[1]);

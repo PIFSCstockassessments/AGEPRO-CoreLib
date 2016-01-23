@@ -14,7 +14,8 @@ namespace AGEPRO_struct
         public string caseID { get; set; }
         public AGEPRO_General general = new AGEPRO_General();
         public AGEPRO_Bootstrap bootstrap = new AGEPRO_Bootstrap();
-        public List <AGEPRO_Recruitment> recruitList { get; set; }
+        public AGEPRO_Recruitment recruitment = new AGEPRO_Recruitment();
+        public List<AGEPRO_Recruitment> recruitList { get; set; }
         public AGEPRO_InputAgeTable stockWeight = new AGEPRO_InputAgeTable();
         public AGEPRO_WeightAgeTable SSBWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1});
         public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
@@ -81,7 +82,7 @@ namespace AGEPRO_struct
                 else if (line.Equals("[GENERAL]"))
                 {
                     line = sr.ReadLine();
-                    string[] generalLine = line.Split(' ');
+                    string[] generalLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.general.projYearStart = Convert.ToInt32(generalLine[0]);
                     this.general.projYearEnd = Convert.ToInt32(generalLine[1]);
                     this.general.ageBegin = Convert.ToInt32(generalLine[2]);
@@ -99,12 +100,11 @@ namespace AGEPRO_struct
                         this.general.hasDiscards = false;
                     }
 
-
-
                 }
                 else if (line.Equals("[RECRUIT]"))
                 {
                     //Read Recruit Data
+                    this.recruitment.ReadRecruitmentData(sr,general.NumYears(),general.numRecModels);
                 }
                 else if (line.Equals("[STOCK_WEIGHT]"))
                 {
@@ -162,7 +162,7 @@ namespace AGEPRO_struct
                 {
                     AGEPRO_MiscOptions.enableRefpoint = true;
                     line = sr.ReadLine();
-                    string[] refpointOpt = line.Split(' ');
+                    string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.refpoint.refSSB = Convert.ToDouble(refpointOpt[0]);
                     this.refpoint.refStockBio = Convert.ToDouble(refpointOpt[1]);
                     this.refpoint.refMeanBio = Convert.ToDouble(refpointOpt[2]);
@@ -172,7 +172,7 @@ namespace AGEPRO_struct
                 {
                     AGEPRO_MiscOptions.enableBounds = true;
                     line = sr.ReadLine();
-                    string[] boundsOpt = line.Split(' ');
+                    string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.bounds.maxWeight = Convert.ToDouble(boundsOpt[0]);
                     this.bounds.maxNatMort = Convert.ToDouble(boundsOpt[1]);
                 }
@@ -180,7 +180,7 @@ namespace AGEPRO_struct
                 {
                     AGEPRO_MiscOptions.enableRetroAdjustmentFactors = true;
                     line = sr.ReadLine();
-                    string[] rafLine = line.Split(' ');
+                    string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     DataTable retroAdjTable = new DataTable();
 
                     //TODO: throw warning/error if 'rafLine' length doesn't match number of Ages
@@ -195,7 +195,7 @@ namespace AGEPRO_struct
                 else if (line.Equals("[OPTIONS]"))
                 {
                     line = sr.ReadLine();
-                    string[] optionOpt = line.Split(' ');
+                    string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.options.enableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
                     this.options.enableDataFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
                     this.options.enableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
@@ -204,7 +204,7 @@ namespace AGEPRO_struct
                 {
                     AGEPRO_MiscOptions.enableScaleFactors = true;
                     line = sr.ReadLine();
-                    string[] scaleOpt = line.Split(' ');
+                    string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.scale.scaleBio = Convert.ToDouble(scaleOpt[0]);
                     this.scale.scaleRec = Convert.ToDouble(scaleOpt[1]);
                     this.scale.scaleStockNum = Convert.ToDouble(scaleOpt[2]);

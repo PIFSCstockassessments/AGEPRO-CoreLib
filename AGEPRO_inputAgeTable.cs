@@ -41,7 +41,7 @@ namespace AGEPRO_struct
 
             //Input Age Option
             string line = sr.ReadLine();
-            string[] swLine = line.Split(' ');
+            string[] swLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             string optStock = swLine[0];
             ReadInputAgeOption(optStock);  //Input Age Option may vary if this a weightAgeTable
 
@@ -76,7 +76,7 @@ namespace AGEPRO_struct
                     {
                         line = sr.ReadLine();
                         DataRow dr = ageTable.NewRow();
-                        string[] ageLine = line.Split(' ');
+                        string[] ageLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         //j: Age Columns 
                         for (int j = 0; j < ageLine.Length; j++)
                         {
@@ -91,7 +91,7 @@ namespace AGEPRO_struct
                     {
                         line = sr.ReadLine();
                         DataRow dr = cvTable.NewRow();
-                        string[] cvLine = line.Split(' ');
+                        string[] cvLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         for (int j = 0; j < numAges; j++)
                         {
                             dr[j] = cvLine[j];

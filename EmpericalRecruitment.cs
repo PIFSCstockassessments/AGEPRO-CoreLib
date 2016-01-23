@@ -47,11 +47,11 @@ namespace AGEPRO_struct
 
             //obsTable
             line = sr.ReadLine();
-            string[] nobsRecruits = line.Split(' ');
+            string[] nobsRecruits = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             if (useSSB)
             {
                 line = sr.ReadLine();
-                string[] nobsSSB = line.Split(' ');
+                string[] nobsSSB = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < nObs; i++)
                 {
                     inputTable.Rows.Add((i + 1), Convert.ToDouble(nobsRecruits[i]), Convert.ToDouble(nobsSSB[i]));
@@ -103,7 +103,7 @@ namespace AGEPRO_struct
 
             //lv1NumObs, lv2NumObs
             line = sr.ReadLine();
-            string[] lineNumObsLvl = line.Split(' ');
+            string[] lineNumObsLvl = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             this.lv1NumObs = Convert.ToInt32(lineNumObsLvl[0]);
             this.lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
 

@@ -26,7 +26,7 @@ namespace AGEPRO_struct
         {
             string line;
             line = sr.ReadLine();
-            string[] MarkovMatrixOptions = line.Split(' ');
+            string[] MarkovMatrixOptions = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             this.numRecruitLevels = Convert.ToInt32(MarkovMatrixOptions[0]);
             this.numSSBLevels = Convert.ToInt32(MarkovMatrixOptions[1]);
@@ -34,7 +34,7 @@ namespace AGEPRO_struct
             //Recruitment
             DataTable inputTable = new DataTable();
             line = sr.ReadLine();
-            string[] inputTableLine = line.Split(' ');
+            string[] inputTableLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i=0; i < this.numRecruitLevels; i++)
             {
                 inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
@@ -44,7 +44,7 @@ namespace AGEPRO_struct
             //SSB
             inputTable = new DataTable();
             line = sr.ReadLine();
-            inputTableLine = line.Split(' ');
+            inputTableLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < this.numSSBLevels; i++)
             {
                 inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
@@ -56,7 +56,7 @@ namespace AGEPRO_struct
             for (int i = 0; i < this.numSSBLevels; i++)
             {
                 line = sr.ReadLine();
-                inputTableLine = line.Split(' ');
+                inputTableLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 for (int j = 0; j < this.numRecruitLevels; j++)
                 {
                     inputTable.Rows[i][j] = Convert.ToDouble(inputTableLine[j]);

@@ -25,10 +25,11 @@ namespace AGEPRO_struct
         
         public void ReadRecruitmentData(StreamReader sr, int nyears, int numRecruitModels)
         {
-            string line; 
-            
+            string line;
+            Console.WriteLine("Reading Recuitment Data ... ");
+
             line = sr.ReadLine();
-            string[] recruitOpt = line.Split(' ');
+            string[] recruitOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             this.recruitScalingFactor = Convert.ToInt32(recruitOpt[0]); //Recruitment Scaling Factor
             this.SSBScalingFactor = Convert.ToInt32(recruitOpt[1]); //SSB Scaling Factor
             this.maxRecuitObs = Convert.ToInt32(recruitOpt[2]);
@@ -50,7 +51,7 @@ namespace AGEPRO_struct
             for (int i = 0; i < nyears; i++)
             {
                 line = sr.ReadLine();
-                string[] nyearRecruitProb = line.Split(' ');
+                string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 
                 //TODO: Check Recruitment Probability for all selections of each year sums to 1.0
                 
@@ -61,7 +62,9 @@ namespace AGEPRO_struct
                 
             }
 
-            //Instanciate recuitList Object
+            Console.WriteLine("Reading Recuitment Model Data ... ");
+            
+            //Instanciate recruitList as new list
             recruitList = new List<RecruitmentModel>();
             
             //Recruitment type
@@ -73,7 +76,7 @@ namespace AGEPRO_struct
             //Check for multiple Markov Matrix Recuitments. (Only one is allowed)
             if (recruitList.Count(r => r.recruitModelNum == 1) > 1)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Multiple Markov Matrix Recruitment not allowed");
             }   
 
             //Read Recruitment Data
@@ -82,8 +85,7 @@ namespace AGEPRO_struct
                 nrecruit.ReadRecruitmentModel(sr);
             }
 
-            //Return RecuritList
-            
+            Console.WriteLine("Done.");
         }
         
         

@@ -23,7 +23,7 @@ namespace AGEPRO_struct
             string line;
             
             line = sr.ReadLine();
-            string[] bootstrapOptions = line.Split(' ');
+            string[] bootstrapOptions = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             //Number of Bootstraps
             this.numBootstraps = Convert.ToInt32(bootstrapOptions[0]); 
             //Pop. Scale Factor
