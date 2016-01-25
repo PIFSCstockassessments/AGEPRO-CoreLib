@@ -32,13 +32,6 @@ namespace AGEPRO_struct
             this.nFleets = numFleets; //Defaults to 1 for Non fleet-dependent InputAge Data
             int N;
 
-            //Create Ages Header?
-            string [] ageHeader = new string[numAges];
-            for (int i = 0; i < numAges; i++)
-            {
-                ageHeader[i] = "Age " + (i+1).ToString();
-            }
-
             //Input Age Option
             string line = sr.ReadLine();
             string[] swLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -59,6 +52,14 @@ namespace AGEPRO_struct
             //check fromFile has non-null value. Do nothing if so.
             if (this.fromFile.HasValue)
             {
+                //Create Ages Header
+                string[] ageHeader = new string[numAges];
+                for (int i = 0; i < numAges; i++)
+                {
+                    ageHeader[i] = "Age " + (i + 1).ToString();
+                }
+
+
                 if (!(bool)this.fromFile) //User spec by user
                 {
                     //byAge
@@ -71,22 +72,30 @@ namespace AGEPRO_struct
                     {
                         N = numFleets;
                     }
+
+                    //Set Age Columns for ageTable
+                    foreach(var nage in ageHeader){
+                        ageTable.Columns.Add(nage, typeof(double));
+                    }
+
                     //i:N rows (years (and fleets))
                     for (int i = 0; i < N; i++)
                     {
                         line = sr.ReadLine();
                         DataRow dr = ageTable.NewRow();
-                        string[] ageLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                        //j: Age Columns 
-                        for (int j = 0; j < ageLine.Length; j++)
-                        {
-                            dr[j] = ageLine[j];
-                        }
-                        ageTable.Rows.Add(dr);
+                        string[] ageLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);   
+                        ageTable.Rows.Add(ageLine);
                     }
                     this.byAgeData = ageTable;
                     //byCV
                     DataTable cvTable = new DataTable();
+
+                    //Set Age Columns for cvTable
+                    foreach (var nage in ageHeader)
+                    {
+                        cvTable.Columns.Add(nage, typeof(double));
+                    }
+
                     for (int K = 0; K < numFleets; K++)
                     {
                         line = sr.ReadLine();
@@ -102,7 +111,7 @@ namespace AGEPRO_struct
                 }
                 else
                 {
-                    //From File
+                    //From File: Reads filepath string
                     ReadInputAgeFromFileOption(sr);
                 }
             }
@@ -113,17 +122,18 @@ namespace AGEPRO_struct
         {
             if (optParam.Equals("1"))
             {
-                this.fromFile = false; //User Spec by Age
+                this.fromFile = true; //From File
             }
             else
             {
-                this.fromFile = true; //From File
+                this.fromFile = false; //User Spec by Age
             }
 
         }
 
         protected virtual void ReadInputAgeFromFileOption(StreamReader sr)
         {
+            //Reads dataflie path
             string line = sr.ReadLine();
             this.dataFile = line;
         }

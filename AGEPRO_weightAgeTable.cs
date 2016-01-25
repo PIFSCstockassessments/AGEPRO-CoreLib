@@ -36,13 +36,14 @@ namespace AGEPRO_struct
             else
             {
                 this.fromFile = null;
+                //Check if weightOpt is a valid one
                 if (this.validOpt.Contains(Convert.ToInt32(optParam)))
                 {
                     this.weightOpt = Convert.ToInt32(optParam);
                 }
                 else
                 {
-                    //TODO: Throw warning/error
+                    throw new InvalidOperationException("Weight option not valid for current Weights of Age Model");
                 }
             }
         }
