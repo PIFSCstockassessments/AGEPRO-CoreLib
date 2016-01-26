@@ -23,14 +23,14 @@ namespace AGEPRO_struct
 
         protected override void ReadInputAgeOption(string optParam)
         {
-            if (optParam.Equals("1"))
+            if (optParam.Equals("0"))
             {
-                this.fromFile = false; //1=User Spec by Age
+                this.fromFile = false; //0=User Spec by Age
                 this.weightOpt = Convert.ToInt32(optParam);
             }
-            else if (optParam.Equals("0"))
+            else if (optParam.Equals("1"))
             {
-                this.fromFile = true; //0=From File
+                this.fromFile = true; //1=From File
                 this.weightOpt = Convert.ToInt32(optParam);
             }
             else

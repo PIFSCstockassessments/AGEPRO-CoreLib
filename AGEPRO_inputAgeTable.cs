@@ -120,13 +120,13 @@ namespace AGEPRO_struct
 
         protected virtual void ReadInputAgeOption(string optParam)
         {
-            if (optParam.Equals("1"))
-            {
-                this.fromFile = true; //From File
-            }
-            else
+            if (optParam.Equals("0"))
             {
                 this.fromFile = false; //User Spec by Age
+            }
+            else if (optParam.Equals("1"))
+            {
+                this.fromFile = true; //From File   
             }
 
         }
