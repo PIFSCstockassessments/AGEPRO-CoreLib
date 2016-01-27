@@ -42,31 +42,35 @@ namespace AGEPRO_struct
 
         protected DataTable ReadObsTable(StreamReader sr, int nObs, bool useSSB)
         {
+            
             string line;
-            DataTable inputTable = new DataTable();
-
-            //obsTable
             line = sr.ReadLine();
             string[] nobsRecruits = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            //inputTable
+            DataTable inputTable = new DataTable();
+            inputTable.Columns.Add("Recruits", typeof(double));
+
             if (useSSB)
             {
+                inputTable.Columns.Add("SSB", typeof(double));
+
                 line = sr.ReadLine();
                 string[] nobsSSB = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < nObs; i++)
                 {
-                    inputTable.Rows.Add((i + 1), Convert.ToDouble(nobsRecruits[i]), Convert.ToDouble(nobsSSB[i]));
+                    inputTable.Rows.Add(Convert.ToDouble(nobsRecruits[i]), Convert.ToDouble(nobsSSB[i]));
                 }
                 
             }
-            else
+            else //useSSB is false
             {
                 for (int i = 0; i < nObs; i++)
                 {
-                    inputTable.Rows.Add((i + 1), Convert.ToDouble(nobsRecruits[i]));
+                    inputTable.Rows.Add(Convert.ToDouble(nobsRecruits[i]));
                 }
                 
             }
-
             return inputTable;
         }
 
