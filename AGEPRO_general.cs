@@ -44,7 +44,7 @@ namespace AGEPRO_struct
 
         public int[] SeqYears()
         {
-            return Enumerable.Range(this.projYearStart, this.projYearEnd).ToArray();
+            return Enumerable.Range(this.projYearStart, this.NumYears()).ToArray();
         }
 
         //TODO:Remove this function? Replace it with a 'ReadGeneralOptionsData' function and 
