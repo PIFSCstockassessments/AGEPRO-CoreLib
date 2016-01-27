@@ -58,6 +58,8 @@ namespace AGEPRO_struct
             }
             else //All Years
             {
+                tSpawnTable.Columns.Add("All Years", typeof(double));
+
                 line = sr.ReadLine();
                 string TFLine = line;
                 tSpawnTable.Rows.Add(TFLine);
