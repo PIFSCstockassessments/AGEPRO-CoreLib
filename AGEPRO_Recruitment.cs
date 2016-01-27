@@ -14,9 +14,10 @@ namespace AGEPRO_struct
         public int SSBScalingFactor { get; set; }
         public int maxRecuitObs { get; set; }
         public int[] recruitType { get; set; }
-        public DataTable recruitProb { get; set; }
+        public DataTable recruitProb = new DataTable();
         public int recruitmentCategory { get; set; }
         public List<RecruitmentModel> recruitList { get; set; }
+        public int[] observationYears { get; set; }
 
         public AGEPRO_Recruitment()
         {
@@ -35,8 +36,8 @@ namespace AGEPRO_struct
             this.maxRecuitObs = Convert.ToInt32(recruitOpt[2]);
 
             //Recruit Methods
-            line = sr.ReadLine();
-            string[] recruitModels = line.Split();
+            line = sr.ReadLine().Trim();
+            string[] recruitModels = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             //TODO:Keep Recruit Type a int array for switch-case
             this.recruitType = Array.ConvertAll<string, int>(recruitModels, int.Parse);  
 
@@ -46,19 +47,22 @@ namespace AGEPRO_struct
                 throw new System.InvalidOperationException("numRecruitModels does not match input file recruitModel count");
             }
 
+            
 
-            //Recruit Prob
+            //Set Recruit Prob Columns
+            for(int nselection = 0; nselection < recruitType.Count(); nselection++)
+            {
+                recruitProb.Columns.Add("Selection " + (nselection+1).ToString(), typeof(double));
+            }
+            //Recruitment Probability
             for (int i = 0; i < nyears; i++)
             {
                 line = sr.ReadLine();
                 string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                recruitProb.Rows.Add(nyearRecruitProb);
                 
                 //TODO: Check Recruitment Probability for all selections of each year sums to 1.0
                 
-                for (int j=0; j < numRecruitModels; j++)
-                {
-                    this.recruitProb.Rows[i][j] = nyearRecruitProb[j];
-                }
                 
             }
 
@@ -132,7 +136,9 @@ namespace AGEPRO_struct
                 case 17:
                 case 18:
                 case 19:
-                    recruitList.Add(new PredictorRecruitment(recruitType));
+                    PredictorRecruitment predictorRecruitModel = new PredictorRecruitment(recruitType);
+                    predictorRecruitModel.obsYears = this.observationYears;
+                    recruitList.Add(predictorRecruitModel);
                     break;
                 case 21:
                     recruitList.Add(new EmpericalCDFZero(recruitType));
@@ -146,10 +152,7 @@ namespace AGEPRO_struct
             //return RecruitmentModel
         }
 
-        public bool ValidateModel()
-        {
-            return true;
-        }
+
     }
 
 

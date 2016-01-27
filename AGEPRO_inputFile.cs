@@ -15,7 +15,6 @@ namespace AGEPRO_struct
         public AGEPRO_General general = new AGEPRO_General();
         public AGEPRO_Bootstrap bootstrap = new AGEPRO_Bootstrap();
         public AGEPRO_Recruitment recruitment = new AGEPRO_Recruitment();
-        public List<AGEPRO_Recruitment> recruitList { get; set; }
         public AGEPRO_InputAgeTable stockWeight = new AGEPRO_InputAgeTable();
         public AGEPRO_WeightAgeTable SSBWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1});
         public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
@@ -104,6 +103,7 @@ namespace AGEPRO_struct
                 else if (line.Equals("[RECRUIT]"))
                 {
                     //Read Recruit Data
+                    this.recruitment.observationYears = this.general.SeqYears();
                     this.recruitment.ReadRecruitmentData(sr,general.NumYears(),general.numRecModels);
                 }
                 else if (line.Equals("[STOCK_WEIGHT]"))
