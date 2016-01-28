@@ -32,8 +32,8 @@ namespace AGEPRO_struct
         public AGEPRO_MiscOptions.ScaleFactors scale = new AGEPRO_MiscOptions.ScaleFactors(); //scale
         public AGEPRO_MiscOptions.ReportPercentile reportPercentile = new AGEPRO_MiscOptions.ReportPercentile(); //reportPercentile
         public AGEPRO_MiscOptions.Refpoint refpoint = new AGEPRO_MiscOptions.Refpoint(); //refpoint
-        public AGEPRO_HarvestScenario.Rebuild rebuild = new AGEPRO_HarvestScenario.Rebuild();
-        public AGEPRO_HarvestScenario.PStar pstar = new AGEPRO_HarvestScenario.PStar(); 
+        public RebuilderTarget rebuild = new RebuilderTarget(); //rebuilder
+        public PStar pstar = new PStar(); 
         
         public void ReadInputFile(string file)
         {
