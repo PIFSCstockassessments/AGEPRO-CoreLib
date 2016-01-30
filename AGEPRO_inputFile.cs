@@ -182,7 +182,7 @@ namespace AGEPRO_struct
                     line = sr.ReadLine();
                     string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     DataTable retroAdjTable = new DataTable();
-
+                    retroAdjTable.Columns.Add(); //set column without name
                     //TODO: throw warning/error if 'rafLine' length doesn't match number of Ages
 
                     for (int i = 0; i < this.general.NumAges(); i++)
