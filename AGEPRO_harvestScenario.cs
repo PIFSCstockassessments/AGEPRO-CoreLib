@@ -24,9 +24,7 @@ namespace AGEPRO_struct
             DataTable G = new DataTable();
             line = sr.ReadLine();
             string[] harvestSpecLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            //line = sr.ReadLine();
-            //string[] harvestValueLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            
+           
             //Set Columns and save HarvestSpec/Nfleet Values to list
             G.Columns.Add("Harvest Spec", typeof(string));
             List<string[]> harvestNFleetLines = new List<string[]>(nfleet);
@@ -47,17 +45,16 @@ namespace AGEPRO_struct
                     string[] harvestValueLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     harvestNFleetLines.Add(harvestValueLine);
                     
-                    G.Columns.Add("FLEET-" + nfleet.ToString(), typeof(double));
+                    G.Columns.Add("FLEET-" + (i+1).ToString(), typeof(double));
 
                 }
             }
 
             
-            //Harvest Spec
             for (int i = 0; i < nyears; i++)
             {
+                DataRow dr = G.NewRow();
                 string iyearHarvestSpec;
-                double[] iyearHarvestNFleetValue = new double[nfleet];
                 int ihs = Convert.ToInt32(harvestSpecLine[i]);
                 switch (ihs)
                 {
@@ -71,35 +68,19 @@ namespace AGEPRO_struct
                         iyearHarvestSpec = "REMOVALS";
                         break;
                 }
-                //dr[0] = iyearHarvestSpec;
+                //Harvest Spec
+                dr[0] = iyearHarvestSpec;
                 
-
+                //Column Harvest Value/Fleet-N
                 for (int j = 0 ; j < harvestNFleetLines.Count(); j++)
                 {
                     string[] nfleetValue = harvestNFleetLines[j];
-                    iyearHarvestNFleetValue[j] = Convert.ToDouble(nfleetValue[i]);
+
+                    dr[j + 1] = Convert.ToDouble(nfleetValue[i]);
                 }
            
-                
-                G.Rows.Add(iyearHarvestSpec, iyearHarvestNFleetValue);
-                
-
+                G.Rows.Add(dr);
             }
-            //////Harvest Value (or Value per nfleet)
-            //for (int k = 0; k < nfleet; k++)
-            //{
-            //    int kfleetIndexStart = 0 + (nyears * k);
-            //    int kfleetIndexEnd = nyears + (nyears * k);
-            //    string[] harvestValueLineFleet = harvestValueLine.SplitArray(kfleetIndexStart, kfleetIndexEnd);
-
-            //    for (int i = 0; i < nyears; i++)
-            //    {
-            //        //Add Harvest Value Column values to existing data table
-            //        G.Rows[i][k + 1] = Convert.ToDouble(harvestValueLineFleet[i]); 
-            //    }
-                
-            //}
-
             
             return G;
         }
