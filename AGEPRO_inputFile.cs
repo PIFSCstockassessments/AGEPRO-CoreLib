@@ -90,7 +90,7 @@ namespace AGEPRO_struct
                     this.general.numFleets = Convert.ToInt32(generalLine[5]);
                     this.general.numRecModels = Convert.ToInt32(generalLine[6]);
                     this.general.seed = Convert.ToInt32(generalLine[8]);
-                    if (generalLine[7].Equals('1'))
+                    if (generalLine[7].Equals("1"))
                     {
                         this.general.hasDiscards = true;
                     }
