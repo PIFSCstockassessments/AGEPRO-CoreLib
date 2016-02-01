@@ -18,7 +18,7 @@ namespace AGEPRO_struct
 
         }
 
-        public DataTable ReadHarvestTable(StreamReader sr, int nyears, int nfleet=1)
+        public void ReadHarvestTable(StreamReader sr, int nyears, int nfleet=1)
         {
             string line;
             DataTable G = new DataTable();
@@ -82,7 +82,7 @@ namespace AGEPRO_struct
                 G.Rows.Add(dr);
             }
             
-            return G;
+            this.harvestScenarioTable = G;
         }
 
 
