@@ -111,12 +111,14 @@ namespace AGEPRO_struct
     public class PStar : AGEPRO_HarvestScenario
     {
         public int pStarLevels { get; set; }
-        public DataTable pStarTable = new DataTable();
+        public DataTable pStarTable; 
         public double pStarF { get; set; }
 
         public void ReadPStarData(StreamReader sr)
         {
             string line;
+            this.pStarTable = new DataTable();
+            
             //Number of pStar Levels
             line = sr.ReadLine();
             this.pStarLevels = Convert.ToInt32(line);
@@ -124,12 +126,11 @@ namespace AGEPRO_struct
             //pStar Level Values
             line = sr.ReadLine();
             string[] pStarLevelData = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            DataRow pStarLevelRow = pStarTable.NewRow();
             for (int i = 0; i < this.pStarLevels; i++)
             {
-                pStarLevelRow[i] = Convert.ToDouble(pStarLevelData[i]);
+                pStarTable.Columns.Add("Level " + (i+1).ToString(), typeof(double));
             }
-            pStarTable.Rows.Add(pStarLevelRow);
+            pStarTable.Rows.Add(pStarLevelData);
 
             //Overfishing F
             line = sr.ReadLine();
