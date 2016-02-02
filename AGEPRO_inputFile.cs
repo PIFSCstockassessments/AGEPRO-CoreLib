@@ -24,7 +24,7 @@ namespace AGEPRO_struct
         public AGEPRO_InputAgeTable maturity = new AGEPRO_InputAgeTable();
         public AGEPRO_InputAgeTable fishery = new AGEPRO_InputAgeTable();
         public AGEPRO_InputAgeTable discardWeight = new AGEPRO_InputAgeTable(); //discard weight
-        public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustFactor = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
+        public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustOption = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
         public AGEPRO_HarvestScenario harvestScenario = new AGEPRO_HarvestScenario();
         public AGEPRO_InputAgeTable discardFraction = new AGEPRO_InputAgeTable(); //discard fraction
         public AGEPRO_MiscOptions.Bounds bounds = new AGEPRO_MiscOptions.Bounds(); //bounds
@@ -181,16 +181,16 @@ namespace AGEPRO_struct
                     AGEPRO_MiscOptions.enableRetroAdjustmentFactors = true;
                     line = sr.ReadLine();
                     string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    DataTable retroAdjTable = new DataTable();
-                    retroAdjTable.Columns.Add(); //set column without name
+                    DataTable rafTable = new DataTable();
+                    rafTable.Columns.Add(); //set column without name
                     //TODO: throw warning/error if 'rafLine' length doesn't match number of Ages
 
                     for (int i = 0; i < this.general.NumAges(); i++)
                     {
-                        retroAdjTable.Rows.Add(rafLine[i]);
+                        rafTable.Rows.Add(rafLine[i]);
                     }
 
-                    this.retroAdjustFactor.retroAdjust = retroAdjTable;
+                    this.retroAdjustOption.retroAdjust = rafTable;
                 }
                 else if (line.Equals("[OPTIONS]"))
                 {
