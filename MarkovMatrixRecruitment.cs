@@ -32,9 +32,10 @@ namespace AGEPRO_struct
             this.numSSBLevels = Convert.ToInt32(MarkovMatrixOptions[1]);
 
             //Recruitment
-            DataTable inputTable = new DataTable();
+            DataTable inputTable = new DataTable("Recruitment");
             line = sr.ReadLine();
             string[] inputTableLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            inputTable.Columns.Add("Recruitment", typeof(int));
             for (int i=0; i < this.numRecruitLevels; i++)
             {
                 inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
@@ -42,9 +43,10 @@ namespace AGEPRO_struct
             this.recruitmentTable = inputTable;
             
             //SSB
-            inputTable = new DataTable();
+            inputTable = new DataTable("SSB");
             line = sr.ReadLine();
             inputTableLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            inputTable.Columns.Add("SSB Cut Points", typeof(int));
             for (int i = 0; i < this.numSSBLevels; i++)
             {
                 inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
@@ -52,20 +54,22 @@ namespace AGEPRO_struct
             this.SSBTable = inputTable;
             
             //Probalility
-            inputTable = new DataTable();
+            inputTable = new DataTable("Probalitity");
+            for (int j = 0; j < this.numRecruitLevels; j++)
+            {
+                inputTable.Columns.Add("PR("+(j+1).ToString()+")",typeof(double));
+            }
             for (int i = 0; i < this.numSSBLevels; i++)
             {
                 line = sr.ReadLine();
                 inputTableLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                for (int j = 0; j < this.numRecruitLevels; j++)
-                {
-                    inputTable.Rows[i][j] = Convert.ToDouble(inputTableLine[j]);
-                }
+                //TODO: Check Probability of each SSB Level (row) must sum to 1.0 
+                
+                inputTable.Rows.Add(inputTableLine);
             }
             this.probabilityTable = inputTable;
         }
 
-        
         
     }
 }
