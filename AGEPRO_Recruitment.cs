@@ -27,6 +27,8 @@ namespace AGEPRO_struct
         public void ReadRecruitmentData(StreamReader sr, int nyears, int numRecruitModels)
         {
             string line;
+            double nyearProbSum;
+            double precisionDiff;
             Console.WriteLine("Reading Recuitment Data ... ");
 
             line = sr.ReadLine();
@@ -61,8 +63,15 @@ namespace AGEPRO_struct
                 string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 recruitProb.Rows.Add(nyearRecruitProb);
                 
-                //TODO: Check Recruitment Probability for all selections of each year sums to 1.0
-                
+                //Check Recruitment Probability for all selections of each year sums to 1.0
+                nyearProbSum = Array.ConvertAll<string, double>(nyearRecruitProb, double.Parse).Sum();
+                precisionDiff = Math.Abs(nyearProbSum * 0.00001);
+                // To Handle Floating-Point precision issues when "nyearProbSum != 1.0" comparisons
+                if(!(Math.Abs(nyearProbSum - (double)1) <= precisionDiff))
+                {
+                    throw new InvalidOperationException("Year " + (i + 1).ToString() + " recruitment probablity sum does not equal 1.0: " + 
+                        "Probability sum is " + nyearProbSum.ToString());
+                }
                 
             }
 

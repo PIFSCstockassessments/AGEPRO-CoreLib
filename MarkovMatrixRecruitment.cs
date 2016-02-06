@@ -25,6 +25,9 @@ namespace AGEPRO_struct
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
+            double SSBLevelProbSum;
+            double precisionDiff;
+
             line = sr.ReadLine();
             string[] MarkovMatrixOptions = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
@@ -63,8 +66,16 @@ namespace AGEPRO_struct
             {
                 line = sr.ReadLine();
                 inputTableLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                //TODO: Check Probability of each SSB Level (row) must sum to 1.0 
                 
+                //Check Probability of each SSB Level (row) must sum to 1.0 
+                SSBLevelProbSum = Array.ConvertAll<string, double>(inputTableLine, double.Parse).Sum();
+                precisionDiff = Math.Abs(SSBLevelProbSum * .000001);
+                //To Handle Floating-Point Precision issues in "SSBLevelProbSum != 1" Comparision
+                if(!(Math.Abs(SSBLevelProbSum - (double)1.0) <= precisionDiff))
+                {
+                    throw new InvalidOperationException("SSB level " + (i + 1).ToString() + " probability sum does not equal to 1.0: " +
+                        "Probability sum is " + SSBLevelProbSum.ToString());
+                }
                 inputTable.Rows.Add(inputTableLine);
             }
             this.probabilityTable = inputTable;
