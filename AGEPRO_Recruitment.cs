@@ -14,7 +14,7 @@ namespace AGEPRO_struct
         public int SSBScalingFactor { get; set; }
         public int maxRecuitObs { get; set; }
         public int[] recruitType { get; set; }
-        public DataTable recruitProb = new DataTable();
+        public DataTable recruitProb = new DataTable("Recruitment Probability");
         public int recruitmentCategory { get; set; }
         public List<RecruitmentModel> recruitList { get; set; }
         public int[] observationYears { get; set; }

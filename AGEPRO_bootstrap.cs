@@ -32,6 +32,8 @@ namespace AGEPRO_struct
             line = sr.ReadLine();
             this.bootstrapFile = line;
 
+            //TODO: Send error/warning if bootstrapFile is not found in system
+
         }
     }
 }

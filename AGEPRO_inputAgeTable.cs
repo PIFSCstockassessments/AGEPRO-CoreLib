@@ -63,7 +63,7 @@ namespace AGEPRO_struct
                 if (!(bool)this.fromFile) //User spec by user
                 {
                     //byAge
-                    DataTable ageTable = new DataTable();
+                    DataTable ageTable = new DataTable("Age Value");
                     if (this.timeVarying)
                     {
                         N = this.nYears * numFleets;
@@ -88,7 +88,7 @@ namespace AGEPRO_struct
                     }
                     this.byAgeData = ageTable;
                     //byCV
-                    DataTable cvTable = new DataTable();
+                    DataTable cvTable = new DataTable("Age CV");
 
                     //Set Age Columns for cvTable
                     foreach (var nage in ageHeader)

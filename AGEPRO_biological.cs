@@ -37,7 +37,7 @@ namespace AGEPRO_struct
             }
 
             //Fraction mortality prior to spawning 
-            DataTable tSpawnTable = new DataTable();
+            DataTable tSpawnTable = new DataTable("tSpawnTable");
 
             if (this.timeVarying)
             {

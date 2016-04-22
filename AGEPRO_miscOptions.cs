@@ -57,7 +57,7 @@ namespace AGEPRO_struct
 
         public class retroAdjustmentFactors
         {
-            public DataTable retroAdjust = new DataTable();
+            public DataTable retroAdjust = new DataTable("Retro Adjustment Factors");
         }
     }
 }

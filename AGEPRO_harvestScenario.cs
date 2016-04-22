@@ -21,7 +21,7 @@ namespace AGEPRO_struct
         public void ReadHarvestTable(StreamReader sr, int nyears, int nfleet=1)
         {
             string line;
-            DataTable G = new DataTable();
+            DataTable G = new DataTable("Harvest Scenario");
             line = sr.ReadLine();
             string[] harvestSpecLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
            
@@ -117,7 +117,7 @@ namespace AGEPRO_struct
         public void ReadPStarData(StreamReader sr)
         {
             string line;
-            this.pStarTable = new DataTable();
+            this.pStarTable = new DataTable("pStar");
             
             //Number of pStar Levels
             line = sr.ReadLine();

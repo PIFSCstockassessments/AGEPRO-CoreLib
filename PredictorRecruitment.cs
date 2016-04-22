@@ -38,7 +38,7 @@ namespace AGEPRO_struct
             //TODO:Check numRecruitPredictors <= 5 (max is 5)
 
             //Coefficents
-            DataTable inputTable = new DataTable();
+            DataTable inputTable = new DataTable("Coefficients");
             inputTable.Columns.Add("Coefficient", typeof(double));
 
             line = sr.ReadLine();
@@ -50,7 +50,7 @@ namespace AGEPRO_struct
             this.coefficientTable = inputTable;
 
             //Observations
-            inputTable = new DataTable();
+            inputTable = new DataTable("Observations");
             for (int j = 0; j < obsYears.Count(); j++)
             {
                 inputTable.Columns.Add( obsYears[j].ToString(), typeof(double));

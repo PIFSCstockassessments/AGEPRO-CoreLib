@@ -48,7 +48,7 @@ namespace AGEPRO_struct
             string[] nobsRecruits = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             //inputTable
-            DataTable inputTable = new DataTable();
+            DataTable inputTable = new DataTable("Observation Table");
             inputTable.Columns.Add("Recruits", typeof(double));
 
             if (useSSB)
@@ -103,7 +103,7 @@ namespace AGEPRO_struct
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
-            DataTable inputTable = new DataTable();
+            DataTable inputTable = new DataTable("Observation Table");
 
             //lv1NumObs, lv2NumObs
             line = sr.ReadLine();
