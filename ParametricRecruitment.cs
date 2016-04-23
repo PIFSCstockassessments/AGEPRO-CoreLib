@@ -24,6 +24,8 @@ namespace AGEPRO_struct
         {
             this.autocorrelated = isAutocorrelated;
         }
+
+
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             throw new NotImplementedException();

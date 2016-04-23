@@ -26,6 +26,7 @@ namespace AGEPRO_struct
             this.withSSB = useSSB;
         }
 
+
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
@@ -98,7 +99,6 @@ namespace AGEPRO_struct
         {
             this.withSSB = useSSB;
         }
-
 
         public override void ReadRecruitmentModel(StreamReader sr)
         {
