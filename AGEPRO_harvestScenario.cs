@@ -8,6 +8,9 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// AGEPRO Harvest Scenario Parameters. 
+    /// </summary>
     public class AGEPRO_HarvestScenario
     {
         public DataTable harvestScenarioTable { get; set; }
@@ -18,6 +21,12 @@ namespace AGEPRO_struct
 
         }
 
+        /// <summary>
+        /// Reads in Harvest Specficiation basis for each year from the AGEPRO input file. 
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
+        /// <param name="nyears">Number of years.</param>
+        /// <param name="nfleet">Number of Fleets. Default is <c>1</c>.</param>
         public void ReadHarvestTable(StreamReader sr, int nyears, int nfleet=1)
         {
             string line;
@@ -88,12 +97,19 @@ namespace AGEPRO_struct
 
     }
 
+    /// <summary>
+    /// Specifications for Stock Rebuilder Targets
+    /// </summary>
     public class RebuilderTarget : AGEPRO_HarvestScenario
     {
         public double targetValue { get; set; }
         public int targetType { get; set; } //rebuild target type (cboRebuild.SelectedIndex)
         public double targetPercent { get; set; } //Percent Confidence
 
+        /// <summary>
+        /// Readin AGEPRO Input Data File for Rebuild Specification Parameters
+        /// </summary>
+        /// <param name="sr">AGEPRO Input Data File StreamReader</param>
         public void ReadRebuildData(StreamReader sr)
         {
             string line;
@@ -108,12 +124,19 @@ namespace AGEPRO_struct
         }
     }
 
+    /// <summary>
+    /// P-Star Analysis
+    /// </summary>
     public class PStar : AGEPRO_HarvestScenario
     {
         public int pStarLevels { get; set; }
         public DataTable pStarTable; 
         public double pStarF { get; set; }
 
+        /// <summary>
+        /// Readin AGEPRO Input Data File for P-Star Data Specifications
+        /// </summary>
+        /// <param name="sr">AGEPRO Input Data File StreamReader</param>
         public void ReadPStarData(StreamReader sr)
         {
             string line;

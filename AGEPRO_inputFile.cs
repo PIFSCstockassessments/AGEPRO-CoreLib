@@ -7,10 +7,14 @@ using System.Data;
 using System.IO;
 
 namespace AGEPRO_struct
-{
+{   
+    /// <summary>
+    /// AGEPRO Input File 
+    /// </summary>
     public class AGEPRO_InputFile
     {
         public string version { get; set; }
+        public double numVer { get; set; }
         public string caseID { get; set; }
         public AGEPRO_General general = new AGEPRO_General();
         public AGEPRO_Bootstrap bootstrap = new AGEPRO_Bootstrap();
@@ -35,12 +39,16 @@ namespace AGEPRO_struct
         public RebuilderTarget rebuild = new RebuilderTarget(); //rebuilder
         public PStar pstar = new PStar(); 
         
+
+        /// <summary>
+        /// Initates the <paramref name="System.IO.StreamReader"/> function to read the AGEPRO Input file.
+        /// </summary>
+        /// <param name="file"> AGEPRO Input Filename Location</param>
+        /// <remarks> Contains Try-Catch Execption Handler</remarks>
         public void ReadInputFile(string file)
         {
             try
             {
-                //string[] lines = File.ReadAllLines(file);
-                //ReadInputFileLineValues(lines);
                 using (StreamReader inReader = new StreamReader(file))
                 {
                     ReadInputFileLineValues(inReader);
@@ -53,6 +61,10 @@ namespace AGEPRO_struct
             }
         }
 
+        /// <summary>
+        /// Reads in the AGERPRO Input file values by line
+        /// </summary>
+        /// <param name="sr">SreamReader Object</param>
         private void ReadInputFileLineValues(StreamReader sr)
         {
             string line;
@@ -66,7 +78,7 @@ namespace AGEPRO_struct
             }
             else
             {
-                //Throw Error/Warning for incompatiability
+                //TODO: Throw Error/Warning for incompatiability
             }
 
             while(!sr.EndOfStream)
@@ -222,6 +234,10 @@ namespace AGEPRO_struct
 
         }
 
+        /// <summary>
+        /// Creates and sets the Recruitment Model Dictionary Object
+        /// </summary>
+        /// <returns>Returns the Recruitment Model Dictionary</returns>
         private Dictionary<int, string> RecruitDictionary() 
         {
             //Future Feature: Generizse/Automate this Dictionary?

@@ -7,6 +7,9 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// General Paramemeters of AGEPRO
+    /// </summary>
     public class AGEPRO_General
     {
         public int projYearStart { get; set; }    //First Year in Projection
@@ -30,42 +33,37 @@ namespace AGEPRO_struct
             //readin file contents
         }
         
+        /// <summary>
+        /// Determine number of years in projection by the (absolulte) diffefence between the 
+        /// last and first year of projection. 
+        /// </summary>
+        /// <returns>The difference stored in 'nYears'</returns>
         public int NumYears()
         {
             int nYears = Math.Abs(this.projYearEnd - this.projYearStart) + 1;
             return nYears;
         }
 
+        /// <summary>
+        /// Determine number of ages in projection by the (absolulte) diffefence between last age 
+        /// class and first age class of projection. 
+        /// </summary>
+        /// <returns>The difference in stored in 'nAges'</returns>
         public int NumAges()
         {
             int nAges = Math.Abs(this.ageBegin - this.ageEnd) + 1;
             return nAges;
         }
 
+        /// <summary>
+        /// Returns a sequence of years from First year of projection
+        /// </summary>
+        /// <returns>Returns a int array from <paramref name="projYearStart"/> by <paramref name="NumYears"/></returns>
         public int[] SeqYears()
         {
             return Enumerable.Range(this.projYearStart, this.NumYears()).ToArray();
         }
 
-        //TODO:Remove this function? Replace it with a 'ReadGeneralOptionsData' function and 
-        //move "general option" centric functionality from AGEPRO_InputFile.ReadInputDataFile() to here? 
-        private void ReadInputFile(string file)
-        {
-            try
-            {
-                //open file
-                using (StreamReader inFile = new StreamReader(file))
-                {
-                        
-                }
-            }
-            catch(IOException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-           
-
-        }
+        
     }
 }

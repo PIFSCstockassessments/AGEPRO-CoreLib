@@ -20,6 +20,11 @@ namespace AGEPRO_struct
         }
 
         //TODO: Test if Function is sucessful.
+        /// <summary>
+        /// Read in AGEPRO Biological Options from the AGEPRO Input File StreamReader
+        /// </summary>
+        /// <param name="sr">AGEPRO Input Data File StreamReader</param>
+        /// <param name="yearSeq">Year Sequence</param>
         public void ReadBiologicalData(StreamReader sr, int [] yearSeq)
         {
             this.nYears = yearSeq.Count();

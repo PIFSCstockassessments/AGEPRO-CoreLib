@@ -7,6 +7,14 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// AGEPRO Bootstrapping Options
+    /// </summary>
+    /// <remarks>
+    /// -Number of data values of each row must equal to the number of age classes.
+    /// -The number of rows in a bootstrap file must be at least equal to the number of bootstrap 
+    /// iterations containing the popluation of the first year in the projection
+    /// </remarks>
     public class AGEPRO_Bootstrap
     {
         public int numBootstraps { get; set; }
@@ -18,6 +26,10 @@ namespace AGEPRO_struct
 
         }
 
+        /// <summary>
+        /// Reading Bootstrap Options from AGEPRO Input File Stream
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public void ReadBootstrapData(StreamReader sr)
         {
             string line;
