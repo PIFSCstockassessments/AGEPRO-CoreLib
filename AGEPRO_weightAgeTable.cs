@@ -7,6 +7,9 @@ using System.Collections.ObjectModel;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// Weight Specfic Stochastic Weights-at-age AGEPRO parameter class.
+    /// </summary>
     public class AGEPRO_WeightAgeTable : AGEPRO_InputAgeTable
     {
         public int weightOpt { get; set; }  //Weight Option
@@ -21,6 +24,11 @@ namespace AGEPRO_struct
             validOpt = validOptions;
         }
 
+        /// <summary>
+        /// Sets option for stochastic weights-at-age to either: inputted maunually, 
+        /// read from the AGEPRO Input File, or use a valid weight option
+        /// </summary>
+        /// <param name="optParam">String Character from <paramref name="validOpt"/></param>
         protected override void ReadInputAgeOption(string optParam)
         {
             if (optParam.Equals("0"))
@@ -48,6 +56,10 @@ namespace AGEPRO_struct
             }
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File for the 'Read Weights From File' option 
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         protected override void ReadInputAgeFromFileOption(System.IO.StreamReader sr)
         {
             //If Option 0=fromFile, read fromFile options

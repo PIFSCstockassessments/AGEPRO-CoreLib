@@ -7,6 +7,9 @@ using System.Data;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// AGEPRO Misc Options.
+    /// </summary>
     public class AGEPRO_MiscOptions
     {
         public bool enableSummaryReport { get; set; }

@@ -8,6 +8,9 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// Generalized Stochastic Weights-at-age AGEPRO parameter class.
+    /// </summary>
     public class AGEPRO_InputAgeTable : AGEPRO_Input
     {
         public bool? fromFile { get; set; }
@@ -25,6 +28,13 @@ namespace AGEPRO_struct
 
         }
         
+        /// <summary>
+        /// Read in AGEPRO Input Data File for stochastic Weights-at-age AGEPRO Parameters 
+        /// </summary>
+        /// <param name="sr">AGEPRO Input Data File StreamReader</param>
+        /// <param name="numYears">Number of Years in Projection</param>
+        /// <param name="numAges">Number of Ages in Projection</param>
+        /// <param name="numFleets">Number of Fleets. Default to <c>1</c></param>
         public void ReadInputAgeData(StreamReader sr, int numYears, int numAges, int numFleets = 1)
         {
             
@@ -118,6 +128,10 @@ namespace AGEPRO_struct
 
         }
 
+        /// <summary>
+        /// Sets option for stochastic weights-at-age to be inputted maunually or read from the AGEPRO Input File
+        /// </summary>
+        /// <param name="optParam">String Character with '0' or '1'</param>
         protected virtual void ReadInputAgeOption(string optParam)
         {
             if (optParam.Equals("0"))
@@ -131,6 +145,10 @@ namespace AGEPRO_struct
 
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File for the 'Read Weights From File' option 
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         protected virtual void ReadInputAgeFromFileOption(StreamReader sr)
         {
             //Reads dataflie path
