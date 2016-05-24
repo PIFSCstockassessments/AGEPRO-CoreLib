@@ -8,6 +8,9 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// Emperical Recruitment
+    /// </summary>
     public class EmpericalRecruitment : RecruitmentModel
     {
         public int numObs { get; set; }
@@ -26,7 +29,10 @@ namespace AGEPRO_struct
             this.withSSB = useSSB;
         }
 
-
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream For Emperical Recruitment Specfic Parameters & Data 
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
@@ -78,6 +84,9 @@ namespace AGEPRO_struct
         
     }
 
+    /// <summary>
+    /// Two-Stage Emperical Recruitment. Parameters & Observations for two levels (stages).
+    /// </summary>
     public class TwoStageEmpericalRecruitment : EmpericalRecruitment
     {
         public int lv1NumObs { get; set; }
@@ -122,6 +131,9 @@ namespace AGEPRO_struct
         }
     }
 
+    /// <summary>
+    /// Emperical CDF of Recruitment w/ Linear Decline to Zero.
+    /// </summary>
     public class EmpericalCDFZero : EmpericalRecruitment
     {
         public double? SSBHinge { get; set; }
