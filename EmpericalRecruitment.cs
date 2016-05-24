@@ -42,18 +42,18 @@ namespace AGEPRO_struct
             this.numObs = Convert.ToInt32(line);
 
             //obsTable
-            this.obsTable = ReadObsTable(sr, this.numObs, this.withSSB);
-
+            this.obsTable = ReadObsTable(sr, this.numObs);
 
         }
 
-        protected DataTable ReadObsTable(StreamReader sr, int nObs, bool useSSB)
+        protected DataTable ReadObsTable(StreamReader sr, int nObs)
         {
             
             string line;
+            bool useSSB = this.withSSB;
             line = sr.ReadLine();
             string[] nobsRecruits = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
+            
             //inputTable
             DataTable inputTable = new DataTable("Observation Table");
             inputTable.Columns.Add("Recruits", typeof(double));
@@ -121,9 +121,9 @@ namespace AGEPRO_struct
             this.lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
 
             //lv1Obs 
-            this.lv1Obs = base.ReadObsTable(sr, this.lv1NumObs, this.withSSB);
+            this.lv1Obs = base.ReadObsTable(sr, this.lv1NumObs);
             //lv2Obs
-            this.lv2Obs = base.ReadObsTable(sr, this.lv2NumObs, this.withSSB);
+            this.lv2Obs = base.ReadObsTable(sr, this.lv2NumObs);
 
             //SSBBReakVal
             line = sr.ReadLine();
