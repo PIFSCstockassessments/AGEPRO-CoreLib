@@ -8,6 +8,9 @@ using System.IO;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// Predictor Recruitment
+    /// </summary>
     public class PredictorRecruitment : RecruitmentModel
     {
         public int numRecruitPredictors { get; set; }
@@ -16,12 +19,13 @@ namespace AGEPRO_struct
         public DataTable coefficientTable { get; set; }
         public DataTable observationTable { get; set; }
         public int[] obsYears { get; set; }
-        
+        public int maxNumPredictors { get; set; }
 
         public PredictorRecruitment(int modelNum) 
         {
             this.recruitModelNum = modelNum;
             this.recruitCategory = 3;
+            this.maxNumPredictors = 5;
         }
 
         public override void ReadRecruitmentModel(StreamReader sr) 
@@ -35,7 +39,14 @@ namespace AGEPRO_struct
             this.variance = Convert.ToDouble(predictorParamLine[1]);
             this.intercept = Convert.ToDouble(predictorParamLine[2]);
 
-            //TODO:Check numRecruitPredictors <= 5 (max is 5)
+            //Check numRecruitPredictors <= 5 (max is 5)
+            if (this.numRecruitPredictors > this.maxNumPredictors)
+            {
+                throw new ArgumentOutOfRangeException("numRecruitPredictors",this.numRecruitPredictors,
+                    "Number of Recruitment Predictors of Recruit Model "+this.recruitModelNum+
+                    " is greater than the Maximum of "+this.maxNumPredictors );
+            }
+
 
             //Coefficents
             DataTable inputTable = new DataTable("Coefficients");
