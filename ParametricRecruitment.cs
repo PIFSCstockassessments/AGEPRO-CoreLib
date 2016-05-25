@@ -8,6 +8,9 @@ using System.Data;
 
 namespace AGEPRO_struct
 {
+    /// <summary>
+    /// Parametric Recruitment
+    /// </summary>
     public class ParametricRecruitment : RecruitmentModel
     {
         public double? phi { get; set; }
@@ -46,6 +49,9 @@ namespace AGEPRO_struct
         
     }
 
+    /// <summary>
+    /// Parameteric Recruitment Using the Berverton-Holt, Ricker, or Shepherd Curve
+    /// </summary>
     public class ParametricCurve : ParametricRecruitment
     {
         public double alpha { get; set; }
@@ -64,7 +70,11 @@ namespace AGEPRO_struct
 
             if (parametricLine.Length == 3)
             {
-                //TODO: Verify if this Parametric Model should have 3 parameters
+                //Verify if this Parametric Model should have 3 parameters
+                if (IsThisAShepherdCurve(this.recruitModelNum))
+                {
+                    throw new System.InvalidOperationException("3 Parameter Shepherd Curve Found");
+                }
                 this.alpha = Convert.ToDouble(parametricLine[0]);
                 this.beta = Convert.ToDouble(parametricLine[1]);
                 this.variance = Convert.ToDouble(parametricLine[2]);
@@ -72,7 +82,10 @@ namespace AGEPRO_struct
             }
             else if (parametricLine.Length == 4)
             {
-                //TODO: Verify if this Parametric Model should have 4 parameters 
+                //Verify if this Parametric Model should have 4 parameters 
+                if(!IsThisAShepherdCurve(this.recruitModelNum)){
+                    throw new System.InvalidOperationException("Beverton-Holt or Ricker Curve with 4 parameters found");
+                }
                 this.alpha = Convert.ToDouble(parametricLine[0]);
                 this.beta = Convert.ToDouble(parametricLine[1]);
                 this.kParm = Convert.ToDouble(parametricLine[2]);
@@ -80,7 +93,9 @@ namespace AGEPRO_struct
             }
             else
             {
-                //throw error
+                //Throw error
+                throw new System.ArgumentOutOfRangeException("Number of Parmetric parameters", parametricLine.Length, 
+                    "Parmetric Curve must have 3 or 4 parameters.");
             }
 
             if (this.autocorrelated)
@@ -88,8 +103,16 @@ namespace AGEPRO_struct
                 ReadAutocorrelatedValues(sr);
             }
         }
+
+        private bool IsThisAShepherdCurve (int modelNum)
+        {
+            return (modelNum == 7 || modelNum == 12);
+        }
     }
 
+    /// <summary>
+    /// Parmetric Recruitment in Lognormal Distribution
+    /// </summary>
     public class ParametricLognormal : ParametricRecruitment
     {
         public double mean { get; set; }
