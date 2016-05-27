@@ -268,17 +268,21 @@ namespace AGEPRO_struct
             if (this.stockWeight.fromFile == true)
             {
                 //Read Data Files
+                inpFile.Add(this.stockWeight.dataFile.ToString());
             }
             else
             {
-                if(this.stockWeight.timeVarying)
+                //WeightsAtAge (per year (row))
+                //Can be TimeVarying(Multiple or Not
+                foreach(DataRow yearRow in this.stockWeight.byAgeData.Rows)
                 {
-                    
-                    
+                    inpFile.Add(string.Join("  ",yearRow.ItemArray));
                 }
-                else
+                
+                //CV
+                foreach (DataRow cvRow in this.stockWeight.byAgeCV.Rows)
                 {
-
+                    inpFile.Add(string.Join("  ", cvRow.ItemArray));
                 }
 
             }
