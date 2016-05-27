@@ -234,6 +234,57 @@ namespace AGEPRO_struct
 
         }
 
+        private void WriteInputFileLines()
+        {
+            List<string> inpFile = new List<string>();
+            inpFile.Add(this.version); //AGEPRO VERSION 4.0
+            
+            //CASEID
+            inpFile.Add("[CASEID]");
+            inpFile.Add(this.caseID);
+
+            //GENERAL
+            inpFile.Add("[GENERAL]");
+            inpFile.Add(
+                this.general.projYearStart.ToString() + "  " +
+                this.general.projYearEnd.ToString() + "  " +
+                this.general.ageBegin.ToString() + "  " +
+                this.general.ageEnd.ToString() + "  " + 
+                this.general.numPopSims.ToString() + "  " + 
+                this.general.numFleets.ToString() + "  " + 
+                this.general.numRecModels.ToString() + "  " +
+                this.general.hasDiscards.ToString() + "  " +
+                this.general.seed.ToString());
+
+            //BOOTSTRAP
+            inpFile.Add("[BOOTSTRAP]");
+            inpFile.Add(this.bootstrap.numBootstraps.ToString() + "  " + this.bootstrap.popScaleFactor.ToString());
+            inpFile.Add(this.bootstrap.bootstrapFile);
+
+            //STOCK WEIGHT
+            inpFile.Add("[STOCK_WEIGHT]");
+            inpFile.Add(Convert.ToInt32(this.stockWeight.fromFile).ToString() + "  " +
+                Convert.ToInt32(this.stockWeight.timeVarying).ToString());
+            if (this.stockWeight.fromFile == true)
+            {
+                //Read Data Files
+            }
+            else
+            {
+                if(this.stockWeight.timeVarying)
+                {
+                    
+                    
+                }
+                else
+                {
+
+                }
+
+            }
+
+        }
+
         /// <summary>
         /// Creates and sets the Recruitment Model Dictionary Object
         /// </summary>
