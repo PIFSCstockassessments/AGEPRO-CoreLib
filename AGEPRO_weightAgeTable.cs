@@ -29,7 +29,7 @@ namespace AGEPRO_struct
         /// read from the AGEPRO Input File, or use a valid weight option
         /// </summary>
         /// <param name="optParam">String Character from <paramref name="validOpt"/></param>
-        protected override void ReadInputAgeOption(string optParam)
+        protected override void SetInputAgeOption(string optParam)
         {
             if (optParam.Equals("0"))
             {

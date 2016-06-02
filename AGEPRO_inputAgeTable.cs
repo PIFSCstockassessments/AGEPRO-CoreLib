@@ -46,7 +46,7 @@ namespace AGEPRO_struct
             string line = sr.ReadLine();
             string[] swLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             string optStock = swLine[0];
-            ReadInputAgeOption(optStock);  //Input Age Option may vary if this a weightAgeTable
+            SetInputAgeOption(optStock);  //Input Age Option may vary if this a weightAgeTable
 
             //Time Varying
             string optTimeVarying = swLine[1];
@@ -88,6 +88,7 @@ namespace AGEPRO_struct
                         ageTable.Columns.Add(nage, typeof(double));
                     }
 
+                    //TODO:Rowheader/add-'Fleet-Year Column' to DataTable??
                     //i:N rows (years (and fleets))
                     for (int i = 0; i < N; i++)
                     {
@@ -132,7 +133,7 @@ namespace AGEPRO_struct
         /// Sets option for stochastic weights-at-age to be inputted maunually or read from the AGEPRO Input File
         /// </summary>
         /// <param name="optParam">String Character with '0' or '1'</param>
-        protected virtual void ReadInputAgeOption(string optParam)
+        protected virtual void SetInputAgeOption(string optParam)
         {
             if (optParam.Equals("0"))
             {

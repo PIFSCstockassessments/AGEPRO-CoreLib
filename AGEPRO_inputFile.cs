@@ -23,11 +23,11 @@ namespace AGEPRO_struct
         public AGEPRO_WeightAgeTable SSBWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1});
         public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
         public AGEPRO_WeightAgeTable catchWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2,-3} );
-        public AGEPRO_WeightAgeTable naturalMortality = new AGEPRO_WeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 });
+        public AGEPRO_WeightAgeTable discardWeight = new AGEPRO_WeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 }); //discard weight
         public AGEPRO_Biological biological = new AGEPRO_Biological();
         public AGEPRO_InputAgeTable maturity = new AGEPRO_InputAgeTable();
         public AGEPRO_InputAgeTable fishery = new AGEPRO_InputAgeTable();
-        public AGEPRO_InputAgeTable discardWeight = new AGEPRO_InputAgeTable(); //discard weight
+        public AGEPRO_InputAgeTable naturalMortality = new AGEPRO_InputAgeTable(); 
         public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustOption = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
         public AGEPRO_HarvestScenario harvestScenario = new AGEPRO_HarvestScenario();
         public AGEPRO_InputAgeTable discardFraction = new AGEPRO_InputAgeTable(); //discard fraction
@@ -268,24 +268,49 @@ namespace AGEPRO_struct
             if (this.stockWeight.fromFile == true)
             {
                 //Read Data Files
-                inpFile.Add(this.stockWeight.dataFile.ToString());
+                inpFile.Add(this.stockWeight.dataFile);
             }
             else
             {
                 //WeightsAtAge (per year (row))
-                //Can be TimeVarying(Multiple or Not
+                //Can be TimeVarying(Multiple years) or Not
                 foreach(DataRow yearRow in this.stockWeight.byAgeData.Rows)
                 {
-                    inpFile.Add(string.Join("  ",yearRow.ItemArray));
+                    inpFile.Add(string.Join("  ",yearRow.ItemArray)+"  ");
                 }
                 
                 //CV
                 foreach (DataRow cvRow in this.stockWeight.byAgeCV.Rows)
                 {
-                    inpFile.Add(string.Join("  ", cvRow.ItemArray));
+                    inpFile.Add(string.Join("  ", cvRow.ItemArray)+"  ");
                 }
 
             }
+
+            
+            //CATCH_WEIDHT
+            inpFile.Add("[CATCH_WEIGHT]");
+            inpFile.Add(this.catchWeight.weightOpt.ToString() + "  " +
+                Convert.ToInt32(this.catchWeight.timeVarying).ToString());
+            if (this.catchWeight.fromFile == true)
+            {
+                inpFile.Add(this.catchWeight.dataFile);
+            }
+            else
+            {
+                foreach (DataRow fleetYear in this.catchWeight.byAgeData.Rows)
+                {
+                    inpFile.Add(string.Join("  ",fleetYear.ItemArray) + "  ");
+                }
+
+                foreach (DataRow cvRow in this.catchWeight.byAgeCV.Rows)
+                {
+                    inpFile.Add(string.Join("  ", cvRow.ItemArray) + "  ");
+                }
+            }
+
+          
+
 
         }
 
