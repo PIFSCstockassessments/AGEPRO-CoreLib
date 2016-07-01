@@ -24,8 +24,8 @@ namespace AGEPRO_struct
         public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
         public AGEPRO_WeightAgeTable catchWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2,-3} );
         public AGEPRO_WeightAgeTable discardWeight = new AGEPRO_WeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 }); //discard weight
-        public AGEPRO_Biological biological = new AGEPRO_Biological();
-        public AGEPRO_InputAgeTable maturity = new AGEPRO_InputAgeTable();
+        public AGEPRO_Biological biological = new AGEPRO_Biological(); //Fraction Mortality in Biological
+        public AGEPRO_InputAgeTable maturity = new AGEPRO_InputAgeTable(); //Maturity in Biological
         public AGEPRO_InputAgeTable fishery = new AGEPRO_InputAgeTable();
         public AGEPRO_InputAgeTable naturalMortality = new AGEPRO_InputAgeTable(); 
         public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustOption = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
