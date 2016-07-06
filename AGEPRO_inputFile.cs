@@ -120,39 +120,39 @@ namespace AGEPRO_struct
                 }
                 else if (line.Equals("[STOCK_WEIGHT]"))
                 {
-                    this.stockWeight.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges());
+                    this.stockWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
                 }
                 else if (line.Equals("[SSB_WEIGHT]"))
                 {
-                    this.SSBWeight.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges());
+                    this.SSBWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
                 }
                 else if (line.Equals("[MEAN_WEIGHT]"))
                 {
-                    this.meanWeight.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges());
+                    this.meanWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
                 }
                 else if (line.Equals("[CATCH_WEIGHT]"))
                 {
-                    this.catchWeight.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.catchWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
                 }
                 else if (line.Equals("[DISC_WEIGHT]"))
                 {
-                    this.discardWeight.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.discardWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
                 }
                 else if (line.Equals("[NATMORT]"))
                 {
-                    this.naturalMortality.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges());
+                    this.naturalMortality.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
                 }
                 else if (line.Equals("[MATURITY]"))
                 {
-                    this.maturity.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges());
+                    this.maturity.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
                 }
                 else if (line.Equals("[FISHERY]"))
                 {
-                    this.fishery.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.fishery.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
                 }
                 else if (line.Equals("[DISCARD]"))
                 {
-                    this.discardFraction.ReadInputAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.discardFraction.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
                 }
                 else if (line.Equals("[BIOLOGICAL]"))
                 {

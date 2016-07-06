@@ -37,7 +37,7 @@ namespace AGEPRO_struct
         /// <param name="numYears">Number of Years in Projection</param>
         /// <param name="numAges">Number of Ages in Projection</param>
         /// <param name="numFleets">Number of Fleets. Default to <c>1</c></param>
-        public void ReadInputAgeData(StreamReader sr, int numYears, int numAges, int numFleets = 1)
+        public void ReadStochasticAgeData(StreamReader sr, int numYears, int numAges, int numFleets = 1)
         {
             
             this.numYears = numYears;
@@ -48,7 +48,7 @@ namespace AGEPRO_struct
             string line = sr.ReadLine();
             string[] swLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             string optStock = swLine[0];
-            SetInputAgeOption(optStock);  //Input Age Option may vary if this a weightAgeTable
+            SetStochasticAgeOption(optStock);  //Input Age Option may vary if this a weightAgeTable
 
             //Time Varying
             string optTimeVarying = swLine[1];
@@ -125,7 +125,7 @@ namespace AGEPRO_struct
                 else
                 {
                     //From File: Reads filepath string
-                    ReadInputAgeFromFileOption(sr);
+                    ReadStochasticAgeFromFileOption(sr);
                 }
             }
 
@@ -135,7 +135,7 @@ namespace AGEPRO_struct
         /// Sets option for stochastic weights-at-age to be inputted maunually or read from the AGEPRO Input File
         /// </summary>
         /// <param name="optParam">String Character with '0' or '1'</param>
-        protected virtual void SetInputAgeOption(string optParam)
+        protected virtual void SetStochasticAgeOption(string optParam)
         {
             if (optParam.Equals("0"))
             {
@@ -152,7 +152,7 @@ namespace AGEPRO_struct
         /// Reads in AGEPRO Input File for the 'Read Weights From File' option 
         /// </summary>
         /// <param name="sr">AGEPRO Input File StreamReader</param>
-        protected virtual void ReadInputAgeFromFileOption(StreamReader sr)
+        protected virtual void ReadStochasticAgeFromFileOption(StreamReader sr)
         {
             //Reads dataflie path
             string line = sr.ReadLine();

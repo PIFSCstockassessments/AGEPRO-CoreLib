@@ -29,7 +29,7 @@ namespace AGEPRO_struct
         /// read from the AGEPRO Input File, or use a valid weight option
         /// </summary>
         /// <param name="optParam">String Character from <paramref name="validOpt"/></param>
-        protected override void SetInputAgeOption(string optParam)
+        protected override void SetStochasticAgeOption(string optParam)
         {
             if (optParam.Equals("0"))
             {
@@ -60,13 +60,13 @@ namespace AGEPRO_struct
         /// Reads in AGEPRO Input File for the 'Read Weights From File' option 
         /// </summary>
         /// <param name="sr">AGEPRO Input File StreamReader</param>
-        protected override void ReadInputAgeFromFileOption(System.IO.StreamReader sr)
+        protected override void ReadStochasticAgeFromFileOption(System.IO.StreamReader sr)
         {
             //If Option 0=fromFile, read fromFile options
             //otherwise ignore and finish reading the current AGEPRO parameter
             if (this.weightOpt == 0) 
             {
-                base.ReadInputAgeFromFileOption(sr);
+                base.ReadStochasticAgeFromFileOption(sr);
             }
             
             
