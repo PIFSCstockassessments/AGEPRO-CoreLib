@@ -11,7 +11,7 @@ namespace AGEPRO_struct
     /// <summary>
     /// Generalized Stochastic Weights-at-age AGEPRO parameter class.
     /// </summary>
-    public class AGEPRO_InputAgeTable 
+    public class AgeproStochasticAgeTable 
     {
         public bool? fromFile { get; set; }
         public bool timeVarying { get; set; }
@@ -21,11 +21,11 @@ namespace AGEPRO_struct
         public int numYears { get; set; }
         public int numFleets { get; set; }
 
-        public AGEPRO_InputAgeTable()
+        public AgeproStochasticAgeTable()
         {
           
         }
-        public AGEPRO_InputAgeTable(string file) 
+        public AgeproStochasticAgeTable(string file) 
         {
 
         }

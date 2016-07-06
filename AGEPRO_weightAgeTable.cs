@@ -10,7 +10,7 @@ namespace AGEPRO_struct
     /// <summary>
     /// Weight Specfic Stochastic Weights-at-age AGEPRO parameter class.
     /// </summary>
-    public class AGEPRO_WeightAgeTable : AGEPRO_InputAgeTable
+    public class AGEPRO_WeightAgeTable : AgeproStochasticAgeTable
     {
         public int weightOpt { get; set; }  //Weight Option
         public int [] validOpt { get; set;  } //Valid weight options
