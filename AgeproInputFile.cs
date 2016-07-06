@@ -11,7 +11,7 @@ namespace AGEPRO_struct
     /// <summary>
     /// AGEPRO Input File 
     /// </summary>
-    public class AGEPRO_InputFile
+    public class AgeproInputFile
     {
         public string version { get; set; }
         public double numVer { get; set; }
