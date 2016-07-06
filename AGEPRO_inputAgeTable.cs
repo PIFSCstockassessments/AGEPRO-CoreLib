@@ -11,13 +11,15 @@ namespace AGEPRO_struct
     /// <summary>
     /// Generalized Stochastic Weights-at-age AGEPRO parameter class.
     /// </summary>
-    public class AGEPRO_InputAgeTable : AGEPRO_Input
+    public class AGEPRO_InputAgeTable 
     {
         public bool? fromFile { get; set; }
         public bool timeVarying { get; set; }
         public DataTable byAgeData { get; set; }
         public DataTable byAgeCV { get; set; }
         public string dataFile { get; set; }
+        public int numYears { get; set; }
+        public int numFleets { get; set; }
 
         public AGEPRO_InputAgeTable()
         {
@@ -38,8 +40,8 @@ namespace AGEPRO_struct
         public void ReadInputAgeData(StreamReader sr, int numYears, int numAges, int numFleets = 1)
         {
             
-            this.nYears = numYears;
-            this.nFleets = numFleets; //Defaults to 1 for Non fleet-dependent InputAge Data
+            this.numYears = numYears;
+            this.numFleets = numFleets; //Defaults to 1 for Non fleet-dependent InputAge Data
             int N;
 
             //Input Age Option
@@ -76,7 +78,7 @@ namespace AGEPRO_struct
                     DataTable ageTable = new DataTable("Age Value");
                     if (this.timeVarying)
                     {
-                        N = this.nYears * numFleets;
+                        N = this.numYears * numFleets;
                     }
                     else
                     {

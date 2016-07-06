@@ -8,11 +8,11 @@ using System.IO;
 
 namespace AGEPRO_struct 
 {
-    public class AGEPRO_Biological : AGEPRO_Input
+    public class AGEPRO_Biological
     {
         public bool timeVarying { get; set; }
         public DataTable TSpawn { get; set; } //Fraction Mortality Prior To Spawning
-
+        public int numYears { get; set; }
 
         public AGEPRO_Biological()
         {
@@ -27,7 +27,7 @@ namespace AGEPRO_struct
         /// <param name="yearSeq">Year Sequence</param>
         public void ReadBiologicalData(StreamReader sr, int [] yearSeq)
         {
-            this.nYears = yearSeq.Count();
+            this.numYears = yearSeq.Count();
             //time varying
             string line = sr.ReadLine();
             string[] bioLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -54,7 +54,7 @@ namespace AGEPRO_struct
                 line = sr.ReadLine();
                 string[] TMLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = 0; i < this.nYears; i++)
+                for (int i = 0; i < this.numYears; i++)
                 {
                     tSpawnTable.Columns.Add(yearSeq[i].ToString(), typeof(double));
                 }
