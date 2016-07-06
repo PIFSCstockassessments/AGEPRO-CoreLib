@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 
-namespace AGEPRO_struct
+namespace AGEPRO.CoreLib
 {
     /// <summary>
     /// General AGEPRO Recruitment Parameters. 

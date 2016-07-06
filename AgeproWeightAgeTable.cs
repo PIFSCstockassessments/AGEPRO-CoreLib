@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
-namespace AGEPRO_struct
+namespace AGEPRO.CoreLib
 {
     /// <summary>
     /// Weight Specfic Stochastic Weights-at-age AGEPRO parameter class.

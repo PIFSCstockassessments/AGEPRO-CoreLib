@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AGEPRO_struct
+namespace AGEPRO.CoreLib
 {
     public static class Extensions
     {

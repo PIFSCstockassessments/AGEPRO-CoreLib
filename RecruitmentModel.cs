@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace AGEPRO_struct
+namespace AGEPRO.CoreLib
 {
     /// <summary>
     /// Generalized, abstract representation of various AGEPRO Recruitment Models
