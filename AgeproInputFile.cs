@@ -28,14 +28,14 @@ namespace AGEPRO.CoreLib
         public AgeproStochasticAgeTable maturity = new AgeproStochasticAgeTable(); //Maturity in Biological
         public AgeproStochasticAgeTable fishery = new AgeproStochasticAgeTable();
         public AgeproStochasticAgeTable naturalMortality = new AgeproStochasticAgeTable(); 
-        public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustOption = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
+        public AgeproMiscOptions.retroAdjustmentFactors retroAdjustOption = new AgeproMiscOptions.retroAdjustmentFactors(); //retroAdjust
         public AgeproHarvestScenario harvestScenario = new AgeproHarvestScenario();
         public AgeproStochasticAgeTable discardFraction = new AgeproStochasticAgeTable(); //discard fraction
-        public AGEPRO_MiscOptions.Bounds bounds = new AGEPRO_MiscOptions.Bounds(); //bounds
-        public AGEPRO_MiscOptions options = new AGEPRO_MiscOptions(); //options
-        public AGEPRO_MiscOptions.ScaleFactors scale = new AGEPRO_MiscOptions.ScaleFactors(); //scale
-        public AGEPRO_MiscOptions.ReportPercentile reportPercentile = new AGEPRO_MiscOptions.ReportPercentile(); //reportPercentile
-        public AGEPRO_MiscOptions.Refpoint refpoint = new AGEPRO_MiscOptions.Refpoint(); //refpoint
+        public AgeproMiscOptions.Bounds bounds = new AgeproMiscOptions.Bounds(); //bounds
+        public AgeproMiscOptions options = new AgeproMiscOptions(); //options
+        public AgeproMiscOptions.ScaleFactors scale = new AgeproMiscOptions.ScaleFactors(); //scale
+        public AgeproMiscOptions.ReportPercentile reportPercentile = new AgeproMiscOptions.ReportPercentile(); //reportPercentile
+        public AgeproMiscOptions.Refpoint refpoint = new AgeproMiscOptions.Refpoint(); //refpoint
         public RebuilderTarget rebuild = new RebuilderTarget(); //rebuilder
         public PStar pstar = new PStar(); 
         
@@ -172,7 +172,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
-                    AGEPRO_MiscOptions.enableRefpoint = true;
+                    AgeproMiscOptions.enableRefpoint = true;
                     line = sr.ReadLine();
                     string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.refpoint.refSSB = Convert.ToDouble(refpointOpt[0]);
@@ -182,7 +182,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[BOUNDS]"))
                 {
-                    AGEPRO_MiscOptions.enableBounds = true;
+                    AgeproMiscOptions.enableBounds = true;
                     line = sr.ReadLine();
                     string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.bounds.maxWeight = Convert.ToDouble(boundsOpt[0]);
@@ -190,7 +190,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[RETROADJUST]"))
                 {
-                    AGEPRO_MiscOptions.enableRetroAdjustmentFactors = true;
+                    AgeproMiscOptions.enableRetroAdjustmentFactors = true;
                     line = sr.ReadLine();
                     string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     DataTable rafTable = new DataTable("Retro Adjustment Factors");
@@ -214,7 +214,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[SCALE]"))
                 {
-                    AGEPRO_MiscOptions.enableScaleFactors = true;
+                    AgeproMiscOptions.enableScaleFactors = true;
                     line = sr.ReadLine();
                     string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.scale.scaleBio = Convert.ToDouble(scaleOpt[0]);
@@ -223,7 +223,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[PERC]"))
                 {
-                    AGEPRO_MiscOptions.enablePercentileReport = true;
+                    AgeproMiscOptions.enablePercentileReport = true;
                     this.reportPercentile.percentile = Convert.ToDouble(sr.ReadLine());
                 }
                 else if (line.Equals("[PSTAR]"))

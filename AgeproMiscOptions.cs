@@ -10,7 +10,7 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// AGEPRO Misc Options.
     /// </summary>
-    public class AGEPRO_MiscOptions
+    public class AgeproMiscOptions
     {
         public bool enableSummaryReport { get; set; }
         public bool enableDataFiles { get; set; }
@@ -22,7 +22,7 @@ namespace AGEPRO.CoreLib
         public static bool enableBounds { get; set; }
         public static bool enableRetroAdjustmentFactors { get; set; }
 
-        public AGEPRO_MiscOptions()
+        public AgeproMiscOptions()
         {
             enableRefpoint = false;
             enablePercentileReport = false;
