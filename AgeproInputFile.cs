@@ -29,7 +29,7 @@ namespace AGEPRO.CoreLib
         public AgeproStochasticAgeTable fishery = new AgeproStochasticAgeTable();
         public AgeproStochasticAgeTable naturalMortality = new AgeproStochasticAgeTable(); 
         public AGEPRO_MiscOptions.retroAdjustmentFactors retroAdjustOption = new AGEPRO_MiscOptions.retroAdjustmentFactors(); //retroAdjust
-        public AGEPRO_HarvestScenario harvestScenario = new AGEPRO_HarvestScenario();
+        public AgeproHarvestScenario harvestScenario = new AgeproHarvestScenario();
         public AgeproStochasticAgeTable discardFraction = new AgeproStochasticAgeTable(); //discard fraction
         public AGEPRO_MiscOptions.Bounds bounds = new AGEPRO_MiscOptions.Bounds(); //bounds
         public AGEPRO_MiscOptions options = new AGEPRO_MiscOptions(); //options

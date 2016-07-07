@@ -11,12 +11,12 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// AGEPRO Harvest Scenario Parameters. 
     /// </summary>
-    public class AGEPRO_HarvestScenario
+    public class AgeproHarvestScenario
     {
         public DataTable harvestScenarioTable { get; set; }
         public int targetYear { get; set; }
 
-        public AGEPRO_HarvestScenario()
+        public AgeproHarvestScenario()
         {
 
         }
@@ -100,7 +100,7 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// Specifications for Stock Rebuilder Targets
     /// </summary>
-    public class RebuilderTarget : AGEPRO_HarvestScenario
+    public class RebuilderTarget : AgeproHarvestScenario
     {
         public double targetValue { get; set; }
         public int targetType { get; set; } //rebuild target type (cboRebuild.SelectedIndex)
@@ -127,7 +127,7 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// P-Star Analysis
     /// </summary>
-    public class PStar : AGEPRO_HarvestScenario
+    public class PStar : AgeproHarvestScenario
     {
         public int pStarLevels { get; set; }
         public DataTable pStarTable; 
