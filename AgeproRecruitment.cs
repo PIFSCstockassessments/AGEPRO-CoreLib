@@ -11,7 +11,7 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// General AGEPRO Recruitment Parameters. 
     /// </summary>
-    public class AGEPRO_Recruitment
+    public class AgeproRecruitment
     {
         public int recruitScalingFactor { get; set; }
         public int SSBScalingFactor { get; set; }
@@ -22,7 +22,7 @@ namespace AGEPRO.CoreLib
         public List<RecruitmentModel> recruitList { get; set; }
         public int[] observationYears { get; set; }
 
-        public AGEPRO_Recruitment()
+        public AgeproRecruitment()
         {
             
         }
