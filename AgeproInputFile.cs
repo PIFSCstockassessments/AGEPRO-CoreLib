@@ -20,10 +20,10 @@ namespace AGEPRO.CoreLib
         public AgeproBootstrap bootstrap = new AgeproBootstrap();
         public AgeproRecruitment recruitment = new AgeproRecruitment();
         public AgeproStochasticAgeTable stockWeight = new AgeproStochasticAgeTable();
-        public AGEPRO_WeightAgeTable SSBWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1});
-        public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
-        public AGEPRO_WeightAgeTable catchWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2,-3} );
-        public AGEPRO_WeightAgeTable discardWeight = new AGEPRO_WeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 }); //discard weight
+        public AgeproWeightAgeTable SSBWeight = new AgeproWeightAgeTable (new int[] {1,0,-1});
+        public AgeproWeightAgeTable meanWeight = new AgeproWeightAgeTable (new int[] {1,0,-1,-2});
+        public AgeproWeightAgeTable catchWeight = new AgeproWeightAgeTable (new int[] {1,0,-1,-2,-3} );
+        public AgeproWeightAgeTable discardWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 }); //discard weight
         public AgeproBiological biological = new AgeproBiological(); //Fraction Mortality in Biological
         public AgeproStochasticAgeTable maturity = new AgeproStochasticAgeTable(); //Maturity in Biological
         public AgeproStochasticAgeTable fishery = new AgeproStochasticAgeTable();

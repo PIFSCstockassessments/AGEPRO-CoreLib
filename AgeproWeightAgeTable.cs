@@ -10,16 +10,16 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// Weight Specfic Stochastic Weights-at-age AGEPRO parameter class.
     /// </summary>
-    public class AGEPRO_WeightAgeTable : AgeproStochasticAgeTable
+    public class AgeproWeightAgeTable : AgeproStochasticAgeTable
     {
         public int weightOpt { get; set; }  //Weight Option
         public int [] validOpt { get; set;  } //Valid weight options
 
-        public AGEPRO_WeightAgeTable()
+        public AgeproWeightAgeTable()
         {
             validOpt = new int[] {1,0,-1,-2,-3,-4};
         }
-        public AGEPRO_WeightAgeTable(int[] validOptions)
+        public AgeproWeightAgeTable(int[] validOptions)
         {
             validOpt = validOptions;
         }
