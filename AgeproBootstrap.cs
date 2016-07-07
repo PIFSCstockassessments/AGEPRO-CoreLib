@@ -15,13 +15,13 @@ namespace AGEPRO.CoreLib
     /// -The number of rows in a bootstrap file must be at least equal to the number of bootstrap 
     /// iterations containing the popluation of the first year in the projection
     /// </remarks>
-    public class AGEPRO_Bootstrap
+    public class AgeproBootstrap
     {
         public int numBootstraps { get; set; }
         public double popScaleFactor { get; set; }
         public string bootstrapFile { get; set; }
 
-        public AGEPRO_Bootstrap()
+        public AgeproBootstrap()
         {
 
         }

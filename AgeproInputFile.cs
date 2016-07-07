@@ -17,7 +17,7 @@ namespace AGEPRO.CoreLib
         public double numVer { get; set; }
         public string caseID { get; set; }
         public AgeproGeneral general = new AgeproGeneral();
-        public AGEPRO_Bootstrap bootstrap = new AGEPRO_Bootstrap();
+        public AgeproBootstrap bootstrap = new AgeproBootstrap();
         public AGEPRO_Recruitment recruitment = new AGEPRO_Recruitment();
         public AgeproStochasticAgeTable stockWeight = new AgeproStochasticAgeTable();
         public AGEPRO_WeightAgeTable SSBWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1});
