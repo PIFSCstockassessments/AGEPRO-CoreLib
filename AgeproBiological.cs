@@ -8,13 +8,13 @@ using System.IO;
 
 namespace AGEPRO.CoreLib 
 {
-    public class AGEPRO_Biological
+    public class AgeproBiological
     {
         public bool timeVarying { get; set; }
         public DataTable TSpawn { get; set; } //Fraction Mortality Prior To Spawning
         public int numYears { get; set; }
 
-        public AGEPRO_Biological()
+        public AgeproBiological()
         {
 
         }

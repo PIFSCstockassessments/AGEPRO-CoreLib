@@ -24,7 +24,7 @@ namespace AGEPRO.CoreLib
         public AGEPRO_WeightAgeTable meanWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2});
         public AGEPRO_WeightAgeTable catchWeight = new AGEPRO_WeightAgeTable (new int[] {1,0,-1,-2,-3} );
         public AGEPRO_WeightAgeTable discardWeight = new AGEPRO_WeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 }); //discard weight
-        public AGEPRO_Biological biological = new AGEPRO_Biological(); //Fraction Mortality in Biological
+        public AgeproBiological biological = new AgeproBiological(); //Fraction Mortality in Biological
         public AgeproStochasticAgeTable maturity = new AgeproStochasticAgeTable(); //Maturity in Biological
         public AgeproStochasticAgeTable fishery = new AgeproStochasticAgeTable();
         public AgeproStochasticAgeTable naturalMortality = new AgeproStochasticAgeTable(); 
