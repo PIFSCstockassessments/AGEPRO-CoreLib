@@ -10,7 +10,7 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// General Paramemeters of AGEPRO
     /// </summary>
-    public class AGEPRO_General
+    public class AgeproGeneral
     {
         public int projYearStart { get; set; }    //First Year in Projection
         public int projYearEnd { get; set; }     //Last Year in Projection
@@ -23,11 +23,11 @@ namespace AGEPRO.CoreLib
         public int seed { get; set; }            //Random Number Seed
         public string inputFile { get; set; }
 
-        public AGEPRO_General()
+        public AgeproGeneral()
         {
         }
 
-        public AGEPRO_General(string file)
+        public AgeproGeneral(string file)
         {
             this.inputFile = file;
             //readin file contents
