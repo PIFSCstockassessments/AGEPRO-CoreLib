@@ -37,8 +37,12 @@ namespace AGEPRO.CoreLib
         public AgeproMiscOptions.ReportPercentile reportPercentile = new AgeproMiscOptions.ReportPercentile(); //reportPercentile
         public AgeproMiscOptions.Refpoint refpoint = new AgeproMiscOptions.Refpoint(); //refpoint
         public RebuilderTarget rebuild = new RebuilderTarget(); //rebuilder
-        public PStar pstar = new PStar(); 
-        
+        public PStar pstar = new PStar();
+
+        public AgeproInputFile()
+        {
+            caseID = "";
+        }
 
         /// <summary>
         /// Initates the <paramref name="System.IO.StreamReader"/> function to read the AGEPRO Input file.
@@ -47,6 +51,7 @@ namespace AGEPRO.CoreLib
         /// <remarks> Contains Try-Catch Execption Handler</remarks>
         public void ReadInputFile(string file)
         {
+            
             try
             {
                 using (StreamReader inReader = new StreamReader(file))
@@ -87,7 +92,7 @@ namespace AGEPRO.CoreLib
                 //Case ID
                 if (line.Equals("[CASEID]"))
                 {
-                    this.caseID = sr.ReadLine();
+                    caseID = sr.ReadLine();
                 }
                 //General
                 else if (line.Equals("[GENERAL]"))

@@ -25,6 +25,7 @@ namespace AGEPRO.CoreLib
 
         public AgeproGeneral()
         {
+
         }
 
         public AgeproGeneral(string file)

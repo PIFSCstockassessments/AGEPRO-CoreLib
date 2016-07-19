@@ -38,6 +38,10 @@ namespace AGEPRO.CoreLib
             string line;
             double nyearProbSum;
             double precisionDiff;
+            
+            //Clean off any existing data on DataTables
+            recruitProb.Clear();
+            
             Console.WriteLine("Reading Recuitment Data ... ");
 
             line = sr.ReadLine();
@@ -63,8 +67,22 @@ namespace AGEPRO.CoreLib
             //Set Recruit Prob Columns
             for(int nselection = 0; nselection < recruitType.Count(); nselection++)
             {
-                recruitProb.Columns.Add("Selection " + (nselection+1).ToString(), typeof(double));
+                String recruitProbColumnName = "Selection " + (nselection+1).ToString(); 
+                
+                if (!recruitProb.Columns.Contains(recruitProbColumnName))
+                {
+                    recruitProb.Columns.Add(recruitProbColumnName, typeof(double));
+                }                
             }
+            //If current Recruitment Probability table has more columns than actual count, trim it
+            if (recruitProb.Columns.Count > recruitType.Count())
+            {
+                for (int index=recruitProb.Columns.Count-1; index > 0 ; index--){
+                    recruitProb.Columns.RemoveAt(index);
+                }
+            }
+
+
             //Recruitment Probability
             for (int i = 0; i < nyears; i++)
             {
