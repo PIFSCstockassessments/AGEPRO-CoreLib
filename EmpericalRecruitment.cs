@@ -112,8 +112,7 @@ namespace AGEPRO.CoreLib
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
-            DataTable inputTable = new DataTable("Observation Table");
-
+            
             //lv1NumObs, lv2NumObs
             line = sr.ReadLine();
             string[] lineNumObsLvl = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);

@@ -100,6 +100,7 @@ namespace AGEPRO.CoreLib
                         ageTable.Rows.Add(ageLine);
                     }
                     this.byAgeData = ageTable;
+                    
                     //byCV
                     DataTable cvTable = new DataTable("Age CV");
 
