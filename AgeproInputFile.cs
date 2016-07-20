@@ -177,7 +177,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
-                    AgeproMiscOptions.enableRefpoint = true;
+                    this.options.enableRefpoint = true;
                     line = sr.ReadLine();
                     string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.refpoint.refSSB = Convert.ToDouble(refpointOpt[0]);
@@ -187,7 +187,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[BOUNDS]"))
                 {
-                    AgeproMiscOptions.enableBounds = true;
+                    this.options.enableBounds = true;
                     line = sr.ReadLine();
                     string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.bounds.maxWeight = Convert.ToDouble(boundsOpt[0]);
@@ -195,7 +195,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[RETROADJUST]"))
                 {
-                    AgeproMiscOptions.enableRetroAdjustmentFactors = true;
+                    this.options.enableRetroAdjustmentFactors = true;
                     line = sr.ReadLine();
                     string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     DataTable rafTable = new DataTable("Retro Adjustment Factors");
@@ -219,7 +219,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[SCALE]"))
                 {
-                    AgeproMiscOptions.enableScaleFactors = true;
+                    this.options.enableScaleFactors = true;
                     line = sr.ReadLine();
                     string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.scale.scaleBio = Convert.ToDouble(scaleOpt[0]);
@@ -228,7 +228,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[PERC]"))
                 {
-                    AgeproMiscOptions.enablePercentileReport = true;
+                    this.options.enablePercentileReport = true;
                     this.reportPercentile.percentile = Convert.ToDouble(sr.ReadLine());
                 }
                 else if (line.Equals("[PSTAR]"))

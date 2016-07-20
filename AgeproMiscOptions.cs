@@ -16,11 +16,11 @@ namespace AGEPRO.CoreLib
         public bool enableDataFiles { get; set; }
         public bool enableExportR { get; set; }
         //enabled if classes are called.
-        public static bool enableRefpoint { get; set; }
-        public static bool enablePercentileReport { get; set; }
-        public static bool enableScaleFactors { get; set; }
-        public static bool enableBounds { get; set; }
-        public static bool enableRetroAdjustmentFactors { get; set; }
+        public bool enableRefpoint { get; set; }
+        public bool enablePercentileReport { get; set; }
+        public bool enableScaleFactors { get; set; }
+        public bool enableBounds { get; set; }
+        public bool enableRetroAdjustmentFactors { get; set; }
 
         public AgeproMiscOptions()
         {
