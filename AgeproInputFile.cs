@@ -180,8 +180,8 @@ namespace AGEPRO.CoreLib
                     this.options.enableRefpoint = true;
                     line = sr.ReadLine();
                     string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    this.refpoint.refSSB = Convert.ToDouble(refpointOpt[0]);
-                    this.refpoint.refStockBio = Convert.ToDouble(refpointOpt[1]);
+                    this.refpoint.refSpawnBio = Convert.ToDouble(refpointOpt[0]);
+                    this.refpoint.refJan1Bio = Convert.ToDouble(refpointOpt[1]);
                     this.refpoint.refMeanBio = Convert.ToDouble(refpointOpt[2]);
                     this.refpoint.refFMort = Convert.ToDouble(refpointOpt[3]);
                 }

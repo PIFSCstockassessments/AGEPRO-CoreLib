@@ -33,10 +33,10 @@ namespace AGEPRO.CoreLib
 
         public class Refpoint
         {
-            public double refSSB { get; set; }
-            public double refStockBio { get; set; }
-            public double refMeanBio { get; set; }
-            public double refFMort { get; set; }
+            public double refSpawnBio { get; set; } //SSBThresh
+            public double refJan1Bio { get; set; }  //StockBioThresh
+            public double refMeanBio { get; set; }  //MeanBioThresh
+            public double refFMort { get; set; }    //FMortThresh
 
         }
 
