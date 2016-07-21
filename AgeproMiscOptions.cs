@@ -26,7 +26,7 @@ namespace AGEPRO.CoreLib
         {
             enableRefpoint = false;
             enablePercentileReport = false;
-            enableScaleFactors = true; //TODO: should this be enabled by default?
+            enableScaleFactors = false; 
             enableBounds = false;
             enableRetroAdjustmentFactors = false;
         }

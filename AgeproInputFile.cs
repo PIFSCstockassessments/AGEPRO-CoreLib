@@ -177,7 +177,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
-                    this.options.enableRefpoint = true;
+                    this.options.enableRefpoint = false;
                     line = sr.ReadLine();
                     string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.refpoint.refSpawnBio = Convert.ToDouble(refpointOpt[0]);
@@ -187,7 +187,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[BOUNDS]"))
                 {
-                    this.options.enableBounds = true;
+                    this.options.enableBounds = false;
                     line = sr.ReadLine();
                     string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.bounds.maxWeight = Convert.ToDouble(boundsOpt[0]);
@@ -195,7 +195,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[RETROADJUST]"))
                 {
-                    this.options.enableRetroAdjustmentFactors = true;
+                    this.options.enableRetroAdjustmentFactors = false;
                     line = sr.ReadLine();
                     string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     DataTable rafTable = new DataTable("Retro Adjustment Factors");
