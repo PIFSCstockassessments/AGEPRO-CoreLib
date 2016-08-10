@@ -19,7 +19,7 @@ namespace AGEPRO.CoreLib
         public AgeproGeneral general = new AgeproGeneral();
         public AgeproBootstrap bootstrap = new AgeproBootstrap();
         public AgeproRecruitment recruitment = new AgeproRecruitment();
-        public AgeproStochasticAgeTable stockWeight = new AgeproStochasticAgeTable();
+        public AgeproWeightAgeTable jan1Weight = new AgeproWeightAgeTable(new int[] {1,0}); //STOCK_WEIGHT
         public AgeproWeightAgeTable SSBWeight = new AgeproWeightAgeTable (new int[] {1,0,-1});
         public AgeproWeightAgeTable meanWeight = new AgeproWeightAgeTable (new int[] {1,0,-1,-2});
         public AgeproWeightAgeTable catchWeight = new AgeproWeightAgeTable (new int[] {1,0,-1,-2,-3} );
@@ -125,7 +125,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[STOCK_WEIGHT]"))
                 {
-                    this.stockWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
+                    this.jan1Weight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
                 }
                 else if (line.Equals("[SSB_WEIGHT]"))
                 {
@@ -268,24 +268,24 @@ namespace AGEPRO.CoreLib
 
             //STOCK WEIGHT
             inpFile.Add("[STOCK_WEIGHT]");
-            inpFile.Add(Convert.ToInt32(this.stockWeight.fromFile).ToString() + "  " +
-                Convert.ToInt32(this.stockWeight.timeVarying).ToString());
-            if (this.stockWeight.fromFile == true)
+            inpFile.Add(Convert.ToInt32(this.jan1Weight.fromFile).ToString() + "  " +
+                Convert.ToInt32(this.jan1Weight.timeVarying).ToString());
+            if (this.jan1Weight.fromFile == true)
             {
                 //Read Data Files
-                inpFile.Add(this.stockWeight.dataFile);
+                inpFile.Add(this.jan1Weight.dataFile);
             }
             else
             {
                 //WeightsAtAge (per year (row))
                 //Can be TimeVarying(Multiple years) or Not
-                foreach(DataRow yearRow in this.stockWeight.byAgeData.Rows)
+                foreach(DataRow yearRow in this.jan1Weight.byAgeData.Rows)
                 {
                     inpFile.Add(string.Join("  ",yearRow.ItemArray)+"  ");
                 }
                 
                 //CV
-                foreach (DataRow cvRow in this.stockWeight.byAgeCV.Rows)
+                foreach (DataRow cvRow in this.jan1Weight.byAgeCV.Rows)
                 {
                     inpFile.Add(string.Join("  ", cvRow.ItemArray)+"  ");
                 }
