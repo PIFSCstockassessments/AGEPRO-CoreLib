@@ -137,18 +137,22 @@ namespace AGEPRO.CoreLib
         private void AddToRecruitList(int rtype, List<RecruitmentModel> rlist)
         {
             
+            
             switch (rtype)
             {
                 case 1:
                     rlist.Add(new MarkovMatrixRecruitment());
                     break;
                 case 2:
-                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: true)); 
+                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: true, subType: EmpericalType.Emperical)); 
                     break;
                 case 3: 
                 case 14:
+                //case 20:
+                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: false, subType: EmpericalType.Emperical));
+                    break;
                 case 20:
-                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: false));
+                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: false, subType: EmpericalType.Fixed));
                     break;
                 case 4:
                     
@@ -188,12 +192,10 @@ namespace AGEPRO.CoreLib
                 default:
                     throw new ArgumentOutOfRangeException("rtype","Must be a vaild recruitType model number.");  
             }//end switch
-
-            
+                       
             //return RecruitmentModel
         }
-
-
+                
     }
 
 

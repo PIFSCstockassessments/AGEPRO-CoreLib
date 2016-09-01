@@ -8,6 +8,14 @@ using System.IO;
 
 namespace AGEPRO.CoreLib
 {
+    public enum EmpericalType
+    {
+        Emperical,
+        TwoStage,
+        CDFZero,
+        Fixed
+    };
+
     /// <summary>
     /// Emperical Recruitment
     /// </summary>
@@ -16,6 +24,7 @@ namespace AGEPRO.CoreLib
         public int numObs { get; set; }
         public DataTable obsTable { get; set; }
         public bool withSSB { get; set; }
+        public EmpericalType subType { get; set; }
         
         public EmpericalRecruitment(int modelNum)
         {
@@ -24,9 +33,10 @@ namespace AGEPRO.CoreLib
             this.withSSB = false;
         }
 
-        public EmpericalRecruitment(int modelNum, bool useSSB) : this(modelNum)
+        public EmpericalRecruitment(int modelNum, bool useSSB, EmpericalType subType) : this(modelNum)
         {
             this.withSSB = useSSB;
+            this.subType = subType;
         }
 
         /// <summary>
@@ -101,6 +111,7 @@ namespace AGEPRO.CoreLib
             this.recruitModelNum = modelNum;
             this.recruitCategory = 1;
             this.withSSB = true; //TODO: Should this be default?
+            this.subType = EmpericalType.TwoStage;
         }
 
         public TwoStageEmpericalRecruitment(int modelNum, bool useSSB)
@@ -137,7 +148,10 @@ namespace AGEPRO.CoreLib
     {
         public double? SSBHinge { get; set; }
 
-        public EmpericalCDFZero(int modelNum) : base(modelNum) { }
+        public EmpericalCDFZero(int modelNum) : base(modelNum) 
+        {
+            this.subType = EmpericalType.CDFZero;
+        }
 
         public override void ReadRecruitmentModel(StreamReader sr)
         {

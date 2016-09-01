@@ -8,6 +8,12 @@ using System.Data;
 
 namespace AGEPRO.CoreLib
 {
+    public enum ParametricType
+    {
+        Lognormal,
+        Curve
+    }
+
     /// <summary>
     /// Parametric Recruitment
     /// </summary>
@@ -16,7 +22,8 @@ namespace AGEPRO.CoreLib
         public double? phi { get; set; }
         public double? lastResidual { get; set; }
         public bool autocorrelated { get; set; }
-        
+        public ParametricType subtype { get; set; }
+
         public ParametricRecruitment(int modelNum)
         {
             this.recruitModelNum = modelNum;
@@ -59,7 +66,10 @@ namespace AGEPRO.CoreLib
         public double variance { get; set; }
         public double? kParm { get; set; }
 
-        public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
+        public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) 
+        {
+            this.subtype = ParametricType.Curve;
+        }
 
         public override void ReadRecruitmentModel(StreamReader sr)
         {
@@ -118,7 +128,10 @@ namespace AGEPRO.CoreLib
         public double mean { get; set; }
         public double stdDev { get; set; }
 
-        public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) { }
+        public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) 
+        {
+            this.subtype = ParametricType.Lognormal;
+        }
 
         public override void ReadRecruitmentModel(StreamReader sr)
         {
