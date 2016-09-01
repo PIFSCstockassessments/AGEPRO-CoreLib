@@ -50,7 +50,7 @@
     <Compile Include="AgeproRecruitment.cs" />
     <Compile Include="AgeproStochasticAgeTable.cs" />
     <Compile Include="AgeproWeightAgeTable.cs" />
-    <Compile Include="EmpericalRecruitment.cs" />
+    <Compile Include="EmpiricalRecruitment.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="MarkovMatrixRecruitment.cs" />
     <Compile Include="ParametricRecruitment.cs" />

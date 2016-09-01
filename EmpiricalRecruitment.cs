@@ -8,39 +8,39 @@ using System.IO;
 
 namespace AGEPRO.CoreLib
 {
-    public enum EmpericalType
+    public enum EmpiricalType
     {
-        Emperical,
+        Empirical,
         TwoStage,
         CDFZero,
         Fixed
     };
 
     /// <summary>
-    /// Emperical Recruitment
+    /// Empirical Recruitment
     /// </summary>
-    public class EmpericalRecruitment : RecruitmentModel
+    public class EmpiricalRecruitment : RecruitmentModel
     {
         public int numObs { get; set; }
         public DataTable obsTable { get; set; }
         public bool withSSB { get; set; }
-        public EmpericalType subType { get; set; }
+        public EmpiricalType subType { get; set; }
         
-        public EmpericalRecruitment(int modelNum)
+        public EmpiricalRecruitment(int modelNum)
         {
             this.recruitModelNum = modelNum;
             this.recruitCategory = 1;
             this.withSSB = false;
         }
 
-        public EmpericalRecruitment(int modelNum, bool useSSB, EmpericalType subType) : this(modelNum)
+        public EmpiricalRecruitment(int modelNum, bool useSSB, EmpiricalType subType) : this(modelNum)
         {
             this.withSSB = useSSB;
             this.subType = subType;
         }
 
         /// <summary>
-        /// Reads in AGEPRO Input File Stream For Emperical Recruitment Specfic Parameters & Data 
+        /// Reads in AGEPRO Input File Stream For Empirical Recruitment Specfic Parameters & Data 
         /// </summary>
         /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
@@ -95,9 +95,9 @@ namespace AGEPRO.CoreLib
     }
 
     /// <summary>
-    /// Two-Stage Emperical Recruitment. Parameters & Observations for two levels (stages).
+    /// Two-Stage Empirical Recruitment. Parameters & Observations for two levels (stages).
     /// </summary>
-    public class TwoStageEmpericalRecruitment : EmpericalRecruitment
+    public class TwoStageEmpiricalRecruitment : EmpiricalRecruitment
     {
         public int lv1NumObs { get; set; }
         public int lv2NumObs { get; set; }
@@ -105,16 +105,16 @@ namespace AGEPRO.CoreLib
         public DataTable lv1Obs { get; set; }
         public DataTable lv2Obs { get; set; }
 
-        public TwoStageEmpericalRecruitment(int modelNum)
+        public TwoStageEmpiricalRecruitment(int modelNum)
             : base(modelNum)
         {
             this.recruitModelNum = modelNum;
             this.recruitCategory = 1;
             this.withSSB = true; //TODO: Should this be default?
-            this.subType = EmpericalType.TwoStage;
+            this.subType = EmpiricalType.TwoStage;
         }
 
-        public TwoStageEmpericalRecruitment(int modelNum, bool useSSB)
+        public TwoStageEmpiricalRecruitment(int modelNum, bool useSSB)
             : this(modelNum)
         {
             this.withSSB = useSSB;
@@ -142,15 +142,15 @@ namespace AGEPRO.CoreLib
     }
 
     /// <summary>
-    /// Emperical CDF of Recruitment w/ Linear Decline to Zero.
+    /// Empirical CDF of Recruitment w/ Linear Decline to Zero.
     /// </summary>
-    public class EmpericalCDFZero : EmpericalRecruitment
+    public class EmpiricalCDFZero : EmpiricalRecruitment
     {
         public double? SSBHinge { get; set; }
 
-        public EmpericalCDFZero(int modelNum) : base(modelNum) 
+        public EmpiricalCDFZero(int modelNum) : base(modelNum) 
         {
-            this.subType = EmpericalType.CDFZero;
+            this.subType = EmpiricalType.CDFZero;
         }
 
         public override void ReadRecruitmentModel(StreamReader sr)

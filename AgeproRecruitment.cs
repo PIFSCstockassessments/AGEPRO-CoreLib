@@ -144,19 +144,19 @@ namespace AGEPRO.CoreLib
                     rlist.Add(new MarkovMatrixRecruitment());
                     break;
                 case 2:
-                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: true, subType: EmpericalType.Emperical)); 
+                    rlist.Add(new EmpiricalRecruitment(rtype, useSSB: true, subType: EmpiricalType.Empirical)); 
                     break;
                 case 3: 
                 case 14:
                 //case 20:
-                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: false, subType: EmpericalType.Emperical));
+                    rlist.Add(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Empirical));
                     break;
                 case 20:
-                    rlist.Add(new EmpericalRecruitment(rtype, useSSB: false, subType: EmpericalType.Fixed));
+                    rlist.Add(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Fixed));
                     break;
                 case 4:
                     
-                    rlist.Add(new TwoStageEmpericalRecruitment(rtype, useSSB: true));
+                    rlist.Add(new TwoStageEmpiricalRecruitment(rtype, useSSB: true));
                     break;
                 case 5:
                 case 6:
@@ -175,7 +175,7 @@ namespace AGEPRO.CoreLib
                     rlist.Add(new ParametricLognormal(rtype, isAutocorrelated: true));
                     break;
                 case 15:
-                    rlist.Add(new TwoStageEmpericalRecruitment(rtype, useSSB: false));
+                    rlist.Add(new TwoStageEmpiricalRecruitment(rtype, useSSB: false));
                     break;
                 case 16:
                 case 17:
@@ -186,7 +186,7 @@ namespace AGEPRO.CoreLib
                     rlist.Add(predictorRecruitModel);
                     break;
                 case 21:
-                    rlist.Add(new EmpericalCDFZero(rtype));
+                    rlist.Add(new EmpiricalCDFZero(rtype));
                     break;
                 case 0:
                 default:
