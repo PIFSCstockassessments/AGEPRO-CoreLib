@@ -31,6 +31,7 @@ namespace AGEPRO.CoreLib
             this.recruitModelNum = modelNum;
             this.recruitCategory = 1;
             this.withSSB = false;
+            this.numObs = 0;      //Fallback Default
         }
 
         public EmpiricalRecruitment(int modelNum, bool useSSB, EmpiricalType subType) : this(modelNum)
@@ -46,45 +47,57 @@ namespace AGEPRO.CoreLib
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
-            
+            string[] nobsRecruits;
+            string[] nobsSSB;
+
             //numObs
             line = sr.ReadLine();
             this.numObs = Convert.ToInt32(line);
 
             //obsTable
-            this.obsTable = ReadObsTable(sr, this.numObs);
+            //obsRecruits
+            line = sr.ReadLine();
+            nobsRecruits = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            //obsSSB           
+            if (this.withSSB == true)
+            {
+                line = sr.ReadLine();
+                nobsSSB = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                this.obsTable = SetObsTable(this.numObs, nobsRecruits, nobsSSB);
+            }
+            else
+            {
+                this.obsTable = SetObsTable(this.numObs, nobsRecruits);
+            }
+
+            
 
         }
 
-        protected DataTable ReadObsTable(StreamReader sr, int nObs)
+        protected DataTable SetObsTable(int nObs, string[] obsRecruits, string[] obsSSB = null)
         {
-            
-            string line;
             bool useSSB = this.withSSB;
-            line = sr.ReadLine();
-            string[] nobsRecruits = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             
             //inputTable
             DataTable inputTable = new DataTable("Observation Table");
             inputTable.Columns.Add("Recruits", typeof(double));
 
-            if (useSSB)
+            if (obsSSB != null)
             {
                 inputTable.Columns.Add("SSB", typeof(double));
 
-                line = sr.ReadLine();
-                string[] nobsSSB = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < nObs; i++)
                 {
-                    inputTable.Rows.Add(Convert.ToDouble(nobsRecruits[i]), Convert.ToDouble(nobsSSB[i]));
+                    inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]), Convert.ToDouble(obsSSB[i]));
                 }
                 
             }
-            else //useSSB is false
+            else //obsSSB is null, therefore no SSB column
             {
                 for (int i = 0; i < nObs; i++)
                 {
-                    inputTable.Rows.Add(Convert.ToDouble(nobsRecruits[i]));
+                    inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]));
                 }
                 
             }
@@ -112,6 +125,12 @@ namespace AGEPRO.CoreLib
             this.recruitCategory = 1;
             this.withSSB = true; //TODO: Should this be default?
             this.subType = EmpiricalType.TwoStage;
+
+            //Fallback Defaults
+            this.lv1NumObs = 0;
+            this.lv2NumObs = 0;
+            this.SSBBreakVal = 0;
+
         }
 
         public TwoStageEmpiricalRecruitment(int modelNum, bool useSSB)
@@ -123,6 +142,8 @@ namespace AGEPRO.CoreLib
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
+            string[] lv1RecruitObs;
+            string[] lv2RecruitObs;
             
             //lv1NumObs, lv2NumObs
             line = sr.ReadLine();
@@ -131,9 +152,13 @@ namespace AGEPRO.CoreLib
             this.lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
 
             //lv1Obs 
-            this.lv1Obs = base.ReadObsTable(sr, this.lv1NumObs);
+            line = sr.ReadLine();
+            lv1RecruitObs = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            this.lv1Obs = base.SetObsTable(this.lv1NumObs, lv1RecruitObs);
             //lv2Obs
-            this.lv2Obs = base.ReadObsTable(sr, this.lv2NumObs);
+            line = sr.ReadLine();
+            lv2RecruitObs = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            this.lv2Obs = base.SetObsTable(this.lv2NumObs, lv2RecruitObs);
 
             //SSBBReakVal
             line = sr.ReadLine();
@@ -151,6 +176,7 @@ namespace AGEPRO.CoreLib
         public EmpiricalCDFZero(int modelNum) : base(modelNum) 
         {
             this.subType = EmpiricalType.CDFZero;
+            this.SSBHinge = 0;  //Fallback Default
         }
 
         public override void ReadRecruitmentModel(StreamReader sr)
