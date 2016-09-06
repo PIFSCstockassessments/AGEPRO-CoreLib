@@ -109,7 +109,8 @@ namespace AGEPRO.CoreLib
             //Recruitment type
             for (int i = 0; i < numRecruitModels; i++)
             {
-                AddToRecruitList(this.recruitType[i], recruitList);
+                //AddToRecruitList(this.recruitType[i], recruitList);
+                recruitList.Add(GetNewRecruitModel(this.recruitType[i]));
             }
 
             //Check for multiple Markov Matrix Recuitments. (Only one is allowed)
@@ -128,73 +129,55 @@ namespace AGEPRO.CoreLib
 
             Console.WriteLine("Done.");
         }
-        
+
         /// <summary>
-        /// Creates a new recruitment model, based on type (model number). Then adds the object to the Recruitment Model Class List.
+        /// Returns a new recruitment model, based on type (model number). 
         /// </summary>
         /// <param name="rtype">Recruitment Model Number</param>
-        /// <param name="rlist">Recruitment Model List Object</param>
-        private void AddToRecruitList(int rtype, List<RecruitmentModel> rlist)
+        private RecruitmentModel GetNewRecruitModel(int rtype)
         {
-            
-            
             switch (rtype)
             {
                 case 1:
-                    rlist.Add(new MarkovMatrixRecruitment());
-                    break;
+                    return (new MarkovMatrixRecruitment());
                 case 2:
-                    rlist.Add(new EmpiricalRecruitment(rtype, useSSB: true, subType: EmpiricalType.Empirical)); 
-                    break;
-                case 3: 
+                    return (new EmpiricalRecruitment(rtype, useSSB: true, subType: EmpiricalType.Empirical));
+                case 3:
                 case 14:
-                //case 20:
-                    rlist.Add(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Empirical));
-                    break;
+                    return(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Empirical));
                 case 20:
-                    rlist.Add(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Fixed));
-                    break;
+                    return(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Fixed));
                 case 4:
-                    
-                    rlist.Add(new TwoStageEmpiricalRecruitment(rtype, useSSB: true));
-                    break;
+                    return(new TwoStageEmpiricalRecruitment(rtype, useSSB: true));
                 case 5:
                 case 6:
                 case 7:
-                    rlist.Add(new ParametricCurve(rtype, isAutocorrelated: false));
-                    break;
+                    return(new ParametricCurve(rtype, isAutocorrelated: false));
                 case 8:
-                    rlist.Add(new ParametricLognormal(rtype, isAutocorrelated: false));
-                    break;
+                    return(new ParametricLognormal(rtype, isAutocorrelated: false));
                 case 10:
                 case 11:
                 case 12:
-                    rlist.Add(new ParametricCurve(rtype, isAutocorrelated: true));
-                    break;
+                    return(new ParametricCurve(rtype, isAutocorrelated: true));
                 case 13:
-                    rlist.Add(new ParametricLognormal(rtype, isAutocorrelated: true));
-                    break;
+                    return(new ParametricLognormal(rtype, isAutocorrelated: true));
                 case 15:
-                    rlist.Add(new TwoStageEmpiricalRecruitment(rtype, useSSB: false));
-                    break;
+                    return(new TwoStageEmpiricalRecruitment(rtype, useSSB: false));
                 case 16:
                 case 17:
                 case 18:
                 case 19:
                     PredictorRecruitment predictorRecruitModel = new PredictorRecruitment(rtype);
                     predictorRecruitModel.obsYears = this.observationYears;
-                    rlist.Add(predictorRecruitModel);
-                    break;
+                    return(predictorRecruitModel);
                 case 21:
-                    rlist.Add(new EmpiricalCDFZero(rtype));
-                    break;
+                    return(new EmpiricalCDFZero(rtype));
                 case 0:
                 default:
-                    throw new ArgumentOutOfRangeException("rtype","Must be a vaild recruitType model number.");  
+                    throw new ArgumentOutOfRangeException("rtype", "Must be a vaild recruitType model number.");
             }//end switch
-                       
-            //return RecruitmentModel
-        }
+
+        }//end GetNewRecruitModel
                 
     }
 
