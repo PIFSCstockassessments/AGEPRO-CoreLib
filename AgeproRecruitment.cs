@@ -111,6 +111,11 @@ namespace AGEPRO.CoreLib
             {
                 //AddToRecruitList(this.recruitType[i], recruitList);
                 recruitList.Add(GetNewRecruitModel(this.recruitType[i]));
+                //if this Recruit Model is a Predictor Recruitment Type, set the observation years.
+                if (recruitList[i] is PredictorRecruitment)
+                {
+                    ((PredictorRecruitment)recruitList[i]).obsYears = this.observationYears;
+                }
             }
 
             //Check for multiple Markov Matrix Recuitments. (Only one is allowed)
@@ -134,7 +139,7 @@ namespace AGEPRO.CoreLib
         /// Returns a new recruitment model, based on type (model number). 
         /// </summary>
         /// <param name="rtype">Recruitment Model Number</param>
-        public RecruitmentModel GetNewRecruitModel(int rtype)
+        public static RecruitmentModel GetNewRecruitModel(int rtype)
         {
             switch (rtype)
             {
@@ -167,9 +172,9 @@ namespace AGEPRO.CoreLib
                 case 17:
                 case 18:
                 case 19:
-                    PredictorRecruitment predictorRecruitModel = new PredictorRecruitment(rtype);
-                    predictorRecruitModel.obsYears = this.observationYears;
-                    return(predictorRecruitModel);
+                    //PredictorRecruitment predictorRecruitModel = new PredictorRecruitment(rtype);
+                    //predictorRecruitModel.obsYears = this.observationYears;
+                    return(new PredictorRecruitment(rtype));
                 case 21:
                     return(new EmpiricalCDFZero(rtype));
                 case 0:
