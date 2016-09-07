@@ -134,7 +134,7 @@ namespace AGEPRO.CoreLib
         /// Returns a new recruitment model, based on type (model number). 
         /// </summary>
         /// <param name="rtype">Recruitment Model Number</param>
-        private RecruitmentModel GetNewRecruitModel(int rtype)
+        public RecruitmentModel GetNewRecruitModel(int rtype)
         {
             switch (rtype)
             {
