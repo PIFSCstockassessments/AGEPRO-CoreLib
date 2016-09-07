@@ -52,6 +52,7 @@
     <Compile Include="AgeproWeightAgeTable.cs" />
     <Compile Include="EmpiricalRecruitment.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="GeneralizedRecruitment.cs" />
     <Compile Include="MarkovMatrixRecruitment.cs" />
     <Compile Include="ParametricRecruitment.cs" />
     <Compile Include="PredictorRecruitment.cs" />
