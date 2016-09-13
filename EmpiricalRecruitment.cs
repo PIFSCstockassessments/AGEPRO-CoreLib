@@ -64,18 +64,18 @@ namespace AGEPRO.CoreLib
                 line = sr.ReadLine();
                 nobsSSB = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                this.obsTable = SetObsTable(this.numObs, nobsRecruits, nobsSSB);
+                this.obsTable = ReadObsTable(this.numObs, nobsRecruits, nobsSSB);
             }
             else
             {
-                this.obsTable = SetObsTable(this.numObs, nobsRecruits);
+                this.obsTable = ReadObsTable(this.numObs, nobsRecruits);
             }
 
             
 
         }
 
-        protected DataTable SetObsTable(int nObs, string[] obsRecruits, string[] obsSSB = null)
+        protected DataTable ReadObsTable(int nObs, string[] obsRecruits, string[] obsSSB = null)
         {
             bool useSSB = this.withSSB;
             
@@ -154,11 +154,11 @@ namespace AGEPRO.CoreLib
             //lv1Obs 
             line = sr.ReadLine();
             lv1RecruitObs = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            this.lv1Obs = base.SetObsTable(this.lv1NumObs, lv1RecruitObs);
+            this.lv1Obs = base.ReadObsTable(this.lv1NumObs, lv1RecruitObs);
             //lv2Obs
             line = sr.ReadLine();
             lv2RecruitObs = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            this.lv2Obs = base.SetObsTable(this.lv2NumObs, lv2RecruitObs);
+            this.lv2Obs = base.ReadObsTable(this.lv2NumObs, lv2RecruitObs);
 
             //SSBBReakVal
             line = sr.ReadLine();
