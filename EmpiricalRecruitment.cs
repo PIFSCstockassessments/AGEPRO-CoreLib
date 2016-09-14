@@ -75,35 +75,71 @@ namespace AGEPRO.CoreLib
 
         }
 
-        protected DataTable ReadObsTable(int nObs, string[] obsRecruits, string[] obsSSB = null)
-        {
-            bool useSSB = this.withSSB;
+        //protected DataTable ReadObsTable(int nObs, string[] obsRecruits, string[] obsSSB = null)
+        //{
+        //    bool useSSB = this.withSSB;
             
+        //    //inputTable
+        //    DataTable inputTable = new DataTable("Observation Table");
+        //    inputTable.Columns.Add("Recruits", typeof(double));
+
+        //    if (obsSSB != null)
+        //    {
+        //        inputTable.Columns.Add("SSB", typeof(double));
+
+        //        for (int i = 0; i < nObs; i++)
+        //        {
+        //            inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]), Convert.ToDouble(obsSSB[i]));
+        //        }
+                
+        //    }
+        //    else //obsSSB is null, therefore no SSB column
+        //    {
+        //        for (int i = 0; i < nObs; i++)
+        //        {
+        //            inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]));
+        //        }
+                
+        //    }
+        //    return inputTable;
+        //}
+        protected DataTable ReadObsTable(int numObs, string[] obsRecruits, string[] obsSSB = null)
+        {
             //inputTable
-            DataTable inputTable = new DataTable("Observation Table");
-            inputTable.Columns.Add("Recruits", typeof(double));
-
-            if (obsSSB != null)
+            DataTable inputTable = SetNewObsTable(numObs);
+            int i = 0;
+            foreach (DataRow obsRow in inputTable.Rows)
             {
-                inputTable.Columns.Add("SSB", typeof(double));
+                //TODO: Add a check if stated "numObs" is more than inputTable row count  
+                obsRow["Recruits"] = Convert.ToDouble(obsRecruits[i]);
+                if (this.withSSB)
+                {
+                    obsRow["SSB"] = Convert.ToDouble(obsSSB[i]);
+                }
+                i++;
+            }
+            
 
-                for (int i = 0; i < nObs; i++)
-                {
-                    inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]), Convert.ToDouble(obsSSB[i]));
-                }
-                
-            }
-            else //obsSSB is null, therefore no SSB column
-            {
-                for (int i = 0; i < nObs; i++)
-                {
-                    inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]));
-                }
-                
-            }
             return inputTable;
         }
 
+        public DataTable SetNewObsTable(int numObs)
+        {
+            //inputTable
+            DataTable obsTable = new DataTable("Observation Table");
+            obsTable.Columns.Add("Recruits", typeof(double));
+            if (this.withSSB)
+            {
+                obsTable.Columns.Add("SSB", typeof(double));
+            }
+            
+            for (int i = 0; i < numObs; i++)
+            {
+                obsTable.Rows.Add();
+            }
+
+            return obsTable;
+        }
         
     }
 

@@ -49,34 +49,72 @@ namespace AGEPRO.CoreLib
 
 
             //Coefficents
-            DataTable inputTable = new DataTable("Coefficients");
-            inputTable.Columns.Add("Coefficient", typeof(double));
+            //DataTable inputTable = new DataTable("Coefficients");
+            //inputTable.Columns.Add("Coefficient", typeof(double));
 
             line = sr.ReadLine();
             string[] predictorCoefficents = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < this.numRecruitPredictors; i++)
+            //for (int i = 0; i < this.numRecruitPredictors; i++)
+            //{
+            //    inputTable.Rows.Add(Convert.ToDouble(predictorCoefficents[i]));
+            //}
+            //this.coefficientTable = inputTable;
+            this.coefficientTable = SetNewCoefficientTable(this.numRecruitPredictors);
+            int ipredictor = 0;
+            foreach (DataRow coefRow in coefficientTable.Rows)
             {
-                inputTable.Rows.Add(Convert.ToDouble(predictorCoefficents[i]));
+                coefRow["Coefficient"] = (Convert.ToDouble(predictorCoefficents[ipredictor]));
+                ipredictor++;
             }
-            this.coefficientTable = inputTable;
-
+            
             //Observations
-            inputTable = new DataTable("Observations");
-            for (int j = 0; j < obsYears.Count(); j++)
-            {
-                inputTable.Columns.Add( obsYears[j].ToString(), typeof(double));
-            }
-            for (int i = 0; i < this.numRecruitPredictors; i++)
+            //inputTable = new DataTable("Observations");
+            //for (int j = 0; j < obsYears.Count(); j++)
+            //{
+            //    inputTable.Columns.Add( obsYears[j].ToString(), typeof(double));
+            //}
+            this.observationTable = 
+                SetNewObsTable(this.numRecruitPredictors, Array.ConvertAll(this.obsYears, element => element.ToString()) );
+            //for (int i = 0; i < this.numRecruitPredictors; i++)
+            //{
+            //    line = sr.ReadLine();
+            //    string[] observationsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            //    inputTable.Rows.Add(observationsLine);
+            //}
+            foreach (DataRow obsRow in this.observationTable.Rows)
             {
                 line = sr.ReadLine();
                 string[] observationsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                inputTable.Rows.Add(observationsLine);
-
+                obsRow.ItemArray = observationsLine;
             }
-            this.observationTable = inputTable;
+            //this.observationTable = inputTable;
 
         }
 
-        
+       
+        public DataTable SetNewCoefficientTable(int numPredictors)
+        {
+            DataTable coefficientTable = new DataTable("Coefficients");
+            coefficientTable.Columns.Add("Coefficient", typeof(double));
+            for (int i = 0; i < numPredictors; i++)
+            {
+                coefficientTable.Rows.Add();
+            }
+            return coefficientTable;
+        }
+        public DataTable SetNewObsTable(int numPredictors, string[] obsYears)
+        {
+            DataTable obsTable = new DataTable("Observations");
+            for (int j = 0; j < obsYears.Count(); j++)
+            {
+                obsTable.Columns.Add(obsYears[j], typeof(double));
+            }
+            for (int i = 0; i < numPredictors; i++)
+            {
+                obsTable.Rows.Add();
+            }
+            
+            return obsTable;
+        }
     }
 }
