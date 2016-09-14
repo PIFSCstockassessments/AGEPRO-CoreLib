@@ -75,34 +75,6 @@ namespace AGEPRO.CoreLib
 
         }
 
-        //protected DataTable ReadObsTable(int nObs, string[] obsRecruits, string[] obsSSB = null)
-        //{
-        //    bool useSSB = this.withSSB;
-            
-        //    //inputTable
-        //    DataTable inputTable = new DataTable("Observation Table");
-        //    inputTable.Columns.Add("Recruits", typeof(double));
-
-        //    if (obsSSB != null)
-        //    {
-        //        inputTable.Columns.Add("SSB", typeof(double));
-
-        //        for (int i = 0; i < nObs; i++)
-        //        {
-        //            inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]), Convert.ToDouble(obsSSB[i]));
-        //        }
-                
-        //    }
-        //    else //obsSSB is null, therefore no SSB column
-        //    {
-        //        for (int i = 0; i < nObs; i++)
-        //        {
-        //            inputTable.Rows.Add(Convert.ToDouble(obsRecruits[i]));
-        //        }
-                
-        //    }
-        //    return inputTable;
-        //}
         protected DataTable ReadObsTable(int numObs, string[] obsRecruits, string[] obsSSB = null)
         {
             //inputTable

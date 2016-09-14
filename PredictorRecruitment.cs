@@ -49,17 +49,11 @@ namespace AGEPRO.CoreLib
 
 
             //Coefficents
-            //DataTable inputTable = new DataTable("Coefficients");
-            //inputTable.Columns.Add("Coefficient", typeof(double));
-
+            this.coefficientTable = SetNewCoefficientTable(this.numRecruitPredictors);
+            
             line = sr.ReadLine();
             string[] predictorCoefficents = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            //for (int i = 0; i < this.numRecruitPredictors; i++)
-            //{
-            //    inputTable.Rows.Add(Convert.ToDouble(predictorCoefficents[i]));
-            //}
-            //this.coefficientTable = inputTable;
-            this.coefficientTable = SetNewCoefficientTable(this.numRecruitPredictors);
+            
             int ipredictor = 0;
             foreach (DataRow coefRow in coefficientTable.Rows)
             {
@@ -68,27 +62,16 @@ namespace AGEPRO.CoreLib
             }
             
             //Observations
-            //inputTable = new DataTable("Observations");
-            //for (int j = 0; j < obsYears.Count(); j++)
-            //{
-            //    inputTable.Columns.Add( obsYears[j].ToString(), typeof(double));
-            //}
             this.observationTable = 
                 SetNewObsTable(this.numRecruitPredictors, Array.ConvertAll(this.obsYears, element => element.ToString()) );
-            //for (int i = 0; i < this.numRecruitPredictors; i++)
-            //{
-            //    line = sr.ReadLine();
-            //    string[] observationsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            //    inputTable.Rows.Add(observationsLine);
-            //}
+            
             foreach (DataRow obsRow in this.observationTable.Rows)
             {
                 line = sr.ReadLine();
                 string[] observationsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 obsRow.ItemArray = observationsLine;
             }
-            //this.observationTable = inputTable;
-
+            
         }
 
        
