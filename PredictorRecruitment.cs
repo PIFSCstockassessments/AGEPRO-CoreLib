@@ -65,11 +65,11 @@ namespace AGEPRO.CoreLib
             this.observationTable = 
                 SetNewObsTable(this.numRecruitPredictors, Array.ConvertAll(this.obsYears, element => element.ToString()) );
             
-            foreach (DataRow obsRow in this.observationTable.Rows)
+            foreach (DataRow predictorRow in this.observationTable.Rows)
             {
                 line = sr.ReadLine();
-                string[] observationsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                obsRow.ItemArray = observationsLine;
+                string[] observationsPerYear = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                predictorRow.ItemArray = observationsPerYear;
             }
             
         }
