@@ -47,14 +47,22 @@ namespace AGEPRO.CoreLib
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
-            string[] nobsRecruits;
-            string[] nobsSSB;
-
+            
             //numObs
             line = sr.ReadLine();
             this.numObs = Convert.ToInt32(line);
 
             //obsTable
+            ReadObsTable(sr, this.numObs);
+            
+        }
+
+        protected void ReadObsTable(StreamReader sr, int numObs)
+        {
+            string line;
+            string[] nobsRecruits;
+            string[] nobsSSB;
+
             //obsRecruits
             line = sr.ReadLine();
             nobsRecruits = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -64,18 +72,16 @@ namespace AGEPRO.CoreLib
                 line = sr.ReadLine();
                 nobsSSB = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                this.obsTable = ReadObsTable(this.numObs, nobsRecruits, nobsSSB);
+                this.obsTable = SetObsTableData(this.numObs, nobsRecruits, nobsSSB);
             }
             else
             {
-                this.obsTable = ReadObsTable(this.numObs, nobsRecruits);
+                this.obsTable = SetObsTableData(this.numObs, nobsRecruits);
             }
-
-            
-
         }
 
-        protected DataTable ReadObsTable(int numObs, string[] obsRecruits, string[] obsSSB = null)
+
+        protected DataTable SetObsTableData(int numObs, string[] obsRecruits, string[] obsSSB = null)
         {
             //inputTable
             DataTable inputTable = SetNewObsTable(numObs);
@@ -150,9 +156,7 @@ namespace AGEPRO.CoreLib
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
-            string[] lv1RecruitObs;
-            string[] lv2RecruitObs;
-            
+
             //lv1NumObs, lv2NumObs
             line = sr.ReadLine();
             string[] lineNumObsLvl = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -160,14 +164,10 @@ namespace AGEPRO.CoreLib
             this.lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
 
             //lv1Obs 
-            line = sr.ReadLine();
-            lv1RecruitObs = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            this.lv1Obs = base.ReadObsTable(this.lv1NumObs, lv1RecruitObs);
+            base.ReadObsTable(sr, this.lv1NumObs);
             //lv2Obs
-            line = sr.ReadLine();
-            lv2RecruitObs = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            this.lv2Obs = base.ReadObsTable(this.lv2NumObs, lv2RecruitObs);
-
+            base.ReadObsTable(sr, this.lv2NumObs);
+            
             //SSBBReakVal
             line = sr.ReadLine();
             this.SSBBreakVal = Convert.ToInt32(line);
