@@ -75,7 +75,7 @@ namespace AGEPRO.CoreLib
         }
 
        
-        public DataTable SetNewCoefficientTable(int numPredictors)
+        public static DataTable SetNewCoefficientTable(int numPredictors)
         {
             DataTable coefficientTable = new DataTable("Coefficients");
             coefficientTable.Columns.Add("Coefficient", typeof(double));
@@ -85,7 +85,7 @@ namespace AGEPRO.CoreLib
             }
             return coefficientTable;
         }
-        public DataTable SetNewObsTable(int numPredictors, string[] obsYears)
+        public static DataTable SetNewObsTable(int numPredictors, string[] obsYears)
         {
             DataTable obsTable = new DataTable("Observations");
             for (int j = 0; j < obsYears.Count(); j++)
