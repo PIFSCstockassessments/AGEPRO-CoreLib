@@ -53,11 +53,11 @@ namespace AGEPRO.CoreLib
             this.numObs = Convert.ToInt32(line);
 
             //obsTable
-            ReadObsTable(sr, this.numObs);
+            this.obsTable = ReadObsTable(sr, this.numObs);
             
         }
 
-        protected void ReadObsTable(StreamReader sr, int numObs)
+        protected DataTable ReadObsTable(StreamReader sr, int numObs)
         {
             string line;
             string[] nobsRecruits;
@@ -72,12 +72,14 @@ namespace AGEPRO.CoreLib
                 line = sr.ReadLine();
                 nobsSSB = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                this.obsTable = SetObsTableData(this.numObs, nobsRecruits, nobsSSB);
+                return SetObsTableData(numObs, nobsRecruits, nobsSSB);
             }
             else
             {
-                this.obsTable = SetObsTableData(this.numObs, nobsRecruits);
+                return SetObsTableData(numObs, nobsRecruits);
             }
+
+            
         }
 
 
@@ -164,9 +166,9 @@ namespace AGEPRO.CoreLib
             this.lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
 
             //lv1Obs 
-            base.ReadObsTable(sr, this.lv1NumObs);
+            this.lv1Obs = base.ReadObsTable(sr, this.lv1NumObs);
             //lv2Obs
-            base.ReadObsTable(sr, this.lv2NumObs);
+            this.lv2Obs = base.ReadObsTable(sr, this.lv2NumObs);
             
             //SSBBReakVal
             line = sr.ReadLine();
