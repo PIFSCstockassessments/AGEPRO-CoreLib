@@ -81,7 +81,8 @@ namespace AGEPRO.CoreLib
             if (parametricLine.Length == 3)
             {
                 //Verify if this Parametric Model should have 3 parameters
-                if (IsThisAShepherdCurve(this.recruitModelNum))
+                //Shepherd Curve Models do not have 3 parameters
+                if (IsThisAShepherdCurve())
                 {
                     throw new InvalidRecruitmentParameterException("3 Parameter Shepherd Curve Found");
                 }
@@ -92,8 +93,9 @@ namespace AGEPRO.CoreLib
             }
             else if (parametricLine.Length == 4)
             {
-                //Verify if this Parametric Model should have 4 parameters 
-                if(!IsThisAShepherdCurve(this.recruitModelNum)){
+                //Verify if this Parametric Model should have 4 parameters
+                //Only Shepherd Models have 4 parameters.
+                if(!IsThisAShepherdCurve()){
                     throw new InvalidRecruitmentParameterException("Beverton-Holt or Ricker Curve with 4 parameters found");
                 }
                 this.alpha = Convert.ToDouble(parametricLine[0]);
@@ -114,9 +116,9 @@ namespace AGEPRO.CoreLib
             }
         }
 
-        private bool IsThisAShepherdCurve (int modelNum)
+        public bool IsThisAShepherdCurve()
         {
-            return (modelNum == 7 || modelNum == 12);
+            return (this.recruitModelNum == 7 || this.recruitModelNum == 12);
         }
     }
 
