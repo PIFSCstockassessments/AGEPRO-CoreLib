@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Data;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AGEPRO.CoreLib
 {
@@ -17,12 +19,30 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// Parametric Recruitment
     /// </summary>
-    public class ParametricRecruitment : RecruitmentModel
+    public class ParametricRecruitment : RecruitmentModel, INotifyPropertyChanged
     {
-        public double? phi { get; set; }
-        public double? lastResidual { get; set; }
-        public bool autocorrelated { get; set; }
+        private double? _phi;
+        private double? _lastResidual;
+        private bool _autocorrelated;
+
+        public double? phi 
+        {
+            get { return _phi; }
+            set { SetProperty(ref _phi, value); }
+        }
+        public double? lastResidual 
+        {
+            get { return _lastResidual; }
+            set { SetProperty(ref _lastResidual, value); } 
+        }
+        public bool autocorrelated
+        {
+            get { return _autocorrelated; }
+            set { SetProperty(ref _autocorrelated, value); }
+        }
         public ParametricType subtype { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ParametricRecruitment(int modelNum)
         {
@@ -52,7 +72,19 @@ namespace AGEPRO.CoreLib
             this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
         }
 
-        
+        //DanRigby 
+        protected void SetProperty<T>(ref T field, T value, [CallerMemberName] string name = "")
+        {
+            if (!EqualityComparer<T>.Default.Equals(field, value))
+            {
+                field = value;
+                var handler = PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(name));
+                }
+            }
+        }
         
     }
 
@@ -61,10 +93,31 @@ namespace AGEPRO.CoreLib
     /// </summary>
     public class ParametricCurve : ParametricRecruitment
     {
-        public double alpha { get; set; }
-        public double beta { get; set; }
-        public double variance { get; set; }
-        public double? kParm { get; set; }
+        private double _alpha;
+        private double _beta;
+        private double _variance;
+        private double? _kParm;
+
+        public double alpha 
+        {
+            get { return _alpha; }
+            set { SetProperty(ref _alpha, value); }
+        }
+        public double beta
+        {
+            get { return _beta; }
+            set { SetProperty(ref _beta, value); }
+        }
+        public double variance 
+        {
+            get { return _variance; }
+            set { SetProperty(ref _variance, value); }
+        }
+        public double? kParm 
+        {
+            get { return _kParm; }
+            set { SetProperty(ref _kParm, value); }
+        }
 
         public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) 
         {
@@ -127,8 +180,19 @@ namespace AGEPRO.CoreLib
     /// </summary>
     public class ParametricLognormal : ParametricRecruitment
     {
-        public double mean { get; set; }
-        public double stdDev { get; set; }
+        private double _mean;
+        private double _stdDev;
+
+        public double mean 
+        {
+            get { return _mean; }
+            set { SetProperty(ref _mean, value); }
+        }
+        public double stdDev 
+        {
+            get { return _stdDev; }
+            set { SetProperty(ref _stdDev, value); }
+        }
 
         public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) 
         {
