@@ -292,31 +292,38 @@ namespace AGEPRO.CoreLib
 
             }
 
-            
+            //SSB_WEIGHT
+            inpFile.AddRange(SSBWeight.WriteStochasticAgeDataLines("[SSB_WEIGHT]"));
+
+            //MEAN_WEIGHT
+            inpFile.AddRange(meanWeight.WriteStochasticAgeDataLines("[MEAN_WEIGHT]"));
+
             //CATCH_WEIDHT
-            inpFile.Add("[CATCH_WEIGHT]");
-            inpFile.Add(this.catchWeight.weightOpt.ToString() + "  " +
-                Convert.ToInt32(this.catchWeight.timeVarying).ToString());
-            if (this.catchWeight.fromFile == true)
+            inpFile.AddRange(catchWeight.WriteStochasticAgeDataLines("[CATCH_WEIGHT]"));
+
+            if (this.general.hasDiscards)
             {
-                inpFile.Add(this.catchWeight.dataFile);
+                //DISC_WEIGHT
+                inpFile.AddRange(discardWeight.WriteStochasticAgeDataLines("[DISC_WEIGHT]"));
             }
-            else
+            
+            //NATMORT
+            inpFile.AddRange(naturalMortality.WriteStochasticAgeDataLines("[NATMORT]"));
+
+            //BIOLOGICAL (Bioloical:Fraction Mortality Prior to Spawning) 
+            inpFile.AddRange(biological.WriteBiologicalDataLines());
+
+            //MATURITY (Biological:Maturity At Age)
+            inpFile.AddRange(maturity.WriteStochasticAgeDataLines("[MATURITY]"));
+
+            //FISHERY
+            inpFile.AddRange(fishery.WriteStochasticAgeDataLines("[FISHERY]"));
+
+            if (this.general.hasDiscards)
             {
-                foreach (DataRow fleetYear in this.catchWeight.byAgeData.Rows)
-                {
-                    inpFile.Add(string.Join("  ",fleetYear.ItemArray) + "  ");
-                }
-
-                foreach (DataRow cvRow in this.catchWeight.byAgeCV.Rows)
-                {
-                    inpFile.Add(string.Join("  ", cvRow.ItemArray) + "  ");
-                }
+                //DISCARDS
+                inpFile.AddRange(discardFraction.WriteStochasticAgeDataLines("[DISCARD]"));
             }
-
-          
-
-
         }
 
         /// <summary>

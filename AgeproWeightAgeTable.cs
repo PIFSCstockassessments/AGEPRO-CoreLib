@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.Collections.ObjectModel;
 
 namespace AGEPRO.CoreLib
@@ -69,7 +70,33 @@ namespace AGEPRO.CoreLib
                 base.ReadStochasticAgeFromFileOption(sr);
             }
             
-            
+        }
+
+        public override List<string> WriteStochasticAgeDataLines(string S)
+        {
+            List<string> outputLines = new List<string>();
+
+            outputLines.Add(S);
+            outputLines.Add(this.weightOpt.ToString() + new string(' ',2) + Convert.ToInt32(this.timeVarying).ToString());
+            //since fromFile is a nullable boolean, have to explicitly check if its true 
+            if (this.fromFile == true)
+            {
+                outputLines.Add(this.dataFile);
+            }
+            else
+            {
+                foreach (DataRow yearRow in this.byAgeData.Rows)
+                {
+                    outputLines.Add(string.Join(new string(' ',2), yearRow.ItemArray));
+                }
+
+                foreach (DataRow cvRow in this.byAgeCV.Rows)
+                {
+                    outputLines.Add(string.Join(new string(' ',2), cvRow.ItemArray));
+                }
+            }
+
+            return outputLines;
         }
             
     }

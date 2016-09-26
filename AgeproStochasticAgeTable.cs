@@ -159,5 +159,32 @@ namespace AGEPRO.CoreLib
             string line = sr.ReadLine();
             this.dataFile = line;
         }
+
+
+        public virtual List<string> WriteStochasticAgeDataLines(string S)
+        {
+            List<string> outputLines = new List<string>();
+
+            outputLines.Add(S); //[PARAMETER]
+            if (this.fromFile == true)
+            {
+                outputLines.Add("1" + new string(' ',2) + Convert.ToInt32(this.timeVarying).ToString());
+                outputLines.Add(this.dataFile);
+            }
+            else
+            {
+                outputLines.Add("0" + new string(' ', 2) + Convert.ToInt32(this.timeVarying).ToString());
+                foreach (DataRow yearRow in this.byAgeData.Rows)
+                {
+                    outputLines.Add(string.Join(new string(' ', 2), yearRow.ItemArray));
+                }
+                foreach (DataRow cvRow in this.byAgeCV.Rows)
+                {
+                    outputLines.Add(string.Join(new string(' ', 2), cvRow.ItemArray));
+                }
+            }
+            
+            return outputLines;
+        }
     }
 }

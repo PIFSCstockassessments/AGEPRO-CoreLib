@@ -75,5 +75,17 @@ namespace AGEPRO.CoreLib
             }
             this.TSpawn = tSpawnTable;
         }
+
+        public List<string> WriteBiologicalDataLines()
+        {
+            List<string> outputLines = new List<string>();
+            outputLines.Add("[BIOLOGICAL]");
+            outputLines.Add(Convert.ToInt32(this.timeVarying).ToString());
+            foreach (DataRow gRow in this.TSpawn.Rows)
+            {
+                outputLines.Add(string.Join(new string(' ', 2), gRow.ItemArray));
+            }
+            return outputLines;
+        }
     }
 }
