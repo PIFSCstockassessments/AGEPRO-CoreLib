@@ -214,7 +214,7 @@ namespace AGEPRO.CoreLib
                     line = sr.ReadLine();
                     string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.options.enableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
-                    this.options.enableDataFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
+                    this.options.enableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
                     this.options.enableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
                 }
                 else if (line.Equals("[SCALE]"))
@@ -239,7 +239,21 @@ namespace AGEPRO.CoreLib
 
         }
 
-        private void WriteInputFileLines()
+
+        public void WriteInputFile(string file)
+        {
+            try
+            {
+                List<string> outLines = this.WriteInputFileLines();
+                File.WriteAllLines(file, outLines);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private List<string> WriteInputFileLines()
         {
             List<string> inpFile = new List<string>();
             inpFile.Add(this.version); //AGEPRO VERSION 4.0
@@ -327,6 +341,61 @@ namespace AGEPRO.CoreLib
 
             //RECRUIT (Recruitment)
             inpFile.AddRange(recruitment.WriteRecruitmentDataLines());
+
+            //HARVEST
+            inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
+
+            //REBUILD
+            inpFile.AddRange(rebuild.WriteHarvestTableDataLines());
+
+            //PSTAR
+            inpFile.AddRange(pstar.WriteHarvestTableDataLines());
+
+            //REFPOINT (Misc Options: Refpoint)
+            if (this.options.enableRefpoint)
+            {
+                inpFile.Add("[REFPOINT]");
+                inpFile.Add(this.refpoint.refSpawnBio.ToString() + new string(' ', 2) +
+                    this.refpoint.refJan1Bio.ToString() + new string(' ', 2) +
+                    this.refpoint.refMeanBio.ToString() + new string(' ', 2) +
+                    this.refpoint.refFMort.ToString());
+            }
+
+            //BOUNDS (Misc Options: Bounds)
+            if (this.options.enableBounds)
+            {
+                inpFile.Add("[BOUNDS]");
+                inpFile.Add(this.bounds.maxWeight + new string(' ',2) + this.bounds.maxNatMort);
+            }
+
+            //RETROADJUST (Misc Options: Retro Adjustment Factors)
+            if (this.options.enableRetroAdjustmentFactors)
+            {
+                inpFile.Add("[RETROADJUST]");
+                List<string> rafCol = new List<string>();
+                foreach (DataRow ageRow in this.retroAdjustOption.retroAdjust.Rows)
+                {
+                    rafCol.Add(ageRow[0].ToString());
+                }
+                inpFile.Add(string.Join(new string(' ', 2), rafCol));
+
+            }
+
+            //OPTIONS (Misc Options)
+            inpFile.Add("[OPTIONS]");
+            inpFile.Add(Convert.ToInt32(this.options.enableSummaryReport).ToString() + new string(' ',2) +
+                Convert.ToInt32(this.options.enableAuxStochasticFiles).ToString() + new string(' ',2) +
+                Convert.ToInt32(this.options.enableExportR).ToString());
+
+            if (this.options.enableScaleFactors)
+            {
+                inpFile.Add("[SCALE]");
+                inpFile.Add(this.scale.scaleBio + new string(' ',2) + 
+                    this.scale.scaleRec + new string(' ',2) +
+                    this.scale.scaleStockNum + new string(' ',2));
+            }
+
+            return inpFile;
         }
 
         /// <summary>

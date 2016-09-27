@@ -13,7 +13,7 @@ namespace AGEPRO.CoreLib
     public class AgeproMiscOptions
     {
         public bool enableSummaryReport { get; set; }
-        public bool enableDataFiles { get; set; }
+        public bool enableAuxStochasticFiles { get; set; }
         public bool enableExportR { get; set; }
         //enabled if classes are called.
         public bool enableRefpoint { get; set; }

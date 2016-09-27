@@ -73,7 +73,7 @@ namespace AGEPRO.CoreLib
                     case 1:
                         iyearHarvestSpec = "LANDINGS";
                         break;
-                    default:
+                    default:  //or 2
                         iyearHarvestSpec = "REMOVALS";
                         break;
                 }
@@ -94,7 +94,42 @@ namespace AGEPRO.CoreLib
             this.harvestScenarioTable = G;
         }
 
+        public List<string> WriteHarvestTableDataLines()
+        {
+            List<string> outputLines = new List<string>();
+            outputLines.Add("[HARVEST]");
 
+            //HARVEST SPEC
+            Dictionary<string, string> harvestSpecDict = new Dictionary<string, string>();
+            harvestSpecDict.Add("F-MULT", "0");
+            harvestSpecDict.Add("LANDINGS", "1");
+            harvestSpecDict.Add("REMOVALS", "2");
+
+            List<string> specCol = new List<string>();
+            foreach (DataRow dtRow in this.harvestScenarioTable.Rows)
+            {
+                string specOptNum;
+                if (harvestSpecDict.TryGetValue(dtRow["Harvest Spec"].ToString(), out specOptNum))
+                {
+                    specCol.Add(specOptNum);
+                }
+            }
+            outputLines.Add(string.Join(new string(' ',2), specCol));
+
+            //HARVEST FLEET-N
+            for (int fleetCol = 0; fleetCol < (harvestScenarioTable.Columns.Count - 1); fleetCol++ )
+            {
+                List<string> harvestValCol = new List<string>();
+                foreach (DataRow dtRow in this.harvestScenarioTable.Rows)
+                {
+                    harvestValCol.Add(dtRow[fleetCol + 1].ToString());
+                }
+                outputLines.Add(string.Join(new string(' ',2), harvestValCol));
+
+            }
+
+            return outputLines;
+        }
     }
 
     /// <summary>
@@ -121,6 +156,18 @@ namespace AGEPRO.CoreLib
             this.targetType = Convert.ToInt32(rebuildOptionLine[2]);
             this.targetPercent = Convert.ToDouble(rebuildOptionLine[3]);
 
+        }
+
+        public List<string> WriteRebuildDataLines()
+        {
+            List<string> outputLines = new List<string>();
+            outputLines.Add("[REBUILD]");
+            outputLines.Add(this.targetYear + new string(' ', 2) +
+                this.targetValue + new string(' ',2) +
+                this.targetType + new string(' ',2) + 
+                this.targetPercent);
+
+            return outputLines;
         }
     }
 
@@ -163,6 +210,24 @@ namespace AGEPRO.CoreLib
             line = sr.ReadLine();
             this.targetYear = Convert.ToInt32(line);
 
+        }
+
+        public List<string> WritePStarDataLines()
+        {
+            List<string> outputLines = new List<string>();
+            outputLines.Add("[PSTAR]");
+            outputLines.Add(this.pStarLevels.ToString());
+
+            if (this.pStarTable.Rows.Count > 1)
+            {
+                throw new ApplicationException("P-Star Data Table Has more than one row");
+            }
+            foreach (DataRow dtRow in this.pStarTable.Rows)
+            {
+                outputLines.Add(string.Join(new string(' ', 2), dtRow.ItemArray.ToString()));
+            }
+            outputLines.Add(this.pStarF.ToString());
+            return outputLines;
         }
     }
 
