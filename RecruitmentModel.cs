@@ -15,6 +15,7 @@ namespace AGEPRO.CoreLib
         public int recruitModelNum;
         public int recruitCategory;
         public abstract void ReadRecruitmentModel(StreamReader sr);
+        public abstract List<string> WriteRecruitmentDataModelData();
 
         /// <summary>
         /// Looks up the name of the AGEPRO Recruitment Model. Unimpmented at this time. 

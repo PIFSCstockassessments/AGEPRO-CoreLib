@@ -120,6 +120,41 @@ namespace AGEPRO.CoreLib
 
             return obsTable;
         }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLines = new List<string>();
+            outputLines.Add(this.numObs.ToString());
+            
+            //obsTable
+            outputLines.AddRange(this.WriteObsTableLines(this.obsTable,this.withSSB));
+            
+            return outputLines;
+        }
+
+        protected List<string> WriteObsTableLines(DataTable recruitObsTable, bool hasSSBCols)
+        {
+            List<string> obsTableLines = new List<string>();
+
+            List<string> obsRecritCol = new List<string>();
+            List<string> obsSSBCol = new List<string>();
+            foreach (DataRow obsRow in recruitObsTable.Rows)
+            {
+                obsRecritCol.Add(obsRow["Recruits"].ToString());
+                if (hasSSBCols)
+                {
+                    obsSSBCol.Add(obsRow["SSB"].ToString());
+                }
+            }
+            obsTableLines.Add(string.Join(new string(' ', 2), obsRecritCol));
+            
+            if (hasSSBCols)
+            {
+                obsTableLines.Add(string.Join(new string(' ', 2), obsSSBCol));
+            }
+
+            return obsTableLines;
+        }
         
     }
 
@@ -174,6 +209,19 @@ namespace AGEPRO.CoreLib
             line = sr.ReadLine();
             this.SSBBreakVal = Convert.ToInt32(line);
         }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLines = new List<string>();
+            outputLines.Add(this.lv1NumObs + new string(' ', 2) + this.lv2NumObs);
+
+            outputLines.AddRange(this.WriteObsTableLines(this.lv1Obs, this.withSSB));
+            outputLines.AddRange(this.WriteObsTableLines(this.lv2Obs, this.withSSB));
+
+            outputLines.Add(this.SSBBreakVal.ToString());
+
+            return outputLines;
+        }
     }
 
     /// <summary>
@@ -200,6 +248,14 @@ namespace AGEPRO.CoreLib
             line = sr.ReadLine();
             this.SSBHinge = Convert.ToDouble(line);
 
+        }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLine = new List<string>();
+            outputLine.AddRange(base.WriteRecruitmentDataModelData());
+            outputLine.Add(this.SSBHinge.ToString());
+            return outputLine;
         }
 
     }

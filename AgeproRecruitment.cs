@@ -183,6 +183,38 @@ namespace AGEPRO.CoreLib
             }//end switch
 
         }//end GetNewRecruitModel
+
+        public List<string> WriteRecruitmentDataLines()
+        {
+            List<string> outputLines = new List<string>();
+
+            outputLines.Add("[RECRUIT]");
+            outputLines.Add(this.recruitScalingFactor.ToString() + new string(' ', 2) +
+                this.SSBScalingFactor.ToString() + new string(' ', 2) +
+                this.maxRecruitObs.ToString());
+            
+            //Gathering recruitNum from RecruitList because its more sturctured
+            List<string> modelNumArrayFromRecruitList = new List<string>();
+            foreach (RecruitmentModel recruit in this.recruitList)
+            {
+                modelNumArrayFromRecruitList.Add(recruit.recruitModelNum.ToString());
+            }
+            outputLines.Add(string.Join(new string(' ', 2), modelNumArrayFromRecruitList));
+
+            foreach(DataRow yearRow in this.recruitProb.Rows)
+            {
+                outputLines.Add(string.Join(new string(' ', 2), yearRow.ItemArray));
+            }
+
+            //Recruit Model(s)
+            foreach (RecruitmentModel recruitModel in recruitList)
+            {
+                outputLines.AddRange(recruitModel.WriteRecruitmentDataModelData());
+            }
+
+
+            return outputLines;
+        }
                 
     }
 

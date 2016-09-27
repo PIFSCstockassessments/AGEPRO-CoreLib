@@ -21,5 +21,10 @@ namespace AGEPRO.CoreLib
         {
             throw new NotImplementedException();
         }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

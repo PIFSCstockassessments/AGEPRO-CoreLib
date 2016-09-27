@@ -58,7 +58,7 @@ namespace AGEPRO.CoreLib
                 markov.Tables.Add(inputTable);
 
                 //Probalility
-                inputTable = new DataTable("Probalitity");
+                inputTable = new DataTable("Probability");
                 for (int j = 0; j < this.numRecruitLevels; j++)
                 {
                     inputTable.Columns.Add("PR(" + (j + 1).ToString() + ")", typeof(double));
@@ -85,6 +85,36 @@ namespace AGEPRO.CoreLib
             }
         }
 
-        
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLines = new List<string>();
+
+            outputLines.Add(this.numRecruitLevels + new string(' ', 2) + this.numSSBLevels);
+            foreach (DataTable markovTable in markovRecruitment.Tables)
+            {
+                if (markovTable.TableName == "Probability")
+                {
+                    foreach (DataRow ssbRow in markovTable.Rows)
+                    {
+                        outputLines.Add(string.Join(new string(' ', 2), ssbRow.ItemArray));
+                    }
+                }
+                else
+                {
+                    if (markovTable.Columns.Count > 1)
+                    {
+                        throw new InvalidRecruitmentParameterException("Non-Probability Table has more than one column");
+                    }
+                    List<string> markovParamCol = new List<string>();
+                    foreach (DataRow dtRow in markovTable.Rows)
+                    {
+                        markovParamCol.Add(dtRow[0].ToString());
+                    }
+                    outputLines.Add(string.Join(new string(' ', 2), markovParamCol));
+                }
+            }
+
+            return outputLines;
+        }
     }
 }

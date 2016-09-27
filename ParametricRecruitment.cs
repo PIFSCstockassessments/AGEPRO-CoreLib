@@ -61,6 +61,11 @@ namespace AGEPRO.CoreLib
             throw new NotImplementedException();
         }
 
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            throw new NotImplementedException();
+        }
+
 
         protected void ReadAutocorrelatedValues(StreamReader sr)
         {
@@ -173,6 +178,32 @@ namespace AGEPRO.CoreLib
         {
             return (this.recruitModelNum == 7 || this.recruitModelNum == 12);
         }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLines = new List<string>();
+
+            if (IsThisAShepherdCurve())
+            {
+                outputLines.Add(this.alpha.ToString().PadRight(12) +
+                    this.beta.ToString().PadRight(12) +
+                    this.kParm.ToString().PadRight(12) +
+                    this.variance.ToString().PadRight(12));
+            }
+            else
+            {
+                outputLines.Add(this.alpha.ToString().PadRight(12) +
+                    this.beta.ToString().PadRight(12) + 
+                    this.variance.ToString().PadRight(12));
+            }
+
+            if (this.autocorrelated)
+            {
+                outputLines.Add(this.phi.ToString().PadRight(12) + this.lastResidual.ToString().PadRight(12));
+            }
+
+            return outputLines;
+        }
     }
 
     /// <summary>
@@ -212,6 +243,17 @@ namespace AGEPRO.CoreLib
             {
                 ReadAutocorrelatedValues(sr);
             }
+        }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLines = new List<string>();
+            outputLines.Add(this.mean.ToString().PadRight(12) + this.stdDev.ToString().PadRight(12));
+            if (this.autocorrelated)
+            {
+                outputLines.Add(this.phi.ToString().PadRight(12) + this.lastResidual.ToString().PadRight(12));
+            }
+            return outputLines;
         }
     }
 }

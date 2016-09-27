@@ -324,6 +324,9 @@ namespace AGEPRO.CoreLib
                 //DISCARDS
                 inpFile.AddRange(discardFraction.WriteStochasticAgeDataLines("[DISCARD]"));
             }
+
+            //RECRUIT (Recruitment)
+            inpFile.AddRange(recruitment.WriteRecruitmentDataLines());
         }
 
         /// <summary>

@@ -99,5 +99,26 @@ namespace AGEPRO.CoreLib
             
             return obsTable;
         }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLines = new List<string>();
+
+            outputLines.Add(this.numRecruitPredictors.ToString() + new string(' ', 2) +
+                this.variance.ToString().PadRight(12) + this.intercept.ToString());
+
+            List<string> coefficientCol = new List<string>();
+            foreach (DataRow predictorRow in coefficientTable.Rows)
+            {
+                coefficientCol.Add(predictorRow[0].ToString());
+            }
+            outputLines.Add(string.Join(new String(' ',2), coefficientCol).PadRight(12));
+            foreach (DataRow predictorRow in observationTable.Rows)
+            {
+                outputLines.Add(string.Join(new string(' ', 2), predictorRow.ItemArray.ToString()));
+            }
+
+            return outputLines;
+        }
     }
 }
