@@ -8,6 +8,13 @@ using System.IO;
 
 namespace AGEPRO.CoreLib
 {
+    public enum HarvestScenarioAnalysis
+    {
+        HarvestScenario,
+        Rebuilder,
+        PStar,
+    };
+
     /// <summary>
     /// AGEPRO Harvest Scenario Parameters. 
     /// </summary>
@@ -15,10 +22,12 @@ namespace AGEPRO.CoreLib
     {
         public DataTable harvestScenarioTable { get; set; }
         public int targetYear { get; set; }
+        public HarvestScenarioAnalysis analysisType { get; set; }
+        public HarvestScenarioAnalysis enableScenarioType { get; set; }
 
         public AgeproHarvestScenario()
         {
-
+            analysisType = HarvestScenarioAnalysis.HarvestScenario;
         }
 
         /// <summary>
@@ -141,6 +150,11 @@ namespace AGEPRO.CoreLib
         public int targetType { get; set; } //rebuild target type (cboRebuild.SelectedIndex)
         public double targetPercent { get; set; } //Percent Confidence
 
+        public RebuilderTarget()
+        {
+            analysisType = HarvestScenarioAnalysis.Rebuilder;
+        }
+
         /// <summary>
         /// Readin AGEPRO Input Data File for Rebuild Specification Parameters
         /// </summary>
@@ -179,6 +193,11 @@ namespace AGEPRO.CoreLib
         public int pStarLevels { get; set; }
         public DataTable pStarTable; 
         public double pStarF { get; set; }
+
+        public PStar()
+        {
+            analysisType = HarvestScenarioAnalysis.PStar;
+        }
 
         /// <summary>
         /// Readin AGEPRO Input Data File for P-Star Data Specifications

@@ -343,14 +343,25 @@ namespace AGEPRO.CoreLib
             inpFile.AddRange(recruitment.WriteRecruitmentDataLines());
 
             //HARVEST
-            inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
-
+            if (this.harvestScenario.enableScenarioType == HarvestScenarioAnalysis.HarvestScenario)
+            {
+                inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
+            }
+            
             //REBUILD
-            inpFile.AddRange(rebuild.WriteHarvestTableDataLines());
-
+            if (this.harvestScenario.enableScenarioType == HarvestScenarioAnalysis.Rebuilder)
+            {
+                inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
+                inpFile.AddRange(rebuild.WriteHarvestTableDataLines());
+            }
+            
             //PSTAR
-            inpFile.AddRange(pstar.WriteHarvestTableDataLines());
-
+            if (this.harvestScenario.enableScenarioType == HarvestScenarioAnalysis.PStar)
+            {
+                inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
+                inpFile.AddRange(pstar.WriteHarvestTableDataLines());
+            }
+            
             //REFPOINT (Misc Options: Refpoint)
             if (this.options.enableRefpoint)
             {
