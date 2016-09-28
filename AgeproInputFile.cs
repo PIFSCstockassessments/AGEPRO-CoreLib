@@ -272,7 +272,7 @@ namespace AGEPRO.CoreLib
                 this.general.numPopSims.ToString() + "  " + 
                 this.general.numFleets.ToString() + "  " + 
                 this.general.numRecModels.ToString() + "  " +
-                this.general.hasDiscards.ToString() + "  " +
+                Convert.ToInt32(this.general.hasDiscards).ToString() + "  " +
                 this.general.seed.ToString());
 
             //BOOTSTRAP
@@ -366,7 +366,8 @@ namespace AGEPRO.CoreLib
             if (this.options.enableRefpoint)
             {
                 inpFile.Add("[REFPOINT]");
-                inpFile.Add(this.refpoint.refSpawnBio.ToString() + new string(' ', 2) +
+                inpFile.Add(
+                    this.refpoint.refSpawnBio.ToString() + new string(' ', 2) +
                     this.refpoint.refJan1Bio.ToString() + new string(' ', 2) +
                     this.refpoint.refMeanBio.ToString() + new string(' ', 2) +
                     this.refpoint.refFMort.ToString());
@@ -394,14 +395,16 @@ namespace AGEPRO.CoreLib
 
             //OPTIONS (Misc Options)
             inpFile.Add("[OPTIONS]");
-            inpFile.Add(Convert.ToInt32(this.options.enableSummaryReport).ToString() + new string(' ',2) +
+            inpFile.Add(
+                Convert.ToInt32(this.options.enableSummaryReport).ToString() + new string(' ',2) +
                 Convert.ToInt32(this.options.enableAuxStochasticFiles).ToString() + new string(' ',2) +
                 Convert.ToInt32(this.options.enableExportR).ToString());
 
             if (this.options.enableScaleFactors)
             {
                 inpFile.Add("[SCALE]");
-                inpFile.Add(this.scale.scaleBio + new string(' ',2) + 
+                inpFile.Add(
+                    this.scale.scaleBio + new string(' ',2) + 
                     this.scale.scaleRec + new string(' ',2) +
                     this.scale.scaleStockNum + new string(' ',2));
             }
