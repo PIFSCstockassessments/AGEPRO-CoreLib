@@ -97,6 +97,20 @@ namespace AGEPRO.CoreLib
             }
         }
 
+        public DataTable NewMarkovLevelTable(DataTable tableT, int numLevels)
+        {
+            for (int i = 0; i < numLevels; i++)
+            {
+                tableT.Rows.Add();
+            }
+            return tableT;
+        }
+
+        public DataTable NewProbabilityTable(int lvlRecruits, int lvlSSB)
+        {
+            return null;
+        }
+
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
