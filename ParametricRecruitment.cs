@@ -19,7 +19,7 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// Parametric Recruitment
     /// </summary>
-    public class ParametricRecruitment : RecruitmentModel, INotifyPropertyChanged
+    public class ParametricRecruitment : RecruitmentModel
     {
         private double? _phi;
         private double? _lastResidual;
@@ -41,8 +41,6 @@ namespace AGEPRO.CoreLib
             set { SetProperty(ref _autocorrelated, value); }
         }
         public ParametricType subtype { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public ParametricRecruitment(int modelNum)
         {
@@ -76,21 +74,7 @@ namespace AGEPRO.CoreLib
             this.phi = Convert.ToDouble(autoCorrLine[0]);
             this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
         }
-
-        //DanRigby 
-        protected void SetProperty<T>(ref T field, T value, [CallerMemberName] string name = "")
-        {
-            if (!EqualityComparer<T>.Default.Equals(field, value))
-            {
-                field = value;
-                var handler = PropertyChanged;
-                if (handler != null)
-                {
-                    handler(this, new PropertyChangedEventArgs(name));
-                }
-            }
-        }
-        
+      
     }
 
     /// <summary>
