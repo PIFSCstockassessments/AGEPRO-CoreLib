@@ -69,7 +69,7 @@ namespace AGEPRO.CoreLib
                 }
                 markov.Tables.Add(inputTable);
 
-                //Probalility
+                //Probability
                 inputTable = new DataTable("Probability");
                 for (int j = 0; j < this.numRecruitLevels; j++)
                 {
