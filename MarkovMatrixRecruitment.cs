@@ -10,8 +10,20 @@ namespace AGEPRO.CoreLib
 {
     public class MarkovMatrixRecruitment : RecruitmentModel
     {
-        public int numRecruitLevels { get; set; }
-        public int numSSBLevels { get; set; }
+        private int _numRecruitLevels;
+        private int _numSSBLevels;
+        
+        public int numRecruitLevels 
+        {
+            get { return _numRecruitLevels; }
+            set { SetProperty(ref _numRecruitLevels, value);}
+        }
+        public int numSSBLevels 
+        {
+            get { return _numSSBLevels; }
+            set { SetProperty(ref _numSSBLevels, value); }
+        }
+        
         public DataSet markovRecruitment { get; set; }
         
         public MarkovMatrixRecruitment()
