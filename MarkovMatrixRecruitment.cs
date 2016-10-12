@@ -97,18 +97,43 @@ namespace AGEPRO.CoreLib
             }
         }
 
-        public DataTable NewMarkovLevelTable(DataTable tableT, int numLevels)
+        private DataTable NewMarkovLevelTable(string tableName, int numLevels, string colName, int numCols = 1)
         {
+            DataTable tableT = new DataTable(tableName);
+            if (numCols == 1)
+            {
+                tableT.Columns.Add(colName, typeof(int));    
+            }
+            else if (numCols > 1)
+            {   //Assumming 'Probabiliy' is the only multi-column Markov Matrix level Datatable
+                for (int j = 0; j < numCols; j++)
+                {
+                    tableT.Columns.Add(colName+"("+ (j+1).ToString()+")", typeof(double));
+                }
+            }
+            else
+            {
+                throw new InvalidRecruitmentParameterException("Markov Table "+ tableName +
+                    " has invalid number of columns: "+ numCols);
+            }
+
             for (int i = 0; i < numLevels; i++)
             {
                 tableT.Rows.Add();
             }
             return tableT;
         }
-
+        public DataTable NewRecruitLevelTable(int numLevels)
+        {
+            return NewMarkovLevelTable("Recruitment", numLevels, "Recruitment");
+        }
+        public DataTable NewSSBLevelTable(int numLevels)
+        {
+            return NewMarkovLevelTable("SSB", numLevels, "SSB Cut Points");
+        }
         public DataTable NewProbabilityTable(int lvlRecruits, int lvlSSB)
         {
-            return null;
+            return NewMarkovLevelTable("Probability", lvlSSB, "PR", lvlRecruits);
         }
 
         public override List<string> WriteRecruitmentDataModelData()
