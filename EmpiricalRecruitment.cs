@@ -82,7 +82,13 @@ namespace AGEPRO.CoreLib
             
         }
 
-
+        /// <summary>
+        /// Sets a new Observation Datatable and populates it with string array paramters. 
+        /// </summary>
+        /// <param name="numObs"></param>
+        /// <param name="obsRecruits"></param>
+        /// <param name="obsSSB"></param>
+        /// <returns></returns>
         protected DataTable SetObsTableData(int numObs, string[] obsRecruits, string[] obsSSB = null)
         {
             //inputTable
@@ -103,6 +109,11 @@ namespace AGEPRO.CoreLib
             return inputTable;
         }
 
+        /// <summary>
+        /// Creates an empty observation data table.
+        /// </summary>
+        /// <param name="numObs">Number of Observation Rows.</param>
+        /// <returns>Returns a Empty Data Table</returns>
         public DataTable SetNewObsTable(int numObs)
         {
             //inputTable
