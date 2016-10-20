@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace AGEPRO.CoreLib
 {
@@ -17,9 +19,27 @@ namespace AGEPRO.CoreLib
     /// </remarks>
     public class AgeproBootstrap
     {
-        public int numBootstraps { get; set; }
-        public double popScaleFactor { get; set; }
-        public string bootstrapFile { get; set; }
+        private int _numBootstraps;
+        private double _popScaleFactor;
+        private string _bootstrapFile;
+
+        public int numBootstraps
+        { 
+            get { return _numBootstraps; }
+            set { SetProperty(ref _numBootstraps, value); }
+        }
+        public double popScaleFactor 
+        {
+            get { return _popScaleFactor; }
+            set { SetProperty(ref _popScaleFactor, value); }
+        }
+        public string bootstrapFile 
+        {
+            get { return _bootstrapFile; }
+            set { SetProperty(ref _bootstrapFile, value); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public AgeproBootstrap()
         {
@@ -46,6 +66,20 @@ namespace AGEPRO.CoreLib
 
             //TODO: Send error/warning if bootstrapFile is not found in system
 
+        }
+
+        //DanRigby 
+        public void SetProperty<T>(ref T field, T value, [CallerMemberName] string name = "")
+        {
+            if (!EqualityComparer<T>.Default.Equals(field, value))
+            {
+                field = value;
+                var handler = PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(name));
+                }
+            }
         }
     }
 }
