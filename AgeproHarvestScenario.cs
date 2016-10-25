@@ -44,7 +44,7 @@ namespace AGEPRO.CoreLib
             string[] harvestSpecLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
            
             //Set Columns and save HarvestSpec/Nfleet Values to list
-            G.Columns.Add("Harvest Specification", typeof(string));
+            G.Columns.Add("Harvest Spec", typeof(string));
             List<string[]> harvestNFleetLines = new List<string[]>(nfleet);
             if (nfleet.Equals(1))
             {
@@ -86,7 +86,7 @@ namespace AGEPRO.CoreLib
                         iyearHarvestSpec = "REMOVALS";
                         break;
                 }
-                //Harvest Specification
+                //Harvest Spec
                 dr[0] = iyearHarvestSpec;
                 
                 //Column Harvest Value/Fleet-N
@@ -118,7 +118,7 @@ namespace AGEPRO.CoreLib
             foreach (DataRow dtRow in this.harvestScenarioTable.Rows)
             {
                 string specOptNum;
-                if (harvestSpecDict.TryGetValue(dtRow["Harvest Specification"].ToString(), out specOptNum))
+                if (harvestSpecDict.TryGetValue(dtRow["Harvest Spec"].ToString(), out specOptNum))
                 {
                     specCol.Add(specOptNum);
                 }
