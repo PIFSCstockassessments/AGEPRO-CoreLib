@@ -23,7 +23,6 @@ namespace AGEPRO.CoreLib
         public DataTable harvestScenarioTable { get; set; }
         public int targetYear { get; set; }
         public HarvestScenarioAnalysis analysisType { get; set; }
-        public HarvestScenarioAnalysis enableScenarioType { get; set; }
 
         public AgeproHarvestScenario()
         {
