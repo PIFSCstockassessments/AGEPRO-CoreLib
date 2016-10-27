@@ -53,12 +53,15 @@
     <Compile Include="EmpiricalRecruitment.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GeneralizedRecruitment.cs" />
+    <Compile Include="HarvestCalculation.cs" />
     <Compile Include="HarvestSpecification.cs" />
     <Compile Include="InvalidRecruitmentParameterException.cs" />
     <Compile Include="MarkovMatrixRecruitment.cs" />
     <Compile Include="ParametricRecruitment.cs" />
     <Compile Include="PredictorRecruitment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PStarCalculation.cs" />
+    <Compile Include="RebuilderTargetCalculation.cs" />
     <Compile Include="RecruitmentModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
