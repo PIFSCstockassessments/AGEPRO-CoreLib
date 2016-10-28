@@ -9,7 +9,7 @@ namespace AGEPRO.CoreLib
     /// <summary>
     /// Specifications for Stock Rebuilder Targets
     /// </summary>
-    class RebuilderTargetCalculation : HarvestCalculation
+    public class RebuilderTargetCalculation : HarvestCalculation
     {
         private int _targetYear;
         private double _targetValue;

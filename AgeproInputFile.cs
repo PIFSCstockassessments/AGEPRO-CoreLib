@@ -36,8 +36,8 @@ namespace AGEPRO.CoreLib
         public AgeproMiscOptions.ScaleFactors scale = new AgeproMiscOptions.ScaleFactors(); //scale
         public AgeproMiscOptions.ReportPercentile reportPercentile = new AgeproMiscOptions.ReportPercentile(); //reportPercentile
         public AgeproMiscOptions.Refpoint refpoint = new AgeproMiscOptions.Refpoint(); //refpoint
-        public RebuilderTarget rebuild = new RebuilderTarget(); //rebuilder
-        public PStar pstar = new PStar();
+        public RebuilderTargetCalculation rebuild = new RebuilderTargetCalculation(); //rebuilder
+        public PStarCalculation pstar = new PStarCalculation();
 
         public AgeproInputFile()
         {
@@ -173,7 +173,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[REBUILD]"))
                 {
-                    this.rebuild.ReadRebuildData(sr);
+                    this.rebuild.ReadCalculationDataLines(sr);
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
@@ -233,7 +233,7 @@ namespace AGEPRO.CoreLib
                 }
                 else if (line.Equals("[PSTAR]"))
                 {
-                    this.pstar.ReadPStarData(sr);
+                    this.pstar.ReadCalculationDataLines(sr);
                 }
             }
 
@@ -352,14 +352,14 @@ namespace AGEPRO.CoreLib
             if (this.harvestScenario.analysisType == HarvestScenarioAnalysis.Rebuilder)
             {
                 //inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
-                inpFile.AddRange(rebuild.WriteHarvestTableDataLines());
+                inpFile.AddRange(rebuild.WriteCalculationDataLines());
             }
             
             //PSTAR
             if (this.harvestScenario.analysisType == HarvestScenarioAnalysis.PStar)
             {
                 //inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
-                inpFile.AddRange(pstar.WriteHarvestTableDataLines());
+                inpFile.AddRange(pstar.WriteCalculationDataLines());
             }
             
             //REFPOINT (Misc Options: Refpoint)

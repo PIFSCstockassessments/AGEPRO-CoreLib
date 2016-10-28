@@ -7,7 +7,7 @@ using System.Data;
 
 namespace AGEPRO.CoreLib
 {
-    class PStarCalculation : HarvestCalculation
+    public class PStarCalculation : HarvestCalculation
     {
         private int _targetYear;
         private double _pStarF;
