@@ -408,6 +408,11 @@ namespace AGEPRO.CoreLib
                     this.scale.scaleRec + new string(' ',2) +
                     this.scale.scaleStockNum + new string(' ',2));
             }
+            if (this.options.enablePercentileReport)
+            {
+                inpFile.Add("[PERC]");
+                inpFile.Add(this.reportPercentile.ToString());
+            }
 
             return inpFile;
         }
