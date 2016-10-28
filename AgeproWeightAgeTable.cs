@@ -83,7 +83,7 @@ namespace AGEPRO.CoreLib
             {
                 outputLines.Add(this.dataFile);
             }
-            else
+            else if (this.weightOpt == 0)
             {
                 foreach (DataRow yearRow in this.byAgeData.Rows)
                 {
