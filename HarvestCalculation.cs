@@ -10,13 +10,6 @@ using System.Runtime.CompilerServices;
 
 namespace AGEPRO.CoreLib
 {
-    public enum HarvestScenarioAnalysis
-    {
-        HarvestScenario,
-        Rebuilder,
-        PStar,
-    };
-
     /// <summary>
     /// Generalized, abstract represetion for (Non-Standard) Harvest Scenario Calculations
     /// </summary>

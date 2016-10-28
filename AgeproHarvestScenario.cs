@@ -8,6 +8,12 @@ using System.IO;
 
 namespace AGEPRO.CoreLib
 {
+    public enum HarvestScenarioAnalysis
+    {
+        HarvestScenario,
+        Rebuilder,
+        PStar,
+    };
 
     /// <summary>
     /// AGEPRO Harvest Scenario Parameters. 
