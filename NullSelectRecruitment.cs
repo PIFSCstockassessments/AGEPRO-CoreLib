@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace AGEPRO.CoreLib
 {
-    public class GeneralizedRecruitment : RecruitmentModel
+    public class NullSelectRecruitment : RecruitmentModel
     {
         /// <summary>
         /// A empty RecruitmentModel class. Only meant for Recruit List intialization purposes.
         /// </summary>
-        public GeneralizedRecruitment()
+        public NullSelectRecruitment()
         {
             this.recruitModelNum = 0;
             this.recruitCategory = 0;
