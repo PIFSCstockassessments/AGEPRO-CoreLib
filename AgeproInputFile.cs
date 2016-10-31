@@ -174,6 +174,7 @@ namespace AGEPRO.CoreLib
                 else if (line.Equals("[REBUILD]"))
                 {
                     this.rebuild.ReadCalculationDataLines(sr);
+                    this.harvestScenario.analysisType = HarvestScenarioAnalysis.Rebuilder;
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
@@ -234,6 +235,7 @@ namespace AGEPRO.CoreLib
                 else if (line.Equals("[PSTAR]"))
                 {
                     this.pstar.ReadCalculationDataLines(sr);
+                    this.harvestScenario.analysisType = HarvestScenarioAnalysis.PStar;
                 }
             }
 
