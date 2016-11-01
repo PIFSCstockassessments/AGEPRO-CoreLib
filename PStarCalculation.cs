@@ -89,9 +89,10 @@ namespace AGEPRO.CoreLib
             }
             foreach (DataRow dtRow in this.pStarTable.Rows)
             {
-                outputLines.Add(string.Join(new string(' ', 2), dtRow.ItemArray.ToString()));
+                outputLines.Add(string.Join(new string(' ', 2), dtRow.ItemArray));
             }
             outputLines.Add(this.pStarF.ToString());
+            outputLines.Add(this.targetYear.ToString());
             return outputLines;
         }
     }

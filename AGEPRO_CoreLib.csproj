@@ -52,7 +52,7 @@
     <Compile Include="AgeproWeightAgeTable.cs" />
     <Compile Include="EmpiricalRecruitment.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="GeneralizedRecruitment.cs" />
+    <Compile Include="NullSelectRecruitment.cs" />
     <Compile Include="HarvestCalculation.cs" />
     <Compile Include="HarvestSpecification.cs" />
     <Compile Include="InvalidRecruitmentParameterException.cs" />

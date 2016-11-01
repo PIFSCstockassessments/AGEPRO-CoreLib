@@ -345,10 +345,7 @@ namespace AGEPRO.CoreLib
             inpFile.AddRange(recruitment.WriteRecruitmentDataLines());
 
             //HARVEST
-            if (this.harvestScenario.analysisType == HarvestScenarioAnalysis.HarvestScenario)
-            {
-                inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
-            }
+            inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
             
             //REBUILD
             if (this.harvestScenario.analysisType == HarvestScenarioAnalysis.Rebuilder)
@@ -413,7 +410,7 @@ namespace AGEPRO.CoreLib
             if (this.options.enablePercentileReport)
             {
                 inpFile.Add("[PERC]");
-                inpFile.Add(this.reportPercentile.ToString());
+                inpFile.Add(this.reportPercentile.percentile.ToString());
             }
 
             return inpFile;
