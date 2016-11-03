@@ -60,7 +60,12 @@ namespace AGEPRO.CoreLib
 
         public class retroAdjustmentFactors
         {
-            public DataTable retroAdjust = new DataTable("Retro Adjustment Factors");
+            public DataTable retroAdjust; 
+
+            public retroAdjustmentFactors()
+            {
+                retroAdjust = new DataTable("Retro Adjustment Factors");
+            }
         }
     }
 }
