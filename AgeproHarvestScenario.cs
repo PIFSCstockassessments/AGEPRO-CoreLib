@@ -104,6 +104,9 @@ namespace AGEPRO.CoreLib
 
         public List<string> WriteHarvestTableDataLines()
         {
+            //Check if Harvest Table has blank/null cells, and if it does fill it w/ a zero
+            harvestScenarioTable = Extensions.FillDBNullCellsWithZero(harvestScenarioTable);
+
             List<string> outputLines = new List<string>();
             outputLines.Add("[HARVEST]");
 
