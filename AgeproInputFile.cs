@@ -283,30 +283,7 @@ namespace AGEPRO.CoreLib
             inpFile.Add(this.bootstrap.bootstrapFile);
 
             //STOCK WEIGHT
-            inpFile.Add("[STOCK_WEIGHT]");
-            inpFile.Add(Convert.ToInt32(this.jan1Weight.fromFile).ToString() + "  " +
-                Convert.ToInt32(this.jan1Weight.timeVarying).ToString());
-            if (this.jan1Weight.fromFile == true)
-            {
-                //Read Data Files
-                inpFile.Add(this.jan1Weight.dataFile);
-            }
-            else
-            {
-                //WeightsAtAge (per year (row))
-                //Can be TimeVarying(Multiple years) or Not
-                foreach(DataRow yearRow in this.jan1Weight.byAgeData.Rows)
-                {
-                    inpFile.Add(string.Join("  ",yearRow.ItemArray)+"  ");
-                }
-                
-                //CV
-                foreach (DataRow cvRow in this.jan1Weight.byAgeCV.Rows)
-                {
-                    inpFile.Add(string.Join("  ", cvRow.ItemArray)+"  ");
-                }
-
-            }
+            inpFile.AddRange(jan1Weight.WriteStochasticAgeDataLines("[STOCK_WEIGHT]"));
 
             //SSB_WEIGHT
             inpFile.AddRange(SSBWeight.WriteStochasticAgeDataLines("[SSB_WEIGHT]"));
