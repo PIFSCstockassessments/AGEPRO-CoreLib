@@ -41,14 +41,31 @@ namespace AGEPRO.CoreLib
         }
 
         /// <summary>
+        /// Creates a new instance of a PStar Levels DataTable
+        /// </summary>
+        /// <param name="levels">Number of columns to create. Defaults to 1.</param>
+        /// <returns>A row-less PStar DataTable Instance.</returns>
+        public DataTable CreateNewPStarTable(int levels = 1)
+        {
+            DataTable newPStarTable = new DataTable("pStar");
+
+            for (int i = 0; i < levels; i++)
+            {
+                newPStarTable.Columns.Add("Level " + (i + 1).ToString(), typeof(double));
+            }
+
+            return newPStarTable;
+        }
+
+
+        /// <summary>
         /// Reads in AGEPRO Input Data File for P-Star Data Specifications
         /// </summary>
         /// <param name="sr">AGEPRO Input Data File StreamReader</param>
         public override void ReadCalculationDataLines(System.IO.StreamReader sr)
         {
             string line;
-            this.pStarTable = new DataTable("pStar");
-
+            
             //Number of pStar Levels
             line = sr.ReadLine();
             this.pStarLevels = Convert.ToInt32(line);
@@ -56,10 +73,7 @@ namespace AGEPRO.CoreLib
             //pStar Level Values
             line = sr.ReadLine();
             string[] pStarLevelData = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < this.pStarLevels; i++)
-            {
-                pStarTable.Columns.Add("Level " + (i + 1).ToString(), typeof(double));
-            }
+            pStarTable = CreateNewPStarTable(this.pStarLevels);
             pStarTable.Rows.Add(pStarLevelData);
 
             //Overfishing F
