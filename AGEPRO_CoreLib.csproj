@@ -55,7 +55,7 @@
     <Compile Include="NullSelectRecruitment.cs" />
     <Compile Include="HarvestCalculation.cs" />
     <Compile Include="HarvestSpecification.cs" />
-    <Compile Include="InvalidRecruitmentParameterException.cs" />
+    <Compile Include="InvalidAgeproParameterException.cs" />
     <Compile Include="MarkovMatrixRecruitment.cs" />
     <Compile Include="ParametricRecruitment.cs" />
     <Compile Include="PredictorRecruitment.cs" />
