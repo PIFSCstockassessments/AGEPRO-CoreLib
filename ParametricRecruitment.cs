@@ -126,7 +126,7 @@ namespace AGEPRO.CoreLib
                 //Shepherd Curve Models do not have 3 parameters
                 if (IsThisAShepherdCurve())
                 {
-                    throw new InvalidRecruitmentParameterException("3 Parameter Shepherd Curve Found");
+                    throw new InvalidAgeproParameterException("3 Parameter Shepherd Curve Found");
                 }
                 this.alpha = Convert.ToDouble(parametricLine[0]);
                 this.beta = Convert.ToDouble(parametricLine[1]);
@@ -138,7 +138,7 @@ namespace AGEPRO.CoreLib
                 //Verify if this Parametric Model should have 4 parameters
                 //Only Shepherd Models have 4 parameters.
                 if(!IsThisAShepherdCurve()){
-                    throw new InvalidRecruitmentParameterException("Beverton-Holt or Ricker Curve with 4 parameters found");
+                    throw new InvalidAgeproParameterException("Beverton-Holt or Ricker Curve with 4 parameters found");
                 }
                 this.alpha = Convert.ToDouble(parametricLine[0]);
                 this.beta = Convert.ToDouble(parametricLine[1]);

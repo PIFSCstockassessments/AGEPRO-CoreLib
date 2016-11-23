@@ -113,7 +113,7 @@ namespace AGEPRO.CoreLib
             }
             else
             {
-                throw new InvalidRecruitmentParameterException("Markov Table "+ tableName +
+                throw new InvalidAgeproParameterException("Markov Table "+ tableName +
                     " has invalid number of columns: "+ numCols);
             }
 
@@ -154,7 +154,7 @@ namespace AGEPRO.CoreLib
                 {
                     if (markovTable.Columns.Count > 1)
                     {
-                        throw new InvalidRecruitmentParameterException("Non-Probability Table has more than one column");
+                        throw new InvalidAgeproParameterException("Non-Probability Table has more than one column");
                     }
                     List<string> markovParamCol = new List<string>();
                     foreach (DataRow dtRow in markovTable.Rows)

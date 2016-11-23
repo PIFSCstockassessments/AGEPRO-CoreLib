@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 namespace AGEPRO.CoreLib
 {
     [Serializable]
-    public class InvalidRecruitmentParameterException : Exception
+    public class InvalidAgeproParameterException : Exception
     {
-        public InvalidRecruitmentParameterException()
+        public InvalidAgeproParameterException()
         {
 
         }
-        public InvalidRecruitmentParameterException(string message)
+        public InvalidAgeproParameterException(string message)
             : base(message)
         {
 
         }
-        public InvalidRecruitmentParameterException(string message, Exception innerException)
+        public InvalidAgeproParameterException(string message, Exception innerException)
             : base(message, innerException)
         {
 
         }
-        public InvalidRecruitmentParameterException(SerializationInfo info, StreamingContext c)
+        public InvalidAgeproParameterException(SerializationInfo info, StreamingContext c)
             : base(info, c)
         {
 
