@@ -8,6 +8,7 @@ namespace AGEPRO.CoreLib
 {
     public class HarvestSpecification
     {
+        //Used in ControlHarvestScenario for the Harvest Specification Combo Box Column
         public int Index { get; set; }
         public string HarvestScenario { get; set; }
 
