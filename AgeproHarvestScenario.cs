@@ -102,6 +102,40 @@ namespace AGEPRO.CoreLib
             this.harvestScenarioTable = G;
         }
 
+        public static DataTable NewHarvestTable(int nyears, int nfleet = 1)
+        {
+            DataTable G = new DataTable("Harvest Scenario");
+            G.Columns.Add("Harvest Spec", typeof(string));
+            if (nfleet == 1)
+            {
+                G.Columns.Add("HARVEST VALUE", typeof(double));
+                for(int irow = 0; irow < nyears; irow++)
+                {
+                    //Use Defaults ("LANDINGS" and 0.0) for values
+                    G.Rows.Add("LANDINGS", 0.0);
+                }
+            }
+            else
+            {
+                object[] harvestFleetRow = new object[1 + nfleet];
+
+                for (int colFleet = 0; colFleet < nfleet; colFleet++)
+                {
+                    G.Columns.Add("FLEET-" + (colFleet + 1).ToString(), typeof(double)); 
+                }
+
+                //Use Defaults ("LANDINGS" and 0.0) for values
+                harvestFleetRow[0] = "LANDINGS";
+                for (int arrayIndex = 1; arrayIndex < harvestFleetRow.Length; arrayIndex++)
+                {
+                    harvestFleetRow[arrayIndex] = 0.0;
+                }
+                G.Rows.Add(harvestFleetRow);
+            }
+
+            return G;
+        }
+
         public List<string> WriteHarvestTableDataLines()
         {
             //Check if Harvest Table has blank/null cells, and if it does fill it w/ a zero
