@@ -104,20 +104,22 @@ namespace AGEPRO.CoreLib
 
         public static DataTable NewHarvestTable(int nyears, int nfleet = 1)
         {
+            object[] harvestFleetRow;
             DataTable G = new DataTable("Harvest Scenario");
             G.Columns.Add("Harvest Spec", typeof(string));
+            //Set Harvest Table Columns
             if (nfleet == 1)
             {
                 G.Columns.Add("HARVEST VALUE", typeof(double));
-                for(int irow = 0; irow < nyears; irow++)
-                {
-                    //Use Defaults ("LANDINGS" and 0.0) for values
-                    G.Rows.Add("LANDINGS", 0.0);
-                }
+                
+                //Use Defaults ("LANDINGS" and 0.0) for values
+                harvestFleetRow = new object[2];
+                harvestFleetRow[0] = "LANDINGS";
+                harvestFleetRow[1] = 0.0;
             }
             else
             {
-                object[] harvestFleetRow = new object[1 + nfleet];
+                harvestFleetRow = new object[1 + nfleet];
 
                 for (int colFleet = 0; colFleet < nfleet; colFleet++)
                 {
@@ -130,6 +132,10 @@ namespace AGEPRO.CoreLib
                 {
                     harvestFleetRow[arrayIndex] = 0.0;
                 }
+            }
+            //Add the Rows 
+            for (int irow = 0; irow < nyears; irow++)
+            {
                 G.Rows.Add(harvestFleetRow);
             }
 
