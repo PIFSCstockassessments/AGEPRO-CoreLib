@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     /// <summary>
     /// Specifications for Stock Rebuilder Targets

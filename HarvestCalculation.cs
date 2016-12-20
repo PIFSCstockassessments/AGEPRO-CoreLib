@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     /// <summary>
     /// Generalized, abstract represetion for (Non-Standard) Harvest Scenario Calculations

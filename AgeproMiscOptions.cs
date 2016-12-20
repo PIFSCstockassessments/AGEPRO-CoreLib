@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     /// <summary>
     /// AGEPRO Misc Options.

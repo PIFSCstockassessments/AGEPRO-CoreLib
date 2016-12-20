@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     /// <summary>
     /// General Paramemeters of AGEPRO

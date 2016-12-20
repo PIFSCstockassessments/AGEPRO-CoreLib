@@ -8,7 +8,7 @@ using System.Data;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     public enum ParametricType
     {

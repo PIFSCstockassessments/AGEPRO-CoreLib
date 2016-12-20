@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Data;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     public class MarkovMatrixRecruitment : RecruitmentModel
     {

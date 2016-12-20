@@ -7,7 +7,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     /// <summary>
     /// Generalized, abstract representation of various AGEPRO Recruitment Models

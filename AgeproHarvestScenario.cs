@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     public enum HarvestScenarioAnalysis
     {

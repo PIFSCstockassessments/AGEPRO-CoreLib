@@ -5,7 +5,7 @@ using System.Text;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
     [Serializable]
     public class InvalidAgeproParameterException : Exception
