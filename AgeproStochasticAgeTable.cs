@@ -160,12 +160,17 @@ namespace Nmfs.Agepro.CoreLib
             this.dataFile = line;
         }
 
-
-        public virtual List<string> WriteStochasticAgeDataLines(string S)
+        /// <summary>
+        /// Creates data line strings to append to the Data Writer for this Stochastic Parameter.
+        /// </summary>
+        /// <param name="keyword">Stochasatic Parameter name. Should be written in 
+        /// all caps, and enclosed in square parenthesis. Example: [PARAMETER] </param>
+        /// <returns>Returns a list of strings. </returns>
+        public virtual List<string> WriteStochasticAgeDataLines(string keyword)
         {
             List<string> outputLines = new List<string>();
 
-            outputLines.Add(S); //[PARAMETER]
+            outputLines.Add(keyword); //[PARAMETER]
             if (this.fromFile == true)
             {
                 outputLines.Add("1" + new string(' ',2) + Convert.ToInt32(this.timeVarying).ToString());
