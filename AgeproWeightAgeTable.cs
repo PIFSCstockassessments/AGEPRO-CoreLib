@@ -58,16 +58,16 @@ namespace Nmfs.Agepro.CoreLib
         }
 
         /// <summary>
-        /// Reads in AGEPRO Input File for the 'Read Weights From File' option 
+        /// Reads in AGEPRO Input Filename for the 'Read Weights From File' option 
         /// </summary>
         /// <param name="sr">AGEPRO Input File StreamReader</param>
-        protected override void ReadStochasticAgeFromFileOption(System.IO.StreamReader sr)
+        protected override void ReadStochasticAgeTableFilename(System.IO.StreamReader sr)
         {
             //If Option 0=fromFile, read fromFile options
             //otherwise ignore and finish reading the current AGEPRO parameter
             if (this.weightOpt == 0) 
             {
-                base.ReadStochasticAgeFromFileOption(sr);
+                base.ReadStochasticAgeTableFilename(sr);
             }
             
         }

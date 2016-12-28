@@ -126,7 +126,7 @@ namespace Nmfs.Agepro.CoreLib
                 else
                 {
                     //From File: Reads filepath string
-                    ReadStochasticAgeFromFileOption(sr);
+                    ReadStochasticAgeTableFilename(sr);
                 }
             }
 
@@ -150,10 +150,10 @@ namespace Nmfs.Agepro.CoreLib
         }
 
         /// <summary>
-        /// Reads in AGEPRO Input File for the 'Read Weights From File' option 
+        /// Reads in AGEPRO Input Filename for the 'Read Weights From File' option 
         /// </summary>
         /// <param name="sr">AGEPRO Input File StreamReader</param>
-        protected virtual void ReadStochasticAgeFromFileOption(StreamReader sr)
+        protected virtual void ReadStochasticAgeTableFilename(StreamReader sr)
         {
             //Reads dataflie path
             string line = sr.ReadLine();
