@@ -198,7 +198,7 @@ namespace Nmfs.Agepro.CoreLib
         /// <param name="fn">Stochastic Table Filename</param>
         /// <param name="ncol">Number of Data Columns. Typically it is the number of Age 
         /// classes. For mulit-fleet cases, it is: Number of ages * Number of fleets.</param>
-        /// <returns>Returns a DataTable object. Note, columns are NOT typed to double.</returns>
+        /// <returns>Returns a DataTable object.</returns>
         public DataTable ReadStochasticTableFile(string fn, int ncol)
         {
             DataTable fromFileAgeTable = new DataTable("Age From File");
@@ -207,7 +207,7 @@ namespace Nmfs.Agepro.CoreLib
             //Setup Columns
             for (int i = 0; i < ncol; i++)
             {
-                fromFileAgeTable.Columns.Add( "Age " + (i + 1).ToString() );
+                fromFileAgeTable.Columns.Add( "Age " + (i + 1).ToString(), typeof(double) );
             }
 
             try
