@@ -105,7 +105,8 @@ namespace Nmfs.Agepro.CoreLib
                 tableT.Columns.Add(colName, typeof(int));    
             }
             else if (numCols > 1)
-            {   //Assumming 'Probabiliy' is the only multi-column Markov Matrix level Datatable
+            {   
+                //Assumming 'Probabiliy' is the only multi-column Markov Matrix level Datatable
                 for (int j = 0; j < numCols; j++)
                 {
                     tableT.Columns.Add(colName+"("+ (j+1).ToString()+")", typeof(double));
@@ -113,8 +114,8 @@ namespace Nmfs.Agepro.CoreLib
             }
             else
             {
-                throw new InvalidAgeproParameterException("Markov Table "+ tableName +
-                    " has invalid number of columns: "+ numCols);
+                throw new InvalidAgeproParameterException("Markov "+ tableName +
+                    " Table has invalid number of columns: "+ numCols);
             }
 
             for (int i = 0; i < numLevels; i++)
@@ -123,7 +124,7 @@ namespace Nmfs.Agepro.CoreLib
             }
             return tableT;
         }
-        public DataTable NewRecruitLevelTable(int numLevels)
+        public DataTable NewRecruitLevelTable(int numLevels = 1)
         {
             return NewMarkovLevelTable("Recruitment", numLevels, "Recruitment");
         }
@@ -131,7 +132,7 @@ namespace Nmfs.Agepro.CoreLib
         {
             return NewMarkovLevelTable("SSB", numLevels, "SSB Cut Points");
         }
-        public DataTable NewProbabilityTable(int lvlRecruits, int lvlSSB)
+        public DataTable NewProbabilityTable(int lvlSSB, int lvlRecruits = 1)
         {
             return NewMarkovLevelTable("Probability", lvlSSB, "PR", lvlRecruits);
         }
