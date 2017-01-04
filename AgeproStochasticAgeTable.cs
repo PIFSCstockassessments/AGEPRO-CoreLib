@@ -199,7 +199,7 @@ namespace Nmfs.Agepro.CoreLib
         /// <param name="ncol">Number of Data Columns. Typically it is the number of Age 
         /// classes. For mulit-fleet cases, it is: Number of ages * Number of fleets.</param>
         /// <returns>Returns a DataTable object.</returns>
-        public DataTable ReadStochasticTableFile(string fn, int ncol)
+        public static DataTable ReadStochasticTableFile(string fn, int ncol)
         {
             DataTable fromFileAgeTable = new DataTable("Age From File");
             string line;
