@@ -172,14 +172,12 @@ namespace Nmfs.Agepro.CoreLib
                 case 17:
                 case 18:
                 case 19:
-                    //PredictorRecruitment predictorRecruitModel = new PredictorRecruitment(rtype);
-                    //predictorRecruitModel.obsYears = this.observationYears;
                     return(new PredictorRecruitment(rtype));
                 case 21:
                     return(new EmpiricalCDFZero(rtype));
                 case 0:
                 default:
-                    throw new ArgumentOutOfRangeException("rtype", "Must be a vaild recruitType model number.");
+                    throw new InvalidAgeproParameterException("Invalid Recruitment Model Number: " + rtype);
             }//end switch
 
         }//end GetNewRecruitModel
