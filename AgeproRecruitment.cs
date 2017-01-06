@@ -36,8 +36,6 @@ namespace Nmfs.Agepro.CoreLib
         public void ReadRecruitmentData(StreamReader sr, int nyears, int numRecruitModels)
         {
             string line;
-            double nyearProbSum;
-            double precisionDiff;
             
             //Clean off any existing data on DataTables
             recruitProb.Clear();
@@ -59,7 +57,7 @@ namespace Nmfs.Agepro.CoreLib
             //Check numRecruitModels matches actual count
             if (this.recruitType.Count() != numRecruitModels)
             {
-                throw new System.InvalidOperationException("numRecruitModels does not match input file recruitModel count");
+                throw new InvalidAgeproParameterException("numRecruitModels does not match input file recruitModel count");
             }
 
             
@@ -89,15 +87,17 @@ namespace Nmfs.Agepro.CoreLib
                 line = sr.ReadLine();
                 string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 recruitProb.Rows.Add(nyearRecruitProb);
-                
-                //Check Recruitment Probability for all selections of each year sums to 1.0
-                nyearProbSum = Array.ConvertAll<string, double>(nyearRecruitProb, double.Parse).Sum();
-                precisionDiff = Math.Abs(nyearProbSum * 0.00001);
-                // To Handle Floating-Point precision issues when "nyearProbSum != 1.0" comparisons
-                if(!(Math.Abs(nyearProbSum - (double)1) <= precisionDiff))
+
+                try
                 {
-                    throw new InvalidOperationException("Year " + (i + 1).ToString() + " recruitment probablity sum does not equal 1.0: " + 
-                        "Probability sum is " + nyearProbSum.ToString());
+                    //Check Recruitment Probability for all selections of each year sums to 1.0
+                    CheckRecruitProbabilitySum(nyearRecruitProb);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidAgeproParameterException("At row " + (i + 1).ToString() + 
+                        " of recruitment probablity:" + Environment.NewLine + ex.InnerException.Message 
+                        , ex);
                 }
                 
             }
@@ -133,6 +133,29 @@ namespace Nmfs.Agepro.CoreLib
             }
 
             Console.WriteLine("Done.");
+        }
+
+        /// <summary>
+        /// Checks the sum of the Selected Recruitment Probabilities add up to 1.0. If it doesn't, it will 
+        /// throw an exception. 
+        /// </summary>
+        /// <param name="recruitProbRow">String array representing the row of the Recruitment 
+        /// probability data grid.</param>
+        public static void CheckRecruitProbabilitySum(String[] recruitProbRow)
+        {
+            double precisionDiff;
+            double rowSumRecruitProb;
+
+            //Check Recruitment Probability for all selections of each year sums to 1.0
+            rowSumRecruitProb = Array.ConvertAll<string, double>(recruitProbRow, double.Parse).Sum();
+            precisionDiff = Math.Abs(rowSumRecruitProb * 0.00001);
+            // To Handle Floating-Point precision issues when "sumRowRecruitProb != 1.0" comparisons
+            if (!(Math.Abs(rowSumRecruitProb - (double)1) <= precisionDiff))
+            {
+                throw new InvalidAgeproParameterException(
+                    "Recruitment probablity sum does not equal 1.0: Probability sum is " + 
+                    rowSumRecruitProb.ToString());
+            }
         }
 
         /// <summary>
