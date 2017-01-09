@@ -136,12 +136,12 @@ namespace Nmfs.Agepro.CoreLib
         }
 
         /// <summary>
-        /// Checks the sum of the Selected Recruitment Probabilities add up to 1.0. If it doesn't, it will 
-        /// throw an exception. 
+        /// Checks the Selected Recruitment Probabilitiy row if it sums up to 1.0.  
         /// </summary>
         /// <param name="recruitProbRow">String array representing the row of the Recruitment 
         /// probability data grid.</param>
-        public static void CheckRecruitProbabilitySum(String[] recruitProbRow)
+        /// <returns>Returns false if the row does not sum up to 1.0. Otherwise, true.</returns>
+        public static bool CheckRecruitProbabilitySum(String[] recruitProbRow)
         {
             double precisionDiff;
             double rowSumRecruitProb;
@@ -152,10 +152,13 @@ namespace Nmfs.Agepro.CoreLib
             // To Handle Floating-Point precision issues when "sumRowRecruitProb != 1.0" comparisons
             if (!(Math.Abs(rowSumRecruitProb - (double)1) <= precisionDiff))
             {
-                throw new InvalidAgeproParameterException(
+                Console.WriteLine(
                     "Recruitment probablity sum does not equal 1.0: Probability sum is " + 
                     rowSumRecruitProb.ToString());
+                return false;
             }
+
+            return true;
         }
 
         /// <summary>
