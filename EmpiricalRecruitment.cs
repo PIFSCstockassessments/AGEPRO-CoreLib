@@ -270,4 +270,16 @@ namespace Nmfs.Agepro.CoreLib
         }
 
     }
+
+    /// <summary>
+    /// Fixed Recruitment
+    /// </summary>
+    public class FixedEmpiricalRecruitment : EmpiricalRecruitment
+    {
+        public FixedEmpiricalRecruitment(int modelNum = 20)
+            : base(modelNum)
+        {
+            this.subType = EmpiricalType.Fixed;
+        }
+    }
 }

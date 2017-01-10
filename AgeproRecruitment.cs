@@ -177,7 +177,7 @@ namespace Nmfs.Agepro.CoreLib
                 case 14:
                     return(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Empirical));
                 case 20:
-                    return(new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Fixed));
+                    return(new FixedEmpiricalRecruitment(rtype));
                 case 4:
                     return(new TwoStageEmpiricalRecruitment(rtype, useSSB: true));
                 case 5:
