@@ -167,10 +167,11 @@ namespace Nmfs.Agepro.CoreLib
             return obsTableLines;
         }
 
-        public override bool ValidateRecruitmentData(int selectionIndex)
+        public virtual bool CheckObservationTable()
         {
-            throw new NotImplementedException();
+            return this.HasBlankOrNullCells(this.obsTable);
         }
+
         
     }
 

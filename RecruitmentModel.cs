@@ -18,8 +18,7 @@ namespace Nmfs.Agepro.CoreLib
         public int recruitCategory;
         public abstract void ReadRecruitmentModel(StreamReader sr);
         public abstract List<string> WriteRecruitmentDataModelData();
-        public abstract bool ValidateRecruitmentData(int selectionIndex);
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -46,6 +45,30 @@ namespace Nmfs.Agepro.CoreLib
                     handler(this, new PropertyChangedEventArgs(name));
                 }
             }
+        }
+
+        /// <summary>
+        /// Checks if this DataTable has any cell that may be blank, null, or with only white-space 
+        /// characters.
+        /// </summary>
+        /// <returns>If the function finds an single instance of a blank/null/white-space only cell,
+        /// then it will return true. Otherwise, false.</returns>
+        protected virtual bool HasBlankOrNullCells(System.Data.DataTable table)
+        {
+            bool blankNullsExist = false;
+
+            foreach (System.Data.DataRow dtRow in table.Rows)
+            {
+                foreach (var item in dtRow.ItemArray)
+                {
+                    if (string.IsNullOrWhiteSpace(item.ToString()))
+                    {
+                        blankNullsExist = true;
+                    }
+                }
+            }
+
+            return blankNullsExist;
         }
     }
 }
