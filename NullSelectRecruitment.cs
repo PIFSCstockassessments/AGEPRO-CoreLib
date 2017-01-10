@@ -26,5 +26,10 @@ namespace Nmfs.Agepro.CoreLib
         {
             throw new NotImplementedException();
         }
+
+        public override bool ValidateRecruitmentData(int selectionIndex)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

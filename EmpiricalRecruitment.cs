@@ -166,6 +166,11 @@ namespace Nmfs.Agepro.CoreLib
 
             return obsTableLines;
         }
+
+        public override bool ValidateRecruitmentData(int selectionIndex)
+        {
+            throw new NotImplementedException();
+        }
         
     }
 

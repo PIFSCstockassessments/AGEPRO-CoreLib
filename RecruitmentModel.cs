@@ -18,6 +18,7 @@ namespace Nmfs.Agepro.CoreLib
         public int recruitCategory;
         public abstract void ReadRecruitmentModel(StreamReader sr);
         public abstract List<string> WriteRecruitmentDataModelData();
+        public abstract bool ValidateRecruitmentData(int selectionIndex);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
