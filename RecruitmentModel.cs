@@ -70,5 +70,28 @@ namespace Nmfs.Agepro.CoreLib
 
             return blankNullsExist;
         }
+
+        /// <summary>
+        /// Checks to see if all the cells in the DataTable are siginificant value. Siginificance values
+        /// is defined by the value above the lower bound.  
+        /// </summary>
+        /// <param name="dtable">Data table to compare.</param>
+        /// <param name="lowBound">The lower bound that defines insigfiicance.</param>
+        /// <returns>If the function finds any value that is smaller than the lower bound
+        /// then it returns false.</returns>
+        protected bool TableHasAllSignificantValues(System.Data.DataTable dtable, double lowBound = 0.0001)
+        {
+            foreach (System.Data.DataRow drow in dtable.Rows)
+            {
+                foreach (System.Data.DataColumn dcol in dtable.Columns)
+                {
+                    if (Convert.ToDouble(drow[dcol]) < lowBound)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
