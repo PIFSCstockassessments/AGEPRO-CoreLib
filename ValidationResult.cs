@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AGEPRO.CoreLib
+{
+
+    public interface IValidate
+    {
+        ValidationResult Validate();
+    }
+
+    public class ValidationResult
+    {
+        public bool isValid { get; private set; }
+        public string message { get; private set; }
+
+        public ValidationResult(bool valid, string message)
+        {
+            this.isValid = valid;
+            this.message = message;
+        }
+
+    }
+}
