@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AGEPRO.CoreLib
+namespace Nmfs.Agepro.CoreLib
 {
-
-    public interface IValidate
+    public interface IValidatable
     {
         ValidationResult Validate();
     }
