@@ -62,6 +62,7 @@
     <Compile Include="PStarCalculation.cs" />
     <Compile Include="RebuilderTargetCalculation.cs" />
     <Compile Include="RecruitmentModel.cs" />
+    <Compile Include="ValidatableExtensions.cs" />
     <Compile Include="ValidationResult.cs" />
   </ItemGroup>
   <ItemGroup>
