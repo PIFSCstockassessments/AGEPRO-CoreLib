@@ -167,9 +167,14 @@ namespace Nmfs.Agepro.CoreLib
             return obsTableLines;
         }
 
-        public virtual bool CheckObservationTable()
+        public virtual bool CheckObservationTableMissingValues()
         {
             return this.HasBlankOrNullCells(this.obsTable);
+        }
+
+        public virtual bool CheckObservationTableInsignificantValues()
+        {
+            return this.TableHasAllSignificantValues(this.obsTable);
         }
 
         
@@ -239,6 +244,32 @@ namespace Nmfs.Agepro.CoreLib
 
             return outputLines;
         }
+
+        public override bool CheckObservationTableMissingValues()
+        {
+            if (this.HasBlankOrNullCells(this.lv1Obs) == false)
+            {
+                return false;
+            }
+            if (this.HasBlankOrNullCells(this.lv2Obs) == false)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool CheckObservationTableInsignificantValues()
+        {
+            if (this.TableHasAllSignificantValues(this.lv1Obs) == false)
+            {
+                return false;
+            }
+            if (this.TableHasAllSignificantValues(this.lv2Obs) == false)
+            {
+                return false;
+            }
+            return true;    
+        }
     }
 
     /// <summary>
@@ -275,6 +306,10 @@ namespace Nmfs.Agepro.CoreLib
             return outputLine;
         }
 
+        public override bool CheckObservationTableMissingValues()
+        {
+            return base.CheckObservationTableMissingValues();
+        }
     }
 
     /// <summary>
@@ -287,5 +322,6 @@ namespace Nmfs.Agepro.CoreLib
         {
             this.subType = EmpiricalType.Fixed;
         }
+
     }
 }
