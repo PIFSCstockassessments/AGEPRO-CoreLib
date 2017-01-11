@@ -7,7 +7,7 @@
     <ProjectGuid>{B1BDCCF1-78C4-4C2D-AE11-5C8D336758FC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AGEPRO.CoreLib</RootNamespace>
+    <RootNamespace>Nmfs.Agepro.CoreLib</RootNamespace>
     <AssemblyName>AGEPRO_CoreLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -63,6 +63,9 @@
     <Compile Include="RebuilderTargetCalculation.cs" />
     <Compile Include="RecruitmentModel.cs" />
     <Compile Include="ValidationResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
