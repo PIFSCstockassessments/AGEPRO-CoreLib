@@ -18,7 +18,7 @@ namespace Nmfs.Agepro.CoreLib
         public double intercept { get; set; }
         public DataTable coefficientTable { get; set; }
         public DataTable observationTable { get; set; }
-        public int[] obsYears { get; set; }
+        //public int[] obsYears { get; set; }
         public int maxNumPredictors { get; set; }
 
         public PredictorRecruitment(int modelNum) 

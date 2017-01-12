@@ -16,6 +16,7 @@ namespace Nmfs.Agepro.CoreLib
     {
         public int recruitModelNum;
         public int recruitCategory;
+        public int[] obsYears;
         public abstract void ReadRecruitmentModel(StreamReader sr);
         public abstract List<string> WriteRecruitmentDataModelData();
         
