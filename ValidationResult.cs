@@ -8,7 +8,7 @@ namespace Nmfs.Agepro.CoreLib
 {
     public interface IValidatable
     {
-        ValidationResult Validate();
+        ValidationResult ValidateInput();
     }
 
     public class ValidationResult

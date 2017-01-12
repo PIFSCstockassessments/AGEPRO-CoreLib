@@ -38,7 +38,7 @@ namespace Nmfs.Agepro.CoreLib
         {
             if (input != null)
             {
-                return input.Validate();
+                return input.ValidateInput();
             }
             else
             {
