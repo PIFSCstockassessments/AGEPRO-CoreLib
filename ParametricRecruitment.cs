@@ -85,6 +85,7 @@ namespace Nmfs.Agepro.CoreLib
         private double _beta;
         private double _variance;
         private double? _kParm;
+        private bool isShepherdCurve;
 
         public double alpha 
         {
@@ -110,6 +111,8 @@ namespace Nmfs.Agepro.CoreLib
         public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) 
         {
             this.subtype = ParametricType.Curve;
+            //true if modelNum is 7 or 12
+            this.isShepherdCurve = (this.recruitModelNum == 7 || this.recruitModelNum == 12);
         }
 
         public override void ReadRecruitmentModel(StreamReader sr)
@@ -123,7 +126,7 @@ namespace Nmfs.Agepro.CoreLib
             {
                 //Verify if this Parametric Model should have 3 parameters
                 //Shepherd Curve Models do not have 3 parameters
-                if (IsThisAShepherdCurve())
+                if (this.isShepherdCurve)
                 {
                     throw new InvalidAgeproParameterException("3 Parameter Shepherd Curve Found");
                 }
@@ -136,7 +139,7 @@ namespace Nmfs.Agepro.CoreLib
             {
                 //Verify if this Parametric Model should have 4 parameters
                 //Only Shepherd Models have 4 parameters.
-                if(!IsThisAShepherdCurve()){
+                if(!this.isShepherdCurve){
                     throw new InvalidAgeproParameterException("Beverton-Holt or Ricker Curve with 4 parameters found");
                 }
                 this.alpha = Convert.ToDouble(parametricLine[0]);
@@ -157,16 +160,13 @@ namespace Nmfs.Agepro.CoreLib
             }
         }
 
-        public bool IsThisAShepherdCurve()
-        {
-            return (this.recruitModelNum == 7 || this.recruitModelNum == 12);
-        }
+        
 
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
 
-            if (IsThisAShepherdCurve())
+            if (this.isShepherdCurve)
             {
                 outputLines.Add(this.alpha.ToString().PadRight(12) +
                     this.beta.ToString().PadRight(12) +
