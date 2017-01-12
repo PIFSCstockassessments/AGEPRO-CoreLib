@@ -30,7 +30,7 @@ namespace Nmfs.Agepro.CoreLib
         }   
 
         /// <summary>
-        /// Call to validation function w/ bulit in null check 
+        /// Null check for nullable validatable objects 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
