@@ -111,11 +111,8 @@ namespace Nmfs.Agepro.CoreLib
             {
                 //AddToRecruitList(this.recruitType[i], recruitList);
                 recruitList.Add(GetNewRecruitModel(this.recruitType[i]));
-                //if this Recruit Model is a Predictor Recruitment Type, set the observation years.
-                if (recruitList[i] is PredictorRecruitment)
-                {
-                    ((PredictorRecruitment)recruitList[i]).obsYears = this.observationYears;
-                }
+                //Set the observation years(Even if this Recruit Model is not a Predictor Recruitment Type).
+                this.recruitList[i].obsYears = this.observationYears;
             }
 
             //Check for multiple Markov Matrix Recuitments. (Only one is allowed)
