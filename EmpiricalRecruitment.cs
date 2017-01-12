@@ -19,12 +19,13 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Empirical Recruitment
     /// </summary>
-    public class EmpiricalRecruitment : RecruitmentModel
+    public class EmpiricalRecruitment : RecruitmentModel, IValidatable
     {
         public int numObs { get; set; }
         public DataTable obsTable { get; set; }
         public bool withSSB { get; set; }
         public EmpiricalType subType { get; set; }
+        protected double lowBound { get; set; }
         
         public EmpiricalRecruitment(int modelNum)
         {
@@ -32,6 +33,7 @@ namespace Nmfs.Agepro.CoreLib
             this.recruitCategory = 1;
             this.withSSB = false;
             this.numObs = 0;      //Fallback Default
+            this.lowBound = 0.0001;
         }
 
         public EmpiricalRecruitment(int modelNum, bool useSSB, EmpiricalType subType) : this(modelNum)
@@ -167,17 +169,21 @@ namespace Nmfs.Agepro.CoreLib
             return obsTableLines;
         }
 
-        public virtual bool CheckObservationTableMissingValues()
+        public virtual ValidationResult ValidateInput()
         {
-            return this.HasBlankOrNullCells(this.obsTable);
-        }
+            if (this.HasBlankOrNullCells(this.obsTable) == false)
+            {
+                return new ValidationResult(false, "Missing Data in observation table");
+            }
+            if (this.TableHasAllSignificantValues(this.obsTable, this.lowBound) == false)
+            {
+                return new ValidationResult(false, "Insignificant values or values lower than " 
+                    + this.lowBound + " found in observation table");
+            }
 
-        public virtual bool CheckObservationTableInsignificantValues()
-        {
-            return this.TableHasAllSignificantValues(this.obsTable);
-        }
+            return new ValidationResult(true, "Validation Successful");
 
-        
+        }
     }
 
     /// <summary>
@@ -198,12 +204,13 @@ namespace Nmfs.Agepro.CoreLib
             this.recruitCategory = 1;
             this.withSSB = true; //TODO: Should this be default?
             this.subType = EmpiricalType.TwoStage;
+            this.lowBound = 0.0001;
 
             //Fallback Defaults
             this.lv1NumObs = 0;
             this.lv2NumObs = 0;
             this.SSBBreakVal = 0;
-
+            
         }
 
         public TwoStageEmpiricalRecruitment(int modelNum, bool useSSB)
@@ -245,30 +252,30 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
-        public override bool CheckObservationTableMissingValues()
+        public override ValidationResult ValidateInput()
         {
+
             if (this.HasBlankOrNullCells(this.lv1Obs) == false)
             {
-                return false;
+                return new ValidationResult(false, "Missing Data in Level 1 observation table");
             }
             if (this.HasBlankOrNullCells(this.lv2Obs) == false)
             {
-                return false;
+                return new ValidationResult(false, "Missing Data in Level 2 observation table");
             }
-            return true;
-        }
 
-        public override bool CheckObservationTableInsignificantValues()
-        {
-            if (this.TableHasAllSignificantValues(this.lv1Obs) == false)
+            if (this.TableHasAllSignificantValues(this.lv1Obs, this.lowBound) == false)
             {
-                return false;
+                return new ValidationResult(false, "Insignificant values or values lower than "
+                    + this.lowBound + " found in Level 1 observation table");
             }
-            if (this.TableHasAllSignificantValues(this.lv2Obs) == false)
+            if (this.TableHasAllSignificantValues(this.lv2Obs, this.lowBound) == false)
             {
-                return false;
+                return new ValidationResult(false, "Insignificant values or values lower than "
+                    + this.lowBound + " found in Level 2 observation table");
             }
-            return true;    
+
+            return new ValidationResult(true, "Validation Successful");
         }
     }
 
@@ -306,9 +313,16 @@ namespace Nmfs.Agepro.CoreLib
             return outputLine;
         }
 
-        public override bool CheckObservationTableMissingValues()
+        public override ValidationResult ValidateInput()
         {
-            return base.CheckObservationTableMissingValues();
+            //SSB Hinge
+            if (this.SSBHinge < 0.001)
+            {
+                return new ValidationResult(false,
+                    "SSB Hinge Value is less than lower limit of 0.001");
+            }
+            
+            return base.ValidateInput();
         }
     }
 
@@ -321,6 +335,14 @@ namespace Nmfs.Agepro.CoreLib
             : base(modelNum)
         {
             this.subType = EmpiricalType.Fixed;
+        }
+
+        public override ValidationResult ValidateInput()
+        {
+            //TODO: Have FixedEmpiricalRecruitment check that number of row match 
+            //number of years minus year one
+
+            return base.ValidateInput();
         }
 
     }
