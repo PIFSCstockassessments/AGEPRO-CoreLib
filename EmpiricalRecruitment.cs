@@ -169,7 +169,7 @@ namespace Nmfs.Agepro.CoreLib
             return obsTableLines;
         }
 
-        public virtual ValidationResult ValidateInput()
+        public override ValidationResult ValidateInput()
         {
             if (this.HasBlankOrNullCells(this.obsTable) == false)
             {

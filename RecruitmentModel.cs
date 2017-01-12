@@ -12,7 +12,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Generalized, abstract representation of various AGEPRO Recruitment Models
     /// </summary>
-    abstract public class RecruitmentModel : INotifyPropertyChanged
+    abstract public class RecruitmentModel : INotifyPropertyChanged, IValidatable
     {
         public int recruitModelNum;
         public int recruitCategory;
@@ -92,6 +92,11 @@ namespace Nmfs.Agepro.CoreLib
                 }
             }
             return true;
+        }
+
+        public virtual ValidationResult ValidateInput()
+        {
+            throw new NotImplementedException();
         }
     }
 }
