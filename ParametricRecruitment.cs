@@ -74,7 +74,7 @@ namespace Nmfs.Agepro.CoreLib
             this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
         }
 
-        protected List<string> ValidateParametricParmeter(double param, string paramName, 
+        protected List<string> ValidateParametricParameter(double param, string paramName, 
             double significantBound = 0.000000001)
         {
             var msgList = new List<string>();
@@ -92,6 +92,7 @@ namespace Nmfs.Agepro.CoreLib
             }
             return msgList;
         }
+
       
     }
 
@@ -213,19 +214,19 @@ namespace Nmfs.Agepro.CoreLib
             
             if (this.isShepherdCurve)
             {
-                msgList.AddRange(ValidateParametricParmeter(this.kParm.Value, "KParm"));
+                msgList.AddRange(ValidateParametricParameter(this.kParm.Value, "KParm"));
             }
             else
             {
-                msgList.AddRange(ValidateParametricParmeter(this.alpha, "Alpha"));
-                msgList.AddRange(ValidateParametricParmeter(this.beta, "Beta"));
-                msgList.AddRange(ValidateParametricParmeter(this.variance, "Variance"));
+                msgList.AddRange(ValidateParametricParameter(this.alpha, "Alpha"));
+                msgList.AddRange(ValidateParametricParameter(this.beta, "Beta"));
+                msgList.AddRange(ValidateParametricParameter(this.variance, "Variance"));
             }
 
             if (this.autocorrelated)
             {
-                msgList.AddRange(ValidateParametricParmeter(this.phi.Value, "Phi"));
-                msgList.AddRange(ValidateParametricParmeter(this.lastResidual.Value, 
+                msgList.AddRange(ValidateParametricParameter(this.phi.Value, "Phi"));
+                msgList.AddRange(ValidateParametricParameter(this.lastResidual.Value, 
                     "Last Residual"));
             }
             var results = msgList.EnumerateValidationResults();
@@ -288,13 +289,13 @@ namespace Nmfs.Agepro.CoreLib
         {
             List<string> msgList = new List<string>();
 
-            msgList.AddRange(ValidateParametricParmeter(this.mean, "Mean"));
-            msgList.AddRange(ValidateParametricParmeter(this.stdDev, "Std. Deviaition"));
+            msgList.AddRange(ValidateParametricParameter(this.mean, "Mean"));
+            msgList.AddRange(ValidateParametricParameter(this.stdDev, "Std. Deviaition"));
 
             if (this.autocorrelated)
             {
-                msgList.AddRange(ValidateParametricParmeter(this.phi.Value, "Phi"));
-                msgList.AddRange(ValidateParametricParmeter(this.lastResidual.Value,
+                msgList.AddRange(ValidateParametricParameter(this.phi.Value, "Phi"));
+                msgList.AddRange(ValidateParametricParameter(this.lastResidual.Value,
                     "Last Residual"));
             }
             var results = msgList.EnumerateValidationResults();
