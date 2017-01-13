@@ -121,5 +121,28 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        public override ValidationResult ValidateInput()
+        {
+            List<string> errorMsgList = new List<string>();
+            //Make Sure Number of Recruitment Predictors is not zero
+            if (this.numRecruitPredictors == 0)
+            {
+                errorMsgList.Add("Zero number of recruitment predictors.");
+            }
+
+            if (this.HasBlankOrNullCells(this.coefficientTable))
+            {
+                errorMsgList.Add("Coefficient table has missing or null data.");
+            }
+
+            if (this.HasBlankOrNullCells(this.observationTable))
+            {
+                errorMsgList.Add("Observation table has missing or null data.");
+            }
+
+            var results = errorMsgList.EnumerateValidationResults();
+
+            return results;
+        }
     }
 }
