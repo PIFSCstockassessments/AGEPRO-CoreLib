@@ -171,7 +171,7 @@ namespace Nmfs.Agepro.CoreLib
 
         public override ValidationResult ValidateInput()
         {
-            if (this.HasBlankOrNullCells(this.obsTable) == false)
+            if (this.HasBlankOrNullCells(this.obsTable))
             {
                 return new ValidationResult(false, "Missing Data in observation table");
             }
@@ -255,11 +255,11 @@ namespace Nmfs.Agepro.CoreLib
         public override ValidationResult ValidateInput()
         {
 
-            if (this.HasBlankOrNullCells(this.lv1Obs) == false)
+            if (this.HasBlankOrNullCells(this.lv1Obs))
             {
                 return new ValidationResult(false, "Missing Data in Level 1 observation table");
             }
-            if (this.HasBlankOrNullCells(this.lv2Obs) == false)
+            if (this.HasBlankOrNullCells(this.lv2Obs))
             {
                 return new ValidationResult(false, "Missing Data in Level 2 observation table");
             }
