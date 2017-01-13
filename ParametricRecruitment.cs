@@ -73,6 +73,25 @@ namespace Nmfs.Agepro.CoreLib
             this.phi = Convert.ToDouble(autoCorrLine[0]);
             this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
         }
+
+        protected List<string> ValidateParametricParmeter(double param, string paramName, 
+            double significantBound = 0.000000001)
+        {
+            var msgList = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(param.ToString()))
+            {
+                msgList.Add("Missing or empty " + paramName + " value.");
+            }
+            else
+            {
+                if (Math.Abs(param) < significantBound)
+                {
+                    msgList.Add(paramName + " value is zero or less significant than " + significantBound + ".");
+                }
+            }
+            return msgList;
+        }
       
     }
 
@@ -85,7 +104,7 @@ namespace Nmfs.Agepro.CoreLib
         private double _beta;
         private double _variance;
         private double? _kParm;
-        private bool isShepherdCurve;
+        public bool isShepherdCurve;
 
         public double alpha 
         {
@@ -111,7 +130,6 @@ namespace Nmfs.Agepro.CoreLib
         public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) 
         {
             this.subtype = ParametricType.Curve;
-            //true if modelNum is 7 or 12
             this.isShepherdCurve = (this.recruitModelNum == 7 || this.recruitModelNum == 12);
         }
 
@@ -187,6 +205,33 @@ namespace Nmfs.Agepro.CoreLib
 
             return outputLines;
         }
+
+
+        public override ValidationResult ValidateInput()
+        {
+            var msgList = new List<string>();
+            
+            if (this.isShepherdCurve)
+            {
+                msgList.AddRange(ValidateParametricParmeter(this.kParm.Value, "KParm"));
+            }
+            else
+            {
+                msgList.AddRange(ValidateParametricParmeter(this.alpha, "Alpha"));
+                msgList.AddRange(ValidateParametricParmeter(this.beta, "Beta"));
+                msgList.AddRange(ValidateParametricParmeter(this.variance, "Variance"));
+            }
+
+            if (this.autocorrelated)
+            {
+                msgList.AddRange(ValidateParametricParmeter(this.phi.Value, "Phi"));
+                msgList.AddRange(ValidateParametricParmeter(this.lastResidual.Value, 
+                    "Last Residual"));
+            }
+            var results = msgList.EnumerateValidationResults();
+
+            return results;
+        }
     }
 
     /// <summary>
@@ -237,6 +282,22 @@ namespace Nmfs.Agepro.CoreLib
                 outputLines.Add(this.phi.ToString().PadRight(12) + this.lastResidual.ToString().PadRight(12));
             }
             return outputLines;
+        }
+
+        public override ValidationResult ValidateInput()
+        {
+            List<string> msgList = new List<string>();
+
+            msgList.AddRange(ValidateParametricParmeter(this.mean, "Mean"));
+            msgList.AddRange(ValidateParametricParmeter(this.stdDev, "Std. Deviaition"));
+
+            if (this.autocorrelated)
+            {
+                msgList.AddRange(ValidateParametricParmeter(this.phi.Value, "Phi"));
+                msgList.AddRange(ValidateParametricParmeter(this.lastResidual.Value,
+                    "Last Residual"));
+            }
+            return base.ValidateInput();
         }
     }
 }
