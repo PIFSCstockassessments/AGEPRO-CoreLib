@@ -42,7 +42,7 @@ namespace Nmfs.Agepro.CoreLib
             }
             else
             {
-                return new ValidationResult(false, "Null or Missing input");
+                return new ValidationResult(false, "Null or Missing input.");
             }
 
         }
@@ -56,7 +56,7 @@ namespace Nmfs.Agepro.CoreLib
         {
             if (input == null)
             {
-                return new ValidationResult(false, "Null or Missing input");
+                return new ValidationResult(false, "Null or Missing input.");
             }
 
             //Enumerate the Errors
