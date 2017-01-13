@@ -297,7 +297,9 @@ namespace Nmfs.Agepro.CoreLib
                 msgList.AddRange(ValidateParametricParmeter(this.lastResidual.Value,
                     "Last Residual"));
             }
-            return base.ValidateInput();
+            var results = msgList.EnumerateValidationResults();
+
+            return results;
         }
     }
 }
