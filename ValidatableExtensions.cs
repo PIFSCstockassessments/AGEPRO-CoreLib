@@ -69,7 +69,7 @@ namespace Nmfs.Agepro.CoreLib
             }
             else
             {
-                message = string.Join(" ", errors);
+                message = string.Join(Environment.NewLine, errors);
             }
 
             return new ValidationResult(success, message);
