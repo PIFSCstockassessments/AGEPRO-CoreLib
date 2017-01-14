@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.IO;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Nmfs.Agepro.CoreLib
 {
@@ -13,9 +15,25 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     public class PredictorRecruitment : RecruitmentModel
     {
-        public int numRecruitPredictors { get; set; }
-        public double variance { get; set; }
-        public double intercept { get; set; }
+        private int _numRecruitPredictors;
+        private double _variance;
+        private double _intercept;
+        
+        public int numRecruitPredictors
+        { 
+            get { return _numRecruitPredictors; }
+            set { SetProperty(ref _numRecruitPredictors, value); }
+        }
+        public double variance
+        { 
+            get { return _variance; }
+            set { SetProperty(ref _variance, value); }
+        }
+        public double intercept 
+        {
+            get { return _intercept; }
+            set { SetProperty(ref _intercept, value); }
+        }
         public DataTable coefficientTable { get; set; }
         public DataTable observationTable { get; set; }
         //public int[] obsYears { get; set; }
