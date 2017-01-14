@@ -93,6 +93,23 @@ namespace Nmfs.Agepro.CoreLib
             return msgList;
         }
 
+
+        protected List<string> ValidateParametricParameter(double? param, string paramName,
+            double significantBound = 0.000000001)
+        {
+            var msgList = new List<string>();
+
+            if (param != null)
+            {
+                msgList.AddRange(ValidateParametricParameter(param.Value, paramName, significantBound));
+            }
+            else
+            {
+                msgList.Add("Missing " + paramName + " value.");
+            }
+
+            return msgList;
+        }
       
     }
 
@@ -212,21 +229,19 @@ namespace Nmfs.Agepro.CoreLib
         {
             var msgList = new List<string>();
             
+            msgList.AddRange(ValidateParametricParameter(this.alpha, "Alpha"));
+            msgList.AddRange(ValidateParametricParameter(this.beta, "Beta"));
+            msgList.AddRange(ValidateParametricParameter(this.variance, "Variance"));
+
             if (this.isShepherdCurve)
             {
-                msgList.AddRange(ValidateParametricParameter(this.kParm.Value, "KParm"));
+                msgList.AddRange(ValidateParametricParameter(this.kParm, "KParm"));
             }
-            else
-            {
-                msgList.AddRange(ValidateParametricParameter(this.alpha, "Alpha"));
-                msgList.AddRange(ValidateParametricParameter(this.beta, "Beta"));
-                msgList.AddRange(ValidateParametricParameter(this.variance, "Variance"));
-            }
-
+           
             if (this.autocorrelated)
             {
-                msgList.AddRange(ValidateParametricParameter(this.phi.Value, "Phi"));
-                msgList.AddRange(ValidateParametricParameter(this.lastResidual.Value, 
+                msgList.AddRange(ValidateParametricParameter(this.phi, "Phi"));
+                msgList.AddRange(ValidateParametricParameter(this.lastResidual, 
                     "Last Residual"));
             }
             var results = msgList.EnumerateValidationResults();
