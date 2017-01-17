@@ -46,11 +46,19 @@ namespace Nmfs.Agepro.CoreLib
         {
             this.recruitModelNum = modelNum;
             this.recruitCategory = 2;
-            this.autocorrelated = false;  
+            this.autocorrelated = false;
+
         }
         public ParametricRecruitment(int modelNum, bool isAutocorrelated) : this(modelNum)
         {
             this.autocorrelated = isAutocorrelated;
+
+            if (this.autocorrelated)
+            {
+                //If enabled, these values will be set to '0' (instead of null)
+                this.lastResidual = lastResidual.GetValueOrDefault();
+                this.phi = phi.GetValueOrDefault();
+            }
         }
 
 
@@ -149,6 +157,13 @@ namespace Nmfs.Agepro.CoreLib
         {
             this.subtype = ParametricType.Curve;
             this.isShepherdCurve = (this.recruitModelNum == 7 || this.recruitModelNum == 12);
+            
+            if (this.isShepherdCurve)
+            {
+                //If enabled, K-parm will be set to '0' (instead of null)
+                this.kParm = kParm.GetValueOrDefault(); 
+            }
+            
         }
 
         public override void ReadRecruitmentModel(StreamReader sr)
