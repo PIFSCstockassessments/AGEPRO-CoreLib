@@ -58,6 +58,12 @@ namespace Nmfs.Agepro.CoreLib
         {
             bool blankNullsExist = false;
 
+            //Return true if there is no table, or 0 row or columns.
+            if (table == null)
+            {
+                return blankNullsExist = true;
+            }
+
             foreach (System.Data.DataRow dtRow in table.Rows)
             {
                 foreach (var item in dtRow.ItemArray)
