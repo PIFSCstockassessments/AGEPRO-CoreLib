@@ -169,5 +169,48 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        private bool ValidMarkovParameter(int markovParam)
+        {
+            List<string> errorMsgList = new List<string>();
+            if (markovParam == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        public override ValidationResult ValidateInput()
+        {
+            List<string> errorMsgList = new List<string>();
+            if (this.ValidMarkovParameter(this.numRecruitLevels) == false)
+            {
+                errorMsgList.Add("Zero or missing number of recruitment levels found.");
+                errorMsgList.Add("Recruitment table has 0 rows, "+
+                    "Probability table has 0 columns.");
+            }
+            if (this.ValidMarkovParameter(this.numSSBLevels) == false)
+            {
+                errorMsgList.Add("Zero or missing number of SSB levels found.");
+                errorMsgList.Add("SSB table has 0 rows, Probability table has 0 rows.");
+            }
+
+            if (this.HasBlankOrNullCells(this.markovRecruitment.Tables["Recruitment"]))
+            {
+                errorMsgList.Add("Missing data in recruitment table.");
+            }
+            if (this.HasBlankOrNullCells(this.markovRecruitment.Tables["SSB"]))
+            {
+                errorMsgList.Add("Missing data in SSB Cut Points Table.");
+            }
+            if (this.HasBlankOrNullCells(this.markovRecruitment.Tables["Probability"]))
+            {
+                errorMsgList.Add("Missing data in Probability table.");
+            }
+
+            var results = errorMsgList.EnumerateValidationResults();
+            return results;
+        }
+
     }
 }
