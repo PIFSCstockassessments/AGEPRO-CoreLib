@@ -148,15 +148,35 @@ namespace Nmfs.Agepro.CoreLib
                 errorMsgList.Add("Zero number of recruitment predictors.");
             }
 
-            if (this.HasBlankOrNullCells(this.coefficientTable))
+            if (this.coefficientTable.Rows.Count == 0)
             {
-                errorMsgList.Add("Coefficient table has missing or null data.");
+                errorMsgList.Add("Coefficient Table has 0 rows.");
+            }
+            else
+            {
+                if (this.HasBlankOrNullCells(this.coefficientTable))
+                {
+                    errorMsgList.Add("Coefficient table has missing or null data.");
+                }
             }
 
-            if (this.HasBlankOrNullCells(this.observationTable))
+            if (this.observationTable.Columns.Count == 0)
             {
-                errorMsgList.Add("Observation table has missing or null data.");
+                errorMsgList.Add("Missing year projection time series. Observation Table has 0 Columns.");
             }
+            if (this.observationTable.Rows.Count == 0)
+            {
+                errorMsgList.Add("Observation Table has 0 rows.");
+            }
+            else
+            {
+                if (this.HasBlankOrNullCells(this.observationTable))
+                {
+                    errorMsgList.Add("Observation table has missing or null data.");
+                }
+            }
+
+
 
             var results = errorMsgList.EnumerateValidationResults();
 
