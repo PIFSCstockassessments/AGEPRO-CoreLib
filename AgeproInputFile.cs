@@ -93,7 +93,7 @@ namespace Nmfs.Agepro.CoreLib
                     throw new InvalidAgeproParameterException("This file format version is incompatible.");
                 }
                 else
-                {
+                { 
                     throw new InvalidAgeproParameterException("Invaild AGEPRO input file.");
                 }
             }
