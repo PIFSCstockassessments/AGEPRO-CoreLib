@@ -83,7 +83,19 @@ namespace Nmfs.Agepro.CoreLib
             }
             else
             {
-                //TODO: Throw Error/Warning for incompatiability
+                //Throw Error/Warning for incompatiability
+                if (line.Equals("AGEPRO VERSION 3.2"))
+                {
+                    throw new InvalidAgeproParameterException("This file format version is incompatible.");
+                }
+                else if (line.Equals("AGEPRO VERSION 3.3"))
+                {
+                    throw new InvalidAgeproParameterException("This file format version is incompatible.");
+                }
+                else
+                {
+                    throw new InvalidAgeproParameterException("Invaild AGEPRO input file.");
+                }
             }
 
             while(!sr.EndOfStream)
