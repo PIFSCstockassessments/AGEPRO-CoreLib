@@ -21,12 +21,19 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     public class EmpiricalRecruitment : RecruitmentModel, IValidatable
     {
-        public int numObs { get; set; }
+        private int _numObs;
+
         public DataTable obsTable { get; set; }
         public bool withSSB { get; set; }
         public EmpiricalType subType { get; set; }
         protected double lowBound { get; set; }
-        
+
+        public int numObs 
+        {
+            get { return _numObs; }
+            set { SetProperty(ref _numObs, value); }
+        }
+
         public EmpiricalRecruitment(int modelNum)
         {
             this.recruitModelNum = modelNum;
@@ -191,12 +198,29 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     public class TwoStageEmpiricalRecruitment : EmpiricalRecruitment
     {
-        public int lv1NumObs { get; set; }
-        public int lv2NumObs { get; set; }
-        public int SSBBreakVal { get; set; }
+        private int _lv1NumObs;
+        private int _lv2NumObs;
+        private int _SSBBreakVal;
+
         public DataTable lv1Obs { get; set; }
         public DataTable lv2Obs { get; set; }
-
+        
+        public int lv1NumObs 
+        {
+            get { return _lv1NumObs; }
+            set { SetProperty(ref _lv1NumObs, value); }
+        }
+        public int lv2NumObs 
+        {
+            get { return _lv2NumObs; }
+            set { SetProperty(ref _lv2NumObs, value); }
+        }
+        public int SSBBreakVal 
+        {
+            get { return _SSBBreakVal; }
+            set { SetProperty(ref _SSBBreakVal, value); }
+        }
+        
         public TwoStageEmpiricalRecruitment(int modelNum)
             : base(modelNum)
         {
@@ -284,7 +308,13 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     public class EmpiricalCDFZero : EmpiricalRecruitment
     {
-        public double? SSBHinge { get; set; }
+        private double? _SSBHinge;
+
+        public double? SSBHinge 
+        {
+            get { return _SSBHinge; }
+            set { SetProperty(ref _SSBHinge, value); }
+        }
 
         public EmpiricalCDFZero(int modelNum) : base(modelNum) 
         {
