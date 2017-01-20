@@ -276,30 +276,44 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        private List<string> CheckTwoStageObsTable(DataTable twoStageObsTable, string tableName)
+        {
+            List<string> errorMsgList = new List<string>();
+
+            if (twoStageObsTable.Rows.Count <= 0)
+            {
+                errorMsgList.Add(tableName + " table has 0 rows");
+            }
+
+            if (this.HasBlankOrNullCells(twoStageObsTable))
+            {
+                errorMsgList.Add("Missing Data in "+ tableName +" table");
+            }            
+            else
+            {
+                if (this.TableHasAllSignificantValues(twoStageObsTable, this.lowBound) == false)
+                {
+                    errorMsgList.Add("Insignificant values or values lower than "
+                        + this.lowBound + " found in " + tableName + " table");
+                }
+            }
+
+            return errorMsgList;
+        }
+
         public override ValidationResult ValidateInput()
         {
+            List<string> errorMsgList = new List<string>();
 
-            if (this.HasBlankOrNullCells(this.lv1Obs))
+            errorMsgList.AddRange(CheckTwoStageObsTable(this.lv1Obs, "Level 1 Observation"));
+            errorMsgList.AddRange(CheckTwoStageObsTable(this.lv2Obs, "Level 2 Observation"));
+            if (string.IsNullOrWhiteSpace(this.SSBBreakVal.ToString()))
             {
-                return new ValidationResult(false, "Missing Data in Level 1 observation table");
-            }
-            if (this.HasBlankOrNullCells(this.lv2Obs))
-            {
-                return new ValidationResult(false, "Missing Data in Level 2 observation table");
-            }
-
-            if (this.TableHasAllSignificantValues(this.lv1Obs, this.lowBound) == false)
-            {
-                return new ValidationResult(false, "Insignificant values or values lower than "
-                    + this.lowBound + " found in Level 1 observation table");
-            }
-            if (this.TableHasAllSignificantValues(this.lv2Obs, this.lowBound) == false)
-            {
-                return new ValidationResult(false, "Insignificant values or values lower than "
-                    + this.lowBound + " found in Level 2 observation table");
+                errorMsgList.Add("Missing SSB Break Value.");
             }
 
-            return new ValidationResult(true, "Validation Successful");
+            var results = errorMsgList.EnumerateValidationResults();
+            return results;
         }
     }
 
@@ -346,11 +360,20 @@ namespace Nmfs.Agepro.CoreLib
         public override ValidationResult ValidateInput()
         {
             //SSB Hinge
-            if (this.SSBHinge < 0.001)
+            if (string.IsNullOrWhiteSpace(this.SSBHinge.ToString()))
             {
-                return new ValidationResult(false,
-                    "SSB Hinge Value is less than lower limit of 0.001");
+                return new ValidationResult(false, "Missing SSB Hinge Value");
             }
+            else
+            {
+                if (this.SSBHinge < 0.001)
+                {
+                    return new ValidationResult(false,
+                        "SSB Hinge Value is less than lower limit of 0.001");
+                }
+            }
+           
+            
             
             return base.ValidateInput();
         }
