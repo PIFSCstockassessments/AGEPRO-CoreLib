@@ -393,7 +393,7 @@ namespace Nmfs.Agepro.CoreLib
         public override ValidationResult ValidateInput()
         {
             //Check that number of rows match umber of years minus year one
-            if (this.obsTable.Rows.Count == (this.obsYears.Count() - 1))
+            if (this.obsTable.Rows.Count != (this.obsYears.Count() - 1))
             {
                 return new ValidationResult(false, 
                     "Number of recruitment rows does not equal to the number of years minus year one.");
