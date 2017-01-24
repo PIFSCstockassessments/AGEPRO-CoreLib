@@ -176,8 +176,6 @@ namespace Nmfs.Agepro.CoreLib
                 }
             }
 
-
-
             var results = errorMsgList.EnumerateValidationResults();
 
             return results;
