@@ -16,6 +16,7 @@ namespace Nmfs.Agepro.CoreLib
     abstract public class HarvestCalculation : INotifyPropertyChanged, IValidatable
     {
         public HarvestScenarioAnalysis calculationType;
+        public int[] obsYears;
         public abstract void ReadCalculationDataLines(StreamReader sr);
         public abstract List<string> WriteCalculationDataLines();
 
