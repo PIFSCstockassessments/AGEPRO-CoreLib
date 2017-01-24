@@ -14,7 +14,7 @@ namespace Nmfs.Agepro.CoreLib
         private int _targetYear;
         private double _targetValue;
         private int _targetType;        //rebuild target type (cboRebuild.SelectedIndex)
-        private double _targetPercent;  //Percent Confidence
+        private double _targetPercent;  //Percent Confidence (Rebulider Confidence Level)
 
         public int targetYear
         {
@@ -72,6 +72,23 @@ namespace Nmfs.Agepro.CoreLib
                 this.targetPercent);
 
             return outputLines;
+        }
+
+        public override ValidationResult ValidateInput()
+        {
+            List<string> errorMsgList = new List<string>();
+            //Rebulider Year
+            //if (this.targetYear < generalOptions.projYearStart || this.targetYear > generalOptions.projYearEnd)
+            //{
+            //    errorMsgList.Add("Invalid Rebuilder Year Specification.");
+            //}
+            //Rebuilder Target
+            
+            //Rebuilder Confidence Level
+
+            //
+
+            return base.ValidateInput();
         }
     }
 }

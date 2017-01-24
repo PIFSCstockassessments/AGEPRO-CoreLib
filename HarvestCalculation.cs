@@ -13,7 +13,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Generalized, abstract represetion for (Non-Standard) Harvest Scenario Calculations
     /// </summary>
-    abstract public class HarvestCalculation : INotifyPropertyChanged
+    abstract public class HarvestCalculation : INotifyPropertyChanged, IValidatable
     {
         public HarvestScenarioAnalysis calculationType;
         public abstract void ReadCalculationDataLines(StreamReader sr);
@@ -42,6 +42,11 @@ namespace Nmfs.Agepro.CoreLib
                     handler(this, new PropertyChangedEventArgs(name));
                 }
             }
+        }
+
+        public virtual ValidationResult ValidateInput()
+        {
+            throw new NotImplementedException();
         }
     }
 }
