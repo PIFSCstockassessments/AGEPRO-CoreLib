@@ -77,18 +77,28 @@ namespace Nmfs.Agepro.CoreLib
         public override ValidationResult ValidateInput()
         {
             List<string> errorMsgList = new List<string>();
-            //Rebulider Year
-            //if (this.targetYear < generalOptions.projYearStart || this.targetYear > generalOptions.projYearEnd)
-            //{
-            //    errorMsgList.Add("Invalid Rebuilder Year Specification.");
-            //}
-            //Rebuilder Target
-            
-            //Rebuilder Confidence Level
+            int yrStart = obsYears[0];
+            int yrEnd = obsYears[(obsYears.Count()-1)];
 
+            //Rebulider Year
+            if (this.targetYear < yrStart || this.targetYear > yrEnd)
+            {
+                errorMsgList.Add("Invalid Rebuilder Year Specification.");
+            }
+            //Rebuilder Target
+            if (string.IsNullOrWhiteSpace(this.targetValue.ToString()))
+            {
+                errorMsgList.Add("Invalid or missing rebuilder target value.");
+            }
+            //Rebuilder Confidence Level
+            if (string.IsNullOrWhiteSpace(this.targetPercent.ToString()))
+            {
+                errorMsgList.Add("Invalid or missing rebuilder confidence level.");
+            }
             //
 
-            return base.ValidateInput();
+            var results = errorMsgList.EnumerateValidationResults();
+            return results;
         }
     }
 }

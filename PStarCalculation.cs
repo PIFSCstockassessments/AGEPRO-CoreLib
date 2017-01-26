@@ -109,5 +109,49 @@ namespace Nmfs.Agepro.CoreLib
             outputLines.Add(this.targetYear.ToString());
             return outputLines;
         }
+
+
+        public override ValidationResult ValidateInput()
+        {
+            List<string> errorMsgList = new List<string>();
+            int yrStart = obsYears[0];
+            int yrEnd = obsYears[(obsYears.Count() - 1)];
+            //Target Year
+            if (this.targetYear < yrStart || this.targetYear > yrEnd)
+            {
+                errorMsgList.Add("Invalid P-Star Year Specification.");
+            }
+            //
+            if (string.IsNullOrWhiteSpace(this.pStarLevels.ToString()))
+            {
+                errorMsgList.Add("Invalid or missing number of P-Star Levels.");
+            }
+            if (string.IsNullOrWhiteSpace(this.pStarF.ToString()))
+            {
+                errorMsgList.Add("Invalid or missing overfishing value.");
+            }
+
+            double xPstar = 0.0;
+            double currentPstar;
+            foreach (DataRow pstarLvl in this.pStarTable.Rows)
+            {
+                foreach (var item in pstarLvl.ItemArray)
+                {
+                    currentPstar = Convert.ToDouble(item);
+                    if (xPstar > currentPstar)
+                    {
+                        errorMsgList.Add("P-Star Levels must be in ascending order.");
+                        break;
+                    }
+                    else
+                    {
+                        xPstar = currentPstar;
+                    }
+                }
+            }
+
+            var results = errorMsgList.EnumerateValidationResults();
+            return results;
+        }
     }
 }
