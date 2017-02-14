@@ -129,9 +129,7 @@ namespace Nmfs.Agepro.CoreLib
         private double _alpha;
         private double _beta;
         private double _variance;
-        private double? _kParm;
-        public bool isShepherdCurve;
-
+        
         public double alpha 
         {
             get { return _alpha; }
@@ -147,23 +145,10 @@ namespace Nmfs.Agepro.CoreLib
             get { return _variance; }
             set { SetProperty(ref _variance, value); }
         }
-        public double? kParm 
-        {
-            get { return _kParm; }
-            set { SetProperty(ref _kParm, value); }
-        }
 
         public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated) 
         {
             this.subtype = ParametricType.Curve;
-            this.isShepherdCurve = (this.recruitModelNum == 7 || this.recruitModelNum == 12);
-            
-            if (this.isShepherdCurve)
-            {
-                //If enabled, K-parm will be set to '0' (instead of null)
-                this.kParm = kParm.GetValueOrDefault(); 
-            }
-            
         }
 
         public override void ReadRecruitmentModel(StreamReader sr)
@@ -172,37 +157,19 @@ namespace Nmfs.Agepro.CoreLib
             line = sr.ReadLine();
             string[] parametricLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-
+            //Verify if this Parametric Model has 3 parameters
+            //Shepherd Curve Models do not have 3 parameters
             if (parametricLine.Length == 3)
             {
-                //Verify if this Parametric Model should have 3 parameters
-                //Shepherd Curve Models do not have 3 parameters
-                if (this.isShepherdCurve)
-                {
-                    throw new InvalidAgeproParameterException("3 Parameter Shepherd Curve Found");
-                }
                 this.alpha = Convert.ToDouble(parametricLine[0]);
                 this.beta = Convert.ToDouble(parametricLine[1]);
                 this.variance = Convert.ToDouble(parametricLine[2]);
-                this.kParm = null; //TODO:Leave null value?
-            }
-            else if (parametricLine.Length == 4)
-            {
-                //Verify if this Parametric Model should have 4 parameters
-                //Only Shepherd Models have 4 parameters.
-                if(!this.isShepherdCurve){
-                    throw new InvalidAgeproParameterException("Beverton-Holt or Ricker Curve with 4 parameters found");
-                }
-                this.alpha = Convert.ToDouble(parametricLine[0]);
-                this.beta = Convert.ToDouble(parametricLine[1]);
-                this.kParm = Convert.ToDouble(parametricLine[2]);
-                this.variance = Convert.ToDouble(parametricLine[3]);
             }
             else
             {
                 //Throw error
-                throw new System.ArgumentOutOfRangeException("Number of Parmetric parameters", parametricLine.Length, 
-                    "Parmetric Curve must have 3 or 4 parameters.");
+                throw new InvalidAgeproParameterException("Number of parametric curve parameters must be 3." +
+                    Environment.NewLine + "Number of parameters found: " + parametricLine.Length + ".");
             }
 
             if (this.autocorrelated)
@@ -217,19 +184,9 @@ namespace Nmfs.Agepro.CoreLib
         {
             List<string> outputLines = new List<string>();
 
-            if (this.isShepherdCurve)
-            {
-                outputLines.Add(this.alpha.ToString().PadRight(12) +
-                    this.beta.ToString().PadRight(12) +
-                    this.kParm.ToString().PadRight(12) +
-                    this.variance.ToString().PadRight(12));
-            }
-            else
-            {
-                outputLines.Add(this.alpha.ToString().PadRight(12) +
-                    this.beta.ToString().PadRight(12) + 
-                    this.variance.ToString().PadRight(12));
-            }
+            outputLines.Add(this.alpha.ToString().PadRight(12) +
+                this.beta.ToString().PadRight(12) + 
+                this.variance.ToString().PadRight(12));
 
             if (this.autocorrelated)
             {
@@ -247,11 +204,6 @@ namespace Nmfs.Agepro.CoreLib
             msgList.AddRange(ValidateParametricParameter(this.alpha, "Alpha"));
             msgList.AddRange(ValidateParametricParameter(this.beta, "Beta"));
             msgList.AddRange(ValidateParametricParameter(this.variance, "Variance"));
-
-            if (this.isShepherdCurve)
-            {
-                msgList.AddRange(ValidateParametricParameter(this.kParm, "KParm"));
-            }
            
             if (this.autocorrelated)
             {
@@ -269,7 +221,7 @@ namespace Nmfs.Agepro.CoreLib
     {
         private double _kParm;
 
-        public new double kParm   //TODO:Remove Base Class kParm field when finished implmenting this class.
+        public double kParm 
         {
             get { return _kParm; }
             set { SetProperty(ref _kParm, value); }
@@ -290,8 +242,8 @@ namespace Nmfs.Agepro.CoreLib
             //Check parametricLine was split into 4 parameters. Only Shepherd Models have 4 parameters.
             if (parametricLine.Length != 4)
             {
-                throw new InvalidAgeproParameterException("Shepherd Curve must have 4 parameters." + 
-                    Environment.NewLine + "Number of parameters found: " + parametricLine.Length);
+                throw new InvalidAgeproParameterException("Shepherd Curve must have 4 parameters." +
+                    Environment.NewLine + "Number of parameters found: " + parametricLine.Length + ".");
             }
 
             this.alpha = Convert.ToDouble(parametricLine[0]);
