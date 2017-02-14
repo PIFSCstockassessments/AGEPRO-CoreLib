@@ -179,14 +179,16 @@ namespace Nmfs.Agepro.CoreLib
                     return(new TwoStageEmpiricalRecruitment(rtype, useSSB: true));
                 case 5:
                 case 6:
-                case 7:
                     return(new ParametricCurve(rtype, isAutocorrelated: false));
+                case 7:
+                    return(new ParametricShepherdCurve(rtype, isAutocorrelated: false));
                 case 8:
                     return(new ParametricLognormal(rtype, isAutocorrelated: false));
                 case 10:
                 case 11:
-                case 12:
                     return(new ParametricCurve(rtype, isAutocorrelated: true));
+                case 12:
+                    return(new ParametricShepherdCurve(rtype, isAutocorrelated: true));
                 case 13:
                     return(new ParametricLognormal(rtype, isAutocorrelated: true));
                 case 15:

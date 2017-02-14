@@ -265,6 +265,78 @@ namespace Nmfs.Agepro.CoreLib
         }
     }
 
+    public class ParametricShepherdCurve : ParametricCurve
+    {
+        private double _kParm;
+
+        public new double kParm   //TODO:Remove Base Class kParm field when finished implmenting this class.
+        {
+            get { return _kParm; }
+            set { SetProperty(ref _kParm, value); }
+        }
+
+        public ParametricShepherdCurve(int modelNum, bool isAutocorrelated)
+            : base(modelNum, isAutocorrelated)
+        {
+            
+        }
+
+        public override void ReadRecruitmentModel(StreamReader sr)
+        {
+            string line;
+            line = sr.ReadLine();
+            string[] parametricLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            //Check parametricLine was split into 4 parameters. Only Shepherd Models have 4 parameters.
+            if (parametricLine.Length != 4)
+            {
+                throw new InvalidAgeproParameterException("Shepherd Curve must have 4 parameters." + 
+                    Environment.NewLine + "Number of parameters found: " + parametricLine.Length);
+            }
+
+            this.alpha = Convert.ToDouble(parametricLine[0]);
+            this.beta = Convert.ToDouble(parametricLine[1]);
+            this.kParm = Convert.ToDouble(parametricLine[2]);
+            this.variance = Convert.ToDouble(parametricLine[3]);
+            
+        }
+
+        public override List<string> WriteRecruitmentDataModelData()
+        {
+            List<string> outputLines = new List<string>();
+
+            outputLines.Add(this.alpha.ToString().PadRight(12) +
+                this.beta.ToString().PadRight(12) +
+                this.kParm.ToString().PadRight(12) +
+                this.variance.ToString().PadRight(12));
+
+            if (this.autocorrelated)
+            {
+                outputLines.Add(this.phi.ToString().PadRight(12) + this.lastResidual.ToString().PadRight(12));
+            }
+            return outputLines;
+        }
+
+        public override ValidationResult ValidateInput()
+        {
+            var msgList = new List<string>();
+
+            msgList.AddRange(ValidateParametricParameter(this.alpha, "Alpha"));
+            msgList.AddRange(ValidateParametricParameter(this.beta, "Beta"));
+            msgList.AddRange(ValidateParametricParameter(this.kParm, "KParm"));
+            msgList.AddRange(ValidateParametricParameter(this.variance, "Variance"));
+
+            if (this.autocorrelated)
+            {
+                msgList.AddRange(ValidateParametricParameter(this.phi, "Phi"));
+                msgList.AddRange(ValidateParametricParameter(this.lastResidual, "Last Residual"));
+            }
+            var results = msgList.EnumerateValidationResults();
+
+            return results;
+        }
+    }
+
     /// <summary>
     /// Parmetric Recruitment in Lognormal Distribution
     /// </summary>
