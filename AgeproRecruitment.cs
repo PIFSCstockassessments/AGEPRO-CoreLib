@@ -13,8 +13,8 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     public class AgeproRecruitment
     {
-        public int recruitScalingFactor { get; set; }
-        public int SSBScalingFactor { get; set; }
+        public double recruitScalingFactor { get; set; }
+        public double SSBScalingFactor { get; set; }
         public int maxRecruitObs { get; set; }
         public int[] recruitType { get; set; }
         public DataTable recruitProb = new DataTable("Recruitment Probability");
