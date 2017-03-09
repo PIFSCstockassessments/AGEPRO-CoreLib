@@ -250,7 +250,11 @@ namespace Nmfs.Agepro.CoreLib
             this.beta = Convert.ToDouble(parametricLine[1]);
             this.kParm = Convert.ToDouble(parametricLine[2]);
             this.variance = Convert.ToDouble(parametricLine[3]);
-            
+
+            if (this.autocorrelated)
+            {
+                ReadAutocorrelatedValues(sr);
+            }
         }
 
         public override List<string> WriteRecruitmentDataModelData()
