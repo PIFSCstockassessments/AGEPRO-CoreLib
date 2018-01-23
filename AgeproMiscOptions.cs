@@ -66,7 +66,16 @@ namespace Nmfs.Agepro.CoreLib
             {
                 get { return _refFMort; }
                 set { SetProperty(ref _refFMort, value); }
-            }    
+            }
+
+            public Refpoint()
+            {
+                //Set Defaults to 0
+                refSpawnBio = 0;
+                refJan1Bio = 0;
+                refMeanBio = 0;
+                refFMort = 0;
+            }
 
         }
 
@@ -81,6 +90,12 @@ namespace Nmfs.Agepro.CoreLib
             {
                 get { return _precentile; }
                 set { SetProperty(ref _precentile, value); }
+            }
+
+            public ReportPercentile()
+            {
+                //Set Defaults to 0.0
+                percentile = 0.0;
             }
         }
 
@@ -108,6 +123,14 @@ namespace Nmfs.Agepro.CoreLib
                 get { return _scaleStockSum; }
                 set { SetProperty(ref _scaleStockSum, value); }
             }
+
+            public ScaleFactors()
+            {
+                //Set Defaults to 0
+                scaleBio = 0;
+                scaleRec = 0;
+                scaleStockNum = 0;
+            }
         }
 
         /// <summary>
@@ -127,6 +150,13 @@ namespace Nmfs.Agepro.CoreLib
             {
                 get { return _maxNatMort; }
                 set { SetProperty(ref _maxNatMort, value); }
+            }
+
+            public Bounds()
+            {
+                //Set defaults
+                maxWeight = 10.0;
+                maxNatMort = 1.0;
             }
         }
 
