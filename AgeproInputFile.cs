@@ -28,14 +28,14 @@ namespace Nmfs.Agepro.CoreLib
         public AgeproStochasticAgeTable maturity = new AgeproStochasticAgeTable(); //Maturity in Biological
         public AgeproStochasticAgeTable fishery = new AgeproStochasticAgeTable();
         public AgeproStochasticAgeTable naturalMortality = new AgeproStochasticAgeTable(); 
-        public AgeproMiscOptions.retroAdjustmentFactors retroAdjustOption = new AgeproMiscOptions.retroAdjustmentFactors(); //retroAdjust
+        public RetroAdjustmentFactors retroAdjustOption = new RetroAdjustmentFactors(); //retroAdjust
         public AgeproHarvestScenario harvestScenario = new AgeproHarvestScenario();
         public AgeproStochasticAgeTable discardFraction = new AgeproStochasticAgeTable(); //discard fraction
-        public AgeproMiscOptions.Bounds bounds = new AgeproMiscOptions.Bounds(); //bounds
+        public Bounds bounds = new Bounds(); //bounds
         public AgeproMiscOptions options = new AgeproMiscOptions(); //options
-        public AgeproMiscOptions.ScaleFactors scale = new AgeproMiscOptions.ScaleFactors(); //scale
-        public AgeproMiscOptions.ReportPercentile reportPercentile = new AgeproMiscOptions.ReportPercentile(); //reportPercentile
-        public AgeproMiscOptions.Refpoint refpoint = new AgeproMiscOptions.Refpoint(); //refpoint
+        public ScaleFactors scale = new ScaleFactors(); //scale
+        public ReportPercentile reportPercentile = new ReportPercentile(); //reportPercentile
+        public Refpoint refpoint = new Refpoint(); //refpoint
         public RebuilderTargetCalculation rebuild = new RebuilderTargetCalculation(); //rebuilder
         public PStarCalculation pstar = new PStarCalculation();
 
