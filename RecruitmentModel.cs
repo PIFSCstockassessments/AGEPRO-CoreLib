@@ -19,6 +19,7 @@ namespace Nmfs.Agepro.CoreLib
         public int[] obsYears;
         public abstract void ReadRecruitmentModel(StreamReader sr);
         public abstract List<string> WriteRecruitmentDataModelData();
+        public abstract ValidationResult ValidateInput();
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -101,9 +102,6 @@ namespace Nmfs.Agepro.CoreLib
             return true;
         }
 
-        public virtual ValidationResult ValidateInput()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
