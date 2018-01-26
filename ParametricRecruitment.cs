@@ -71,6 +71,10 @@ namespace Nmfs.Agepro.CoreLib
         {
             throw new NotImplementedException();
         }
+        public override ValidationResult ValidateInput()
+        {
+            throw new NotImplementedException();
+        }
 
         protected void ReadAutocorrelatedValues(StreamReader sr)
         {
