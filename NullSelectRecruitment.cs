@@ -33,6 +33,16 @@ namespace Nmfs.Agepro.CoreLib
                 "(Recruit Model # is " + this.recruitModelNum + "). " + 
                 "Select a valid recruitment model."
             );
+                
+        }
+
+        public override ValidationResult ValidateInput()
+        {
+            throw new InvalidAgeproParameterException(
+                "NullSelectRecruitment is an invalid recruitment model type" +
+                "(Recruit Model # is " + this.recruitModelNum + "). " +
+                "Select a valid recruitment model."
+            );
         }
 
     }
