@@ -21,13 +21,13 @@ namespace Nmfs.Agepro.CoreLib
         {
         }
 
-        //Derived From DanRigby 
         /// <summary>
-        ///     Checks if a property already matches a desired value.  Sets the property and
+        ///     Checks if a property already matches a desired value. Sets the property and
         ///     notifies listeners only when necessary.
-        ///     In AGEPRO, allows a GUI object to set values with its the data-binded CoreLib 
-        ///     property.  
+        ///     In AGEPRO, allows a GUI object to set values with its the data-binded CoreLib
+        ///     property.
         /// </summary>
+        /// <remarks>Derived From DanRigby</remarks>
         /// <typeparam name="T">Type of the property.</typeparam>
         /// <param name="field">Reference to a property with both getter and setter.</param>
         /// <param name="value">Desired value for the property.</param>

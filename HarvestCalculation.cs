@@ -24,14 +24,22 @@ namespace Nmfs.Agepro.CoreLib
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        //DanRigby
         /// <summary>
-        /// Allows two-way data binding to GUI.
+        ///     Checks if a property already matches a desired value.  Sets the property and
+        ///     notifies listeners only when necessary. In AGEPRO, allows a GUI object to set
+        ///     values with its the data-binded CoreLib property.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <param name="name"></param>
+        /// <remarks>
+        ///     Derived From DanRigby
+        /// </remarks>
+        /// <typeparam name="T">Type of the property.</typeparam>
+        /// <param name="field">Reference to a property with both getter and setter.</param>
+        /// <param name="value">Desired value for the property.</param>
+        /// <param name="name">
+        ///     Name of the property used to notify listeners.  This
+        ///     value is optional and can be provided automatically when invoked from compilers that
+        ///     support CallerMemberName.
+        /// </param>
         protected void SetProperty<T>(ref T field, T value, [CallerMemberName] string name = "")
         {
             if (!EqualityComparer<T>.Default.Equals(field, value))
