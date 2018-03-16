@@ -66,9 +66,16 @@ namespace Nmfs.Agepro.CoreLib
             }
 
 
-            //Coefficents
-            this.coefficientTable = SetNewCoefficientTable(this.numRecruitPredictors);
-            
+            //New Coefficient Table 
+            DataTable blankCoefficientTable = new DataTable("Coefficients");
+            blankCoefficientTable.Columns.Add("Coefficient", typeof(double));
+            for (int i = 0; i < this.numRecruitPredictors; i++)
+            {
+                blankCoefficientTable.Rows.Add();
+            }
+
+            this.coefficientTable = blankCoefficientTable;
+
             line = sr.ReadLine();
             string[] predictorCoefficents = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             
@@ -92,17 +99,6 @@ namespace Nmfs.Agepro.CoreLib
             
         }
 
-       
-        public static DataTable SetNewCoefficientTable(int numPredictors)
-        {
-            DataTable coefficientTable = new DataTable("Coefficients");
-            coefficientTable.Columns.Add("Coefficient", typeof(double));
-            for (int i = 0; i < numPredictors; i++)
-            {
-                coefficientTable.Rows.Add();
-            }
-            return coefficientTable;
-        }
         public static DataTable SetNewObsTable(int numPredictors, string[] obsYears)
         {
             DataTable obsTable = new DataTable("Observations");
