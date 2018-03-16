@@ -97,6 +97,20 @@ namespace Nmfs.Agepro.CoreLib
             }
         }
 
+
+        public DataTable NewRecruitLevelTable(int numLevels = 1)
+        {
+            return NewMarkovLevelTable("Recruitment", numLevels, "Recruitment");
+        }
+        public DataTable NewSSBLevelTable(int numLevels)
+        {
+            return NewMarkovLevelTable("SSB", numLevels, "SSB Cut Points");
+        }
+        public DataTable NewProbabilityTable(int lvlSSB, int lvlRecruits = 1)
+        {
+            return NewMarkovLevelTable("Probability", lvlSSB, "PR", lvlRecruits);
+        }
+
         private DataTable NewMarkovLevelTable(string tableName, int numLevels, string colName, int numCols = 1)
         {
             DataTable tableT = new DataTable(tableName);
@@ -123,18 +137,6 @@ namespace Nmfs.Agepro.CoreLib
                 tableT.Rows.Add();
             }
             return tableT;
-        }
-        public DataTable NewRecruitLevelTable(int numLevels = 1)
-        {
-            return NewMarkovLevelTable("Recruitment", numLevels, "Recruitment");
-        }
-        public DataTable NewSSBLevelTable(int numLevels)
-        {
-            return NewMarkovLevelTable("SSB", numLevels, "SSB Cut Points");
-        }
-        public DataTable NewProbabilityTable(int lvlSSB, int lvlRecruits = 1)
-        {
-            return NewMarkovLevelTable("Probability", lvlSSB, "PR", lvlRecruits);
         }
 
         public override List<string> WriteRecruitmentDataModelData()
