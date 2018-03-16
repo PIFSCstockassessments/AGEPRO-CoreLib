@@ -24,18 +24,6 @@ namespace Nmfs.Agepro.CoreLib
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Looks up the name of the AGEPRO Recruitment Model. Unimpmented at this time. 
-        /// </summary>
-        /// <param name="modelType">Desginated AGEPRO Model Numnber</param>
-        /// <returns>String containng the model name</returns>
-        public string GetRecruitModelName(int modelType)
-        {
-            //TODO:Use Dictionary to get Model Name  
-
-            return "";
-        }
-
-        /// <summary>
         ///     Checks if a property already matches a desired value.  Sets the property and
         ///     notifies listeners only when necessary. In AGEPRO, allows a GUI object to set
         ///     values with its the data-binded CoreLib property.
