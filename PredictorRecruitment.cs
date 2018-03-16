@@ -66,16 +66,9 @@ namespace Nmfs.Agepro.CoreLib
             }
 
 
-            //New Coefficient Table 
-            DataTable blankCoefficientTable = new DataTable("Coefficients");
-            blankCoefficientTable.Columns.Add("Coefficient", typeof(double));
-            for (int i = 0; i < this.numRecruitPredictors; i++)
-            {
-                blankCoefficientTable.Rows.Add();
-            }
-
-            this.coefficientTable = blankCoefficientTable;
-
+            //Coefficents
+            this.coefficientTable = SetNewCoefficientTable(this.numRecruitPredictors);
+            
             line = sr.ReadLine();
             string[] predictorCoefficents = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             
@@ -97,6 +90,23 @@ namespace Nmfs.Agepro.CoreLib
                 predictorRow.ItemArray = observationsPerYear;
             }
             
+        }
+
+        /// <summary>
+        /// Accessor to creates a new Coefficient Table.
+        /// </summary>
+        /// <remarks> Allows the interface moduule to setup this table.</remarks>
+        /// <param name="numPredictors">Number of Predictors</param>
+        /// <returns>New, Blank CoefficientTable</returns>
+        public static DataTable SetNewCoefficientTable(int numPredictors)
+        {
+            DataTable coefficientTable = new DataTable("Coefficients");
+            coefficientTable.Columns.Add("Coefficient", typeof(double));
+            for (int i = 0; i < numPredictors; i++)
+            {
+                coefficientTable.Rows.Add();
+            }
+            return coefficientTable;
         }
 
         public static DataTable SetNewObsTable(int numPredictors, string[] obsYears)
