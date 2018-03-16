@@ -19,7 +19,6 @@ namespace Nmfs.Agepro.CoreLib
 
         }
 
-        //TODO: Test if Function is sucessful.
         /// <summary>
         /// Read in AGEPRO Biological Options from the AGEPRO Input File StreamReader
         /// </summary>

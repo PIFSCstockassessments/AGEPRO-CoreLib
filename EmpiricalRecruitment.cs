@@ -111,7 +111,6 @@ namespace Nmfs.Agepro.CoreLib
             int i = 0;
             foreach (DataRow obsRow in inputTable.Rows)
             {
-                //TODO: Add a check if stated "numObs" is more than inputTable row count  
                 obsRow["Recruits"] = Convert.ToDouble(obsRecruits[i]);
                 if (this.withSSB)
                 {
@@ -248,7 +247,7 @@ namespace Nmfs.Agepro.CoreLib
         {
             this.recruitModelNum = modelNum;
             this.recruitCategory = 1;
-            this.withSSB = true; //TODO: Should this be default?
+            this.withSSB = true; 
             this.subType = EmpiricalType.TwoStage;
             this.lowBound = 0.0001;
 
