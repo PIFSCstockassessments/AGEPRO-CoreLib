@@ -142,6 +142,11 @@ namespace Nmfs.Agepro.CoreLib
             return G;
         }
 
+        /// <summary>
+        /// Translates the Harvest Table input data and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public List<string> WriteHarvestTableDataLines()
         {
             //Check if Harvest Table has blank/null cells, and if it does fill it w/ a zero
