@@ -76,6 +76,11 @@ namespace Nmfs.Agepro.CoreLib
             this.TSpawn = tSpawnTable;
         }
 
+        /// <summary>
+        /// Translates the Fraction Mortality Prior to Spawning DataTable into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public List<string> WriteBiologicalDataLines()
         {
             List<string> outputLines = new List<string>();
