@@ -66,6 +66,12 @@ namespace Nmfs.Agepro.CoreLib
             
         }
 
+        /// <summary>
+        /// Gets the Observed Values DataTable from the input stream. 
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
+        /// <param name="numObs">Number of Observations</param>
+        /// <returns>Observed Values DataTable Object</returns>
         protected DataTable ReadObsTable(StreamReader sr, int numObs)
         {
             string line;
@@ -94,10 +100,10 @@ namespace Nmfs.Agepro.CoreLib
         /// <summary>
         /// Sets a new Observation Datatable and populates it with string array paramters. 
         /// </summary>
-        /// <param name="numObs"></param>
-        /// <param name="obsRecruits"></param>
-        /// <param name="obsSSB"></param>
-        /// <returns></returns>
+        /// <param name="numObs">Number of Obervations</param>
+        /// <param name="obsRecruits">Observations values vector</param>
+        /// <param name="obsSSB">Spawning Stock Biomass (SSB) vector</param>
+        /// <returns>Returns a DataTable with the Observed (and Spawning Stock Biomass) values</returns>
         protected DataTable SetObsTableData(int numObs, string[] obsRecruits, string[] obsSSB = null)
         {
             //inputTable
@@ -141,6 +147,11 @@ namespace Nmfs.Agepro.CoreLib
             return obsTable;
         }
 
+        /// <summary>
+        /// Translates Empirical Recruitment and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
@@ -152,6 +163,13 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        /// <summary>
+        /// Translates Observed Values data table object into the
+        /// AGEPRO input file data format. 
+        /// </summary>
+        /// <param name="recruitObsTable">Recruitment Observation DataTable Object</param>
+        /// <param name="hasSSBCols">DataTable has Spawning Stock Biomass (SSB) Columns</param>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         protected List<string> WriteObsTableLines(DataTable recruitObsTable, bool hasSSBCols)
         {
             List<string> obsTableLines = new List<string>();
@@ -176,6 +194,10 @@ namespace Nmfs.Agepro.CoreLib
             return obsTableLines;
         }
 
+        /// <summary>
+        /// Checks the values in the Observed Values DataTable Object are valid.
+        /// </summary>
+        /// <returns>Vaildation Result Object</returns>
         public override ValidationResult ValidateInput()
         {
             if (this.HasBlankOrNullCells(this.obsTable))
@@ -243,6 +265,10 @@ namespace Nmfs.Agepro.CoreLib
             this.withSSB = useSSB;
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream For Two-Stage Empirical Recruitment Specfic Parameters & Data
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
@@ -263,6 +289,11 @@ namespace Nmfs.Agepro.CoreLib
             this.SSBBreakVal = Convert.ToInt32(line);
         }
 
+        /// <summary>
+        /// Translates Two-Stage Empirical Recruitment input data and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
@@ -276,6 +307,15 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        /// <summary>
+        /// Single stage Observation Value DataTable validation check.
+        /// </summary>
+        /// <param name="twoStageObsTable">Observation DataTable from single stage</param>
+        /// <param name="tableName">Observation Table Name</param>
+        /// <returns>
+        /// If DataTable passes all validation checks, nothing will be returned.
+        /// All validations not met will be recorded to a list of "Error Messages" to return.
+        /// </returns>
         private List<string> CheckTwoStageObsTable(DataTable twoStageObsTable, string tableName)
         {
             List<string> errorMsgList = new List<string>();
@@ -301,6 +341,10 @@ namespace Nmfs.Agepro.CoreLib
             return errorMsgList;
         }
 
+        /// <summary>
+        /// Checks the values in the Observed Values DataTable Object are valid.
+        /// </summary>
+        /// <returns>Vaildation Result Object</returns>
         public override ValidationResult ValidateInput()
         {
             List<string> errorMsgList = new List<string>();
@@ -336,6 +380,11 @@ namespace Nmfs.Agepro.CoreLib
             this.SSBHinge = 0;  //Fallback Default
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream For Empirical CDF Recruitment w/ Linear 
+        /// Decline to Zero Specfic Parameters & Data 
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
@@ -349,6 +398,11 @@ namespace Nmfs.Agepro.CoreLib
 
         }
 
+        /// <summary>
+        /// Translates Empirical CDF Recruitment w/ Linear Decline to Zero input data 
+        /// and parameters into the AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLine = new List<string>();
@@ -357,6 +411,10 @@ namespace Nmfs.Agepro.CoreLib
             return outputLine;
         }
 
+        /// <summary>
+        /// Checks the values in the Observed Values DataTable Object are valid.
+        /// </summary>
+        /// <returns>Vaildation Result Object</returns>
         public override ValidationResult ValidateInput()
         {
             //SSB Hinge
@@ -390,6 +448,10 @@ namespace Nmfs.Agepro.CoreLib
             this.subType = EmpiricalType.Fixed;
         }
 
+        /// <summary>
+        /// Checks the values in the Observed Values DataTable Object are valid.
+        /// </summary>
+        /// <returns>Vaildation Result Object</returns>
         public override ValidationResult ValidateInput()
         {
             //Check that number of rows match umber of years minus year one

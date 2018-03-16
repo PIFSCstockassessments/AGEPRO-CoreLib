@@ -32,6 +32,10 @@ namespace Nmfs.Agepro.CoreLib
             this.recruitCategory = 4; //TODO: Check if MarkovMatrix Category is 4
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream for Markov Matrix Recruitment parameters & data.
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             using (DataSet markov = new DataSet("markovRecruitmentTables"))
@@ -97,20 +101,43 @@ namespace Nmfs.Agepro.CoreLib
             }
         }
 
-
+        /// <summary>
+        /// Creates a Recruitment Levels table based on the Number of Levels 
+        /// </summary>
+        /// <param name="numLevels">Numberof Recruitment Levels</param>
+        /// <returns>Recruitment DataTable</returns>
         public DataTable NewRecruitLevelTable(int numLevels = 1)
         {
             return NewMarkovLevelTable("Recruitment", numLevels, "Recruitment");
         }
+        /// <summary>
+        /// Creates a SSB Cut Point table based on the Number of Levels. 
+        /// </summary>
+        /// <param name="numLevels">Number of Levels</param>
+        /// <returns>SSB Cutpoints DataTable</returns>
         public DataTable NewSSBLevelTable(int numLevels)
         {
             return NewMarkovLevelTable("SSB", numLevels, "SSB Cut Points");
         }
+        /// <summary>
+        /// Creates a Proabablity table based on Spawning Stock Biomass 
+        /// </summary>
+        /// <param name="lvlSSB">Spawning Stock Biomass levels</param>
+        /// <param name="lvlRecruits">Recruitment levels</param>
+        /// <returns>Probability DataTable</returns>
         public DataTable NewProbabilityTable(int lvlSSB, int lvlRecruits = 1)
         {
             return NewMarkovLevelTable("Probability", lvlSSB, "PR", lvlRecruits);
         }
 
+        /// <summary>
+        /// Creates a new Markov Matrix DataTable 
+        /// </summary>
+        /// <param name="tableName">DataTable Name</param>
+        /// <param name="numLevels">Number of Level rows</param>
+        /// <param name="colName">Column Name(s)</param>
+        /// <param name="numCols">Number of Columns. Default is 1.</param>
+        /// <returns>A DataTable determined in numLevels by numCol. </returns>
         private DataTable NewMarkovLevelTable(string tableName, int numLevels, string colName, int numCols = 1)
         {
             DataTable tableT = new DataTable(tableName);
@@ -139,6 +166,12 @@ namespace Nmfs.Agepro.CoreLib
             return tableT;
         }
 
+
+        /// <summary>
+        /// Translates Markov Matrix Recruitment input data and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
@@ -171,6 +204,11 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        /// <summary>
+        /// Checks to see parameter is 0
+        /// </summary>
+        /// <param name="markovParam">Parameter Value</param>
+        /// <returns></returns>
         private bool ValidMarkovParameter(int markovParam)
         {
             List<string> errorMsgList = new List<string>();
@@ -181,7 +219,13 @@ namespace Nmfs.Agepro.CoreLib
             return true;
         }
 
-
+        /// <summary>
+        /// Markov Matrix Recuitment Validation
+        /// </summary>
+        /// <returns>
+        /// If all validation checks have been met, nothing will be returned.
+        /// All validations not met will be recorded to a list of "Error Messages" to return.
+        /// </returns>
         public override ValidationResult ValidateInput()
         {
             List<string> errorMsgList = new List<string>();

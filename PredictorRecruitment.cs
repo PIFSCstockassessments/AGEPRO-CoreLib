@@ -46,6 +46,10 @@ namespace Nmfs.Agepro.CoreLib
             this.maxNumPredictors = 5;
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream for Predictor Recruitment parameters & data.
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr) 
         {
             //16, 17, 18, 19
@@ -109,6 +113,13 @@ namespace Nmfs.Agepro.CoreLib
             return coefficientTable;
         }
 
+        /// <summary>
+        /// Accessor to create a new Observation DataTable
+        /// </summary>
+        /// <remarks> Allows the interface moduule to setup this table.</remarks>
+        /// <param name="numPredictors">Number of Predictors</param>
+        /// <param name="obsYears">Observed Years</param>
+        /// <returns>Blank Obervation Table</returns>
         public static DataTable SetNewObsTable(int numPredictors, string[] obsYears)
         {
             DataTable obsTable = new DataTable("Observations");
@@ -124,6 +135,11 @@ namespace Nmfs.Agepro.CoreLib
             return obsTable;
         }
 
+        /// <summary>
+        /// Translates Predictor Recruitment input data and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
@@ -145,6 +161,13 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        /// <summary>
+        /// Predictor Recuitment Validation
+        /// </summary>
+        /// <returns>
+        /// If all validation checks have been met, nothing will be returned.
+        /// All validations not met will be recorded to a list of "Error Messages" to return.
+        /// </returns>
         public override ValidationResult ValidateInput()
         {
             List<string> errorMsgList = new List<string>();

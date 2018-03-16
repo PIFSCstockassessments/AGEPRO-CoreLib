@@ -45,7 +45,7 @@ namespace Nmfs.Agepro.CoreLib
         }
 
         /// <summary>
-        /// Initates the <paramref name="System.IO.StreamReader"/> function to read the AGEPRO Input file.
+        /// Initiates the <paramref name="System.IO.StreamReader"/> function to read the AGEPRO Input file.
         /// </summary>
         /// <param name="file"> AGEPRO Input Filename Location</param>
         /// <remarks> Contains Try-Catch Execption Handler</remarks>
@@ -255,7 +255,10 @@ namespace Nmfs.Agepro.CoreLib
 
         }
 
-
+        /// <summary>
+        /// Initiates the \code{WriteInputFileLines} function to write AGEPRO Input files.
+        /// </summary>
+        /// <param name="file">AGEPRO Input Filename Location</param>
         public void WriteInputFile(string file)
         {
             try
@@ -269,6 +272,10 @@ namespace Nmfs.Agepro.CoreLib
             }
         }
 
+        /// <summary>
+        /// Writes AGERPRO Input file values by line
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         private List<string> WriteInputFileLines()
         {
             List<string> inpFile = new List<string>();

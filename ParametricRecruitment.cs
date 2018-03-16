@@ -76,6 +76,10 @@ namespace Nmfs.Agepro.CoreLib
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream for Autocorrelated Values: Phi, and Last Residual.
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         protected void ReadAutocorrelatedValues(StreamReader sr)
         {
             string line;
@@ -86,6 +90,16 @@ namespace Nmfs.Agepro.CoreLib
             this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
         }
 
+        /// <summary>
+        /// Parameteric Parameter Validation
+        /// </summary>
+        /// <param name="param">Parameter Value</param>
+        /// <param name="paramName">Name of Parameter</param>
+        /// <param name="significantBound">Significant Bound</param>
+        /// <returns>
+        /// If parameter clears all validation checks, nothing will be returned.
+        /// All validations not met will be recorded to a list of "Error Messages" to return.
+        /// </returns>
         protected List<string> ValidateParametricParameter(double param, string paramName, 
             double significantBound = 0.000000001)
         {
@@ -105,7 +119,16 @@ namespace Nmfs.Agepro.CoreLib
             return msgList;
         }
 
-
+        /// <summary>
+        /// Parametric Parameter Validation
+        /// </summary>
+        /// <param name="param">Parameter Value. Can be NULL</param>
+        /// <param name="paramName">Name of Parameter</param>
+        /// <param name="significantBound">Significant Bound</param>
+        /// <returns>       
+        /// If parameter clears all validation checks, nothing will be returned.
+        /// All validations not met will be recorded to a list of "Error Messages" to return.
+        /// </returns>
         protected List<string> ValidateParametricParameter(double? param, string paramName,
             double significantBound = 0.000000001)
         {
@@ -155,6 +178,10 @@ namespace Nmfs.Agepro.CoreLib
             this.subtype = ParametricType.Curve;
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream For Parametric Recruitment Specfic Parameters & Data
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
@@ -182,8 +209,12 @@ namespace Nmfs.Agepro.CoreLib
             }
         }
 
-        
 
+        /// <summary>
+        /// Translates Parametric Curve Recruitment input data and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
@@ -200,7 +231,10 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
-
+        /// <summary>
+        /// Parametric curve parameter validation.
+        /// </summary>
+        /// <returns>Vaildation Result Object</returns>
         public override ValidationResult ValidateInput()
         {
             var msgList = new List<string>();
@@ -237,6 +271,10 @@ namespace Nmfs.Agepro.CoreLib
             
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream For Shepherd Curve Recruitment Specfic Parameters & Data
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
@@ -261,6 +299,11 @@ namespace Nmfs.Agepro.CoreLib
             }
         }
 
+        /// <summary>
+        /// Translates Shepherd Curve Recruitment input data and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
@@ -277,6 +320,10 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        /// <summary>
+        /// Shepherd Curve parameter validation.
+        /// </summary>
+        /// <returns>Vaildation Result Object</returns>
         public override ValidationResult ValidateInput()
         {
             var msgList = new List<string>();
@@ -321,6 +368,10 @@ namespace Nmfs.Agepro.CoreLib
             this.subtype = ParametricType.Lognormal;
         }
 
+        /// <summary>
+        /// Reads in AGEPRO Input File Stream For Parametric Lognornal Recruitment Specfic Parameters & Data
+        /// </summary>
+        /// <param name="sr">AGEPRO Input File StreamReader</param>
         public override void ReadRecruitmentModel(StreamReader sr)
         {
             string line;
@@ -336,6 +387,11 @@ namespace Nmfs.Agepro.CoreLib
             }
         }
 
+        /// <summary>
+        /// Translates Parametric Logmormal Recruitment input data and parameters into the
+        /// AGEPRO input file data format.
+        /// </summary>
+        /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public override List<string> WriteRecruitmentDataModelData()
         {
             List<string> outputLines = new List<string>();
@@ -347,6 +403,10 @@ namespace Nmfs.Agepro.CoreLib
             return outputLines;
         }
 
+        /// <summary>
+        /// Parametric Lognormal parameter validation.
+        /// </summary>
+        /// <returns>Vaildation Result Object</returns>
         public override ValidationResult ValidateInput()
         {
             List<string> msgList = new List<string>();
