@@ -266,9 +266,13 @@ namespace Nmfs.Agepro.CoreLib
                 List<string> outLines = this.WriteInputFileLines();
                 File.WriteAllLines(file, outLines);
             }
-            catch (Exception ex)
+            catch(NullReferenceException)
             {
-                Console.WriteLine(ex.Message);
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
