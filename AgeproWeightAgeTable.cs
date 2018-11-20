@@ -74,6 +74,16 @@ namespace Nmfs.Agepro.CoreLib
 
         public override List<string> WriteStochasticAgeDataLines(string S)
         {
+            if (this.byAgeData == null)
+            {
+                throw new NullReferenceException(typeof(AgeproWeightAgeTable).FullName + " Stochastic Weight Age Data is NULL." );
+            }
+            if (this.byAgeCV == null)
+            {
+                throw new NullReferenceException(typeof(AgeproWeightAgeTable).FullName + " Stochastic CV is NULL.");
+            }
+
+
             List<string> outputLines = new List<string>();
 
             outputLines.Add(S);
@@ -83,7 +93,8 @@ namespace Nmfs.Agepro.CoreLib
             {
                 outputLines.Add(this.dataFile);
             }
-            else if (this.weightOpt == 0)
+            // 0 == User Specfied Weights at Age
+            else if (this.weightOpt == 0)  
             {
                 foreach (DataRow yearRow in this.byAgeData.Rows)
                 {
@@ -95,6 +106,10 @@ namespace Nmfs.Agepro.CoreLib
                     outputLines.Add(string.Join(new string(' ',2), cvRow.ItemArray));
                 }
             }
+            else if (!(this.validOpt.Contains(this.weightOpt)))
+            {
+                throw new InvalidOperationException("Invalid Weight option.");
+            } 
 
             return outputLines;
         }
