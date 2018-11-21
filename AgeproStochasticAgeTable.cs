@@ -168,6 +168,20 @@ namespace Nmfs.Agepro.CoreLib
         /// <returns>Returns a list of strings. </returns>
         public virtual List<string> WriteStochasticAgeDataLines(string keyword)
         {
+
+            
+            if (this.byAgeData == null)
+            {
+                throw new NullReferenceException("Stochastic Age of " + 
+                    keyword + " is NULL.");
+            }
+            if (this.byAgeCV == null)
+            {
+                throw new NullReferenceException("Stochastic CV of " + 
+                    keyword + " is NULL.");
+            }
+
+
             List<string> outputLines = new List<string>();
 
             outputLines.Add(keyword); //[PARAMETER]
