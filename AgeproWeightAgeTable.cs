@@ -72,21 +72,23 @@ namespace Nmfs.Agepro.CoreLib
             
         }
 
-        public override List<string> WriteStochasticAgeDataLines(string S)
+        public override List<string> WriteStochasticAgeDataLines(string keyword)
         {
             if (this.byAgeData == null)
             {
-                throw new NullReferenceException(typeof(AgeproWeightAgeTable).FullName + " Stochastic Weight Age Data is NULL." );
+                throw new NullReferenceException("Stochastic Age of " + 
+                    keyword + " is NULL." );
             }
             if (this.byAgeCV == null)
             {
-                throw new NullReferenceException(typeof(AgeproWeightAgeTable).FullName + " Stochastic CV is NULL.");
+                throw new NullReferenceException("Stochastic CV of " + 
+                    keyword + " is NULL.");
             }
 
 
             List<string> outputLines = new List<string>();
 
-            outputLines.Add(S);
+            outputLines.Add(keyword); //[PARAMETER]
             outputLines.Add(this.weightOpt.ToString() + new string(' ',2) + Convert.ToInt32(this.timeVarying).ToString());
             //since fromFile is a nullable boolean, have to explicitly check if its true 
             if (this.fromFile == true)
