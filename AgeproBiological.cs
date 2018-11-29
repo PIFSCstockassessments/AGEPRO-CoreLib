@@ -82,6 +82,11 @@ namespace Nmfs.Agepro.CoreLib
         /// <returns>List of strings. Each string repesents a line from the input file.</returns>
         public List<string> WriteBiologicalDataLines()
         {
+            if (this.TSpawn == null)
+            {
+                throw new NullReferenceException("Fraction Mortality Prior to Spawn ([BIOLOGICAL]) is NULL.");
+            }
+
             List<string> outputLines = new List<string>();
             outputLines.Add("[BIOLOGICAL]");
             outputLines.Add(Convert.ToInt32(this.timeVarying).ToString());
