@@ -19,6 +19,42 @@ namespace Nmfs.Agepro.CoreLib
 
         }
 
+
+        /// <summary>
+        /// Creates Fraction Mortality Prior to Spawn DataTable with non-null values.
+        /// </summary>
+        /// <param name="yearSeq">Array of subsequent years in the projection</param>
+        public void CreateFallbackTSpawnTable(string [] yearSeq)
+        {
+            
+            if(this.TSpawn != null)
+            {
+                //Clear out data 
+                this.TSpawn.Reset();
+            }
+            
+            DataTable fallbackTSpawn = new DataTable();
+
+            if (this.timeVarying)
+            {
+                for (int icol = 0; icol < yearSeq.Count(); icol++)
+                {
+                    fallbackTSpawn.Columns.Add(yearSeq[icol]);
+                }
+            }
+            else
+            {
+                fallbackTSpawn.Columns.Add("All Years");
+            }
+
+            //Add the Fraction Prior to Spawn
+            fallbackTSpawn.Rows.Add();
+            fallbackTSpawn.Rows.Add();
+
+            this.TSpawn = Extensions.FillDBNullCellsWithZero(fallbackTSpawn);
+
+        }
+
         /// <summary>
         /// Read in AGEPRO Biological Options from the AGEPRO Input File StreamReader
         /// </summary>
