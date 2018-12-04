@@ -18,7 +18,7 @@ namespace Nmfs.Agepro.CoreLib
        
         public int maxRecruitObs { get; set; }
         public int[] recruitType { get; set; }
-        public DataTable recruitProb = new DataTable("Recruitment Probability");
+        public DataTable recruitProb; // = new DataTable("Recruitment Probability");
         public int recruitmentCategory { get; set; }
         public List<RecruitmentModel> recruitList { get; set; }
         public int[] observationYears { get; set; }
@@ -41,6 +41,45 @@ namespace Nmfs.Agepro.CoreLib
             get { return _SSBScalingFactor; }
             set { SetProperty(ref _SSBScalingFactor, value); }
         }
+       
+
+        /// <summary>
+        /// Sets up AgeoroRecruitment data based on user generated AGEPRO parameter new cases.
+        /// </summary>
+        /// <param name="nrecruits">Number of Recruits</param>
+        /// <param name="seqYears">List of Projection Year names</param>
+        public void newCaseRecruitment(int nrecruits, string[] seqYears)
+        {
+
+            this.maxRecruitObs = 50;
+            //TODO: safer int.tryParse
+            this.observationYears = Array.ConvertAll<string, int>(seqYears, int.Parse);
+
+            //NullSelectRecuitment is default for NewCases.
+            recruitList = new List<RecruitmentModel>();
+            recruitType = new int[nrecruits];
+            for (int irecruit = 0; irecruit < nrecruits; irecruit++)
+            {
+                recruitList.Add(GetNewRecruitModel(0));
+                recruitType[irecruit] = recruitList[irecruit].recruitModelNum; //0
+                recruitList[irecruit].obsYears = this.observationYears;
+            }
+
+            //Set Recruitment Probabilty Values
+            List<string[]> recruitProbYear = new List<string[]>();
+            for (int iyear = 0; iyear < seqYears.Count(); iyear++)
+            {
+                string[] yrRecruitProb = new string[nrecruits];
+                for (int jrecruit = 0; jrecruit < nrecruits; jrecruit++)
+                {
+                    double newCaseProb = Math.Round(1.0 / nrecruits);
+                    yrRecruitProb[jrecruit] = newCaseProb.ToString("0.000");
+                }
+                recruitProbYear.Add(yrRecruitProb);
+            }
+            
+            CreateRecruitmentProbabilityTable(recruitProbYear);
+            
             
         }
 
@@ -245,6 +284,7 @@ namespace Nmfs.Agepro.CoreLib
                 case 21:
                     return(new EmpiricalCDFZero(rtype));
                 case 0:
+                    return(new NullSelectRecruitment()); 
                 default:
                     throw new InvalidAgeproParameterException("Invalid Recruitment Model Number: " + rtype);
             }//end switch
