@@ -11,10 +11,11 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// General AGEPRO Recruitment Parameters. 
     /// </summary>
-    public class AgeproRecruitment
+    public class AgeproRecruitment : AgeproCoreLibProperty
     {
-        public double recruitScalingFactor { get; set; }
-        public double SSBScalingFactor { get; set; }
+        private double _recruitScalingFactor;
+        private double _SSBScalingFactor;
+       
         public int maxRecruitObs { get; set; }
         public int[] recruitType { get; set; }
         public DataTable recruitProb = new DataTable("Recruitment Probability");
@@ -22,11 +23,27 @@ namespace Nmfs.Agepro.CoreLib
         public List<RecruitmentModel> recruitList { get; set; }
         public int[] observationYears { get; set; }
 
+ 
         public AgeproRecruitment()
         {
+            recruitScalingFactor = 0;
+            SSBScalingFactor = 0;
+
+        }
+
+        public double recruitScalingFactor
+        {
+            get { return _recruitScalingFactor; }
+            set { SetProperty(ref _recruitScalingFactor, value); }
+        }
+        public double SSBScalingFactor
+        {
+            get { return _SSBScalingFactor; }
+            set { SetProperty(ref _SSBScalingFactor, value); }
+        }
             
         }
-        
+
         /// <summary>
         /// Reads in AGEPRO Input File for Recruitment Model Data
         /// </summary>

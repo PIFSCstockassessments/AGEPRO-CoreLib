@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AgeproBiological.cs" />
     <Compile Include="AgeproBootstrap.cs" />
+    <Compile Include="AgeproCoreLibProperty.cs" />
     <Compile Include="AgeproGeneral.cs" />
     <Compile Include="AgeproHarvestScenario.cs" />
     <Compile Include="AgeproInputFile.cs" />
