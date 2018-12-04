@@ -310,7 +310,7 @@ namespace Nmfs.Agepro.CoreLib
             //MEAN_WEIGHT
             inpFile.AddRange(meanWeight.WriteStochasticAgeDataLines("[MEAN_WEIGHT]"));
 
-            //CATCH_WEIDHT
+            //CATCH_WEIGHT
             inpFile.AddRange(catchWeight.WriteStochasticAgeDataLines("[CATCH_WEIGHT]"));
 
             if (this.general.hasDiscards)
