@@ -54,9 +54,6 @@ namespace Nmfs.Agepro.CoreLib
         {
             string line;
             
-            //Clean off any existing data on DataTables
-            recruitProb.Clear();
-            
             Console.WriteLine("Reading Recuitment Data ... ");
 
             line = sr.ReadLine();
@@ -77,49 +74,19 @@ namespace Nmfs.Agepro.CoreLib
                 throw new InvalidAgeproParameterException("numRecruitModels does not match input file recruitModel count");
             }
 
-            
-
-            //Set Recruit Prob Columns
-            for(int nselection = 0; nselection < recruitType.Count(); nselection++)
-            {
-                String recruitProbColumnName = "Selection " + (nselection+1).ToString(); 
-                
-                if (!recruitProb.Columns.Contains(recruitProbColumnName))
-                {
-                    recruitProb.Columns.Add(recruitProbColumnName, typeof(double));
-                }                
-            }
-            //If current Recruitment Probability table has more columns than actual count, trim it
-            if (recruitProb.Columns.Count > recruitType.Count())
-            {
-                for (int index=recruitProb.Columns.Count-1; index > 0 ; index--){
-                    recruitProb.Columns.RemoveAt(index);
-                }
-            }
-
-
+            List<string[]> recrProbYear = new List<string[]>();
             //Recruitment Probability
             for (int i = 0; i < nyears; i++)
             {
                 line = sr.ReadLine();
-                string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                recruitProb.Rows.Add(nyearRecruitProb);
-
-                try
-                {
-                    //Check Recruitment Probability for all selections of each year sums to 1.0
-                    CheckRecruitProbabilitySum(nyearRecruitProb);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidAgeproParameterException("At row " + (i + 1).ToString() + 
-                        " of recruitment probablity:" + Environment.NewLine + ex.InnerException.Message 
-                        , ex);
-                }
-                
+                //string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                //recruitProb.Rows.Add(nyearRecruitProb);
+                recrProbYear.Add(line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
             }
 
-            
+            //Set Recruitment Probabilty Values
+            CreateRecruitmentProbabilityTable(recrProbYear);
+
             //Instanciate recruitList as new list
             recruitList = new List<RecruitmentModel>();
             
@@ -147,6 +114,66 @@ namespace Nmfs.Agepro.CoreLib
             }
 
             Console.WriteLine("Done.");
+        }
+
+
+        /// <summary>
+        /// Creates/Initalizes the Recruitment Proabablity Data Table
+        /// </summary>
+        /// <param name="listRecruitProbYr">List containing Recruitment Distribtions per Observaion Year</param>
+        public void CreateRecruitmentProbabilityTable(List<string[]> listRecruitProbYr)
+        {
+
+            //Clean off potentially existing data 
+            if (this.recruitProb != null)
+            {
+                this.recruitProb.Clear();
+            }
+            //Setup Recruitmet Probabilty Table
+            this.recruitProb = new DataTable();
+            this.recruitProb.TableName = "Recruitment Probability";
+
+
+            //Set Recruit Prob Columns
+            for (int nselection = 0; nselection < this.recruitType.Count(); nselection++)
+            {
+                String recruitProbColumnName = "Selection " + (nselection + 1).ToString();
+
+                if (!this.recruitProb.Columns.Contains(recruitProbColumnName))
+                {
+                    this.recruitProb.Columns.Add(recruitProbColumnName, typeof(double));
+                }
+            }
+            //If current Recruitment Probability table has more columns than actual count, trim it
+            if (this.recruitProb.Columns.Count > this.recruitType.Count())
+            {
+                for (int index = this.recruitProb.Columns.Count - 1; index > 0; index--)
+                {
+                    this.recruitProb.Columns.RemoveAt(index);
+                }
+            }
+
+            for (int irow = 0; irow < this.observationYears.Count(); irow++ )
+            {
+                try
+                {
+                    //Check Recruitment Probability for all selections of each year sums to 1.0
+                    CheckRecruitProbabilitySum(listRecruitProbYr[irow]);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidAgeproParameterException("At row " + (irow + 1).ToString() +
+                        " of recruitment probablity:" + Environment.NewLine + ex.InnerException.Message
+                        , ex);
+                }
+
+                this.recruitProb.Rows.Add(listRecruitProbYr[irow]);
+
+            }
+
+
+
+
         }
 
         /// <summary>
