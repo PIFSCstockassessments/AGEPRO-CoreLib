@@ -39,6 +39,7 @@ namespace Nmfs.Agepro.CoreLib
         {
             string line;
             DataTable G = new DataTable("Harvest Scenario");
+            //Read Harvest Specficiation
             line = sr.ReadLine();
             string[] harvestSpecLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
            
