@@ -28,7 +28,7 @@ namespace Nmfs.Agepro.CoreLib
 
         }
 
-        public AgeproGeneral(string file)
+        public AgeproGeneral(string file) 
         {
             this.inputFile = file;
             //readin file contents

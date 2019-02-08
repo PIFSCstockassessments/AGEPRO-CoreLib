@@ -11,22 +11,78 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// General AGEPRO Recruitment Parameters. 
     /// </summary>
-    public class AgeproRecruitment
+    public class AgeproRecruitment : AgeproCoreLibProperty
     {
-        public double recruitScalingFactor { get; set; }
-        public double SSBScalingFactor { get; set; }
+        private double _recruitScalingFactor;
+        private double _SSBScalingFactor;
+       
         public int maxRecruitObs { get; set; }
         public int[] recruitType { get; set; }
-        public DataTable recruitProb = new DataTable("Recruitment Probability");
+        public DataTable recruitProb; // = new DataTable("Recruitment Probability");
         public int recruitmentCategory { get; set; }
         public List<RecruitmentModel> recruitList { get; set; }
         public int[] observationYears { get; set; }
 
+ 
         public AgeproRecruitment()
         {
+            recruitScalingFactor = 0;
+            SSBScalingFactor = 0;
+
+        }
+
+        public double recruitScalingFactor
+        {
+            get { return _recruitScalingFactor; }
+            set { SetProperty(ref _recruitScalingFactor, value); }
+        }
+        public double SSBScalingFactor
+        {
+            get { return _SSBScalingFactor; }
+            set { SetProperty(ref _SSBScalingFactor, value); }
+        }
+       
+
+        /// <summary>
+        /// Sets up AgeoroRecruitment data based on user generated AGEPRO parameter new cases.
+        /// </summary>
+        /// <param name="nrecruits">Number of Recruits</param>
+        /// <param name="seqYears">List of Projection Year names</param>
+        public void newCaseRecruitment(int nrecruits, string[] seqYears)
+        {
+
+            this.maxRecruitObs = 50;
+            //TODO: safer int.tryParse
+            this.observationYears = Array.ConvertAll<string, int>(seqYears, int.Parse);
+
+            //NullSelectRecuitment is default for NewCases.
+            recruitList = new List<RecruitmentModel>();
+            recruitType = new int[nrecruits];
+            for (int irecruit = 0; irecruit < nrecruits; irecruit++)
+            {
+                recruitList.Add(GetNewRecruitModel(0));
+                recruitType[irecruit] = recruitList[irecruit].recruitModelNum; //0
+                recruitList[irecruit].obsYears = this.observationYears;
+            }
+
+            //Set Recruitment Probabilty Values
+            List<string[]> recruitProbYear = new List<string[]>();
+            for (int iyear = 0; iyear < seqYears.Count(); iyear++)
+            {
+                string[] yrRecruitProb = new string[nrecruits];
+                for (int jrecruit = 0; jrecruit < nrecruits; jrecruit++)
+                {
+                    double newCaseProb = Math.Round(1.0 / nrecruits);
+                    yrRecruitProb[jrecruit] = newCaseProb.ToString("0.000");
+                }
+                recruitProbYear.Add(yrRecruitProb);
+            }
+            
+            CreateRecruitmentProbabilityTable(recruitProbYear);
+            
             
         }
-        
+
         /// <summary>
         /// Reads in AGEPRO Input File for Recruitment Model Data
         /// </summary>
@@ -36,9 +92,6 @@ namespace Nmfs.Agepro.CoreLib
         public void ReadRecruitmentData(StreamReader sr, int nyears, int numRecruitModels)
         {
             string line;
-            
-            //Clean off any existing data on DataTables
-            recruitProb.Clear();
             
             Console.WriteLine("Reading Recuitment Data ... ");
 
@@ -60,49 +113,19 @@ namespace Nmfs.Agepro.CoreLib
                 throw new InvalidAgeproParameterException("numRecruitModels does not match input file recruitModel count");
             }
 
-            
-
-            //Set Recruit Prob Columns
-            for(int nselection = 0; nselection < recruitType.Count(); nselection++)
-            {
-                String recruitProbColumnName = "Selection " + (nselection+1).ToString(); 
-                
-                if (!recruitProb.Columns.Contains(recruitProbColumnName))
-                {
-                    recruitProb.Columns.Add(recruitProbColumnName, typeof(double));
-                }                
-            }
-            //If current Recruitment Probability table has more columns than actual count, trim it
-            if (recruitProb.Columns.Count > recruitType.Count())
-            {
-                for (int index=recruitProb.Columns.Count-1; index > 0 ; index--){
-                    recruitProb.Columns.RemoveAt(index);
-                }
-            }
-
-
+            List<string[]> recrProbYear = new List<string[]>();
             //Recruitment Probability
             for (int i = 0; i < nyears; i++)
             {
                 line = sr.ReadLine();
-                string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                recruitProb.Rows.Add(nyearRecruitProb);
-
-                try
-                {
-                    //Check Recruitment Probability for all selections of each year sums to 1.0
-                    CheckRecruitProbabilitySum(nyearRecruitProb);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidAgeproParameterException("At row " + (i + 1).ToString() + 
-                        " of recruitment probablity:" + Environment.NewLine + ex.InnerException.Message 
-                        , ex);
-                }
-                
+                //string[] nyearRecruitProb = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                //recruitProb.Rows.Add(nyearRecruitProb);
+                recrProbYear.Add(line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
             }
 
-            
+            //Set Recruitment Probabilty Values
+            CreateRecruitmentProbabilityTable(recrProbYear);
+
             //Instanciate recruitList as new list
             recruitList = new List<RecruitmentModel>();
             
@@ -130,6 +153,66 @@ namespace Nmfs.Agepro.CoreLib
             }
 
             Console.WriteLine("Done.");
+        }
+
+
+        /// <summary>
+        /// Creates/Initalizes the Recruitment Proabablity Data Table
+        /// </summary>
+        /// <param name="listRecruitProbYr">List containing Recruitment Distribtions per Observaion Year</param>
+        public void CreateRecruitmentProbabilityTable(List<string[]> listRecruitProbYr)
+        {
+
+            //Clean off potentially existing data 
+            if (this.recruitProb != null)
+            {
+                this.recruitProb.Clear();
+            }
+            //Setup Recruitmet Probabilty Table
+            this.recruitProb = new DataTable();
+            this.recruitProb.TableName = "Recruitment Probability";
+
+
+            //Set Recruit Prob Columns
+            for (int nselection = 0; nselection < this.recruitType.Count(); nselection++)
+            {
+                String recruitProbColumnName = "Selection " + (nselection + 1).ToString();
+
+                if (!this.recruitProb.Columns.Contains(recruitProbColumnName))
+                {
+                    this.recruitProb.Columns.Add(recruitProbColumnName, typeof(double));
+                }
+            }
+            //If current Recruitment Probability table has more columns than actual count, trim it
+            if (this.recruitProb.Columns.Count > this.recruitType.Count())
+            {
+                for (int index = this.recruitProb.Columns.Count - 1; index > 0; index--)
+                {
+                    this.recruitProb.Columns.RemoveAt(index);
+                }
+            }
+
+            for (int irow = 0; irow < this.observationYears.Count(); irow++ )
+            {
+                try
+                {
+                    //Check Recruitment Probability for all selections of each year sums to 1.0
+                    CheckRecruitProbabilitySum(listRecruitProbYr[irow]);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidAgeproParameterException("At row " + (irow + 1).ToString() +
+                        " of recruitment probablity:" + Environment.NewLine + ex.InnerException.Message
+                        , ex);
+                }
+
+                this.recruitProb.Rows.Add(listRecruitProbYr[irow]);
+
+            }
+
+
+
+
         }
 
         /// <summary>
@@ -201,6 +284,7 @@ namespace Nmfs.Agepro.CoreLib
                 case 21:
                     return(new EmpiricalCDFZero(rtype));
                 case 0:
+                    return(new NullSelectRecruitment()); 
                 default:
                     throw new InvalidAgeproParameterException("Invalid Recruitment Model Number: " + rtype);
             }//end switch
@@ -238,6 +322,45 @@ namespace Nmfs.Agepro.CoreLib
 
             return outputLines;
         }
+
+        /// <summary>
+        /// Creates a Recruitment Probability DataTable.
+        /// </summary>
+        /// <param name="yCol">Number of columns</param>
+        /// <param name="xRows">Number of Rows</param>
+        /// <param name="colName">Column Names</param>
+        /// <returns></returns>
+        public static DataTable CreateRecruitProbTable(int yCol, int xRows, string colName)
+        {
+            DataTable recruitProbTable = new DataTable();
+
+            for (int icol = 0; icol < yCol; icol++)
+            {
+                recruitProbTable.Columns.Add(colName + " " + (icol + 1));
+            }
+            for (int row = 0; row < xRows; row++)
+            {
+                recruitProbTable.Rows.Add();
+            }
+
+            //Fill Recruit Probability table with default set of values.
+            //Assume each new case recruit selection prob is spread evenly.
+            double recruitProbVal = 1 / Convert.ToDouble(yCol);
+
+            for (int irow = 0; irow < xRows; irow++)
+            {
+                for (int jcol = 0; jcol < yCol; jcol++)
+                {
+                    if (recruitProbTable.Rows[irow][jcol] == DBNull.Value)
+                    {
+                        recruitProbTable.Rows[irow][jcol] = recruitProbVal;
+                    }
+                }
+            }
+
+            return recruitProbTable;
+        }
+     
                 
     }
 

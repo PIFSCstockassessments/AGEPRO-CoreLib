@@ -13,7 +13,7 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     public class AgeproInputFile
     {
-        public string version { get; set; }
+        public string version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
         public double numVer { get; set; }
         public string caseID { get; set; }
         public AgeproGeneral general = new AgeproGeneral();
@@ -73,29 +73,23 @@ namespace Nmfs.Agepro.CoreLib
         private void ReadInputFileLineValues(StreamReader sr)
         {
             string line;
-            
-
             line = sr.ReadLine();
-            //AGEPRO (Input File) Version
-            if (line.Equals("AGEPRO VERSION 4.0"))
+            
+            //Version: AGEPRO (Input File) Version
+            var supportedINPVer = new[]{ "AGEPRO VERSION 4.0", "AGEPRO VERSION 4.2" };
+            var incompatibleINPVer = new[]{ "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
+            if (supportedINPVer.Contains(line))
             {
                 this.version = line;
             }
-            else
+            else if (incompatibleINPVer.Contains(line)) 
             {
                 //Throw Error/Warning for incompatiability
-                if (line.Equals("AGEPRO VERSION 3.2"))
-                {
-                    throw new InvalidAgeproParameterException("This file format version is incompatible.");
-                }
-                else if (line.Equals("AGEPRO VERSION 3.3"))
-                {
-                    throw new InvalidAgeproParameterException("This file format version is incompatible.");
-                }
-                else
-                { 
-                    throw new InvalidAgeproParameterException("Invaild AGEPRO input file.");
-                }
+                throw new InvalidAgeproParameterException("This file format version is incompatible.");
+            }
+            else
+            {           
+                throw new InvalidAgeproParameterException("Invaild AGEPRO input file.");
             }
 
             while(!sr.EndOfStream)
@@ -266,9 +260,13 @@ namespace Nmfs.Agepro.CoreLib
                 List<string> outLines = this.WriteInputFileLines();
                 File.WriteAllLines(file, outLines);
             }
-            catch (Exception ex)
+            catch(NullReferenceException)
             {
-                Console.WriteLine(ex.Message);
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -279,7 +277,7 @@ namespace Nmfs.Agepro.CoreLib
         private List<string> WriteInputFileLines()
         {
             List<string> inpFile = new List<string>();
-            inpFile.Add(this.version); //AGEPRO VERSION 4.0
+            inpFile.Add(this.version); //New cases will have "AGEPRO VERSION 4.2"
             
             //CASEID
             inpFile.Add("[CASEID]");
@@ -312,7 +310,7 @@ namespace Nmfs.Agepro.CoreLib
             //MEAN_WEIGHT
             inpFile.AddRange(meanWeight.WriteStochasticAgeDataLines("[MEAN_WEIGHT]"));
 
-            //CATCH_WEIDHT
+            //CATCH_WEIGHT
             inpFile.AddRange(catchWeight.WriteStochasticAgeDataLines("[CATCH_WEIGHT]"));
 
             if (this.general.hasDiscards)

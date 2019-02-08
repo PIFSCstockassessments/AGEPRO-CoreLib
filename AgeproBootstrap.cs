@@ -43,7 +43,8 @@ namespace Nmfs.Agepro.CoreLib
 
         public AgeproBootstrap()
         {
-
+            numBootstraps = 0; 
+            popScaleFactor = 0;
         }
 
         /// <summary>
