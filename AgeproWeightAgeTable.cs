@@ -74,18 +74,7 @@ namespace Nmfs.Agepro.CoreLib
 
         public override List<string> WriteStochasticAgeDataLines(string keyword)
         {
-            if (this.byAgeData == null)
-            {
-                throw new NullReferenceException("Stochastic Age of " + 
-                    keyword + " is NULL." );
-            }
-            if (this.byAgeCV == null)
-            {
-                throw new NullReferenceException("Stochastic CV of " + 
-                    keyword + " is NULL.");
-            }
-
-
+            
             List<string> outputLines = new List<string>();
 
             outputLines.Add(keyword); //[PARAMETER]
@@ -98,6 +87,18 @@ namespace Nmfs.Agepro.CoreLib
             // 0 == User Specfied Weights at Age
             else if (this.weightOpt == 0)  
             {
+
+                if (this.byAgeData == null)
+                {
+                    throw new NullReferenceException("Stochastic Age of " +
+                        keyword + " is NULL.");
+                }
+                if (this.byAgeCV == null)
+                {
+                    throw new NullReferenceException("Stochastic CV of " +
+                        keyword + " is NULL.");
+                }
+
                 foreach (DataRow yearRow in this.byAgeData.Rows)
                 {
                     outputLines.Add(string.Join(new string(' ',2), yearRow.ItemArray));
