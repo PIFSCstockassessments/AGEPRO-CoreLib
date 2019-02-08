@@ -170,17 +170,7 @@ namespace Nmfs.Agepro.CoreLib
         {
 
             
-            if (this.byAgeData == null)
-            {
-                throw new NullReferenceException("Stochastic Age of " + 
-                    keyword + " is NULL.");
-            }
-            if (this.byAgeCV == null)
-            {
-                throw new NullReferenceException("Stochastic CV of " + 
-                    keyword + " is NULL.");
-            }
-
+            
 
             List<string> outputLines = new List<string>();
 
@@ -192,6 +182,19 @@ namespace Nmfs.Agepro.CoreLib
             }
             else
             {
+
+                if (this.byAgeData == null)
+                {
+                    throw new NullReferenceException("Stochastic Age of " +
+                        keyword + " is NULL.");
+                }
+                if (this.byAgeCV == null)
+                {
+                    throw new NullReferenceException("Stochastic CV of " +
+                        keyword + " is NULL.");
+                }
+
+
                 outputLines.Add("0" + new string(' ', 2) + Convert.ToInt32(this.timeVarying).ToString());
                 foreach (DataRow yearRow in this.byAgeData.Rows)
                 {
