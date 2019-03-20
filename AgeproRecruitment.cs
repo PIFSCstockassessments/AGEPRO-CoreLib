@@ -51,7 +51,7 @@ namespace Nmfs.Agepro.CoreLib
         public void newCaseRecruitment(int nrecruits, string[] seqYears)
         {
 
-            this.maxRecruitObs = 50;
+            this.maxRecruitObs = 500;
             //TODO: safer int.tryParse
             this.observationYears = Array.ConvertAll<string, int>(seqYears, int.Parse);
 
