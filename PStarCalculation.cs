@@ -7,18 +7,13 @@ using System.Data;
 
 namespace Nmfs.Agepro.CoreLib
 {
-    public class PStarCalculation : HarvestCalculation
+    public class PStarCalculation : AgeproHarvestScenario
     {
-        private int _targetYear;
+
         private double _pStarF;
         private DataTable _pStarTable;
         private int _pStarLevels;
 
-        public int targetYear
-        {
-            get { return _targetYear; }
-            set { SetProperty(ref _targetYear, value); }
-        }
         public double pStarF
         {
             get { return _pStarF; }
