@@ -16,7 +16,6 @@ namespace Nmfs.Agepro.CoreLib
         private int _targetType;        //rebuild target type (cboRebuild.SelectedIndex)
         private double _targetPercent;  //Percent Confidence (Rebulider Confidence Level)
 
-
         public double targetValue
         {
             get { return _targetValue; }
@@ -35,6 +34,10 @@ namespace Nmfs.Agepro.CoreLib
         public RebuilderTargetCalculation()
         {
             calculationType = HarvestScenarioAnalysis.Rebuilder;
+            this.targetYear = 0;
+            this.targetValue = 0;
+            this.targetType = 0;
+            this.targetPercent = 0;
         }
 
         /// <summary>
