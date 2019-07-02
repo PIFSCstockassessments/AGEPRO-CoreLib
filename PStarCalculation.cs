@@ -33,6 +33,13 @@ namespace Nmfs.Agepro.CoreLib
         public PStarCalculation()
         {
             calculationType = HarvestScenarioAnalysis.PStar;
+            this.pStarLevels = 1;
+            this.pStarF = 0;
+            this.targetYear = 0;
+            //Create PStar Table
+            this.pStarTable = this.CreateNewPStarTable();
+            this.pStarTable.Rows.Add();
+            Nmfs.Agepro.CoreLib.Extensions.FillDBNullCellsWithZero(this.pStarTable);
         }
 
         /// <summary>

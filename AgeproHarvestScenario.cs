@@ -27,6 +27,7 @@ namespace Nmfs.Agepro.CoreLib
         public AgeproHarvestScenario()
         {
             analysisType = HarvestScenarioAnalysis.HarvestScenario;
+            targetYear = 0;
         }
 
         public int targetYear
