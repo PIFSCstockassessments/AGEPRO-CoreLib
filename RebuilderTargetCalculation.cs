@@ -9,18 +9,13 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Specifications for Stock Rebuilder Targets
     /// </summary>
-    public class RebuilderTargetCalculation : HarvestCalculation
+    public class RebuilderTargetCalculation : AgeproHarvestScenario
     {
-        private int _targetYear;
+        //private int _targetYear;
         private double _targetValue;
         private int _targetType;        //rebuild target type (cboRebuild.SelectedIndex)
         private double _targetPercent;  //Percent Confidence (Rebulider Confidence Level)
 
-        public int targetYear
-        {
-            get { return _targetYear; }
-            set { SetProperty(ref _targetYear, value); }
-        }
         public double targetValue
         {
             get { return _targetValue; }
@@ -39,6 +34,10 @@ namespace Nmfs.Agepro.CoreLib
         public RebuilderTargetCalculation()
         {
             calculationType = HarvestScenarioAnalysis.Rebuilder;
+            this.targetYear = 0;
+            this.targetValue = 0;
+            this.targetType = 0;
+            this.targetPercent = 0;
         }
 
         /// <summary>

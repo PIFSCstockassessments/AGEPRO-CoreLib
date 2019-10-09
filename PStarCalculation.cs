@@ -7,18 +7,13 @@ using System.Data;
 
 namespace Nmfs.Agepro.CoreLib
 {
-    public class PStarCalculation : HarvestCalculation
+    public class PStarCalculation : AgeproHarvestScenario
     {
-        private int _targetYear;
+
         private double _pStarF;
         private DataTable _pStarTable;
         private int _pStarLevels;
 
-        public int targetYear
-        {
-            get { return _targetYear; }
-            set { SetProperty(ref _targetYear, value); }
-        }
         public double pStarF
         {
             get { return _pStarF; }
@@ -38,6 +33,13 @@ namespace Nmfs.Agepro.CoreLib
         public PStarCalculation()
         {
             calculationType = HarvestScenarioAnalysis.PStar;
+            this.pStarLevels = 1;
+            this.pStarF = 0;
+            this.targetYear = 0;
+            //Create PStar Table
+            this.pStarTable = this.CreateNewPStarTable();
+            this.pStarTable.Rows.Add();
+            Nmfs.Agepro.CoreLib.Extensions.FillDBNullCellsWithZero(this.pStarTable);
         }
 
         /// <summary>

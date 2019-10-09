@@ -18,15 +18,37 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// AGEPRO Harvest Scenario Parameters. 
     /// </summary>
-    public class AgeproHarvestScenario
+    public class AgeproHarvestScenario : HarvestCalculation
     {
+        private int _targetYear; 
+        private HarvestScenarioAnalysis _analysisType;
         public DataTable harvestScenarioTable { get; set; }
-        public int targetYear { get; set; }
-        public HarvestScenarioAnalysis analysisType { get; set; }
 
         public AgeproHarvestScenario()
         {
             analysisType = HarvestScenarioAnalysis.HarvestScenario;
+            targetYear = 0;
+        }
+
+        public int targetYear
+        {
+            get { return _targetYear; }
+            set { SetProperty(ref _targetYear, value); }
+        }
+        public HarvestScenarioAnalysis analysisType
+        {
+            get { return _analysisType; }
+            set { SetProperty(ref _analysisType, value); }
+        }
+
+        public override List<string> WriteCalculationDataLines()
+        {
+            return this.WriteHarvestTableDataLines();
+        }
+
+        public override void ReadCalculationDataLines(StreamReader sr)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -187,6 +209,7 @@ namespace Nmfs.Agepro.CoreLib
 
             return outputLines;
         }
+
     }
 
 }

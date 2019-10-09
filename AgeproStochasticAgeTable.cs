@@ -46,7 +46,7 @@ namespace Nmfs.Agepro.CoreLib
 
             //Input Age Option
             string line = sr.ReadLine();
-            string[] swLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] swLine = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
             string optStock = swLine[0];
             SetStochasticAgeOption(optStock);  //Input Age Option may vary if this a weightAgeTable
 
@@ -96,7 +96,7 @@ namespace Nmfs.Agepro.CoreLib
                     {
                         line = sr.ReadLine();
                         DataRow dr = ageTable.NewRow();
-                        string[] ageLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);   
+                        string[] ageLine = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);   
                         ageTable.Rows.Add(ageLine);
                     }
                     this.byAgeData = ageTable;
@@ -114,7 +114,7 @@ namespace Nmfs.Agepro.CoreLib
                     {
                         line = sr.ReadLine();
                         DataRow dr = cvTable.NewRow();
-                        string[] cvLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        string[] cvLine = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                         for (int j = 0; j < numAges; j++)
                         {
                             dr[j] = cvLine[j];
