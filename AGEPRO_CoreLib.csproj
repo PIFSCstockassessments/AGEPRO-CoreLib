@@ -63,6 +63,7 @@
     <Compile Include="src\coreLib\bio-tspawn\AgeproBiological.cs" />
     <Compile Include="src\coreLib\bootstrap\AgeproBootstrap.cs" />
     <Compile Include="src\coreLib\AgeproCoreLibProperty.cs" />
+    <Compile Include="src\coreLib\harvest\HarvestScenarioAnalysis.cs" />
     <Compile Include="src\coreLib\model-setup\AgeproGeneral.cs" />
     <Compile Include="src\coreLib\harvest\AgeproHarvestScenario.cs" />
     <Compile Include="src\io\AgeproInputFile.cs" />
