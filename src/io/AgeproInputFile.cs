@@ -181,7 +181,7 @@ namespace Nmfs.Agepro.CoreLib
                 {
                     this.rebuild.obsYears = this.general.SeqYears();
                     this.rebuild.ReadCalculationDataLines(sr);
-                    this.harvestScenario.analysisType = HarvestScenarioAnalysis.Rebuilder;
+                    this.harvestScenario.AnalysisType = HarvestScenarioAnalysis.Rebuilder;
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
@@ -243,7 +243,7 @@ namespace Nmfs.Agepro.CoreLib
                 {
                     this.pstar.obsYears = this.general.SeqYears();
                     this.pstar.ReadCalculationDataLines(sr);
-                    this.harvestScenario.analysisType = HarvestScenarioAnalysis.PStar;
+                    this.harvestScenario.AnalysisType = HarvestScenarioAnalysis.PStar;
                 }
             }
 
@@ -344,14 +344,14 @@ namespace Nmfs.Agepro.CoreLib
             inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
             
             //REBUILD
-            if (this.harvestScenario.analysisType == HarvestScenarioAnalysis.Rebuilder)
+            if (this.harvestScenario.AnalysisType == HarvestScenarioAnalysis.Rebuilder)
             {
                 //inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
                 inpFile.AddRange(rebuild.WriteCalculationDataLines());
             }
             
             //PSTAR
-            if (this.harvestScenario.analysisType == HarvestScenarioAnalysis.PStar)
+            if (this.harvestScenario.AnalysisType == HarvestScenarioAnalysis.PStar)
             {
                 //inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
                 inpFile.AddRange(pstar.WriteCalculationDataLines());
