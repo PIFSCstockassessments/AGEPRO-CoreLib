@@ -12,7 +12,7 @@ namespace Nmfs.Agepro.CoreLib
     /// AGEPRO Input File 
     /// </summary>
     public class AgeproInputFile
-    {
+  {
         public string version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
         public double numVer { get; set; }
         public string caseID { get; set; }
@@ -411,40 +411,5 @@ namespace Nmfs.Agepro.CoreLib
 
             return inpFile;
         }
-
-        /// <summary>
-        /// Creates and sets the Recruitment Model Dictionary Object
-        /// </summary>
-        /// <returns>Returns the Recruitment Model Dictionary</returns>
-        private Dictionary<int, string> RecruitDictionary() 
-        {
-            //Future Feature: Generizse/Automate this Dictionary?
-            Dictionary<int, string> recruitModelDictionary = new Dictionary<int, string>();
-
-            recruitModelDictionary.Add(0, "None Selected");
-            recruitModelDictionary.Add(1, "Model 1: Markov Matrix");
-            recruitModelDictionary.Add(2, "Model 2: Empirical Recruits per Spawning Biomass Distribution");
-            recruitModelDictionary.Add(3, "Model 3: Empirical Recruitment Distributiion");
-            recruitModelDictionary.Add(4, "Model 4: Two-Stage Empirical Recruits per Spawning Biomass Distribution");
-            recruitModelDictionary.Add(5, "Model 5: Beverton-Holt Curve w/ Lognormal Error");
-            recruitModelDictionary.Add(6, "Model 6: Ricker Curve w/ Lognormal Error");
-            recruitModelDictionary.Add(7, "Model 7: Shepherd Curve w/ Lognormal Error");
-            recruitModelDictionary.Add(8, "Model 8: Lognormal Distribution");
-            //Model 9 was removed in AGEPRO 4.0
-            recruitModelDictionary.Add(10, "Model 10: Beverton-Holt Curve w/ Autocorrected Lognormal Error");
-            recruitModelDictionary.Add(11, "Model 11: Ricker Curve w/ Autocorrected Lognormal Error");
-            recruitModelDictionary.Add(12, "Model 12: Shepherd Curve w/ Autocorrected Lognormal Error");
-            recruitModelDictionary.Add(13, "Model 13: Autocorrected Lognormal Distribution");
-            recruitModelDictionary.Add(14, "Model 14: Empirical Cumulative Distribution Function of Recruitment");
-            recruitModelDictionary.Add(15, "Model 15: Two-Stage Empirical Cumulative Distribution Function of Recruitment");
-            recruitModelDictionary.Add(16, "Model 16: Linear Recruits per Spawning Biomass Predictor w/ Normal Error");
-            recruitModelDictionary.Add(17, "Model 17: Loglinear Recruits per Spawning Biomass Predictor w/ Lognormal Error");
-            recruitModelDictionary.Add(18, "Model 18: Linear Recruitment Predictor w/ Normal Error");
-            recruitModelDictionary.Add(19, "Model 19: Loglinear Recruitment Predictor w/ Lognormal Error");
-            recruitModelDictionary.Add(20, "Model 20: Fixed Recruitment");
-            recruitModelDictionary.Add(21, "Model 21: Empirical Cumulative Distribution Function of Recruitment w/ Linear Decline to Zero");
-
-            return recruitModelDictionary;
-        }
-    }
+  }
 }
