@@ -105,21 +105,21 @@ namespace Nmfs.Agepro.CoreLib
                 {
                     line = sr.ReadLine();
                     string[] generalLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    this.general.projYearStart = Convert.ToInt32(generalLine[0]);
-                    this.general.projYearEnd = Convert.ToInt32(generalLine[1]);
-                    this.general.ageBegin = Convert.ToInt32(generalLine[2]);
-                    this.general.ageEnd = Convert.ToInt32(generalLine[3]);
-                    this.general.numPopSims = Convert.ToInt32(generalLine[4]);
-                    this.general.numFleets = Convert.ToInt32(generalLine[5]);
-                    this.general.numRecModels = Convert.ToInt32(generalLine[6]);
-                    this.general.seed = Convert.ToInt32(generalLine[8]);
+                    this.general.ProjYearStart = Convert.ToInt32(generalLine[0]);
+                    this.general.ProjYearEnd = Convert.ToInt32(generalLine[1]);
+                    this.general.AgeBegin = Convert.ToInt32(generalLine[2]);
+                    this.general.AgeEnd = Convert.ToInt32(generalLine[3]);
+                    this.general.NumPopSims = Convert.ToInt32(generalLine[4]);
+                    this.general.NumFleets = Convert.ToInt32(generalLine[5]);
+                    this.general.NumRecModels = Convert.ToInt32(generalLine[6]);
+                    this.general.Seed = Convert.ToInt32(generalLine[8]);
                     if (generalLine[7].Equals("1"))
                     {
-                        this.general.hasDiscards = true;
+                        this.general.HasDiscards = true;
                     }
                     else
                     {
-                        this.general.hasDiscards = false;
+                        this.general.HasDiscards = false;
                     }
 
                 }
@@ -127,7 +127,7 @@ namespace Nmfs.Agepro.CoreLib
                 {
                     //Read Recruit Data
                     this.recruitment.observationYears = this.general.SeqYears();
-                    this.recruitment.ReadRecruitmentData(sr,general.NumYears(),general.numRecModels);
+                    this.recruitment.ReadRecruitmentData(sr,general.NumYears(),general.NumRecModels);
                 }
                 else if (line.Equals("[STOCK_WEIGHT]"))
                 {
@@ -143,11 +143,11 @@ namespace Nmfs.Agepro.CoreLib
                 }
                 else if (line.Equals("[CATCH_WEIGHT]"))
                 {
-                    this.catchWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.catchWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
                 }
                 else if (line.Equals("[DISC_WEIGHT]"))
                 {
-                    this.discardWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.discardWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
                 }
                 else if (line.Equals("[NATMORT]"))
                 {
@@ -159,11 +159,11 @@ namespace Nmfs.Agepro.CoreLib
                 }
                 else if (line.Equals("[FISHERY]"))
                 {
-                    this.fishery.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.fishery.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
                 }
                 else if (line.Equals("[DISCARD]"))
                 {
-                    this.discardFraction.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.numFleets);
+                    this.discardFraction.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
                 }
                 else if (line.Equals("[BIOLOGICAL]"))
                 {
@@ -175,7 +175,7 @@ namespace Nmfs.Agepro.CoreLib
                 }
                 else if (line.Equals("[HARVEST]"))
                 {
-                    this.harvestScenario.ReadHarvestTable(sr, this.general.NumYears(), this.general.numFleets);
+                    this.harvestScenario.ReadHarvestTable(sr, this.general.NumYears(), this.general.NumFleets);
                 }
                 else if (line.Equals("[REBUILD]"))
                 {
@@ -286,20 +286,20 @@ namespace Nmfs.Agepro.CoreLib
             //GENERAL
             inpFile.Add("[GENERAL]");
             inpFile.Add(
-                this.general.projYearStart.ToString() + "  " +
-                this.general.projYearEnd.ToString() + "  " +
-                this.general.ageBegin.ToString() + "  " +
-                this.general.ageEnd.ToString() + "  " + 
-                this.general.numPopSims.ToString() + "  " + 
-                this.general.numFleets.ToString() + "  " + 
-                this.general.numRecModels.ToString() + "  " +
-                Convert.ToInt32(this.general.hasDiscards).ToString() + "  " +
-                this.general.seed.ToString());
+                this.general.ProjYearStart.ToString() + "  " +
+                this.general.ProjYearEnd.ToString() + "  " +
+                this.general.AgeBegin.ToString() + "  " +
+                this.general.AgeEnd.ToString() + "  " + 
+                this.general.NumPopSims.ToString() + "  " + 
+                this.general.NumFleets.ToString() + "  " + 
+                this.general.NumRecModels.ToString() + "  " +
+                Convert.ToInt32(this.general.HasDiscards).ToString() + "  " +
+                this.general.Seed.ToString());
 
             //BOOTSTRAP
             inpFile.Add("[BOOTSTRAP]");
-            inpFile.Add(this.bootstrap.numBootstraps.ToString() + "  " + this.bootstrap.popScaleFactor.ToString());
-            inpFile.Add(this.bootstrap.bootstrapFile);
+            inpFile.Add(this.bootstrap.NumBootstraps.ToString() + "  " + this.bootstrap.PopScaleFactor.ToString());
+            inpFile.Add(this.bootstrap.BootstrapFile);
 
             //STOCK WEIGHT
             inpFile.AddRange(jan1Weight.WriteStochasticAgeDataLines("[STOCK_WEIGHT]"));
@@ -313,7 +313,7 @@ namespace Nmfs.Agepro.CoreLib
             //CATCH_WEIGHT
             inpFile.AddRange(catchWeight.WriteStochasticAgeDataLines("[CATCH_WEIGHT]"));
 
-            if (this.general.hasDiscards)
+            if (this.general.HasDiscards)
             {
                 //DISC_WEIGHT
                 inpFile.AddRange(discardWeight.WriteStochasticAgeDataLines("[DISC_WEIGHT]"));
@@ -331,7 +331,7 @@ namespace Nmfs.Agepro.CoreLib
             //FISHERY
             inpFile.AddRange(fishery.WriteStochasticAgeDataLines("[FISHERY]"));
 
-            if (this.general.hasDiscards)
+            if (this.general.HasDiscards)
             {
                 //DISCARDS
                 inpFile.AddRange(discardFraction.WriteStochasticAgeDataLines("[DISCARD]"));
