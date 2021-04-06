@@ -117,70 +117,113 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HarvestScenario_INP_header" xml:space="preserve">
+  <data name="HarvestScenario_INP_Header" xml:space="preserve">
     <value>[HARVEST]</value>
   </data>
-  <data name="HarvestScenario_text" xml:space="preserve">
+  <data name="HarvestScenario_Text" xml:space="preserve">
     <value>Harvest Scenario</value>
   </data>
-  <data name="HarvestSpec_case0" xml:space="preserve">
+  <data name="HarvestSpec_Case0" xml:space="preserve">
     <value>F-MULT</value>
   </data>
-  <data name="HarvestSpec_case1" xml:space="preserve">
+  <data name="HarvestSpec_Case1" xml:space="preserve">
     <value>LANDINGS</value>
   </data>
-  <data name="HarvestSpec_case2" xml:space="preserve">
+  <data name="HarvestSpec_Case2" xml:space="preserve">
     <value>REMOVALS</value>
   </data>
-  <data name="HarvestTable_col_spec" xml:space="preserve">
+  <data name="HarvestTable_Col_Spec" xml:space="preserve">
     <value>Harvest Spec</value>
   </data>
-  <data name="HarvestTable_col_value" xml:space="preserve">
+  <data name="HarvestTable_Col_Value" xml:space="preserve">
     <value>HARVEST VALUE</value>
   </data>
-  <data name="HarvestTable_col_valueFleetSuffix" xml:space="preserve">
+  <data name="HarvestTable_Col_ValueFleetSuffix" xml:space="preserve">
     <value>FLEET-</value>
   </data>
-  <data name="program" xml:space="preserve">
+  <data name="Program" xml:space="preserve">
     <value>AGEPRO</value>
   </data>
-  <data name="Pstar_error_decendingLevels" xml:space="preserve">
+  <data name="PStar_Error_DecendingLevels" xml:space="preserve">
     <value>P-Star Levels must be in ascending order</value>
   </data>
-  <data name="PStar_error_invalidF" xml:space="preserve">
+  <data name="PStar_Error_InvalidF" xml:space="preserve">
     <value>Invalid or missing overfishing value.</value>
   </data>
-  <data name="PStar_error_invalidLevels" xml:space="preserve">
+  <data name="PStar_Error_InvalidLevels" xml:space="preserve">
     <value>Invalid or missing number of P-Star Levels.</value>
   </data>
-  <data name="PStar_error_invalidYear" xml:space="preserve">
+  <data name="PStar_Error_InvalidYear" xml:space="preserve">
     <value>Invalid P-Star Year Specification.</value>
   </data>
-  <data name="Pstar_error_rowCount" xml:space="preserve">
+  <data name="PStar_Error_RowCount" xml:space="preserve">
     <value>P-Star Data Table Has more than one row</value>
   </data>
-  <data name="Pstar_INP_header" xml:space="preserve">
+  <data name="PStar_INP_Header" xml:space="preserve">
     <value>[PSTAR]</value>
   </data>
-  <data name="Pstar_text" xml:space="preserve">
+  <data name="PStar_Text" xml:space="preserve">
     <value>Pstar</value>
   </data>
-  <data name="Rebuilder_error_invaildConf" xml:space="preserve">
+  <data name="Rebuilder_Error_InvaildConf" xml:space="preserve">
     <value>Invalid or missing rebuilder confidence level</value>
   </data>
-  <data name="Rebuilder_error_invalidTarget" xml:space="preserve">
+  <data name="Rebuilder_Error_InvalidTarget" xml:space="preserve">
     <value>Invalid or missing rebuilder target value.</value>
   </data>
-  <data name="Rebuilder_error_invalidYear" xml:space="preserve">
+  <data name="Rebuilder_Error_InvalidYear" xml:space="preserve">
     <value>Invalid Rebuilder Year Specification.</value>
   </data>
-  <data name="Rebuilder_text" xml:space="preserve">
+  <data name="Rebuilder_Text" xml:space="preserve">
     <value>Rebuilder</value>
   </data>
-  <data name="Rebulider_INP_header" xml:space="preserve">
+  <data name="Rebulider_INP_Header" xml:space="preserve">
     <value>[REBUILD]</value>
   </data>
-  <data name="version" xml:space="preserve">
+  <data name="Recruitment_Default_Int" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Recruitment_Default_Value" xml:space="preserve">
+    <value>0.000</value>
+  </data>
+  <data name="Recruitment_Error_InvaildCase" xml:space="preserve">
+    <value>Invalid Recruitment Model Number {0}</value>
+  </data>
+  <data name="Recruitment_INP_Header" xml:space="preserve">
+    <value>[RECRUIT]</value>
+  </data>
+  <data name="Recruitment_Max_Obs" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="Recruitment_ReadLine" xml:space="preserve">
+    <value>Reading Recruitment Data ...</value>
+  </data>
+  <data name="Recruitment_ReadLine_Error_NumRecruitModel" xml:space="preserve">
+    <value>Number of Recruit Models does not match input file recruitModel count</value>
+  </data>
+  <data name="Recruitment_ReadLine_Model" xml:space="preserve">
+    <value>Reading Recuitment Model Data ...</value>
+  </data>
+  <data name="Recruitment_Text" xml:space="preserve">
+    <value>Recruitment</value>
+  </data>
+  <data name="RecruitProb_ColName" xml:space="preserve">
+    <value>Selection {0}</value>
+  </data>
+  <data name="RecruitProb_Error_InvaildProb" xml:space="preserve">
+    <value>At row {0} of recruitment probablity:
+{1}{2}</value>
+  </data>
+  <data name="RecruitProb_Error_InvalidSum" xml:space="preserve">
+    <value>Recruitment probablity sum does not equal 1.0: Probability sum is {0}</value>
+  </data>
+  <data name="RecruitProb_Name" xml:space="preserve">
+    <value>Recruitment Probability</value>
+  </data>
+  <data name="Task_Complete" xml:space="preserve">
+    <value>Done.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
     <value>v{0}</value>
   </data>
 </root>

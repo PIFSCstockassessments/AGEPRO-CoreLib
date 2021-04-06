@@ -63,198 +63,325 @@ namespace Nmfs.Agepro.CoreLib.resources {
         /// <summary>
         ///   Looks up a localized string similar to [HARVEST].
         /// </summary>
-        internal static string HarvestScenario_INP_header {
+        internal static string HarvestScenario_INP_Header {
             get {
-                return ResourceManager.GetString("HarvestScenario_INP_header", resourceCulture);
+                return ResourceManager.GetString("HarvestScenario_INP_Header", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Harvest Scenario.
         /// </summary>
-        internal static string HarvestScenario_text {
+        internal static string HarvestScenario_Text {
             get {
-                return ResourceManager.GetString("HarvestScenario_text", resourceCulture);
+                return ResourceManager.GetString("HarvestScenario_Text", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to F-MULT.
         /// </summary>
-        internal static string HarvestSpec_case0 {
+        internal static string HarvestSpec_Case0 {
             get {
-                return ResourceManager.GetString("HarvestSpec_case0", resourceCulture);
+                return ResourceManager.GetString("HarvestSpec_Case0", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to LANDINGS.
         /// </summary>
-        internal static string HarvestSpec_case1 {
+        internal static string HarvestSpec_Case1 {
             get {
-                return ResourceManager.GetString("HarvestSpec_case1", resourceCulture);
+                return ResourceManager.GetString("HarvestSpec_Case1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to REMOVALS.
         /// </summary>
-        internal static string HarvestSpec_case2 {
+        internal static string HarvestSpec_Case2 {
             get {
-                return ResourceManager.GetString("HarvestSpec_case2", resourceCulture);
+                return ResourceManager.GetString("HarvestSpec_Case2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Harvest Spec.
         /// </summary>
-        internal static string HarvestTable_col_spec {
+        internal static string HarvestTable_Col_Spec {
             get {
-                return ResourceManager.GetString("HarvestTable_col_spec", resourceCulture);
+                return ResourceManager.GetString("HarvestTable_Col_Spec", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to HARVEST VALUE.
         /// </summary>
-        internal static string HarvestTable_col_value {
+        internal static string HarvestTable_Col_Value {
             get {
-                return ResourceManager.GetString("HarvestTable_col_value", resourceCulture);
+                return ResourceManager.GetString("HarvestTable_Col_Value", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to FLEET-.
         /// </summary>
-        internal static string HarvestTable_col_valueFleetSuffix {
+        internal static string HarvestTable_Col_ValueFleetSuffix {
             get {
-                return ResourceManager.GetString("HarvestTable_col_valueFleetSuffix", resourceCulture);
+                return ResourceManager.GetString("HarvestTable_Col_ValueFleetSuffix", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to AGEPRO.
         /// </summary>
-        internal static string program {
+        internal static string Program {
             get {
-                return ResourceManager.GetString("program", resourceCulture);
+                return ResourceManager.GetString("Program", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to P-Star Levels must be in ascending order.
         /// </summary>
-        internal static string Pstar_error_decendingLevels {
+        internal static string PStar_Error_DecendingLevels {
             get {
-                return ResourceManager.GetString("Pstar_error_decendingLevels", resourceCulture);
+                return ResourceManager.GetString("PStar_Error_DecendingLevels", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid or missing overfishing value..
         /// </summary>
-        internal static string PStar_error_invalidF {
+        internal static string PStar_Error_InvalidF {
             get {
-                return ResourceManager.GetString("PStar_error_invalidF", resourceCulture);
+                return ResourceManager.GetString("PStar_Error_InvalidF", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid or missing number of P-Star Levels..
         /// </summary>
-        internal static string PStar_error_invalidLevels {
+        internal static string PStar_Error_InvalidLevels {
             get {
-                return ResourceManager.GetString("PStar_error_invalidLevels", resourceCulture);
+                return ResourceManager.GetString("PStar_Error_InvalidLevels", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid P-Star Year Specification..
         /// </summary>
-        internal static string PStar_error_invalidYear {
+        internal static string PStar_Error_InvalidYear {
             get {
-                return ResourceManager.GetString("PStar_error_invalidYear", resourceCulture);
+                return ResourceManager.GetString("PStar_Error_InvalidYear", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to P-Star Data Table Has more than one row.
         /// </summary>
-        internal static string Pstar_error_rowCount {
+        internal static string PStar_Error_RowCount {
             get {
-                return ResourceManager.GetString("Pstar_error_rowCount", resourceCulture);
+                return ResourceManager.GetString("PStar_Error_RowCount", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [PSTAR].
         /// </summary>
-        internal static string Pstar_INP_header {
+        internal static string PStar_INP_Header {
             get {
-                return ResourceManager.GetString("Pstar_INP_header", resourceCulture);
+                return ResourceManager.GetString("PStar_INP_Header", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Pstar.
         /// </summary>
-        internal static string Pstar_text {
+        internal static string PStar_Text {
             get {
-                return ResourceManager.GetString("Pstar_text", resourceCulture);
+                return ResourceManager.GetString("PStar_Text", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid or missing rebuilder confidence level.
         /// </summary>
-        internal static string Rebuilder_error_invaildConf {
+        internal static string Rebuilder_Error_InvaildConf {
             get {
-                return ResourceManager.GetString("Rebuilder_error_invaildConf", resourceCulture);
+                return ResourceManager.GetString("Rebuilder_Error_InvaildConf", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid or missing rebuilder target value..
         /// </summary>
-        internal static string Rebuilder_error_invalidTarget {
+        internal static string Rebuilder_Error_InvalidTarget {
             get {
-                return ResourceManager.GetString("Rebuilder_error_invalidTarget", resourceCulture);
+                return ResourceManager.GetString("Rebuilder_Error_InvalidTarget", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid Rebuilder Year Specification..
         /// </summary>
-        internal static string Rebuilder_error_invalidYear {
+        internal static string Rebuilder_Error_InvalidYear {
             get {
-                return ResourceManager.GetString("Rebuilder_error_invalidYear", resourceCulture);
+                return ResourceManager.GetString("Rebuilder_Error_InvalidYear", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Rebuilder.
         /// </summary>
-        internal static string Rebuilder_text {
+        internal static string Rebuilder_Text {
             get {
-                return ResourceManager.GetString("Rebuilder_text", resourceCulture);
+                return ResourceManager.GetString("Rebuilder_Text", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [REBUILD].
         /// </summary>
-        internal static string Rebulider_INP_header {
+        internal static string Rebulider_INP_Header {
             get {
-                return ResourceManager.GetString("Rebulider_INP_header", resourceCulture);
+                return ResourceManager.GetString("Rebulider_INP_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        internal static string Recruitment_Default_Int {
+            get {
+                return ResourceManager.GetString("Recruitment_Default_Int", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.000.
+        /// </summary>
+        internal static string Recruitment_Default_Value {
+            get {
+                return ResourceManager.GetString("Recruitment_Default_Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Recruitment Model Number {0}.
+        /// </summary>
+        internal static string Recruitment_Error_InvaildCase {
+            get {
+                return ResourceManager.GetString("Recruitment_Error_InvaildCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [RECRUIT].
+        /// </summary>
+        internal static string Recruitment_INP_Header {
+            get {
+                return ResourceManager.GetString("Recruitment_INP_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 500.
+        /// </summary>
+        internal static string Recruitment_Max_Obs {
+            get {
+                return ResourceManager.GetString("Recruitment_Max_Obs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading Recruitment Data ....
+        /// </summary>
+        internal static string Recruitment_ReadLine {
+            get {
+                return ResourceManager.GetString("Recruitment_ReadLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of Recruit Models does not match input file recruitModel count.
+        /// </summary>
+        internal static string Recruitment_ReadLine_Error_NumRecruitModel {
+            get {
+                return ResourceManager.GetString("Recruitment_ReadLine_Error_NumRecruitModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading Recuitment Model Data ....
+        /// </summary>
+        internal static string Recruitment_ReadLine_Model {
+            get {
+                return ResourceManager.GetString("Recruitment_ReadLine_Model", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recruitment.
+        /// </summary>
+        internal static string Recruitment_Text {
+            get {
+                return ResourceManager.GetString("Recruitment_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection {0}.
+        /// </summary>
+        internal static string RecruitProb_ColName {
+            get {
+                return ResourceManager.GetString("RecruitProb_ColName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At row {0} of recruitment probablity:
+        ///{1}{2}.
+        /// </summary>
+        internal static string RecruitProb_Error_InvaildProb {
+            get {
+                return ResourceManager.GetString("RecruitProb_Error_InvaildProb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recruitment probablity sum does not equal 1.0: Probability sum is {0}.
+        /// </summary>
+        internal static string RecruitProb_Error_InvalidSum {
+            get {
+                return ResourceManager.GetString("RecruitProb_Error_InvalidSum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recruitment Probability.
+        /// </summary>
+        internal static string RecruitProb_Name {
+            get {
+                return ResourceManager.GetString("RecruitProb_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done..
+        /// </summary>
+        internal static string Task_Complete {
+            get {
+                return ResourceManager.GetString("Task_Complete", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to v{0}.
         /// </summary>
-        internal static string version {
+        internal static string Version {
             get {
-                return ResourceManager.GetString("version", resourceCulture);
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
     }
