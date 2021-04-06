@@ -89,7 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\coreLib\harvest\PStarCalculation.cs" />
     <Compile Include="src\coreLib\harvest\RebuilderTargetCalculation.cs" />
-    <Compile Include="src\coreLib\recruitment\RecruitmentModel.cs" />
+    <Compile Include="src\coreLib\recruitment\RecruitmentModelProperty.cs" />
     <Compile Include="src\validation\ValidatableExtensions.cs" />
     <Compile Include="src\validation\ValidationResult.cs" />
   </ItemGroup>
