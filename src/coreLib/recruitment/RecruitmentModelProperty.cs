@@ -7,7 +7,7 @@ namespace Nmfs.Agepro.CoreLib
   /// <summary>
   /// Generalized, abstract representation of AGEPRO Recruitment Model property
   /// </summary>
-  abstract public class RecruitmentModel : AgeproCoreLibProperty, IValidatable
+  abstract public class RecruitmentModelProperty : AgeproCoreLibProperty, IValidatable
   {
     public int recruitModelNum;
     public int recruitCategory;

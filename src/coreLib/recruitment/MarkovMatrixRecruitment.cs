@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Nmfs.Agepro.CoreLib
 {
-    public class MarkovMatrixRecruitment : RecruitmentModel
+    public class MarkovMatrixRecruitment : RecruitmentModelProperty
     {
         private int _numRecruitLevels;
         private int _numSSBLevels;

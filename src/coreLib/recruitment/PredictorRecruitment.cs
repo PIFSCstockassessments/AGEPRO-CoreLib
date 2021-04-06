@@ -13,7 +13,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Predictor Recruitment
     /// </summary>
-    public class PredictorRecruitment : RecruitmentModel
+    public class PredictorRecruitment : RecruitmentModelProperty
     {
         private int _numRecruitPredictors;
         private double _variance;

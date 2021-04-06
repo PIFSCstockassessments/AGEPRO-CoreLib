@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nmfs.Agepro.CoreLib
 {
-    public class NullSelectRecruitment : RecruitmentModel
+    public class NullSelectRecruitment : RecruitmentModelProperty
     {
         /// <summary>
         /// A empty RecruitmentModel class. Only meant for Recruit List intialization purposes.

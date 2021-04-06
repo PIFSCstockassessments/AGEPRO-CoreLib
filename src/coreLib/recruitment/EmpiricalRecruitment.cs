@@ -19,7 +19,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Empirical Recruitment
     /// </summary>
-    public class EmpiricalRecruitment : RecruitmentModel, IValidatable
+    public class EmpiricalRecruitment : RecruitmentModelProperty, IValidatable
     {
         private int _numObs;
 

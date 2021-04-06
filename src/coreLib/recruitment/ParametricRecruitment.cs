@@ -19,7 +19,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Parametric Recruitment
     /// </summary>
-    public class ParametricRecruitment : RecruitmentModel
+    public class ParametricRecruitment : RecruitmentModelProperty
     {
         private double? _phi;
         private double? _lastResidual;

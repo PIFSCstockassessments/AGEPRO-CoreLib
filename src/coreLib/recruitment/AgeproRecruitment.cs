@@ -20,7 +20,7 @@ namespace Nmfs.Agepro.CoreLib
         public int[] recruitType { get; set; }
         public DataTable recruitProb; // = new DataTable("Recruitment Probability");
         public int recruitmentCategory { get; set; }
-        public List<RecruitmentModel> recruitList { get; set; }
+        public List<RecruitmentModelProperty> recruitList { get; set; }
         public int[] observationYears { get; set; }
 
  
@@ -56,7 +56,7 @@ namespace Nmfs.Agepro.CoreLib
             this.observationYears = Array.ConvertAll<string, int>(seqYears, int.Parse);
 
             //NullSelectRecuitment is default for NewCases.
-            recruitList = new List<RecruitmentModel>();
+            recruitList = new List<RecruitmentModelProperty>();
             recruitType = new int[nrecruits];
             for (int irecruit = 0; irecruit < nrecruits; irecruit++)
             {
@@ -127,7 +127,7 @@ namespace Nmfs.Agepro.CoreLib
             CreateRecruitmentProbabilityTable(recrProbYear);
 
             //Instanciate recruitList as new list
-            recruitList = new List<RecruitmentModel>();
+            recruitList = new List<RecruitmentModelProperty>();
             
             //Recruitment type
             for (int i = 0; i < numRecruitModels; i++)
@@ -245,7 +245,7 @@ namespace Nmfs.Agepro.CoreLib
         /// Returns a new recruitment model, based on type (model number). 
         /// </summary>
         /// <param name="rtype">Recruitment Model Number</param>
-        public static RecruitmentModel GetNewRecruitModel(int rtype)
+        public static RecruitmentModelProperty GetNewRecruitModel(int rtype)
         {
             switch (rtype)
             {
@@ -302,7 +302,7 @@ namespace Nmfs.Agepro.CoreLib
             
             //Gathering recruitNum from RecruitList because its more sturctured
             List<string> modelNumArrayFromRecruitList = new List<string>();
-            foreach (RecruitmentModel recruit in this.recruitList)
+            foreach (RecruitmentModelProperty recruit in this.recruitList)
             {
                 modelNumArrayFromRecruitList.Add(recruit.recruitModelNum.ToString());
             }
@@ -314,7 +314,7 @@ namespace Nmfs.Agepro.CoreLib
             }
 
             //Recruit Model(s)
-            foreach (RecruitmentModel recruitModel in recruitList)
+            foreach (RecruitmentModelProperty recruitModel in recruitList)
             {
                 outputLines.AddRange(recruitModel.WriteRecruitmentDataModelData());
             }
