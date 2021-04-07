@@ -74,8 +74,6 @@ namespace Nmfs.Agepro.CoreLib
         }
       }
 
-
-
       return base.ValidateInput();
     }
   }
