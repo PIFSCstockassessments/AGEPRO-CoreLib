@@ -126,7 +126,7 @@ namespace Nmfs.Agepro.CoreLib
                 else if (line.Equals("[RECRUIT]"))
                 {
                     //Read Recruit Data
-                    this.recruitment.observationYears = this.general.SeqYears();
+                    this.recruitment.ObservationYears = this.general.SeqYears();
                     this.recruitment.ReadRecruitmentData(sr,general.NumYears(),general.NumRecModels);
                 }
                 else if (line.Equals("[STOCK_WEIGHT]"))
