@@ -71,6 +71,10 @@
     <Compile Include="src\coreLib\harvest\HarvestScenarioAnalysis.cs" />
     <Compile Include="src\coreLib\model-setup\AgeproGeneral.cs" />
     <Compile Include="src\coreLib\harvest\AgeproHarvestScenario.cs" />
+    <Compile Include="src\coreLib\recruitment\EmpiricalCDFZero.cs" />
+    <Compile Include="src\coreLib\recruitment\EmpiricalType.cs" />
+    <Compile Include="src\coreLib\recruitment\FixedEmpiricalRecruitment.cs" />
+    <Compile Include="src\coreLib\recruitment\TwoStageEmpiricalRecruitment.cs" />
     <Compile Include="src\io\AgeproInputFile.cs" />
     <Compile Include="src\coreLib\options\AgeproMiscOptions.cs" />
     <Compile Include="src\coreLib\recruitment\AgeproRecruitment.cs" />
