@@ -23,7 +23,7 @@ namespace Nmfs.Agepro.CoreLib
       if (ObsTable.Rows.Count != (obsYears.Count() - 1))
       {
         return new ValidationResult(false,
-            "Number of recruitment rows does not equal to the number of years minus year one.");
+            "Number of recruitment rows is not equal to 'Observed years count minus year one.");
       }
 
       return base.ValidateInput();
