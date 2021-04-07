@@ -189,11 +189,23 @@
   <data name="Recruitment_Error_InvaildCase" xml:space="preserve">
     <value>Invalid Recruitment Model Number {0}</value>
   </data>
+  <data name="Recruitment_Error_LowBound" xml:space="preserve">
+    <value>Insignificant values or values lower than {0} found in {1}</value>
+  </data>
+  <data name="Recruitment_Error_MissingObs" xml:space="preserve">
+    <value>Missing Data in {0}</value>
+  </data>
+  <data name="Recruitment_Error_ZeroRows" xml:space="preserve">
+    <value>{0} has 0 rows</value>
+  </data>
   <data name="Recruitment_INP_Header" xml:space="preserve">
     <value>[RECRUIT]</value>
   </data>
   <data name="Recruitment_Max_Obs" xml:space="preserve">
     <value>500</value>
+  </data>
+  <data name="Recruitment_ObservationTable" xml:space="preserve">
+    <value>Observation Table</value>
   </data>
   <data name="Recruitment_ReadLine" xml:space="preserve">
     <value>Reading Recruitment Data ...</value>
@@ -203,6 +215,12 @@
   </data>
   <data name="Recruitment_ReadLine_Model" xml:space="preserve">
     <value>Reading Recuitment Model Data ...</value>
+  </data>
+  <data name="Recruitment_Recruits" xml:space="preserve">
+    <value>Recruits</value>
+  </data>
+  <data name="Recruitment_SSB" xml:space="preserve">
+    <value>SSB</value>
   </data>
   <data name="Recruitment_Text" xml:space="preserve">
     <value>Recruitment</value>
@@ -222,6 +240,9 @@
   </data>
   <data name="Task_Complete" xml:space="preserve">
     <value>Done.</value>
+  </data>
+  <data name="Task_Validation_Success" xml:space="preserve">
+    <value>Validation Successful</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>v{0}</value>

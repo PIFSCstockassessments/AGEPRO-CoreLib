@@ -277,6 +277,33 @@ namespace Nmfs.Agepro.CoreLib.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insignificant values or values lower than {0} found in {1}.
+        /// </summary>
+        internal static string Recruitment_Error_LowBound {
+            get {
+                return ResourceManager.GetString("Recruitment_Error_LowBound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing Data in {0}.
+        /// </summary>
+        internal static string Recruitment_Error_MissingObs {
+            get {
+                return ResourceManager.GetString("Recruitment_Error_MissingObs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has 0 rows.
+        /// </summary>
+        internal static string Recruitment_Error_ZeroRows {
+            get {
+                return ResourceManager.GetString("Recruitment_Error_ZeroRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [RECRUIT].
         /// </summary>
         internal static string Recruitment_INP_Header {
@@ -291,6 +318,15 @@ namespace Nmfs.Agepro.CoreLib.resources {
         internal static string Recruitment_Max_Obs {
             get {
                 return ResourceManager.GetString("Recruitment_Max_Obs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Observation Table.
+        /// </summary>
+        internal static string Recruitment_ObservationTable {
+            get {
+                return ResourceManager.GetString("Recruitment_ObservationTable", resourceCulture);
             }
         }
         
@@ -318,6 +354,24 @@ namespace Nmfs.Agepro.CoreLib.resources {
         internal static string Recruitment_ReadLine_Model {
             get {
                 return ResourceManager.GetString("Recruitment_ReadLine_Model", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recruits.
+        /// </summary>
+        internal static string Recruitment_Recruits {
+            get {
+                return ResourceManager.GetString("Recruitment_Recruits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSB.
+        /// </summary>
+        internal static string Recruitment_SSB {
+            get {
+                return ResourceManager.GetString("Recruitment_SSB", resourceCulture);
             }
         }
         
@@ -373,6 +427,15 @@ namespace Nmfs.Agepro.CoreLib.resources {
         internal static string Task_Complete {
             get {
                 return ResourceManager.GetString("Task_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation Successful.
+        /// </summary>
+        internal static string Task_Validation_Success {
+            get {
+                return ResourceManager.GetString("Task_Validation_Success", resourceCulture);
             }
         }
         
