@@ -8,7 +8,7 @@ namespace Nmfs.Agepro.CoreLib
   /// <summary>
   /// Two-Stage Empirical Recruitment. Parameters & Observations for two levels (stages).
   /// </summary>
-  public class TwoStageEmpiricalRecruitment : EmpiricalRecruitment
+  public class EmpiricalTwoStageRecruitment : EmpiricalRecruitment
   {
     private int _lv1NumObs;
     private int _lv2NumObs;
@@ -33,7 +33,7 @@ namespace Nmfs.Agepro.CoreLib
       set => SetProperty(ref _SSBBreakVal, value);
     }
 
-    public TwoStageEmpiricalRecruitment(int modelNum)
+    public EmpiricalTwoStageRecruitment(int modelNum)
         : base(modelNum)
     {
       recruitModelNum = modelNum;
@@ -49,7 +49,7 @@ namespace Nmfs.Agepro.CoreLib
 
     }
 
-    public TwoStageEmpiricalRecruitment(int modelNum, bool useSSB)
+    public EmpiricalTwoStageRecruitment(int modelNum, bool useSSB)
         : this(modelNum)
     {
       WithSSB = useSSB;

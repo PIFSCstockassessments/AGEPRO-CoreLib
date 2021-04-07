@@ -261,9 +261,9 @@ namespace Nmfs.Agepro.CoreLib
         case 14:
           return new EmpiricalRecruitment(rtype, useSSB: false, subType: EmpiricalType.Empirical);
         case 20:
-          return new FixedEmpiricalRecruitment(rtype);
+          return new EmpiricalFixedRecruitment(rtype);
         case 4:
-          return new TwoStageEmpiricalRecruitment(rtype, useSSB: true);
+          return new EmpiricalTwoStageRecruitment(rtype, useSSB: true);
         case 5:
         case 6:
           return new ParametricCurve(rtype, isAutocorrelated: false);
@@ -279,7 +279,7 @@ namespace Nmfs.Agepro.CoreLib
         case 13:
           return new ParametricLognormal(rtype, isAutocorrelated: true);
         case 15:
-          return new TwoStageEmpiricalRecruitment(rtype, useSSB: false);
+          return new EmpiricalTwoStageRecruitment(rtype, useSSB: false);
         case 16:
         case 17:
         case 18:
