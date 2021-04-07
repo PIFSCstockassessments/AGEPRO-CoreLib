@@ -10,22 +10,22 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class EmpiricalTwoStageRecruitment : EmpiricalRecruitment
   {
-    private int _lv1NumObs;
-    private int _lv2NumObs;
+    private int _Lv1NumObs;
+    private int _Lv2NumObs;
     private int _SSBBreakVal;
 
     public DataTable lv1Obs { get; set; }
     public DataTable lv2Obs { get; set; }
 
-    public int lv1NumObs
+    public int Lv1NumObs
     {
-      get => _lv1NumObs;
-      set => SetProperty(ref _lv1NumObs, value);
+      get => _Lv1NumObs;
+      set => SetProperty(ref _Lv1NumObs, value);
     }
-    public int lv2NumObs
+    public int Lv2NumObs
     {
-      get => _lv2NumObs;
-      set => SetProperty(ref _lv2NumObs, value);
+      get => _Lv2NumObs;
+      set => SetProperty(ref _Lv2NumObs, value);
     }
     public int SSBBreakVal
     {
@@ -43,8 +43,8 @@ namespace Nmfs.Agepro.CoreLib
       LowBound = 0.0001;
 
       //Fallback Defaults
-      lv1NumObs = 0;
-      lv2NumObs = 0;
+      Lv1NumObs = 0;
+      Lv2NumObs = 0;
       SSBBreakVal = 0;
 
     }
@@ -66,13 +66,13 @@ namespace Nmfs.Agepro.CoreLib
       //lv1NumObs, lv2NumObs
       line = sr.ReadLine();
       string[] lineNumObsLvl = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-      lv1NumObs = Convert.ToInt32(lineNumObsLvl[0]);
-      lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
+      Lv1NumObs = Convert.ToInt32(lineNumObsLvl[0]);
+      Lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
 
       //lv1Obs 
-      lv1Obs = base.ReadObsTable(sr, lv1NumObs);
+      lv1Obs = ReadObsTable(sr, Lv1NumObs);
       //lv2Obs
-      lv2Obs = base.ReadObsTable(sr, lv2NumObs);
+      lv2Obs = ReadObsTable(sr, Lv2NumObs);
 
       //SSBBReakVal
       line = sr.ReadLine();
@@ -86,8 +86,10 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>List of strings. Each string repesents a line from the input file.</returns>
     public override List<string> WriteRecruitmentDataModelData()
     {
-      List<string> outputLines = new List<string>();
-      outputLines.Add(lv1NumObs + new string(' ', 2) + lv2NumObs);
+      List<string> outputLines = new List<string>
+      {
+        Lv1NumObs + new string(' ', 2) + Lv2NumObs
+      };
 
       outputLines.AddRange(WriteObsTableLines(lv1Obs, WithSSB));
       outputLines.AddRange(WriteObsTableLines(lv2Obs, WithSSB));
@@ -146,8 +148,7 @@ namespace Nmfs.Agepro.CoreLib
         errorMsgList.Add("Missing SSB Break Value.");
       }
 
-      var results = errorMsgList.EnumerateValidationResults();
-      return results;
+      return errorMsgList.EnumerateValidationResults();
     }
   }
 }
