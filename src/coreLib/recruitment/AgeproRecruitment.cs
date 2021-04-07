@@ -232,6 +232,7 @@ namespace Nmfs.Agepro.CoreLib
       //Check Recruitment Probability for all selections of each year sums to 1.0
       rowSumRecruitProb = Array.ConvertAll(recruitProbRow, s => double.TryParse(s, out double x) ? x : 0).Sum();
       precisionDiff = Math.Abs(rowSumRecruitProb * 0.00001);
+
       //Handle Floating-Point precision issues when "sumRowRecruitProb != 1.0" comparisons
       if (!(Math.Abs(rowSumRecruitProb - 1) <= precisionDiff))
       {
@@ -327,7 +328,6 @@ namespace Nmfs.Agepro.CoreLib
         outputLines.AddRange(recruitModel.WriteRecruitmentDataModelData());
       }
 
-
       return outputLines;
     }
 
@@ -354,7 +354,6 @@ namespace Nmfs.Agepro.CoreLib
       //Fill Recruit Probability table with default set of values.
       //Assume each new case recruit selection prob is spread evenly.
       double recruitProbVal = 1 / Convert.ToDouble(yCol);
-
       for (int irow = 0; irow < xRows; irow++)
       {
         for (int jcol = 0; jcol < yCol; jcol++)
