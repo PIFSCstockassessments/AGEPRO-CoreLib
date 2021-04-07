@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
 {
-    public enum EmpiricalType
-    {
-        Empirical,
-        TwoStage,
-        CDFZero,
-        Fixed
-    };
 
-    /// <summary>
-    /// Empirical Recruitment
-    /// </summary>
-    public class EmpiricalRecruitment : RecruitmentModelProperty, IValidatable
+  /// <summary>
+  /// Empirical Recruitment
+  /// </summary>
+  public class EmpiricalRecruitment : RecruitmentModelProperty, IValidatable
     {
         private int _numObs;
 
