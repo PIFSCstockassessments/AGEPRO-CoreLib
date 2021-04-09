@@ -83,7 +83,7 @@ namespace Nmfs.Agepro.CoreLib
               throw new InvalidOperationException("SSB level " + (i + 1).ToString() + " probability sum does not equal to 1.0: " +
                   "Probability sum is " + SSBLevelProbSum.ToString());
             }
-            inputTable.Rows.Add(inputTableLine);
+            DataRow SSBLevel = inputTable.Rows.Add(inputTableLine);
           }
           markov.Tables.Add(inputTable);
         }
@@ -102,10 +102,10 @@ namespace Nmfs.Agepro.CoreLib
     private DataTable ReadRecruitmentDataTable(string[] inputTableLine)
     {
       DataTable inputTable = new DataTable("Recruitment");
-      inputTable.Columns.Add("Recruitment", typeof(int));
+      _ = inputTable.Columns.Add("Recruitment", typeof(int));
       for (int i = 0; i < NumRecruitLevels; i++)
       {
-        inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
+        _ = inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
       }
 
       return inputTable;
@@ -119,10 +119,10 @@ namespace Nmfs.Agepro.CoreLib
     private DataTable ReadSSBLevelsDataTable(string[] inputTableLine)
     {
       DataTable inputTable = new DataTable("SSB");
-      inputTable.Columns.Add("SSB Cut Points", typeof(int));
+      _ = inputTable.Columns.Add("SSB Cut Points", typeof(int));
       for (int i = 0; i < NumSSBLevels; i++)
       {
-        inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
+        _ = inputTable.Rows.Add(Convert.ToInt32(inputTableLine[i]));
       }
 
       return inputTable;
@@ -167,17 +167,17 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>A DataTable determined in numLevels by numCol. </returns>
     private DataTable NewMarkovLevelTable(string tableName, int numLevels, string colName, int numCols = 1)
     {
-      DataTable tableT = new DataTable(tableName);
+      DataTable levelTable = new DataTable(tableName);
       if (numCols == 1)
       {
-        tableT.Columns.Add(colName, typeof(int));
+        _ = levelTable.Columns.Add(colName, typeof(int));
       }
       else if (numCols > 1)
       {
         //Assumming 'Probabiliy' is the only multi-column Markov Matrix level Datatable
         for (int j = 0; j < numCols; j++)
         {
-          tableT.Columns.Add(colName + "(" + (j + 1).ToString() + ")", typeof(double));
+          _ = levelTable.Columns.Add(colName + "(" + (j + 1).ToString() + ")", typeof(double));
         }
       }
       else
@@ -188,9 +188,9 @@ namespace Nmfs.Agepro.CoreLib
 
       for (int i = 0; i < numLevels; i++)
       {
-        tableT.Rows.Add();
+        _ = levelTable.Rows.Add();
       }
-      return tableT;
+      return levelTable;
     }
 
 
