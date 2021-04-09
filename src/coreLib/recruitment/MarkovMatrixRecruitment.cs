@@ -236,14 +236,9 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     /// <param name="markovParam">Parameter Value</param>
     /// <returns></returns>
-    private bool ValidMarkovParameter(int markovParam)
+    private bool VerifyZeroLevels(int markovParam)
     {
-      List<string> errorMsgList = new List<string>();
-      if (markovParam == 0)
-      {
-        return false;
-      }
-      return true;
+      return markovParam == 0;
     }
 
     /// <summary>
@@ -256,13 +251,13 @@ namespace Nmfs.Agepro.CoreLib
     public override ValidationResult ValidateInput()
     {
       List<string> errorMsgList = new List<string>();
-      if (ValidMarkovParameter(NumRecruitLevels) == false)
+      if (VerifyZeroLevels(NumRecruitLevels))
       {
         errorMsgList.Add("Zero or missing number of recruitment levels found.");
         errorMsgList.Add("Recruitment table has 0 rows, " +
             "Probability table has 0 columns.");
       }
-      if (ValidMarkovParameter(NumSSBLevels) == false)
+      if (VerifyZeroLevels(NumSSBLevels))
       {
         errorMsgList.Add("Zero or missing number of SSB levels found.");
         errorMsgList.Add("SSB table has 0 rows, Probability table has 0 rows.");
@@ -281,8 +276,7 @@ namespace Nmfs.Agepro.CoreLib
         errorMsgList.Add("Missing data in Probability table.");
       }
 
-      var results = errorMsgList.EnumerateValidationResults();
-      return results;
+      return errorMsgList.EnumerateValidationResults();
     }
 
   }
