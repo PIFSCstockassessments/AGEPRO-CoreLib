@@ -60,7 +60,8 @@ namespace Nmfs.Agepro.CoreLib
       if (NumRecruitPredictors > MaxNumPredictors)
       {
         throw new ArgumentOutOfRangeException("numRecruitPredictors", NumRecruitPredictors,
-          $"Number of Recruitment Predictors of Recruit Model {recruitModelNum} is greater than the Maximum of {MaxNumPredictors}");
+          message: "Number of Recruitment Predictors of Recruit Model " + recruitModelNum +
+          " is greater than the Maximum of " + MaxNumPredictors);
       }
 
 
@@ -73,19 +74,17 @@ namespace Nmfs.Agepro.CoreLib
       int ipredictor = 0;
       foreach (DataRow coefRow in CoefficientTable.Rows)
       {
-        coefRow["Coefficient"] = (Convert.ToDouble(predictorCoefficents[ipredictor]));
+        coefRow["Coefficient"] = Convert.ToDouble(predictorCoefficents[ipredictor]);
         ipredictor++;
       }
 
       //Observations
-      ObservationTable =
-          SetNewObsTable(NumRecruitPredictors, Array.ConvertAll(obsYears, element => element.ToString()));
+      ObservationTable = SetNewObsTable(NumRecruitPredictors, Array.ConvertAll(obsYears, element => element.ToString()));
 
       foreach (DataRow predictorRow in ObservationTable.Rows)
       {
         line = sr.ReadLine();
-        string[] observationsPerYear = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        predictorRow.ItemArray = observationsPerYear;
+        predictorRow.ItemArray = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
       }
 
     }
@@ -99,10 +98,10 @@ namespace Nmfs.Agepro.CoreLib
     public static DataTable SetNewCoefficientTable(int numPredictors)
     {
       DataTable coefficientTable = new DataTable("Coefficients");
-      coefficientTable.Columns.Add("Coefficient", typeof(double));
+      _ = coefficientTable.Columns.Add("Coefficient", typeof(double));
       for (int i = 0; i < numPredictors; i++)
       {
-        coefficientTable.Rows.Add();
+        _ = coefficientTable.Rows.Add();
       }
       return coefficientTable;
     }
@@ -116,14 +115,19 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>Blank Obervation Table</returns>
     public static DataTable SetNewObsTable(int numPredictors, string[] obsYears)
     {
+      if (obsYears is null)
+      {
+        throw new ArgumentNullException(nameof(obsYears));
+      }
+
       DataTable obsTable = new DataTable("Observations");
       for (int j = 0; j < obsYears.Count(); j++)
       {
-        obsTable.Columns.Add(obsYears[j], typeof(double));
+        _ = obsTable.Columns.Add(obsYears[j], typeof(double));
       }
       for (int i = 0; i < numPredictors; i++)
       {
-        obsTable.Rows.Add();
+        _ = obsTable.Rows.Add();
       }
 
       return obsTable;
@@ -136,17 +140,18 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>List of strings. Each string repesents a line from the input file.</returns>
     public override List<string> WriteRecruitmentDataModelData()
     {
-      List<string> outputLines = new List<string>();
-
-      outputLines.Add(NumRecruitPredictors.ToString() + new string(' ', 2) +
-          Variance.ToString().PadRight(12) + Intercept.ToString());
+      List<string> outputLines = new List<string>
+      {
+        NumRecruitPredictors.ToString() + new string(' ', 2) +
+          Variance.ToString().PadRight(12) + Intercept.ToString()
+      };
 
       List<string> coefficientCol = new List<string>();
       foreach (DataRow predictorRow in CoefficientTable.Rows)
       {
         coefficientCol.Add(predictorRow[0].ToString());
       }
-      outputLines.Add(string.Join(new String(' ', 2), coefficientCol).PadRight(12));
+      outputLines.Add(string.Join(new string(' ', 2), coefficientCol).PadRight(12));
       foreach (DataRow predictorRow in ObservationTable.Rows)
       {
         outputLines.Add(string.Join(new string(' ', 2), predictorRow.ItemArray.ToString()));
@@ -199,9 +204,8 @@ namespace Nmfs.Agepro.CoreLib
         }
       }
 
-      var results = errorMsgList.EnumerateValidationResults();
 
-      return results;
+      return errorMsgList.EnumerateValidationResults();
     }
   }
 }
