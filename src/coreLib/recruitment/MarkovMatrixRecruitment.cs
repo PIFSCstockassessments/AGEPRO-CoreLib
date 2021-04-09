@@ -201,10 +201,10 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>List of strings. Each string repesents a line from the input file.</returns>
     public override List<string> WriteRecruitmentDataModelData()
     {
-      List<string> outputLines = new List<string>();
-
-      string delimiter = new string(' ', 2);
-      outputLines.Add(NumRecruitLevels + delimiter + NumSSBLevels);
+      List<string> outputLines = new List<string>
+      {
+        NumRecruitLevels + new string(' ', 2) + NumSSBLevels
+      };
 
       foreach (DataTable markovTable in MarkovRecruitment.Tables)
       {
@@ -212,7 +212,7 @@ namespace Nmfs.Agepro.CoreLib
         {
           foreach (DataRow ssbRow in markovTable.Rows)
           {
-            outputLines.Add(string.Join(delimiter, ssbRow.ItemArray));
+            outputLines.Add(string.Join(new string(' ', 2), ssbRow.ItemArray));
           }
         }
         else
@@ -226,7 +226,7 @@ namespace Nmfs.Agepro.CoreLib
           {
             markovParamCol.Add(dtRow[0].ToString());
           }
-          outputLines.Add(string.Join(delimiter, markovParamCol));
+          outputLines.Add(string.Join(new string(' ', 2), markovParamCol));
         }
       }
 
