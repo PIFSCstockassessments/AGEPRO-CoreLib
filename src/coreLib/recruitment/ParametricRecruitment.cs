@@ -1,25 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Data;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Nmfs.Agepro.CoreLib
 {
-    public enum ParametricType
-    {
-        Lognormal,
-        Curve
-    }
 
-    /// <summary>
-    /// Parametric Recruitment
-    /// </summary>
-    public class ParametricRecruitment : RecruitmentModelProperty
+  /// <summary>
+  /// Parametric Recruitment
+  /// </summary>
+  public class ParametricRecruitment : RecruitmentModelProperty
     {
         private double? _phi;
         private double? _lastResidual;
