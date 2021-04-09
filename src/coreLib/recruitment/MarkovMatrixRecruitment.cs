@@ -203,14 +203,16 @@ namespace Nmfs.Agepro.CoreLib
     {
       List<string> outputLines = new List<string>();
 
-      outputLines.Add(NumRecruitLevels + new string(' ', 2) + NumSSBLevels);
+      string delimiter = new string(' ', 2);
+      outputLines.Add(NumRecruitLevels + delimiter + NumSSBLevels);
+
       foreach (DataTable markovTable in MarkovRecruitment.Tables)
       {
         if (markovTable.TableName == "Probability")
         {
           foreach (DataRow ssbRow in markovTable.Rows)
           {
-            outputLines.Add(string.Join(new string(' ', 2), ssbRow.ItemArray));
+            outputLines.Add(string.Join(delimiter, ssbRow.ItemArray));
           }
         }
         else
@@ -224,7 +226,7 @@ namespace Nmfs.Agepro.CoreLib
           {
             markovParamCol.Add(dtRow[0].ToString());
           }
-          outputLines.Add(string.Join(new string(' ', 2), markovParamCol));
+          outputLines.Add(string.Join(delimiter, markovParamCol));
         }
       }
 
