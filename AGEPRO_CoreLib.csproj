@@ -75,6 +75,10 @@
     <Compile Include="src\coreLib\recruitment\EmpiricalFixedRecruitment.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalTwoStageRecruitment.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalType.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricCurve.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricLognormal.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricShepherdCurve.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricType.cs" />
     <Compile Include="src\io\AgeproInputFile.cs" />
     <Compile Include="src\coreLib\options\AgeproMiscOptions.cs" />
     <Compile Include="src\coreLib\recruitment\AgeproRecruitment.cs" />
