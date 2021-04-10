@@ -10,43 +10,43 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class ParametricRecruitment : RecruitmentModelProperty
   {
-    private double? _phi;
-    private double? _lastResidual;
-    private bool _autocorrelated;
+    private double? _Phi;
+    private double? _LastResidual;
+    private bool _Autocorrelated;
 
-    public double? phi
+    public double? Phi
     {
-      get { return _phi; }
-      set { SetProperty(ref _phi, value); }
+      get { return _Phi; }
+      set { SetProperty(ref _Phi, value); }
     }
-    public double? lastResidual
+    public double? LastResidual
     {
-      get { return _lastResidual; }
-      set { SetProperty(ref _lastResidual, value); }
+      get { return _LastResidual; }
+      set { SetProperty(ref _LastResidual, value); }
     }
-    public bool autocorrelated
+    public bool Autocorrelated
     {
-      get { return _autocorrelated; }
-      set { SetProperty(ref _autocorrelated, value); }
+      get { return _Autocorrelated; }
+      set { SetProperty(ref _Autocorrelated, value); }
     }
-    public ParametricType subtype { get; set; }
+    public ParametricType Subtype { get; set; }
 
     public ParametricRecruitment(int modelNum)
     {
       this.recruitModelNum = modelNum;
       this.recruitCategory = 2;
-      this.autocorrelated = false;
+      this.Autocorrelated = false;
 
     }
     public ParametricRecruitment(int modelNum, bool isAutocorrelated) : this(modelNum)
     {
-      this.autocorrelated = isAutocorrelated;
+      this.Autocorrelated = isAutocorrelated;
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
         //If enabled, these values will be set to '0' (instead of null)
-        this.lastResidual = lastResidual.GetValueOrDefault();
-        this.phi = phi.GetValueOrDefault();
+        this.LastResidual = LastResidual.GetValueOrDefault();
+        this.Phi = Phi.GetValueOrDefault();
       }
     }
 
@@ -75,8 +75,8 @@ namespace Nmfs.Agepro.CoreLib
       line = sr.ReadLine();
       string[] autoCorrLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-      this.phi = Convert.ToDouble(autoCorrLine[0]);
-      this.lastResidual = Convert.ToDouble(autoCorrLine[1]);
+      this.Phi = Convert.ToDouble(autoCorrLine[0]);
+      this.LastResidual = Convert.ToDouble(autoCorrLine[1]);
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ namespace Nmfs.Agepro.CoreLib
 
     public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated)
     {
-      this.subtype = ParametricType.Curve;
+      this.Subtype = ParametricType.Curve;
     }
 
     /// <summary>
@@ -192,7 +192,7 @@ namespace Nmfs.Agepro.CoreLib
             Environment.NewLine + "Number of parameters found: " + parametricLine.Length + ".");
       }
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
         ReadAutocorrelatedValues(sr);
       }
@@ -212,9 +212,9 @@ namespace Nmfs.Agepro.CoreLib
           this.beta.ToString().PadRight(12) +
           this.variance.ToString().PadRight(12));
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
-        outputLines.Add(this.phi.ToString().PadRight(12) + this.lastResidual.ToString().PadRight(12));
+        outputLines.Add(this.Phi.ToString().PadRight(12) + this.LastResidual.ToString().PadRight(12));
       }
 
       return outputLines;
@@ -232,10 +232,10 @@ namespace Nmfs.Agepro.CoreLib
       msgList.AddRange(ValidateParametricParameter(this.beta, "Beta"));
       msgList.AddRange(ValidateParametricParameter(this.variance, "Variance"));
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
-        msgList.AddRange(ValidateParametricParameter(this.phi, "Phi"));
-        msgList.AddRange(ValidateParametricParameter(this.lastResidual,
+        msgList.AddRange(ValidateParametricParameter(this.Phi, "Phi"));
+        msgList.AddRange(ValidateParametricParameter(this.LastResidual,
             "Last Residual"));
       }
       var results = msgList.EnumerateValidationResults();
@@ -282,7 +282,7 @@ namespace Nmfs.Agepro.CoreLib
       this.kParm = Convert.ToDouble(parametricLine[2]);
       this.variance = Convert.ToDouble(parametricLine[3]);
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
         ReadAutocorrelatedValues(sr);
       }
@@ -302,9 +302,9 @@ namespace Nmfs.Agepro.CoreLib
           this.kParm.ToString().PadRight(12) +
           this.variance.ToString().PadRight(12));
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
-        outputLines.Add(this.phi.ToString().PadRight(12) + this.lastResidual.ToString().PadRight(12));
+        outputLines.Add(this.Phi.ToString().PadRight(12) + this.LastResidual.ToString().PadRight(12));
       }
       return outputLines;
     }
@@ -322,10 +322,10 @@ namespace Nmfs.Agepro.CoreLib
       msgList.AddRange(ValidateParametricParameter(this.kParm, "KParm"));
       msgList.AddRange(ValidateParametricParameter(this.variance, "Variance"));
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
-        msgList.AddRange(ValidateParametricParameter(this.phi, "Phi"));
-        msgList.AddRange(ValidateParametricParameter(this.lastResidual, "Last Residual"));
+        msgList.AddRange(ValidateParametricParameter(this.Phi, "Phi"));
+        msgList.AddRange(ValidateParametricParameter(this.LastResidual, "Last Residual"));
       }
       var results = msgList.EnumerateValidationResults();
 
@@ -354,7 +354,7 @@ namespace Nmfs.Agepro.CoreLib
 
     public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated)
     {
-      this.subtype = ParametricType.Lognormal;
+      this.Subtype = ParametricType.Lognormal;
     }
 
     /// <summary>
@@ -370,7 +370,7 @@ namespace Nmfs.Agepro.CoreLib
       this.mean = Convert.ToDouble(logParamLine[0]);
       this.stdDev = Convert.ToDouble(logParamLine[1]);
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
         ReadAutocorrelatedValues(sr);
       }
@@ -385,9 +385,9 @@ namespace Nmfs.Agepro.CoreLib
     {
       List<string> outputLines = new List<string>();
       outputLines.Add(this.mean.ToString().PadRight(12) + this.stdDev.ToString().PadRight(12));
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
-        outputLines.Add(this.phi.ToString().PadRight(12) + this.lastResidual.ToString().PadRight(12));
+        outputLines.Add(this.Phi.ToString().PadRight(12) + this.LastResidual.ToString().PadRight(12));
       }
       return outputLines;
     }
@@ -403,10 +403,10 @@ namespace Nmfs.Agepro.CoreLib
       msgList.AddRange(ValidateParametricParameter(this.mean, "Mean"));
       msgList.AddRange(ValidateParametricParameter(this.stdDev, "Std. Deviaition"));
 
-      if (this.autocorrelated)
+      if (this.Autocorrelated)
       {
-        msgList.AddRange(ValidateParametricParameter(this.phi.Value, "Phi"));
-        msgList.AddRange(ValidateParametricParameter(this.lastResidual.Value,
+        msgList.AddRange(ValidateParametricParameter(this.Phi.Value, "Phi"));
+        msgList.AddRange(ValidateParametricParameter(this.LastResidual.Value,
             "Last Residual"));
       }
       var results = msgList.EnumerateValidationResults();
