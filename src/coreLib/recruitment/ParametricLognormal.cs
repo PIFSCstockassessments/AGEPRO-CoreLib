@@ -9,18 +9,18 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class ParametricLognormal : ParametricRecruitment
   {
-    private double _mean;
-    private double _stdDev;
+    private double _Mean;
+    private double _StdDev;
 
-    public double mean
+    public double Mean
     {
-      get => _mean;
-      set => SetProperty(ref _mean, value);
+      get => _Mean;
+      set => SetProperty(ref _Mean, value);
     }
-    public double stdDev
+    public double StdDev
     {
-      get => _stdDev;
-      set => SetProperty(ref _stdDev, value);
+      get => _StdDev;
+      set => SetProperty(ref _StdDev, value);
     }
 
     public ParametricLognormal(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated)
@@ -34,12 +34,11 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="sr">AGEPRO Input File StreamReader</param>
     public override void ReadRecruitmentModel(StreamReader sr)
     {
-      string line;
-      line = sr.ReadLine();
+      string line = sr.ReadLine();
       string[] logParamLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-      mean = Convert.ToDouble(logParamLine[0]);
-      stdDev = Convert.ToDouble(logParamLine[1]);
+      Mean = Convert.ToDouble(logParamLine[0]);
+      StdDev = Convert.ToDouble(logParamLine[1]);
 
       if (Autocorrelated)
       {
@@ -54,8 +53,10 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>List of strings. Each string repesents a line from the input file.</returns>
     public override List<string> WriteRecruitmentDataModelData()
     {
-      List<string> outputLines = new List<string>();
-      outputLines.Add(mean.ToString().PadRight(12) + stdDev.ToString().PadRight(12));
+      List<string> outputLines = new List<string>
+      {
+        Mean.ToString().PadRight(12) + StdDev.ToString().PadRight(12)
+      };
       if (Autocorrelated)
       {
         outputLines.Add(Phi.ToString().PadRight(12) + LastResidual.ToString().PadRight(12));
@@ -71,8 +72,8 @@ namespace Nmfs.Agepro.CoreLib
     {
       List<string> msgList = new List<string>();
 
-      msgList.AddRange(ValidateParametricParameter(mean, "Mean"));
-      msgList.AddRange(ValidateParametricParameter(stdDev, "Std. Deviaition"));
+      msgList.AddRange(ValidateParametricParameter(Mean, "Mean"));
+      msgList.AddRange(ValidateParametricParameter(StdDev, "Std. Deviaition"));
 
       if (Autocorrelated)
       {
@@ -80,9 +81,8 @@ namespace Nmfs.Agepro.CoreLib
         msgList.AddRange(ValidateParametricParameter(LastResidual.Value,
             "Last Residual"));
       }
-      var results = msgList.EnumerateValidationResults();
 
-      return results;
+      return msgList.EnumerateValidationResults();
     }
   }
 }

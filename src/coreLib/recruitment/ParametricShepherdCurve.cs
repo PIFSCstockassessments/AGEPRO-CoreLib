@@ -6,12 +6,12 @@ namespace Nmfs.Agepro.CoreLib
 {
   public class ParametricShepherdCurve : ParametricCurve
   {
-    private double _kParm;
+    private double _KParm;
 
-    public double kParm
+    public double KParm
     {
-      get => _kParm;
-      set => SetProperty(ref _kParm, value);
+      get => _KParm;
+      set => SetProperty(ref _KParm, value);
     }
 
     public ParametricShepherdCurve(int modelNum, bool isAutocorrelated)
@@ -26,8 +26,11 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="sr">AGEPRO Input File StreamReader</param>
     public override void ReadRecruitmentModel(StreamReader sr)
     {
-      string line;
-      line = sr.ReadLine();
+      if (sr is null)
+      {
+        throw new ArgumentNullException(nameof(sr));
+      }
+      string line = sr.ReadLine();
       string[] parametricLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
       //Check parametricLine was split into 4 parameters. Only Shepherd Models have 4 parameters.
@@ -37,10 +40,10 @@ namespace Nmfs.Agepro.CoreLib
             Environment.NewLine + "Number of parameters found: " + parametricLine.Length + ".");
       }
 
-      alpha = Convert.ToDouble(parametricLine[0]);
-      beta = Convert.ToDouble(parametricLine[1]);
-      kParm = Convert.ToDouble(parametricLine[2]);
-      variance = Convert.ToDouble(parametricLine[3]);
+      Alpha = Convert.ToDouble(parametricLine[0]);
+      Beta = Convert.ToDouble(parametricLine[1]);
+      KParm = Convert.ToDouble(parametricLine[2]);
+      Variance = Convert.ToDouble(parametricLine[3]);
 
       if (Autocorrelated)
       {
@@ -57,10 +60,10 @@ namespace Nmfs.Agepro.CoreLib
     {
       List<string> outputLines = new List<string>();
 
-      outputLines.Add(alpha.ToString().PadRight(12) +
-          beta.ToString().PadRight(12) +
-          kParm.ToString().PadRight(12) +
-          variance.ToString().PadRight(12));
+      outputLines.Add(Alpha.ToString().PadRight(12) +
+          Beta.ToString().PadRight(12) +
+          KParm.ToString().PadRight(12) +
+          Variance.ToString().PadRight(12));
 
       if (Autocorrelated)
       {
@@ -75,21 +78,20 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>Vaildation Result Object</returns>
     public override ValidationResult ValidateInput()
     {
-      var msgList = new List<string>();
+      List<string> msgList = new List<string>();
 
-      msgList.AddRange(ValidateParametricParameter(alpha, "Alpha"));
-      msgList.AddRange(ValidateParametricParameter(beta, "Beta"));
-      msgList.AddRange(ValidateParametricParameter(kParm, "KParm"));
-      msgList.AddRange(ValidateParametricParameter(variance, "Variance"));
+      msgList.AddRange(ValidateParametricParameter(Alpha, "Alpha"));
+      msgList.AddRange(ValidateParametricParameter(Beta, "Beta"));
+      msgList.AddRange(ValidateParametricParameter(KParm, "KParm"));
+      msgList.AddRange(ValidateParametricParameter(Variance, "Variance"));
 
       if (Autocorrelated)
       {
         msgList.AddRange(ValidateParametricParameter(Phi, "Phi"));
         msgList.AddRange(ValidateParametricParameter(LastResidual, "Last Residual"));
       }
-      var results = msgList.EnumerateValidationResults();
 
-      return results;
+      return msgList.EnumerateValidationResults();
     }
   }
 }

@@ -9,24 +9,24 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class ParametricCurve : ParametricRecruitment
   {
-    private double _alpha;
-    private double _beta;
-    private double _variance;
+    private double _Alpha;
+    private double _Beta;
+    private double _Variance;
 
-    public double alpha
+    public double Alpha
     {
-      get => _alpha;
-      set => SetProperty(ref _alpha, value);
+      get => _Alpha;
+      set => SetProperty(ref _Alpha, value);
     }
-    public double beta
+    public double Beta
     {
-      get => _beta;
-      set => SetProperty(ref _beta, value);
+      get => _Beta;
+      set => SetProperty(ref _Beta, value);
     }
-    public double variance
+    public double Variance
     {
-      get => _variance;
-      set => SetProperty(ref _variance, value);
+      get => _Variance;
+      set => SetProperty(ref _Variance, value);
     }
 
     public ParametricCurve(int modelNum, bool isAutocorrelated) : base(modelNum, isAutocorrelated)
@@ -40,24 +40,27 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="sr">AGEPRO Input File StreamReader</param>
     public override void ReadRecruitmentModel(StreamReader sr)
     {
-      string line;
-      line = sr.ReadLine();
+      if (sr is null)
+      {
+        throw new ArgumentNullException(nameof(sr));
+      }
+
+      string line = sr.ReadLine();
       string[] parametricLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
       //Verify if this Parametric Model has 3 parameters
       //Shepherd Curve Models do not have 3 parameters
-      if (parametricLine.Length == 3)
-      {
-        alpha = Convert.ToDouble(parametricLine[0]);
-        beta = Convert.ToDouble(parametricLine[1]);
-        variance = Convert.ToDouble(parametricLine[2]);
-      }
-      else
+      if (parametricLine.Length != 3)
       {
         //Throw error
         throw new InvalidAgeproParameterException("Number of parametric curve parameters must be 3." +
             Environment.NewLine + "Number of parameters found: " + parametricLine.Length + ".");
       }
+
+      Alpha = Convert.ToDouble(parametricLine[0]);
+      Beta = Convert.ToDouble(parametricLine[1]);
+      Variance = Convert.ToDouble(parametricLine[2]);
+      
 
       if (Autocorrelated)
       {
@@ -73,11 +76,12 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>List of strings. Each string repesents a line from the input file.</returns>
     public override List<string> WriteRecruitmentDataModelData()
     {
-      List<string> outputLines = new List<string>();
-
-      outputLines.Add(alpha.ToString().PadRight(12) +
-          beta.ToString().PadRight(12) +
-          variance.ToString().PadRight(12));
+      List<string> outputLines = new List<string>
+      {
+        Alpha.ToString().PadRight(12) +
+          Beta.ToString().PadRight(12) +
+          Variance.ToString().PadRight(12)
+      };
 
       if (Autocorrelated)
       {
@@ -93,11 +97,11 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>Vaildation Result Object</returns>
     public override ValidationResult ValidateInput()
     {
-      var msgList = new List<string>();
+      List<string> msgList = new List<string>();
 
-      msgList.AddRange(ValidateParametricParameter(alpha, "Alpha"));
-      msgList.AddRange(ValidateParametricParameter(beta, "Beta"));
-      msgList.AddRange(ValidateParametricParameter(variance, "Variance"));
+      msgList.AddRange(ValidateParametricParameter(Alpha, "Alpha"));
+      msgList.AddRange(ValidateParametricParameter(Beta, "Beta"));
+      msgList.AddRange(ValidateParametricParameter(Variance, "Variance"));
 
       if (Autocorrelated)
       {
@@ -105,9 +109,8 @@ namespace Nmfs.Agepro.CoreLib
         msgList.AddRange(ValidateParametricParameter(LastResidual,
             "Last Residual"));
       }
-      var results = msgList.EnumerateValidationResults();
 
-      return results;
+      return msgList.EnumerateValidationResults();
     }
   }
 }
