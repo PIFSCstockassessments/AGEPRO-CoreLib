@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using System.Collections.ObjectModel;
 
 namespace Nmfs.Agepro.CoreLib
 {
@@ -75,13 +72,20 @@ namespace Nmfs.Agepro.CoreLib
 
     }
 
+    /// <summary>
+    /// Creates data line strings to append to the Data Writer for the Stochastic Parameter.
+    /// </summary>
+    /// <param name="keyword">Stochasatic Parameter name. Should be written in 
+    /// all caps, and enclosed in square parenthesis. Example: [PARAMETER] </param>
+    /// <returns>Returns a list of strings. </returns>
     public override List<string> WriteStochasticAgeDataLines(string keyword)
     {
 
-      List<string> outputLines = new List<string>();
-
-      outputLines.Add(keyword); //[PARAMETER]
-      outputLines.Add(weightOpt.ToString() + new string(' ', 2) + Convert.ToInt32(TimeVarying).ToString());
+      List<string> outputLines = new List<string>
+      {
+        keyword, //[PARAMETER]
+        weightOpt.ToString() + new string(' ', 2) + Convert.ToInt32(TimeVarying).ToString() // WeightOpt, TimeVary
+      };
       //since fromFile is a nullable boolean, have to explicitly check if its true 
       if (FromFile == true)
       {
@@ -112,7 +116,7 @@ namespace Nmfs.Agepro.CoreLib
           outputLines.Add(string.Join(new string(' ', 2), cvRow.ItemArray));
         }
       }
-      else if (!(validOpt.Contains(weightOpt)))
+      else if (!validOpt.Contains(weightOpt))
       {
         throw new InvalidOperationException("Invalid Weight option.");
       }
