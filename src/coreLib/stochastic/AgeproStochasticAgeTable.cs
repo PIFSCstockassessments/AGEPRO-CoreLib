@@ -21,11 +21,11 @@ namespace Nmfs.Agepro.CoreLib
 
     public AgeproStochasticAgeTable()
     {
-
+      FromFile = false;
     }
     public AgeproStochasticAgeTable(string file)
     {
-
+      FromFile = true;
     }
 
     /// <summary>
@@ -37,9 +37,13 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="numFleets">Number of Fleets. Default to <c>1</c></param>
     public void ReadStochasticAgeData(StreamReader sr, int numYears, int numAges, int numFleets = 1)
     {
+      if (sr is null)
+      {
+        throw new ArgumentNullException(nameof(sr));
+      }
 
-      this.NumYears = numYears;
-      this.NumFleets = numFleets; //Defaults to 1 for Non fleet-dependent InputAge Data
+      NumYears = numYears;
+      NumFleets = numFleets; //Defaults to 1 for Non fleet-dependent InputAge Data
       int N;
 
       //Input Age Option
@@ -50,17 +54,10 @@ namespace Nmfs.Agepro.CoreLib
 
       //Time Varying
       string optTimeVarying = swLine[1];
-      if (optTimeVarying.Equals("1"))
-      {
-        this.TimeVarying = true;
-      }
-      else
-      {
-        this.TimeVarying = false;
-      }
+      TimeVarying = optTimeVarying.Equals("1");
 
       //check fromFile has non-null value. Do nothing if so.
-      if (this.FromFile.HasValue)
+      if (FromFile.HasValue)
       {
         //Create Ages Header
         string[] ageHeader = new string[numAges];
@@ -70,18 +67,17 @@ namespace Nmfs.Agepro.CoreLib
         }
 
 
-        if (!(bool)this.FromFile) //User spec by user
+        if ((bool)FromFile) 
         {
+          //From File: Reads filepath
+          ReadStochasticAgeTableFilename(sr);
+        }
+        else 
+        {
+          //Reads in Stochastic Data specified from AGERPO Input File Format
           //byAge
           DataTable ageTable = new DataTable("Age Value");
-          if (this.TimeVarying)
-          {
-            N = this.NumYears * numFleets;
-          }
-          else
-          {
-            N = numFleets;
-          }
+          N = TimeVarying ? NumYears * numFleets : numFleets;
 
           //Set Age Columns for ageTable
           foreach (var nage in ageHeader)
@@ -94,11 +90,10 @@ namespace Nmfs.Agepro.CoreLib
           for (int i = 0; i < N; i++)
           {
             line = sr.ReadLine();
-            DataRow dr = ageTable.NewRow();
-            string[] ageLine = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-            ageTable.Rows.Add(ageLine);
+            _ = ageTable.NewRow();
+            ageTable.Rows.Add(line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries));
           }
-          this.ByAgeData = ageTable;
+          ByAgeData = ageTable;
 
           //byCV
           DataTable cvTable = new DataTable("Age CV");
@@ -120,12 +115,7 @@ namespace Nmfs.Agepro.CoreLib
             }
             cvTable.Rows.Add(dr);
           }
-          this.ByAgeCV = cvTable;
-        }
-        else
-        {
-          //From File: Reads filepath string
-          ReadStochasticAgeTableFilename(sr);
+          ByAgeCV = cvTable;
         }
       }
 
@@ -139,11 +129,11 @@ namespace Nmfs.Agepro.CoreLib
     {
       if (optParam.Equals("0"))
       {
-        this.FromFile = false; //User Spec by Age
+        FromFile = false; //User Spec by Age
       }
       else if (optParam.Equals("1"))
       {
-        this.FromFile = true; //From File   
+        FromFile = true; //From File   
       }
 
     }
@@ -155,8 +145,7 @@ namespace Nmfs.Agepro.CoreLib
     protected virtual void ReadStochasticAgeTableFilename(StreamReader sr)
     {
       //Reads dataflie path
-      string line = sr.ReadLine();
-      this.DataFile = line;
+      DataFile = sr.ReadLine();
     }
 
     /// <summary>
@@ -168,38 +157,39 @@ namespace Nmfs.Agepro.CoreLib
     public virtual List<string> WriteStochasticAgeDataLines(string keyword)
     {
 
-
-
-
-      List<string> outputLines = new List<string>();
-
-      outputLines.Add(keyword); //[PARAMETER]
-      if (this.FromFile == true)
+      List<string> outputLines = new List<string>
       {
-        outputLines.Add("1" + new string(' ', 2) + Convert.ToInt32(this.TimeVarying).ToString());
-        outputLines.Add(this.DataFile);
+        keyword //[PARAMETER]
+      };
+
+      if (FromFile == null)
+      {
+        throw new NullReferenceException("Stochastic Table Filepath is NULL");
+      } 
+      else if (FromFile == true)
+      {
+        outputLines.Add("1" + new string(' ', 2) + Convert.ToInt32(TimeVarying).ToString());
+        outputLines.Add(DataFile);
       }
       else
       {
 
-        if (this.ByAgeData == null)
+        if (ByAgeData is null)
         {
-          throw new NullReferenceException("Stochastic Age of " +
-              keyword + " is NULL.");
+          throw new NullReferenceException("Stochastic Age of " + keyword + " is NULL.");
         }
-        if (this.ByAgeCV == null)
+        if (ByAgeCV is null)
         {
-          throw new NullReferenceException("Stochastic CV of " +
-              keyword + " is NULL.");
+          throw new NullReferenceException("Stochastic CV of " + keyword + " is NULL.");
         }
 
 
-        outputLines.Add("0" + new string(' ', 2) + Convert.ToInt32(this.TimeVarying).ToString());
-        foreach (DataRow yearRow in this.ByAgeData.Rows)
+        outputLines.Add("0" + new string(' ', 2) + Convert.ToInt32(TimeVarying).ToString());
+        foreach (DataRow yearRow in ByAgeData.Rows)
         {
           outputLines.Add(string.Join(new string(' ', 2), yearRow.ItemArray));
         }
-        foreach (DataRow cvRow in this.ByAgeCV.Rows)
+        foreach (DataRow cvRow in ByAgeCV.Rows)
         {
           outputLines.Add(string.Join(new string(' ', 2), cvRow.ItemArray));
         }
@@ -217,6 +207,11 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>Returns a DataTable object.</returns>
     public static DataTable ReadStochasticTableFile(string fn, int ncol)
     {
+      if (string.IsNullOrWhiteSpace(fn))
+      {
+        throw new ArgumentException($"'{nameof(fn)}' cannot be null or whitespace.", nameof(fn));
+      }
+
       DataTable fromFileAgeTable = new DataTable("Age From File");
       string line;
 
