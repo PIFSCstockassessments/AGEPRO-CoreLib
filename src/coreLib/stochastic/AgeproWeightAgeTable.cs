@@ -34,17 +34,17 @@ namespace Nmfs.Agepro.CoreLib
         {
             if (optParam.Equals("0"))
             {
-                this.fromFile = false; //0=User Spec by Age
+                this.FromFile = false; //0=User Spec by Age
                 this.weightOpt = Convert.ToInt32(optParam);
             }
             else if (optParam.Equals("1"))
             {
-                this.fromFile = true; //1=From File
+                this.FromFile = true; //1=From File
                 this.weightOpt = Convert.ToInt32(optParam);
             }
             else
             {
-                this.fromFile = null;
+                this.FromFile = null;
                 //Check if weightOpt is a valid one
                 if (this.validOpt.Contains(Convert.ToInt32(optParam)))
                 {
@@ -78,33 +78,33 @@ namespace Nmfs.Agepro.CoreLib
             List<string> outputLines = new List<string>();
 
             outputLines.Add(keyword); //[PARAMETER]
-            outputLines.Add(this.weightOpt.ToString() + new string(' ',2) + Convert.ToInt32(this.timeVarying).ToString());
+            outputLines.Add(this.weightOpt.ToString() + new string(' ',2) + Convert.ToInt32(this.TimeVarying).ToString());
             //since fromFile is a nullable boolean, have to explicitly check if its true 
-            if (this.fromFile == true)
+            if (this.FromFile == true)
             {
-                outputLines.Add(this.dataFile);
+                outputLines.Add(this.DataFile);
             }
             // 0 == User Specfied Weights at Age
             else if (this.weightOpt == 0)  
             {
 
-                if (this.byAgeData == null)
+                if (this.ByAgeData == null)
                 {
                     throw new NullReferenceException("Stochastic Age of " +
                         keyword + " is NULL.");
                 }
-                if (this.byAgeCV == null)
+                if (this.ByAgeCV == null)
                 {
                     throw new NullReferenceException("Stochastic CV of " +
                         keyword + " is NULL.");
                 }
 
-                foreach (DataRow yearRow in this.byAgeData.Rows)
+                foreach (DataRow yearRow in this.ByAgeData.Rows)
                 {
                     outputLines.Add(string.Join(new string(' ',2), yearRow.ItemArray));
                 }
 
-                foreach (DataRow cvRow in this.byAgeCV.Rows)
+                foreach (DataRow cvRow in this.ByAgeCV.Rows)
                 {
                     outputLines.Add(string.Join(new string(' ',2), cvRow.ItemArray));
                 }

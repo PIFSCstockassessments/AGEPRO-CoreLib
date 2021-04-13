@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
 {
-    /// <summary>
-    /// Generalized Stochastic Weights-at-age AGEPRO parameter class.
-    /// </summary>
-    public class AgeproStochasticAgeTable 
+  /// <summary>
+  /// Generalized Stochastic Weights-at-age AGEPRO parameter class.
+  /// </summary>
+  public class AgeproStochasticAgeTable 
     {
-        public bool? fromFile { get; set; }
-        public bool timeVarying { get; set; }
-        public DataTable byAgeData { get; set; }
-        public DataTable byAgeCV { get; set; }
-        public string dataFile { get; set; }
-        public int numYears { get; set; }
-        public int numFleets { get; set; }
+        public bool? FromFile { get; set; }
+        public bool TimeVarying { get; set; }
+        public DataTable ByAgeData { get; set; }
+        public DataTable ByAgeCV { get; set; }
+        public string DataFile { get; set; }
+        public int NumYears { get; set; }
+        public int NumFleets { get; set; }
 
         public AgeproStochasticAgeTable()
         {
@@ -40,8 +38,8 @@ namespace Nmfs.Agepro.CoreLib
         public void ReadStochasticAgeData(StreamReader sr, int numYears, int numAges, int numFleets = 1)
         {
             
-            this.numYears = numYears;
-            this.numFleets = numFleets; //Defaults to 1 for Non fleet-dependent InputAge Data
+            this.NumYears = numYears;
+            this.NumFleets = numFleets; //Defaults to 1 for Non fleet-dependent InputAge Data
             int N;
 
             //Input Age Option
@@ -54,15 +52,15 @@ namespace Nmfs.Agepro.CoreLib
             string optTimeVarying = swLine[1];
             if (optTimeVarying.Equals("1"))
             {
-                this.timeVarying = true;
+                this.TimeVarying = true;
             }
             else
             {
-                this.timeVarying = false;
+                this.TimeVarying = false;
             }
 
             //check fromFile has non-null value. Do nothing if so.
-            if (this.fromFile.HasValue)
+            if (this.FromFile.HasValue)
             {
                 //Create Ages Header
                 string[] ageHeader = new string[numAges];
@@ -72,13 +70,13 @@ namespace Nmfs.Agepro.CoreLib
                 }
 
 
-                if (!(bool)this.fromFile) //User spec by user
+                if (!(bool)this.FromFile) //User spec by user
                 {
                     //byAge
                     DataTable ageTable = new DataTable("Age Value");
-                    if (this.timeVarying)
+                    if (this.TimeVarying)
                     {
-                        N = this.numYears * numFleets;
+                        N = this.NumYears * numFleets;
                     }
                     else
                     {
@@ -99,7 +97,7 @@ namespace Nmfs.Agepro.CoreLib
                         string[] ageLine = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);   
                         ageTable.Rows.Add(ageLine);
                     }
-                    this.byAgeData = ageTable;
+                    this.ByAgeData = ageTable;
                     
                     //byCV
                     DataTable cvTable = new DataTable("Age CV");
@@ -121,7 +119,7 @@ namespace Nmfs.Agepro.CoreLib
                         }
                         cvTable.Rows.Add(dr);
                     }
-                    this.byAgeCV = cvTable;
+                    this.ByAgeCV = cvTable;
                 }
                 else
                 {
@@ -140,11 +138,11 @@ namespace Nmfs.Agepro.CoreLib
         {
             if (optParam.Equals("0"))
             {
-                this.fromFile = false; //User Spec by Age
+                this.FromFile = false; //User Spec by Age
             }
             else if (optParam.Equals("1"))
             {
-                this.fromFile = true; //From File   
+                this.FromFile = true; //From File   
             }
 
         }
@@ -157,7 +155,7 @@ namespace Nmfs.Agepro.CoreLib
         {
             //Reads dataflie path
             string line = sr.ReadLine();
-            this.dataFile = line;
+            this.DataFile = line;
         }
 
         /// <summary>
@@ -175,32 +173,32 @@ namespace Nmfs.Agepro.CoreLib
             List<string> outputLines = new List<string>();
 
             outputLines.Add(keyword); //[PARAMETER]
-            if (this.fromFile == true)
+            if (this.FromFile == true)
             {
-                outputLines.Add("1" + new string(' ',2) + Convert.ToInt32(this.timeVarying).ToString());
-                outputLines.Add(this.dataFile);
+                outputLines.Add("1" + new string(' ',2) + Convert.ToInt32(this.TimeVarying).ToString());
+                outputLines.Add(this.DataFile);
             }
             else
             {
 
-                if (this.byAgeData == null)
+                if (this.ByAgeData == null)
                 {
                     throw new NullReferenceException("Stochastic Age of " +
                         keyword + " is NULL.");
                 }
-                if (this.byAgeCV == null)
+                if (this.ByAgeCV == null)
                 {
                     throw new NullReferenceException("Stochastic CV of " +
                         keyword + " is NULL.");
                 }
 
 
-                outputLines.Add("0" + new string(' ', 2) + Convert.ToInt32(this.timeVarying).ToString());
-                foreach (DataRow yearRow in this.byAgeData.Rows)
+                outputLines.Add("0" + new string(' ', 2) + Convert.ToInt32(this.TimeVarying).ToString());
+                foreach (DataRow yearRow in this.ByAgeData.Rows)
                 {
                     outputLines.Add(string.Join(new string(' ', 2), yearRow.ItemArray));
                 }
-                foreach (DataRow cvRow in this.byAgeCV.Rows)
+                foreach (DataRow cvRow in this.ByAgeCV.Rows)
                 {
                     outputLines.Add(string.Join(new string(' ', 2), cvRow.ItemArray));
                 }
