@@ -6,6 +6,9 @@ using System.Data;
 
 namespace Nmfs.Agepro.CoreLib
 {
+  /// <summary>
+  /// Markov Matrix Recruitment
+  /// </summary>
   public class MarkovMatrixRecruitment : RecruitmentModelProperty
   {
     private int _NumRecruitLevels;

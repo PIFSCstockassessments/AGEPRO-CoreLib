@@ -4,6 +4,9 @@ using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
 {
+  /// <summary>
+  /// Shepherd Curve Parametric Recrutiment 
+  /// </summary>
   public class ParametricShepherdCurve : ParametricCurve
   {
     private double _KParm;
