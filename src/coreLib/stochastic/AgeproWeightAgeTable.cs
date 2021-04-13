@@ -32,6 +32,12 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="optParam">String Character from <paramref name="validOpt"/></param>
     protected override void SetStochasticAgeOption(string optParam)
     {
+      if (string.IsNullOrWhiteSpace(optParam))
+      {
+        FromFile = null;
+        throw new ArgumentException($"'{nameof(optParam)}' cannot be null or whitespace.", nameof(optParam));
+      }
+
       if (optParam.Equals("0"))
       {
         FromFile = false; //0=User Spec by Age
@@ -46,14 +52,11 @@ namespace Nmfs.Agepro.CoreLib
       {
         FromFile = null;
         //Check if weightOpt is a valid one
-        if (validOpt.Contains(Convert.ToInt32(optParam)))
-        {
-          weightOpt = Convert.ToInt32(optParam);
-        }
-        else
-        {
-          throw new InvalidOperationException("Weight option not valid for current Weights of Age Model");
-        }
+        weightOpt = validOpt.Contains(Convert.ToInt32(optParam))
+            ? Convert.ToInt32(optParam)
+            : throw new InvalidOperationException("Weight option not valid for current Weights of Age Model");
+
+
       }
     }
 
