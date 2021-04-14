@@ -3,7 +3,7 @@
   /// <summary>
   /// A Specfic (custom) Percentile for the AGEPRO Output Report
   /// </summary>
-  public class ReportPercentile : MiscOptionsParameter
+  public class ReportPercentile : AgeproOptionsProperty
   {
     private double _precentile;
 

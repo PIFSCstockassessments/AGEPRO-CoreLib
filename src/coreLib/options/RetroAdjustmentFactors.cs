@@ -5,7 +5,7 @@ namespace Nmfs.Agepro.CoreLib
   /// <summary>
   /// At-age vaiues to applied to initial population numbers to correct for retrospective bias.
   /// </summary>
-  public class RetroAdjustmentFactors : MiscOptionsParameter
+  public class RetroAdjustmentFactors : AgeproOptionsProperty
   {
     //Data binded to AGEPRO GUI's dataGridRetroAdjustment (DataGridView)
     public DataTable retroAdjust;

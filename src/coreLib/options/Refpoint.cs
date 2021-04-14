@@ -3,7 +3,7 @@
   /// <summary>
   /// Parameters for the Reference Point Threshold Report
   /// </summary>
-  public class Refpoint : MiscOptionsParameter
+  public class Refpoint : AgeproOptionsProperty
   {
     private double _refSpawnBio; //SSBThresh
     private double _refJan1Bio;  //StockBioThresh

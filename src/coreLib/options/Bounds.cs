@@ -3,7 +3,7 @@
   /// <summary>
   /// Customized maximum bounds for Weight and Natural Mortality   
   /// </summary>
-  public class Bounds : MiscOptionsParameter
+  public class Bounds : AgeproOptionsProperty
   {
     private double _maxWeight;
     private double _maxNatMort;

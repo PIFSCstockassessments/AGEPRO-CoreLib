@@ -3,10 +3,10 @@
   /// <summary>
   /// Wrapper class for AGEPRO's MiscOptions paramerers that includes two-way data binding. 
   /// </summary>
-  public abstract class MiscOptionsParameter : AgeproCoreLibProperty
+  public abstract class AgeproOptionsProperty : AgeproCoreLibProperty
   {
 
-    public MiscOptionsParameter()
+    public AgeproOptionsProperty()
     {
     }
   }

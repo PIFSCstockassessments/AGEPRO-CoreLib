@@ -3,7 +3,7 @@
   /// <summary>
   /// Scaling Factors for the AGEPRO Output Report
   /// </summary>
-  public class ScaleFactors : MiscOptionsParameter
+  public class ScaleFactors : AgeproOptionsProperty
   {
     private double _scaleBio;
     private double _scaleRec;
