@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
 {
+  /// <summary>
+  /// Biologcal: Fraction Mortality Prior to Spawning
+  /// </summary>
   public class AgeproBiological
   {
-    public bool timeVarying { get; set; }
+    public bool TimeVarying { get; set; }
     public DataTable TSpawn { get; set; } //Fraction Mortality Prior To Spawning
-    public int numYears { get; set; }
+    public int NumYears { get; set; }
 
     public AgeproBiological()
     {
@@ -27,31 +28,31 @@ namespace Nmfs.Agepro.CoreLib
     public void CreateFallbackTSpawnTable(string[] yearSeq)
     {
 
-      if (this.TSpawn != null)
+      if (TSpawn != null)
       {
         //Clear out data 
-        this.TSpawn.Reset();
+        TSpawn.Reset();
       }
 
       DataTable fallbackTSpawn = new DataTable();
 
-      if (this.timeVarying)
+      if (TimeVarying)
       {
         for (int icol = 0; icol < yearSeq.Count(); icol++)
         {
-          fallbackTSpawn.Columns.Add(yearSeq[icol]);
+          _ = fallbackTSpawn.Columns.Add(yearSeq[icol]);
         }
       }
       else
       {
-        fallbackTSpawn.Columns.Add("All Years");
+        _ = fallbackTSpawn.Columns.Add("All Years");
       }
 
       //Add the Fraction Prior to Spawn
-      fallbackTSpawn.Rows.Add();
-      fallbackTSpawn.Rows.Add();
+      _ = fallbackTSpawn.Rows.Add();
+      _ = fallbackTSpawn.Rows.Add();
 
-      this.TSpawn = Extensions.FillDBNullCellsWithZero(fallbackTSpawn);
+      TSpawn = Extensions.FillDBNullCellsWithZero(fallbackTSpawn);
 
     }
 
@@ -62,24 +63,17 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="yearSeq">Year Sequence</param>
     public void ReadBiologicalData(StreamReader sr, int[] yearSeq)
     {
-      this.numYears = yearSeq.Count();
+      NumYears = yearSeq.Count();
       //time varying
       string line = sr.ReadLine();
       string[] bioLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
       string optTSpawn = bioLine.First();
-      if (optTSpawn.Equals("1"))
-      {
-        this.timeVarying = true;
-      }
-      else
-      {
-        this.timeVarying = false;
-      }
+      TimeVarying = optTSpawn.Equals("1");
 
       //Fraction mortality prior to spawning 
       DataTable tSpawnTable = new DataTable("tSpawnTable");
 
-      if (this.timeVarying)
+      if (TimeVarying)
       {
         //TFemale
         line = sr.ReadLine();
@@ -89,26 +83,24 @@ namespace Nmfs.Agepro.CoreLib
         line = sr.ReadLine();
         string[] TMLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-        for (int i = 0; i < this.numYears; i++)
+        for (int i = 0; i < NumYears; i++)
         {
-          tSpawnTable.Columns.Add(yearSeq[i].ToString(), typeof(double));
+          _ = tSpawnTable.Columns.Add(yearSeq[i].ToString(), typeof(double));
         }
-        tSpawnTable.Rows.Add(TFLine);
-        tSpawnTable.Rows.Add(TMLine);
+        _ = tSpawnTable.Rows.Add(TFLine);
+        _ = tSpawnTable.Rows.Add(TMLine);
       }
       else //All Years
       {
-        tSpawnTable.Columns.Add("All Years", typeof(double));
+        _ = tSpawnTable.Columns.Add("All Years", typeof(double));
 
         line = sr.ReadLine();
-        string TFLine = line;
-        tSpawnTable.Rows.Add(TFLine);
+        _ = tSpawnTable.Rows.Add((string)line);
 
         line = sr.ReadLine();
-        string TMLine = line;
-        tSpawnTable.Rows.Add(TMLine);
+        _ = tSpawnTable.Rows.Add((string)line);
       }
-      this.TSpawn = tSpawnTable;
+      TSpawn = tSpawnTable;
     }
 
     /// <summary>
@@ -118,15 +110,17 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>List of strings. Each string repesents a line from the input file.</returns>
     public List<string> WriteBiologicalDataLines()
     {
-      if (this.TSpawn == null)
+      if (TSpawn == null)
       {
         throw new NullReferenceException("Fraction Mortality Prior to Spawn ([BIOLOGICAL]) is NULL.");
       }
 
-      List<string> outputLines = new List<string>();
-      outputLines.Add("[BIOLOGICAL]");
-      outputLines.Add(Convert.ToInt32(this.timeVarying).ToString());
-      foreach (DataRow gRow in this.TSpawn.Rows)
+      List<string> outputLines = new List<string>
+      {
+        "[BIOLOGICAL]",
+        Convert.ToInt32(TimeVarying).ToString()
+      };
+      foreach (DataRow gRow in TSpawn.Rows)
       {
         outputLines.Add(string.Join(new string(' ', 2), gRow.ItemArray));
       }
