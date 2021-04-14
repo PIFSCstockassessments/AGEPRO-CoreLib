@@ -185,7 +185,7 @@ namespace Nmfs.Agepro.CoreLib
                 }
                 else if (line.Equals("[REFPOINT]"))
                 {
-                    this.options.enableRefpoint = true;
+                    this.options.EnableRefpoint = true;
                     line = sr.ReadLine();
                     string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.refpoint.refSpawnBio = Convert.ToDouble(refpointOpt[0]);
@@ -195,7 +195,7 @@ namespace Nmfs.Agepro.CoreLib
                 }
                 else if (line.Equals("[BOUNDS]"))
                 {
-                    this.options.enableBounds = true;
+                    this.options.EnableBounds = true;
                     line = sr.ReadLine();
                     string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.bounds.maxWeight = Convert.ToDouble(boundsOpt[0]);
@@ -203,7 +203,7 @@ namespace Nmfs.Agepro.CoreLib
                 }
                 else if (line.Equals("[RETROADJUST]"))
                 {
-                    this.options.enableRetroAdjustmentFactors = true;
+                    this.options.EnableRetroAdjustmentFactors = true;
                     line = sr.ReadLine();
                     string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     DataTable rafTable = new DataTable("Retro Adjustment Factors");
@@ -221,13 +221,13 @@ namespace Nmfs.Agepro.CoreLib
                 {
                     line = sr.ReadLine();
                     string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    this.options.enableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
-                    this.options.enableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
-                    this.options.enableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
+                    this.options.EnableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
+                    this.options.EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
+                    this.options.EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
                 }
                 else if (line.Equals("[SCALE]"))
                 {
-                    this.options.enableScaleFactors = true;
+                    this.options.EnableScaleFactors = true;
                     line = sr.ReadLine();
                     string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     this.scale.scaleBio = Convert.ToDouble(scaleOpt[0]);
@@ -236,7 +236,7 @@ namespace Nmfs.Agepro.CoreLib
                 }
                 else if (line.Equals("[PERC]"))
                 {
-                    this.options.enablePercentileReport = true;
+                    this.options.EnablePercentileReport = true;
                     this.reportPercentile.percentile = Convert.ToDouble(sr.ReadLine());
                 }
                 else if (line.Equals("[PSTAR]"))
@@ -358,7 +358,7 @@ namespace Nmfs.Agepro.CoreLib
             }
             
             //REFPOINT (Misc Options: Refpoint)
-            if (this.options.enableRefpoint)
+            if (this.options.EnableRefpoint)
             {
                 inpFile.Add("[REFPOINT]");
                 inpFile.Add(
@@ -369,14 +369,14 @@ namespace Nmfs.Agepro.CoreLib
             }
 
             //BOUNDS (Misc Options: Bounds)
-            if (this.options.enableBounds)
+            if (this.options.EnableBounds)
             {
                 inpFile.Add("[BOUNDS]");
                 inpFile.Add(this.bounds.maxWeight + new string(' ',2) + this.bounds.maxNatMort);
             }
 
             //RETROADJUST (Misc Options: Retro Adjustment Factors)
-            if (this.options.enableRetroAdjustmentFactors)
+            if (this.options.EnableRetroAdjustmentFactors)
             {
                 inpFile.Add("[RETROADJUST]");
                 List<string> rafCol = new List<string>();
@@ -391,11 +391,11 @@ namespace Nmfs.Agepro.CoreLib
             //OPTIONS (Misc Options)
             inpFile.Add("[OPTIONS]");
             inpFile.Add(
-                Convert.ToInt32(this.options.enableSummaryReport).ToString() + new string(' ',2) +
-                Convert.ToInt32(this.options.enableAuxStochasticFiles).ToString() + new string(' ',2) +
-                Convert.ToInt32(this.options.enableExportR).ToString());
+                Convert.ToInt32(this.options.EnableSummaryReport).ToString() + new string(' ',2) +
+                Convert.ToInt32(this.options.EnableAuxStochasticFiles).ToString() + new string(' ',2) +
+                Convert.ToInt32(this.options.EnableExportR).ToString());
 
-            if (this.options.enableScaleFactors)
+            if (this.options.EnableScaleFactors)
             {
                 inpFile.Add("[SCALE]");
                 inpFile.Add(
@@ -403,7 +403,7 @@ namespace Nmfs.Agepro.CoreLib
                     this.scale.scaleRec + new string(' ',2) +
                     this.scale.scaleStockNum + new string(' ',2));
             }
-            if (this.options.enablePercentileReport)
+            if (this.options.EnablePercentileReport)
             {
                 inpFile.Add("[PERC]");
                 inpFile.Add(this.reportPercentile.percentile.ToString());

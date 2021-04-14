@@ -1,36 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace Nmfs.Agepro.CoreLib
+﻿namespace Nmfs.Agepro.CoreLib
 {
   /// <summary>
   /// AGEPRO Misc Options.
   /// </summary>
   public class AgeproMiscOptions
   {
-    public bool enableSummaryReport { get; set; }
-    public bool enableAuxStochasticFiles { get; set; }
-    public bool enableExportR { get; set; }
+    public bool EnableSummaryReport { get; set; }
+    public bool EnableAuxStochasticFiles { get; set; }
+    public bool EnableExportR { get; set; }
     //enabled if classes are called.
-    public bool enableRefpoint { get; set; }
-    public bool enablePercentileReport { get; set; }
-    public bool enableScaleFactors { get; set; }
-    public bool enableBounds { get; set; }
-    public bool enableRetroAdjustmentFactors { get; set; }
+    public bool EnableRefpoint { get; set; }
+    public bool EnablePercentileReport { get; set; }
+    public bool EnableScaleFactors { get; set; }
+    public bool EnableBounds { get; set; }
+    public bool EnableRetroAdjustmentFactors { get; set; }
 
     public AgeproMiscOptions()
     {
-      enableRefpoint = false;
-      enablePercentileReport = false;
-      enableScaleFactors = false;
-      enableBounds = false;
-      enableRetroAdjustmentFactors = false;
+      EnableRefpoint = false;
+      EnablePercentileReport = false;
+      EnableScaleFactors = false;
+      EnableBounds = false;
+      EnableRetroAdjustmentFactors = false;
     }
 
   }
