@@ -71,6 +71,11 @@
     <Compile Include="src\coreLib\harvest\HarvestScenarioAnalysis.cs" />
     <Compile Include="src\coreLib\model-setup\AgeproGeneral.cs" />
     <Compile Include="src\coreLib\harvest\AgeproHarvestScenario.cs" />
+    <Compile Include="src\coreLib\options\Bounds.cs" />
+    <Compile Include="src\coreLib\options\Refpoint.cs" />
+    <Compile Include="src\coreLib\options\ReportPercentile.cs" />
+    <Compile Include="src\coreLib\options\RetroAdjustmentFactors.cs" />
+    <Compile Include="src\coreLib\options\ScaleFactors.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalCDFZero.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalFixedRecruitment.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalTwoStageRecruitment.cs" />
