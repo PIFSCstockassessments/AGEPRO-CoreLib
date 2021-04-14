@@ -65,7 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>agepro_strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\coreLib\bio-tspawn\AgeproBiological.cs" />
+    <Compile Include="src\coreLib\bio-tspawn\AgeproBioTSpawn.cs" />
     <Compile Include="src\coreLib\bootstrap\AgeproBootstrap.cs" />
     <Compile Include="src\coreLib\AgeproCoreLibProperty.cs" />
     <Compile Include="src\coreLib\harvest\HarvestScenarioAnalysis.cs" />

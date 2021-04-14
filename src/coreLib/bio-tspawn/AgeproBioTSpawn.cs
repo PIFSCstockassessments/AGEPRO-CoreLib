@@ -9,13 +9,13 @@ namespace Nmfs.Agepro.CoreLib
   /// <summary>
   /// Biologcal: Fraction Mortality Prior to Spawning
   /// </summary>
-  public class AgeproBiological
+  public class AgeproBioTSpawn
   {
     public bool TimeVarying { get; set; }
     public DataTable TSpawn { get; set; } //Fraction Mortality Prior To Spawning
     public int NumYears { get; set; }
 
-    public AgeproBiological()
+    public AgeproBioTSpawn()
     {
 
     }
