@@ -198,8 +198,8 @@ namespace Nmfs.Agepro.CoreLib
                     this.options.EnableBounds = true;
                     line = sr.ReadLine();
                     string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    this.bounds.maxWeight = Convert.ToDouble(boundsOpt[0]);
-                    this.bounds.maxNatMort = Convert.ToDouble(boundsOpt[1]);
+                    this.bounds.MaxWeight = Convert.ToDouble(boundsOpt[0]);
+                    this.bounds.MaxNatMort = Convert.ToDouble(boundsOpt[1]);
                 }
                 else if (line.Equals("[RETROADJUST]"))
                 {
@@ -372,7 +372,7 @@ namespace Nmfs.Agepro.CoreLib
             if (this.options.EnableBounds)
             {
                 inpFile.Add("[BOUNDS]");
-                inpFile.Add(this.bounds.maxWeight + new string(' ',2) + this.bounds.maxNatMort);
+                inpFile.Add(this.bounds.MaxWeight + new string(' ',2) + this.bounds.MaxNatMort);
             }
 
             //RETROADJUST (Misc Options: Retro Adjustment Factors)

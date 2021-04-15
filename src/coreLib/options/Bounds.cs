@@ -5,25 +5,25 @@
   /// </summary>
   public class Bounds : AgeproOptionsProperty
   {
-    private double _maxWeight;
-    private double _maxNatMort;
+    private double _MaxWeight;
+    private double _MaxNatMort;
 
-    public double maxWeight
+    public double MaxWeight
     {
-      get { return _maxWeight; }
-      set { SetProperty(ref _maxWeight, value); }
+      get => _MaxWeight;
+      set => SetProperty(ref _MaxWeight, value);
     }
-    public double maxNatMort
+    public double MaxNatMort
     {
-      get { return _maxNatMort; }
-      set { SetProperty(ref _maxNatMort, value); }
+      get => _MaxNatMort;
+      set => SetProperty(ref _MaxNatMort, value);
     }
 
     public Bounds()
     {
       //Set defaults
-      maxWeight = 10.0;
-      maxNatMort = 1.0;
+      MaxWeight = 10.0;
+      MaxNatMort = 1.0;
     }
   }
 
