@@ -188,10 +188,10 @@ namespace Nmfs.Agepro.CoreLib
                     this.options.EnableRefpoint = true;
                     line = sr.ReadLine();
                     string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    this.refpoint.refSpawnBio = Convert.ToDouble(refpointOpt[0]);
-                    this.refpoint.refJan1Bio = Convert.ToDouble(refpointOpt[1]);
-                    this.refpoint.refMeanBio = Convert.ToDouble(refpointOpt[2]);
-                    this.refpoint.refFMort = Convert.ToDouble(refpointOpt[3]);
+                    this.refpoint.RefSpawnBio = Convert.ToDouble(refpointOpt[0]);
+                    this.refpoint.RefJan1Bio = Convert.ToDouble(refpointOpt[1]);
+                    this.refpoint.RefMeanBio = Convert.ToDouble(refpointOpt[2]);
+                    this.refpoint.RefFMort = Convert.ToDouble(refpointOpt[3]);
                 }
                 else if (line.Equals("[BOUNDS]"))
                 {
@@ -362,10 +362,10 @@ namespace Nmfs.Agepro.CoreLib
             {
                 inpFile.Add("[REFPOINT]");
                 inpFile.Add(
-                    this.refpoint.refSpawnBio.ToString() + new string(' ', 2) +
-                    this.refpoint.refJan1Bio.ToString() + new string(' ', 2) +
-                    this.refpoint.refMeanBio.ToString() + new string(' ', 2) +
-                    this.refpoint.refFMort.ToString());
+                    this.refpoint.RefSpawnBio.ToString() + new string(' ', 2) +
+                    this.refpoint.RefJan1Bio.ToString() + new string(' ', 2) +
+                    this.refpoint.RefMeanBio.ToString() + new string(' ', 2) +
+                    this.refpoint.RefFMort.ToString());
             }
 
             //BOUNDS (Misc Options: Bounds)

@@ -5,43 +5,43 @@
   /// </summary>
   public class Refpoint : AgeproOptionsProperty
   {
-    private double _refSpawnBio; //SSBThresh
-    private double _refJan1Bio;  //StockBioThresh
-    private double _refMeanBio;  //MeanBioThresh
-    private double _refFMort;    //FMortThresh
+    private double _RefSpawnBioThresh; //SSBThresh
+    private double _RefJan1BioThresh;  //StockBioThresh
+    private double _RefMeanBioThresh;  //MeanBioThresh
+    private double _RefFMortThresh;    //FMortThresh
 
     //SSBThresh
-    public double refSpawnBio
+    public double RefSpawnBio
     {
-      get { return _refSpawnBio; }
-      set { SetProperty(ref _refSpawnBio, value); }
+      get => _RefSpawnBioThresh;
+      set => SetProperty(ref _RefSpawnBioThresh, value);
     }
     //StockBioThresh
-    public double refJan1Bio
+    public double RefJan1Bio
     {
-      get { return _refJan1Bio; }
-      set { SetProperty(ref _refJan1Bio, value); }
+      get => _RefJan1BioThresh;
+      set => SetProperty(ref _RefJan1BioThresh, value);
     }
     //MeanBioThresh
-    public double refMeanBio
+    public double RefMeanBio
     {
-      get { return _refMeanBio; }
-      set { SetProperty(ref _refMeanBio, value); }
+      get => _RefMeanBioThresh;
+      set => SetProperty(ref _RefMeanBioThresh, value);
     }
     //FMortThresh
-    public double refFMort
+    public double RefFMort
     {
-      get { return _refFMort; }
-      set { SetProperty(ref _refFMort, value); }
+      get => _RefFMortThresh;
+      set => SetProperty(ref _RefFMortThresh, value);
     }
 
     public Refpoint()
     {
       //Set Defaults to 0.0
-      refSpawnBio = 0.0;
-      refJan1Bio = 0.0;
-      refMeanBio = 0.0;
-      refFMort = 0.0;
+      RefSpawnBio = 0.0;
+      RefJan1Bio = 0.0;
+      RefMeanBio = 0.0;
+      RefFMort = 0.0;
     }
 
   }
