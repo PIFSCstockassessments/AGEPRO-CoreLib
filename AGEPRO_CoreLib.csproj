@@ -92,7 +92,7 @@
     <Compile Include="src\coreLib\recruitment\EmpiricalRecruitment.cs" />
     <Compile Include="src\coreLib\recruitment\RecruitModelDictionary.cs" />
     <Compile Include="src\util\Extensions.cs" />
-    <Compile Include="src\coreLib\options\MiscOptionsParameter.cs" />
+    <Compile Include="src\coreLib\options\AgeproOptionsProperty.cs" />
     <Compile Include="src\coreLib\recruitment\NullSelectRecruitment.cs" />
     <Compile Include="src\coreLib\harvest\HarvestCalculation.cs" />
     <Compile Include="src\validation\InvalidAgeproParameterException.cs" />
