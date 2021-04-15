@@ -14,7 +14,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns></returns>
     public static bool IsValid(this IValidatable input)
     {
-      return input.ValidationCheck().isValid;
+      return input.ValidationCheck().IsValid;
     }
 
     /// <summary>
@@ -24,7 +24,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns></returns>
     public static string ValidationMessage(this IValidatable input)
     {
-      return input.ValidationCheck().message;
+      return input.ValidationCheck().Message;
     }
 
     /// <summary>
@@ -34,13 +34,13 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns></returns>
     public static ValidationResult ValidationCheck(this IValidatable input)
     {
-      if (input != null)
+      if (input == null)
       {
-        return input.ValidateInput();
+        return new ValidationResult(false, "Null or Missing input.");
       }
       else
       {
-        return new ValidationResult(false, "Null or Missing input.");
+        return input.ValidateInput();
       }
 
     }

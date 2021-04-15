@@ -7,13 +7,13 @@
 
   public class ValidationResult
   {
-    public bool isValid { get; private set; }
-    public string message { get; private set; }
+    public bool IsValid { get; private set; }
+    public string Message { get; private set; }
 
     public ValidationResult(bool valid, string message)
     {
-      this.isValid = valid;
-      this.message = message;
+      IsValid = valid;
+      Message = message;
     }
 
   }
