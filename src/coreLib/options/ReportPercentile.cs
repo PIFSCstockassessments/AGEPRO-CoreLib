@@ -5,18 +5,18 @@
   /// </summary>
   public class ReportPercentile : AgeproOptionsProperty
   {
-    private double _precentile;
+    private double _Precentile;
 
-    public double percentile
+    public double Percentile
     {
-      get { return _precentile; }
-      set { SetProperty(ref _precentile, value); }
+      get => _Precentile;
+      set => SetProperty(ref _Precentile, value);
     }
 
     public ReportPercentile()
     {
       //Set Defaults to 0.0
-      percentile = 0.0;
+      Percentile = 0.0;
     }
   }
 

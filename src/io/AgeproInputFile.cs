@@ -237,7 +237,7 @@ namespace Nmfs.Agepro.CoreLib
                 else if (line.Equals("[PERC]"))
                 {
                     this.options.EnablePercentileReport = true;
-                    this.reportPercentile.percentile = Convert.ToDouble(sr.ReadLine());
+                    this.reportPercentile.Percentile = Convert.ToDouble(sr.ReadLine());
                 }
                 else if (line.Equals("[PSTAR]"))
                 {
@@ -406,7 +406,7 @@ namespace Nmfs.Agepro.CoreLib
             if (this.options.EnablePercentileReport)
             {
                 inpFile.Add("[PERC]");
-                inpFile.Add(this.reportPercentile.percentile.ToString());
+                inpFile.Add(this.reportPercentile.Percentile.ToString());
             }
 
             return inpFile;
