@@ -230,9 +230,9 @@ namespace Nmfs.Agepro.CoreLib
                     this.options.EnableScaleFactors = true;
                     line = sr.ReadLine();
                     string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    this.scale.scaleBio = Convert.ToDouble(scaleOpt[0]);
-                    this.scale.scaleRec = Convert.ToDouble(scaleOpt[1]);
-                    this.scale.scaleStockNum = Convert.ToDouble(scaleOpt[2]);
+                    this.scale.ScaleBio = Convert.ToDouble(scaleOpt[0]);
+                    this.scale.ScaleRec = Convert.ToDouble(scaleOpt[1]);
+                    this.scale.ScaleStockNum = Convert.ToDouble(scaleOpt[2]);
                 }
                 else if (line.Equals("[PERC]"))
                 {
@@ -399,9 +399,9 @@ namespace Nmfs.Agepro.CoreLib
             {
                 inpFile.Add("[SCALE]");
                 inpFile.Add(
-                    this.scale.scaleBio + new string(' ',2) + 
-                    this.scale.scaleRec + new string(' ',2) +
-                    this.scale.scaleStockNum + new string(' ',2));
+                    this.scale.ScaleBio + new string(' ',2) + 
+                    this.scale.ScaleRec + new string(' ',2) +
+                    this.scale.ScaleStockNum + new string(' ',2));
             }
             if (this.options.EnablePercentileReport)
             {

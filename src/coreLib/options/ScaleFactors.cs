@@ -5,32 +5,32 @@
   /// </summary>
   public class ScaleFactors : AgeproOptionsProperty
   {
-    private double _scaleBio;
-    private double _scaleRec;
-    private double _scaleStockSum;
+    private double _ScaleBio;
+    private double _ScaleRec;
+    private double _ScaleStockSum;
 
-    public double scaleBio
+    public double ScaleBio
     {
-      get { return _scaleBio; }
-      set { SetProperty(ref _scaleBio, value); }
+      get => _ScaleBio;
+      set => SetProperty(ref _ScaleBio, value);
     }
-    public double scaleRec
+    public double ScaleRec
     {
-      get { return _scaleRec; }
-      set { SetProperty(ref _scaleRec, value); }
+      get => _ScaleRec;
+      set => SetProperty(ref _ScaleRec, value);
     }
-    public double scaleStockNum
+    public double ScaleStockNum
     {
-      get { return _scaleStockSum; }
-      set { SetProperty(ref _scaleStockSum, value); }
+      get => _ScaleStockSum;
+      set => SetProperty(ref _ScaleStockSum, value);
     }
 
     public ScaleFactors()
     {
       //Set Defaults to 0
-      scaleBio = 0;
-      scaleRec = 0;
-      scaleStockNum = 0;
+      ScaleBio = 0;
+      ScaleRec = 0;
+      ScaleStockNum = 0;
     }
   }
 
