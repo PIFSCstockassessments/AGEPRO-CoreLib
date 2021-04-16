@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.IO;
 
@@ -13,35 +11,36 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class AgeproInputFile
   {
-    public string version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
-    public double numVer { get; set; }
-    public string caseID { get; set; }
-    public AgeproGeneral general = new AgeproGeneral();
-    public AgeproBootstrap bootstrap = new AgeproBootstrap();
-    public AgeproRecruitment recruitment = new AgeproRecruitment();
-    public AgeproWeightAgeTable jan1Weight = new AgeproWeightAgeTable(new int[] { 1, 0 }); //STOCK_WEIGHT
+    public string Version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
+    public double NumVer { get; set; }
+    public string CaseID { get; set; }
+
+    public AgeproGeneral General = new AgeproGeneral();
+    public AgeproBootstrap Bootstrap = new AgeproBootstrap();
+    public AgeproRecruitment Recruitment = new AgeproRecruitment();
+    public AgeproWeightAgeTable Jan1StockWeight = new AgeproWeightAgeTable(new int[] { 1, 0 }); //STOCK_WEIGHT
     public AgeproWeightAgeTable SSBWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1 });
-    public AgeproWeightAgeTable meanWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1, -2 });
-    public AgeproWeightAgeTable catchWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1, -2, -3 });
-    public AgeproWeightAgeTable discardWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 }); //discard weight
-    public AgeproBioTSpawn biological = new AgeproBioTSpawn(); //Fraction Mortality in Biological
-    public AgeproStochasticAgeTable maturity = new AgeproStochasticAgeTable(); //Maturity in Biological
-    public AgeproStochasticAgeTable fishery = new AgeproStochasticAgeTable();
-    public AgeproStochasticAgeTable naturalMortality = new AgeproStochasticAgeTable();
-    public RetroAdjustmentFactors retroAdjustOption = new RetroAdjustmentFactors(); //retroAdjust
-    public AgeproHarvestScenario harvestScenario = new AgeproHarvestScenario();
-    public AgeproStochasticAgeTable discardFraction = new AgeproStochasticAgeTable(); //discard fraction
-    public Bounds bounds = new Bounds(); //bounds
-    public AgeproMiscOptions options = new AgeproMiscOptions(); //options
-    public ScaleFactors scale = new ScaleFactors(); //scale
-    public ReportPercentile reportPercentile = new ReportPercentile(); //reportPercentile
-    public Refpoint refpoint = new Refpoint(); //refpoint
-    public RebuilderTargetCalculation rebuild = new RebuilderTargetCalculation(); //rebuilder
-    public PStarCalculation pstar = new PStarCalculation();
+    public AgeproWeightAgeTable MeanWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1, -2 });
+    public AgeproWeightAgeTable CatchWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1, -2, -3 });
+    public AgeproWeightAgeTable DiscardWeight = new AgeproWeightAgeTable(new int[] { 1, 0, -1, -2, -3, -4 }); //discard weight
+    public AgeproBioTSpawn BiologicalTSpawn = new AgeproBioTSpawn(); //Fraction Mortality in Biological
+    public AgeproStochasticAgeTable BiologicalMaturity = new AgeproStochasticAgeTable(); //Maturity in Biological
+    public AgeproStochasticAgeTable Fishery = new AgeproStochasticAgeTable();
+    public AgeproStochasticAgeTable NaturalMortality = new AgeproStochasticAgeTable();
+    public RetroAdjustmentFactors RetroAdjustments = new RetroAdjustmentFactors(); //retroAdjust
+    public AgeproHarvestScenario HarvestScenario = new AgeproHarvestScenario();
+    public AgeproStochasticAgeTable DiscardFraction = new AgeproStochasticAgeTable(); //discard fraction
+    public Bounds Bounds = new Bounds(); //bounds
+    public AgeproMiscOptions Options = new AgeproMiscOptions(); //options
+    public ScaleFactors Scale = new ScaleFactors(); //scale
+    public ReportPercentile ReportPercentile = new ReportPercentile(); //reportPercentile
+    public Refpoint Refpoint = new Refpoint(); //refpoint
+    public RebuilderTargetCalculation Rebuild = new RebuilderTargetCalculation(); //rebuilder
+    public PStarCalculation PStar = new PStarCalculation();
 
     public AgeproInputFile()
     {
-      caseID = "";
+      CaseID = "";
     }
 
     /// <summary>
@@ -80,7 +79,7 @@ namespace Nmfs.Agepro.CoreLib
       var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
       if (supportedINPVer.Contains(line))
       {
-        this.version = line;
+        Version = line;
       }
       else if (incompatibleINPVer.Contains(line))
       {
@@ -98,152 +97,152 @@ namespace Nmfs.Agepro.CoreLib
         //Case ID
         if (line.Equals("[CASEID]"))
         {
-          caseID = sr.ReadLine();
+          CaseID = sr.ReadLine();
         }
         //General
         else if (line.Equals("[GENERAL]"))
         {
           line = sr.ReadLine();
           string[] generalLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          this.general.ProjYearStart = Convert.ToInt32(generalLine[0]);
-          this.general.ProjYearEnd = Convert.ToInt32(generalLine[1]);
-          this.general.AgeBegin = Convert.ToInt32(generalLine[2]);
-          this.general.AgeEnd = Convert.ToInt32(generalLine[3]);
-          this.general.NumPopSims = Convert.ToInt32(generalLine[4]);
-          this.general.NumFleets = Convert.ToInt32(generalLine[5]);
-          this.general.NumRecModels = Convert.ToInt32(generalLine[6]);
-          this.general.Seed = Convert.ToInt32(generalLine[8]);
+          General.ProjYearStart = Convert.ToInt32(generalLine[0]);
+          General.ProjYearEnd = Convert.ToInt32(generalLine[1]);
+          General.AgeBegin = Convert.ToInt32(generalLine[2]);
+          General.AgeEnd = Convert.ToInt32(generalLine[3]);
+          General.NumPopSims = Convert.ToInt32(generalLine[4]);
+          General.NumFleets = Convert.ToInt32(generalLine[5]);
+          General.NumRecModels = Convert.ToInt32(generalLine[6]);
+          General.Seed = Convert.ToInt32(generalLine[8]);
           if (generalLine[7].Equals("1"))
           {
-            this.general.HasDiscards = true;
+            General.HasDiscards = true;
           }
           else
           {
-            this.general.HasDiscards = false;
+            General.HasDiscards = false;
           }
 
         }
         else if (line.Equals("[RECRUIT]"))
         {
           //Read Recruit Data
-          this.recruitment.ObservationYears = this.general.SeqYears();
-          this.recruitment.ReadRecruitmentData(sr, general.NumYears(), general.NumRecModels);
+          Recruitment.ObservationYears = General.SeqYears();
+          Recruitment.ReadRecruitmentData(sr, General.NumYears(), General.NumRecModels);
         }
         else if (line.Equals("[STOCK_WEIGHT]"))
         {
-          this.jan1Weight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
+          Jan1StockWeight.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges());
         }
         else if (line.Equals("[SSB_WEIGHT]"))
         {
-          this.SSBWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
+          SSBWeight.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges());
         }
         else if (line.Equals("[MEAN_WEIGHT]"))
         {
-          this.meanWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
+          MeanWeight.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges());
         }
         else if (line.Equals("[CATCH_WEIGHT]"))
         {
-          this.catchWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
+          CatchWeight.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges(), General.NumFleets);
         }
         else if (line.Equals("[DISC_WEIGHT]"))
         {
-          this.discardWeight.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
+          DiscardWeight.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges(), General.NumFleets);
         }
         else if (line.Equals("[NATMORT]"))
         {
-          this.naturalMortality.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
+          NaturalMortality.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges());
         }
         else if (line.Equals("[MATURITY]"))
         {
-          this.maturity.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges());
+          BiologicalMaturity.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges());
         }
         else if (line.Equals("[FISHERY]"))
         {
-          this.fishery.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
+          Fishery.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges(), General.NumFleets);
         }
         else if (line.Equals("[DISCARD]"))
         {
-          this.discardFraction.ReadStochasticAgeData(sr, this.general.NumYears(), this.general.NumAges(), this.general.NumFleets);
+          DiscardFraction.ReadStochasticAgeData(sr, General.NumYears(), General.NumAges(), General.NumFleets);
         }
         else if (line.Equals("[BIOLOGICAL]"))
         {
-          this.biological.ReadBiologicalData(sr, this.general.SeqYears());
+          BiologicalTSpawn.ReadBiologicalData(sr, General.SeqYears());
         }
         else if (line.Equals("[BOOTSTRAP]"))
         {
-          this.bootstrap.ReadBootstrapData(sr);
+          Bootstrap.ReadBootstrapData(sr);
         }
         else if (line.Equals("[HARVEST]"))
         {
-          this.harvestScenario.ReadHarvestTable(sr, this.general.NumYears(), this.general.NumFleets);
+          HarvestScenario.ReadHarvestTable(sr, General.NumYears(), General.NumFleets);
         }
         else if (line.Equals("[REBUILD]"))
         {
-          this.rebuild.obsYears = this.general.SeqYears();
-          this.rebuild.ReadCalculationDataLines(sr);
-          this.harvestScenario.AnalysisType = HarvestScenarioAnalysis.Rebuilder;
+          Rebuild.obsYears = General.SeqYears();
+          Rebuild.ReadCalculationDataLines(sr);
+          HarvestScenario.AnalysisType = HarvestScenarioAnalysis.Rebuilder;
         }
         else if (line.Equals("[REFPOINT]"))
         {
-          this.options.EnableRefpoint = true;
+          Options.EnableRefpoint = true;
           line = sr.ReadLine();
           string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          this.refpoint.RefSpawnBio = Convert.ToDouble(refpointOpt[0]);
-          this.refpoint.RefJan1Bio = Convert.ToDouble(refpointOpt[1]);
-          this.refpoint.RefMeanBio = Convert.ToDouble(refpointOpt[2]);
-          this.refpoint.RefFMort = Convert.ToDouble(refpointOpt[3]);
+          Refpoint.RefSpawnBio = Convert.ToDouble(refpointOpt[0]);
+          Refpoint.RefJan1Bio = Convert.ToDouble(refpointOpt[1]);
+          Refpoint.RefMeanBio = Convert.ToDouble(refpointOpt[2]);
+          Refpoint.RefFMort = Convert.ToDouble(refpointOpt[3]);
         }
         else if (line.Equals("[BOUNDS]"))
         {
-          this.options.EnableBounds = true;
+          Options.EnableBounds = true;
           line = sr.ReadLine();
           string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          this.bounds.MaxWeight = Convert.ToDouble(boundsOpt[0]);
-          this.bounds.MaxNatMort = Convert.ToDouble(boundsOpt[1]);
+          Bounds.MaxWeight = Convert.ToDouble(boundsOpt[0]);
+          Bounds.MaxNatMort = Convert.ToDouble(boundsOpt[1]);
         }
         else if (line.Equals("[RETROADJUST]"))
         {
-          this.options.EnableRetroAdjustmentFactors = true;
+          Options.EnableRetroAdjustmentFactors = true;
           line = sr.ReadLine();
           string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
           DataTable rafTable = new DataTable("Retro Adjustment Factors");
           rafTable.Columns.Add(); //set column without name
                                   //TODO: throw warning/error if 'rafLine' length doesn't match number of Ages
 
-          for (int i = 0; i < this.general.NumAges(); i++)
+          for (int i = 0; i < General.NumAges(); i++)
           {
             rafTable.Rows.Add(rafLine[i]);
           }
 
-          this.retroAdjustOption.retroAdjust = rafTable;
+          RetroAdjustments.retroAdjust = rafTable;
         }
         else if (line.Equals("[OPTIONS]"))
         {
           line = sr.ReadLine();
           string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          this.options.EnableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
-          this.options.EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
-          this.options.EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
+          Options.EnableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
+          Options.EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
+          Options.EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
         }
         else if (line.Equals("[SCALE]"))
         {
-          this.options.EnableScaleFactors = true;
+          Options.EnableScaleFactors = true;
           line = sr.ReadLine();
           string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          this.scale.ScaleBio = Convert.ToDouble(scaleOpt[0]);
-          this.scale.ScaleRec = Convert.ToDouble(scaleOpt[1]);
-          this.scale.ScaleStockNum = Convert.ToDouble(scaleOpt[2]);
+          Scale.ScaleBio = Convert.ToDouble(scaleOpt[0]);
+          Scale.ScaleRec = Convert.ToDouble(scaleOpt[1]);
+          Scale.ScaleStockNum = Convert.ToDouble(scaleOpt[2]);
         }
         else if (line.Equals("[PERC]"))
         {
-          this.options.EnablePercentileReport = true;
-          this.reportPercentile.Percentile = Convert.ToDouble(sr.ReadLine());
+          Options.EnablePercentileReport = true;
+          ReportPercentile.Percentile = Convert.ToDouble(sr.ReadLine());
         }
         else if (line.Equals("[PSTAR]"))
         {
-          this.pstar.obsYears = this.general.SeqYears();
-          this.pstar.ReadCalculationDataLines(sr);
-          this.harvestScenario.AnalysisType = HarvestScenarioAnalysis.PStar;
+          PStar.obsYears = General.SeqYears();
+          PStar.ReadCalculationDataLines(sr);
+          HarvestScenario.AnalysisType = HarvestScenarioAnalysis.PStar;
         }
       }
 
@@ -257,7 +256,7 @@ namespace Nmfs.Agepro.CoreLib
     {
       try
       {
-        List<string> outLines = this.WriteInputFileLines();
+        List<string> outLines = WriteInputFileLines();
         File.WriteAllLines(file, outLines);
       }
       catch (NullReferenceException)
@@ -277,110 +276,110 @@ namespace Nmfs.Agepro.CoreLib
     private List<string> WriteInputFileLines()
     {
       List<string> inpFile = new List<string>();
-      inpFile.Add(this.version); //New cases will have "AGEPRO VERSION 4.2"
+      inpFile.Add(Version); //New cases will have "AGEPRO VERSION 4.2"
 
       //CASEID
       inpFile.Add("[CASEID]");
-      inpFile.Add(this.caseID);
+      inpFile.Add(CaseID);
 
       //GENERAL
       inpFile.Add("[GENERAL]");
       inpFile.Add(
-          this.general.ProjYearStart.ToString() + "  " +
-          this.general.ProjYearEnd.ToString() + "  " +
-          this.general.AgeBegin.ToString() + "  " +
-          this.general.AgeEnd.ToString() + "  " +
-          this.general.NumPopSims.ToString() + "  " +
-          this.general.NumFleets.ToString() + "  " +
-          this.general.NumRecModels.ToString() + "  " +
-          Convert.ToInt32(this.general.HasDiscards).ToString() + "  " +
-          this.general.Seed.ToString());
+          General.ProjYearStart.ToString() + "  " +
+          General.ProjYearEnd.ToString() + "  " +
+          General.AgeBegin.ToString() + "  " +
+          General.AgeEnd.ToString() + "  " +
+          General.NumPopSims.ToString() + "  " +
+          General.NumFleets.ToString() + "  " +
+          General.NumRecModels.ToString() + "  " +
+          Convert.ToInt32(General.HasDiscards).ToString() + "  " +
+          General.Seed.ToString());
 
       //BOOTSTRAP
       inpFile.Add("[BOOTSTRAP]");
-      inpFile.Add(this.bootstrap.NumBootstraps.ToString() + "  " + this.bootstrap.PopScaleFactor.ToString());
-      inpFile.Add(this.bootstrap.BootstrapFile);
+      inpFile.Add(Bootstrap.NumBootstraps.ToString() + "  " + Bootstrap.PopScaleFactor.ToString());
+      inpFile.Add(Bootstrap.BootstrapFile);
 
       //STOCK WEIGHT
-      inpFile.AddRange(jan1Weight.WriteStochasticAgeDataLines("[STOCK_WEIGHT]"));
+      inpFile.AddRange(Jan1StockWeight.WriteStochasticAgeDataLines("[STOCK_WEIGHT]"));
 
       //SSB_WEIGHT
       inpFile.AddRange(SSBWeight.WriteStochasticAgeDataLines("[SSB_WEIGHT]"));
 
       //MEAN_WEIGHT
-      inpFile.AddRange(meanWeight.WriteStochasticAgeDataLines("[MEAN_WEIGHT]"));
+      inpFile.AddRange(MeanWeight.WriteStochasticAgeDataLines("[MEAN_WEIGHT]"));
 
       //CATCH_WEIGHT
-      inpFile.AddRange(catchWeight.WriteStochasticAgeDataLines("[CATCH_WEIGHT]"));
+      inpFile.AddRange(CatchWeight.WriteStochasticAgeDataLines("[CATCH_WEIGHT]"));
 
-      if (this.general.HasDiscards)
+      if (General.HasDiscards)
       {
         //DISC_WEIGHT
-        inpFile.AddRange(discardWeight.WriteStochasticAgeDataLines("[DISC_WEIGHT]"));
+        inpFile.AddRange(DiscardWeight.WriteStochasticAgeDataLines("[DISC_WEIGHT]"));
       }
 
       //NATMORT
-      inpFile.AddRange(naturalMortality.WriteStochasticAgeDataLines("[NATMORT]"));
+      inpFile.AddRange(NaturalMortality.WriteStochasticAgeDataLines("[NATMORT]"));
 
       //BIOLOGICAL (Bioloical:Fraction Mortality Prior to Spawning) 
-      inpFile.AddRange(biological.WriteBiologicalDataLines());
+      inpFile.AddRange(BiologicalTSpawn.WriteBiologicalDataLines());
 
       //MATURITY (Biological:Maturity At Age)
-      inpFile.AddRange(maturity.WriteStochasticAgeDataLines("[MATURITY]"));
+      inpFile.AddRange(BiologicalMaturity.WriteStochasticAgeDataLines("[MATURITY]"));
 
       //FISHERY
-      inpFile.AddRange(fishery.WriteStochasticAgeDataLines("[FISHERY]"));
+      inpFile.AddRange(Fishery.WriteStochasticAgeDataLines("[FISHERY]"));
 
-      if (this.general.HasDiscards)
+      if (General.HasDiscards)
       {
         //DISCARDS
-        inpFile.AddRange(discardFraction.WriteStochasticAgeDataLines("[DISCARD]"));
+        inpFile.AddRange(DiscardFraction.WriteStochasticAgeDataLines("[DISCARD]"));
       }
 
       //RECRUIT (Recruitment)
-      inpFile.AddRange(recruitment.WriteRecruitmentDataLines());
+      inpFile.AddRange(Recruitment.WriteRecruitmentDataLines());
 
       //HARVEST
-      inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
+      inpFile.AddRange(HarvestScenario.WriteHarvestTableDataLines());
 
       //REBUILD
-      if (this.harvestScenario.AnalysisType == HarvestScenarioAnalysis.Rebuilder)
+      if (HarvestScenario.AnalysisType == HarvestScenarioAnalysis.Rebuilder)
       {
         //inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
-        inpFile.AddRange(rebuild.WriteCalculationDataLines());
+        inpFile.AddRange(Rebuild.WriteCalculationDataLines());
       }
 
       //PSTAR
-      if (this.harvestScenario.AnalysisType == HarvestScenarioAnalysis.PStar)
+      if (HarvestScenario.AnalysisType == HarvestScenarioAnalysis.PStar)
       {
         //inpFile.AddRange(harvestScenario.WriteHarvestTableDataLines());
-        inpFile.AddRange(pstar.WriteCalculationDataLines());
+        inpFile.AddRange(PStar.WriteCalculationDataLines());
       }
 
       //REFPOINT (Misc Options: Refpoint)
-      if (this.options.EnableRefpoint)
+      if (Options.EnableRefpoint)
       {
         inpFile.Add("[REFPOINT]");
         inpFile.Add(
-            this.refpoint.RefSpawnBio.ToString() + new string(' ', 2) +
-            this.refpoint.RefJan1Bio.ToString() + new string(' ', 2) +
-            this.refpoint.RefMeanBio.ToString() + new string(' ', 2) +
-            this.refpoint.RefFMort.ToString());
+            Refpoint.RefSpawnBio.ToString() + new string(' ', 2) +
+            Refpoint.RefJan1Bio.ToString() + new string(' ', 2) +
+            Refpoint.RefMeanBio.ToString() + new string(' ', 2) +
+            Refpoint.RefFMort.ToString());
       }
 
       //BOUNDS (Misc Options: Bounds)
-      if (this.options.EnableBounds)
+      if (Options.EnableBounds)
       {
         inpFile.Add("[BOUNDS]");
-        inpFile.Add(this.bounds.MaxWeight + new string(' ', 2) + this.bounds.MaxNatMort);
+        inpFile.Add(Bounds.MaxWeight + new string(' ', 2) + Bounds.MaxNatMort);
       }
 
       //RETROADJUST (Misc Options: Retro Adjustment Factors)
-      if (this.options.EnableRetroAdjustmentFactors)
+      if (Options.EnableRetroAdjustmentFactors)
       {
         inpFile.Add("[RETROADJUST]");
         List<string> rafCol = new List<string>();
-        foreach (DataRow ageRow in this.retroAdjustOption.retroAdjust.Rows)
+        foreach (DataRow ageRow in RetroAdjustments.retroAdjust.Rows)
         {
           rafCol.Add(ageRow[0].ToString());
         }
@@ -391,22 +390,22 @@ namespace Nmfs.Agepro.CoreLib
       //OPTIONS (Misc Options)
       inpFile.Add("[OPTIONS]");
       inpFile.Add(
-          Convert.ToInt32(this.options.EnableSummaryReport).ToString() + new string(' ', 2) +
-          Convert.ToInt32(this.options.EnableAuxStochasticFiles).ToString() + new string(' ', 2) +
-          Convert.ToInt32(this.options.EnableExportR).ToString());
+          Convert.ToInt32(Options.EnableSummaryReport).ToString() + new string(' ', 2) +
+          Convert.ToInt32(Options.EnableAuxStochasticFiles).ToString() + new string(' ', 2) +
+          Convert.ToInt32(Options.EnableExportR).ToString());
 
-      if (this.options.EnableScaleFactors)
+      if (Options.EnableScaleFactors)
       {
         inpFile.Add("[SCALE]");
         inpFile.Add(
-            this.scale.ScaleBio + new string(' ', 2) +
-            this.scale.ScaleRec + new string(' ', 2) +
-            this.scale.ScaleStockNum + new string(' ', 2));
+            Scale.ScaleBio + new string(' ', 2) +
+            Scale.ScaleRec + new string(' ', 2) +
+            Scale.ScaleStockNum + new string(' ', 2));
       }
-      if (this.options.EnablePercentileReport)
+      if (Options.EnablePercentileReport)
       {
         inpFile.Add("[PERC]");
-        inpFile.Add(this.reportPercentile.Percentile.ToString());
+        inpFile.Add(ReportPercentile.Percentile.ToString());
       }
 
       return inpFile;
