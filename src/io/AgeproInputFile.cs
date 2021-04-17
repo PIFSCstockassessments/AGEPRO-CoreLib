@@ -185,12 +185,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[REFPOINT]"))
         {
           Options.EnableRefpoint = true;
-          line = sr.ReadLine();
-          string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          Refpoint.RefSpawnBio = Convert.ToDouble(refpointOpt[0]);
-          Refpoint.RefJan1Bio = Convert.ToDouble(refpointOpt[1]);
-          Refpoint.RefMeanBio = Convert.ToDouble(refpointOpt[2]);
-          Refpoint.RefFMort = Convert.ToDouble(refpointOpt[3]);
+          _ = Refpoint.ReadRefpointLines(sr);
         }
         else if (line.Equals("[BOUNDS]"))
         {

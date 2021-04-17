@@ -1,4 +1,7 @@
-﻿namespace Nmfs.Agepro.CoreLib
+﻿using System;
+using System.IO;
+
+namespace Nmfs.Agepro.CoreLib
 {
   /// <summary>
   /// Parameters for the Reference Point Threshold Report
@@ -44,6 +47,21 @@
       RefFMort = 0.0;
     }
 
+    public string ReadRefpointLines(StreamReader sr)
+    {
+      if (sr is null)
+      {
+        throw new System.ArgumentNullException(nameof(sr));
+      }
+
+      string line = sr.ReadLine();
+      string[] refpointOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      RefSpawnBio = Convert.ToDouble(refpointOpt[0]);
+      RefJan1Bio = Convert.ToDouble(refpointOpt[1]);
+      RefMeanBio = Convert.ToDouble(refpointOpt[2]);
+      RefFMort = Convert.ToDouble(refpointOpt[3]);
+      return line;
+    }
   }
 
 }
