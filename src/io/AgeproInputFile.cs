@@ -14,7 +14,6 @@ namespace Nmfs.Agepro.CoreLib
     public string Version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
     public double NumVer { get; set; }
     public string CaseID { get; set; }
-
     public AgeproGeneral General = new AgeproGeneral();
     public AgeproBootstrap Bootstrap = new AgeproBootstrap();
     public AgeproRecruitment Recruitment = new AgeproRecruitment();
@@ -112,14 +111,7 @@ namespace Nmfs.Agepro.CoreLib
           General.NumFleets = Convert.ToInt32(generalLine[5]);
           General.NumRecModels = Convert.ToInt32(generalLine[6]);
           General.Seed = Convert.ToInt32(generalLine[8]);
-          if (generalLine[7].Equals("1"))
-          {
-            General.HasDiscards = true;
-          }
-          else
-          {
-            General.HasDiscards = false;
-          }
+          General.HasDiscards = generalLine[7].Equals("1");
 
         }
         else if (line.Equals("[RECRUIT]"))
