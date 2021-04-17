@@ -1,4 +1,7 @@
-﻿namespace Nmfs.Agepro.CoreLib
+﻿using System;
+using System.IO;
+
+namespace Nmfs.Agepro.CoreLib
 {
   /// <summary>
   /// Customized maximum bounds for Weight and Natural Mortality   
@@ -24,6 +27,15 @@
       //Set defaults
       MaxWeight = 10.0;
       MaxNatMort = 1.0;
+    }
+
+    public string ReadBounds(StreamReader sr)
+    {
+      string line = sr.ReadLine();
+      string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      MaxWeight = Convert.ToDouble(boundsOpt[0]);
+      MaxNatMort = Convert.ToDouble(boundsOpt[1]);
+      return line;
     }
   }
 

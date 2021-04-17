@@ -190,10 +190,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[BOUNDS]"))
         {
           Options.EnableBounds = true;
-          line = sr.ReadLine();
-          string[] boundsOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          Bounds.MaxWeight = Convert.ToDouble(boundsOpt[0]);
-          Bounds.MaxNatMort = Convert.ToDouble(boundsOpt[1]);
+          _ = Bounds.ReadBounds(sr);
         }
         else if (line.Equals("[RETROADJUST]"))
         {
