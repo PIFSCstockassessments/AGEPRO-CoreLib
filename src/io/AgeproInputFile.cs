@@ -203,18 +203,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[RETROADJUST]"))
         {
           Options.EnableRetroAdjustmentFactors = true;
-          line = sr.ReadLine();
-          string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          DataTable rafTable = new DataTable("Retro Adjustment Factors");
-          rafTable.Columns.Add(); //set column without name
-                                  //TODO: throw warning/error if 'rafLine' length doesn't match number of Ages
-
-          for (int i = 0; i < General.NumAges(); i++)
-          {
-            rafTable.Rows.Add(rafLine[i]);
-          }
-
-          RetroAdjustments.retroAdjust = rafTable;
+          _ = RetroAdjustments.ReadRetroAdjustmwntFactorsTable(sr, General);
         }
         else if (line.Equals("[OPTIONS]"))
         {
@@ -245,8 +234,8 @@ namespace Nmfs.Agepro.CoreLib
           HarvestScenario.AnalysisType = HarvestScenarioAnalysis.PStar;
         }
       }
-
     }
+
 
     /// <summary>
     /// Initiates the \code{WriteInputFileLines} function to write AGEPRO Input files.
@@ -379,7 +368,7 @@ namespace Nmfs.Agepro.CoreLib
       {
         inpFile.Add("[RETROADJUST]");
         List<string> rafCol = new List<string>();
-        foreach (DataRow ageRow in RetroAdjustments.retroAdjust.Rows)
+        foreach (DataRow ageRow in RetroAdjustments.RetroAdjust.Rows)
         {
           rafCol.Add(ageRow[0].ToString());
         }

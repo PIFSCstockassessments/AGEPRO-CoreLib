@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
 {
@@ -7,13 +9,35 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class RetroAdjustmentFactors : AgeproOptionsProperty
   {
-    //Data binded to AGEPRO GUI's dataGridRetroAdjustment (DataGridView)
-    public DataTable retroAdjust;
-
     public RetroAdjustmentFactors()
     {
-      retroAdjust = new DataTable("Retro Adjustment Factors");
+      RetroAdjust = new DataTable("Retro Adjustment Factors");
     }
+
+    public DataTable RetroAdjust { get; set; }
+
+    public string ReadRetroAdjustmwntFactorsTable(StreamReader sr, AgeproGeneral General)
+    {
+      string line = sr.ReadLine();
+      string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      DataTable rafTable = new DataTable("Retro Adjustment Factors");
+      _ = rafTable.Columns.Add(); //set column without name
+
+      //TODO: throw warning/error if 'rafLine' length doesn't match number of Ages
+      if (rafLine.Length == General.NumAges())
+      {
+        throw new InvalidAgeproParameterException("Number of retro adjustment factors match number of ages");
+      }
+
+      for (int i = 0; i < General.NumAges(); i++)
+      {
+        _ = rafTable.Rows.Add(rafLine[i]);
+      }
+
+      RetroAdjust = rafTable;
+      return line;
+    }
+
   }
 
 }
