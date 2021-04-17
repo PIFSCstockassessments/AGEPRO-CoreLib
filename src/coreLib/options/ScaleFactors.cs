@@ -1,4 +1,7 @@
-﻿namespace Nmfs.Agepro.CoreLib
+﻿using System;
+using System.IO;
+
+namespace Nmfs.Agepro.CoreLib
 {
   /// <summary>
   /// Scaling Factors for the AGEPRO Output Report
@@ -31,6 +34,16 @@
       ScaleBio = 0;
       ScaleRec = 0;
       ScaleStockNum = 0;
+    }
+
+    public string ReadScaleFactors(StreamReader sr)
+    {
+      string line = sr.ReadLine();
+      string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      ScaleBio = Convert.ToDouble(scaleOpt[0]);
+      ScaleRec = Convert.ToDouble(scaleOpt[1]);
+      ScaleStockNum = Convert.ToDouble(scaleOpt[2]);
+      return line;
     }
   }
 

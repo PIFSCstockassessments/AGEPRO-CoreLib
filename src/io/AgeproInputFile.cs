@@ -208,11 +208,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[SCALE]"))
         {
           Options.EnableScaleFactors = true;
-          line = sr.ReadLine();
-          string[] scaleOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          Scale.ScaleBio = Convert.ToDouble(scaleOpt[0]);
-          Scale.ScaleRec = Convert.ToDouble(scaleOpt[1]);
-          Scale.ScaleStockNum = Convert.ToDouble(scaleOpt[2]);
+          _ = Scale.ReadScaleFactors(sr);
         }
         else if (line.Equals("[PERC]"))
         {
