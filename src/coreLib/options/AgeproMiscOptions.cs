@@ -1,4 +1,7 @@
-﻿namespace Nmfs.Agepro.CoreLib
+﻿using System;
+using System.IO;
+
+namespace Nmfs.Agepro.CoreLib
 {
   /// <summary>
   /// AGEPRO Misc Options.
@@ -23,6 +26,23 @@
       EnableBounds = false;
       EnableRetroAdjustmentFactors = false;
     }
+
+    public string ReadAgeproOptions(StreamReader sr)
+    {
+      if (sr is null)
+      {
+        throw new System.ArgumentNullException(nameof(sr));
+      }
+
+      string line = sr.ReadLine();
+      string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      EnableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
+      EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
+      EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
+      return line;
+    }
+
+
 
   }
 

@@ -191,11 +191,7 @@ namespace Nmfs.Agepro.CoreLib
         }
         else if (line.Equals("[OPTIONS]"))
         {
-          line = sr.ReadLine();
-          string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          Options.EnableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
-          Options.EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
-          Options.EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
+          _ = Options.ReadAgeproOptions(sr);
         }
         else if (line.Equals("[SCALE]"))
         {
