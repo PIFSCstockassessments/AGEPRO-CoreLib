@@ -94,9 +94,11 @@ namespace Nmfs.Agepro.CoreLib
     /// <returns>A list of strings to be appended to the AGEPRO Input Data file.</returns>
     public override List<string> WriteCalculationDataLines()
     {
-      List<string> outputLines = new List<string>();
-      outputLines.Add("[PSTAR]");
-      outputLines.Add(PStarLevels.ToString());
+      List<string> outputLines = new List<string>
+      {
+        "[PSTAR]",
+        PStarLevels.ToString()
+      };
 
       if (PStarTable.Rows.Count > 1)
       {
