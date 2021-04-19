@@ -187,7 +187,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[RETROADJUST]"))
         {
           Options.EnableRetroAdjustmentFactors = true;
-          _ = RetroAdjustments.ReadRetroAdjustmwntFactorsTable(sr, General);
+          _ = RetroAdjustments.ReadRetroAdjustmentFactorsTable(sr, General);
         }
         else if (line.Equals("[OPTIONS]"))
         {

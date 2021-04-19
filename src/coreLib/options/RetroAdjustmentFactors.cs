@@ -16,14 +16,14 @@ namespace Nmfs.Agepro.CoreLib
 
     public DataTable RetroAdjust { get; set; }
 
-    public string ReadRetroAdjustmwntFactorsTable(StreamReader sr, AgeproGeneral General)
+    public string ReadRetroAdjustmentFactorsTable(StreamReader sr, AgeproGeneral General)
     {
       string line = sr.ReadLine();
       string[] rafLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
       DataTable rafTable = new DataTable("Retro Adjustment Factors");
       _ = rafTable.Columns.Add(); //set column without name
 
-      //TODO: throw warning/error if 'rafLine' length doesn't match number of Ages
+      //Throw warning/error if 'rafLine' length doesn't match number of Ages
       if (rafLine.Length == General.NumAges())
       {
         throw new InvalidAgeproParameterException("Number of retro adjustment factors match number of ages");
