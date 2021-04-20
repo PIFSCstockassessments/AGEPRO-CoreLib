@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Nmfs.Agepro.CoreLib
@@ -58,6 +60,44 @@ namespace Nmfs.Agepro.CoreLib
       return Enumerable.Range(ProjYearStart, NumYears()).ToArray();
     }
 
+    public string ReadGeneralModelParameters(StreamReader sr)
+    {
+      if (sr is null)
+      {
+        throw new ArgumentNullException(nameof(sr));
+      }
 
+      string line = sr.ReadLine();
+      string[] generalLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      ProjYearStart = Convert.ToInt32(generalLine[0]);
+      ProjYearEnd = Convert.ToInt32(generalLine[1]);
+      AgeBegin = Convert.ToInt32(generalLine[2]);
+      AgeEnd = Convert.ToInt32(generalLine[3]);
+      NumPopSims = Convert.ToInt32(generalLine[4]);
+      NumFleets = Convert.ToInt32(generalLine[5]);
+      NumRecModels = Convert.ToInt32(generalLine[6]);
+      Seed = Convert.ToInt32(generalLine[8]);
+      HasDiscards = generalLine[7].Equals("1");
+
+      return line;
+    }
+
+    public List<string> WriteAgeproGeneralParameters()
+    {
+
+      return new List<string>
+      {
+        "[GENERAL]",
+        ProjYearStart.ToString() + "  " +
+          ProjYearEnd.ToString() + "  " +
+          AgeBegin.ToString() + "  " +
+          AgeEnd.ToString() + "  " +
+          NumPopSims.ToString() + "  " +
+          NumFleets.ToString() + "  " +
+          NumRecModels.ToString() + "  " +
+          Convert.ToInt32(HasDiscards).ToString() + "  " +
+          Seed.ToString()
+      };
+    }
   }
 }

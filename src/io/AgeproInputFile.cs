@@ -84,17 +84,7 @@ namespace Nmfs.Agepro.CoreLib
         //General
         else if (line.Equals("[GENERAL]"))
         {
-          line = sr.ReadLine();
-          string[] generalLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-          General.ProjYearStart = Convert.ToInt32(generalLine[0]);
-          General.ProjYearEnd = Convert.ToInt32(generalLine[1]);
-          General.AgeBegin = Convert.ToInt32(generalLine[2]);
-          General.AgeEnd = Convert.ToInt32(generalLine[3]);
-          General.NumPopSims = Convert.ToInt32(generalLine[4]);
-          General.NumFleets = Convert.ToInt32(generalLine[5]);
-          General.NumRecModels = Convert.ToInt32(generalLine[6]);
-          General.Seed = Convert.ToInt32(generalLine[8]);
-          General.HasDiscards = generalLine[7].Equals("1");
+          _ = General.ReadGeneralModelParameters(sr);
 
         }
         else if (line.Equals("[RECRUIT]"))
@@ -195,6 +185,11 @@ namespace Nmfs.Agepro.CoreLib
       }
     }
 
+    /// <summary>
+    /// Checks Printed AGEPRO Input File Version
+    /// </summary>
+    /// <param name="sr"></param>
+    /// <returns></returns>
     private string CheckINPVersion(StreamReader sr)
     {
       string line = sr.ReadLine();
@@ -248,7 +243,7 @@ namespace Nmfs.Agepro.CoreLib
     private List<string> WriteInputFileLines()
     {
       List<string> inpFile = new List<string>();
-      
+
       //VERSION
       inpFile.Add(Version); //New cases will have "AGEPRO VERSION 4.2"
 
@@ -257,17 +252,7 @@ namespace Nmfs.Agepro.CoreLib
       inpFile.Add(CaseID);
 
       //GENERAL
-      inpFile.Add("[GENERAL]");
-      inpFile.Add(
-          General.ProjYearStart.ToString() + "  " +
-          General.ProjYearEnd.ToString() + "  " +
-          General.AgeBegin.ToString() + "  " +
-          General.AgeEnd.ToString() + "  " +
-          General.NumPopSims.ToString() + "  " +
-          General.NumFleets.ToString() + "  " +
-          General.NumRecModels.ToString() + "  " +
-          Convert.ToInt32(General.HasDiscards).ToString() + "  " +
-          General.Seed.ToString());
+      inpFile.AddRange(General.WriteAgeproGeneralParameters());
 
       //BOOTSTRAP
       inpFile.Add("[BOOTSTRAP]");
@@ -366,5 +351,6 @@ namespace Nmfs.Agepro.CoreLib
 
       return inpFile;
     }
+
   }
 }
