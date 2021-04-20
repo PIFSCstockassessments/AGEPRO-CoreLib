@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
@@ -44,6 +45,17 @@ namespace Nmfs.Agepro.CoreLib
       ScaleRec = Convert.ToDouble(scaleOpt[1]);
       ScaleStockNum = Convert.ToDouble(scaleOpt[2]);
       return line;
+    }
+
+    public List<string> WriteScaleFactors()
+    {
+      return new List<string>
+      {
+        "[SCALE]",
+        ScaleBio + new string(' ', 2) 
+        + ScaleRec + new string(' ', 2) 
+        + ScaleStockNum + new string(' ', 2)
+      };
     }
   }
 

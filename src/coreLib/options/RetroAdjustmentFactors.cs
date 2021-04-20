@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 
@@ -36,6 +37,22 @@ namespace Nmfs.Agepro.CoreLib
 
       RetroAdjust = rafTable;
       return line;
+    }
+
+    public List<string> WriteRetroAdjustmentFactorsTable()
+    {
+      List<string> outputLines = new List<string>
+      {
+        "[RETROADJUST]"
+      };
+      List<string> rafCol = new List<string>();
+      foreach (DataRow ageRow in RetroAdjust.Rows)
+      {
+        rafCol.Add(ageRow[0].ToString());
+      }
+      outputLines.Add(string.Join(new string(' ', 2), rafCol));
+
+      return outputLines;
     }
 
   }

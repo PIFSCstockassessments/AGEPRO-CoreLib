@@ -324,49 +324,31 @@ namespace Nmfs.Agepro.CoreLib
       //REFPOINT (Misc Options: Refpoint)
       if (Options.EnableRefpoint)
       {
-        inpFile.Add("[REFPOINT]");
-        inpFile.Add(
-            Refpoint.RefSpawnBio.ToString() + new string(' ', 2) +
-            Refpoint.RefJan1Bio.ToString() + new string(' ', 2) +
-            Refpoint.RefMeanBio.ToString() + new string(' ', 2) +
-            Refpoint.RefFMort.ToString());
+        inpFile.AddRange(Refpoint.WriteRefpointLines());
       }
 
       //BOUNDS (Misc Options: Bounds)
       if (Options.EnableBounds)
       {
-        inpFile.Add("[BOUNDS]");
-        inpFile.Add(Bounds.MaxWeight + new string(' ', 2) + Bounds.MaxNatMort);
+        inpFile.AddRange(Bounds.WriteBoundsLines());
       }
 
       //RETROADJUST (Misc Options: Retro Adjustment Factors)
       if (Options.EnableRetroAdjustmentFactors)
       {
-        inpFile.Add("[RETROADJUST]");
-        List<string> rafCol = new List<string>();
-        foreach (DataRow ageRow in RetroAdjustments.RetroAdjust.Rows)
-        {
-          rafCol.Add(ageRow[0].ToString());
-        }
-        inpFile.Add(string.Join(new string(' ', 2), rafCol));
-
+        inpFile.AddRange(RetroAdjustments.WriteRetroAdjustmentFactorsTable());
       }
 
       //OPTIONS (Misc Options)
-      inpFile.Add("[OPTIONS]");
-      inpFile.Add(
-          Convert.ToInt32(Options.EnableSummaryReport).ToString() + new string(' ', 2) +
-          Convert.ToInt32(Options.EnableAuxStochasticFiles).ToString() + new string(' ', 2) +
-          Convert.ToInt32(Options.EnableExportR).ToString());
+      inpFile.AddRange(Options.WriteAgeproOptions());
 
+      //SCALE FACTORS
       if (Options.EnableScaleFactors)
       {
-        inpFile.Add("[SCALE]");
-        inpFile.Add(
-            Scale.ScaleBio + new string(' ', 2) +
-            Scale.ScaleRec + new string(' ', 2) +
-            Scale.ScaleStockNum + new string(' ', 2));
+        inpFile.AddRange(Scale.WriteScaleFactors());
       }
+
+      //REPORT PERCENTILE
       if (Options.EnablePercentileReport)
       {
         inpFile.Add("[PERC]");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
@@ -61,6 +62,18 @@ namespace Nmfs.Agepro.CoreLib
       RefMeanBio = Convert.ToDouble(refpointOpt[2]);
       RefFMort = Convert.ToDouble(refpointOpt[3]);
       return line;
+    }
+
+    public List<string> WriteRefpointLines()
+    {
+      return new List<string>
+      {
+        "[REFPOINT]",
+        RefSpawnBio.ToString() + new string(' ', 2)
+        + RefJan1Bio.ToString() + new string(' ', 2)
+        + RefMeanBio.ToString() + new string(' ', 2)
+        + RefFMort.ToString()
+      };
     }
   }
 

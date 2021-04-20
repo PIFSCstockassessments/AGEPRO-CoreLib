@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
@@ -36,6 +37,15 @@ namespace Nmfs.Agepro.CoreLib
       MaxWeight = Convert.ToDouble(boundsOpt[0]);
       MaxNatMort = Convert.ToDouble(boundsOpt[1]);
       return line;
+    }
+
+    public List<string> WriteBoundsLines()
+    {
+      return new List<string>
+      {
+        "[BOUNDS]",
+        MaxWeight + new string(' ', 2) + MaxNatMort
+      };
     }
   }
 

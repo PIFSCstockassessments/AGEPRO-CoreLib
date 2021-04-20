@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Nmfs.Agepro.CoreLib
@@ -42,9 +43,16 @@ namespace Nmfs.Agepro.CoreLib
       return line;
     }
 
-
+    public List<string> WriteAgeproOptions()
+    {
+      return new List<string>
+      {
+        "[OPTIONS]",
+        Convert.ToInt32(EnableSummaryReport).ToString() + new string(' ', 2) +
+          Convert.ToInt32(EnableAuxStochasticFiles).ToString() + new string(' ', 2) +
+          Convert.ToInt32(EnableExportR).ToString()
+      };
+    }
 
   }
-
-
 }
