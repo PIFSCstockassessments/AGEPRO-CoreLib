@@ -6,7 +6,7 @@ using System.Linq;
 namespace Nmfs.Agepro.CoreLib
 {
   /// <summary>
-  /// General Paramemeters of AGEPRO
+  /// General AGEPRO model Parameters
   /// </summary>
   public class AgeproGeneral
   {
@@ -60,6 +60,11 @@ namespace Nmfs.Agepro.CoreLib
       return Enumerable.Range(ProjYearStart, NumYears()).ToArray();
     }
 
+    /// <summary>
+    /// Reads General AGEPRO parameters from Input File
+    /// </summary>
+    /// <param name="sr"></param>
+    /// <returns></returns>
     public string ReadGeneralModelParameters(StreamReader sr)
     {
       if (sr is null)
@@ -82,6 +87,10 @@ namespace Nmfs.Agepro.CoreLib
       return line;
     }
 
+    /// <summary>
+    /// Writes General AGEPRO Model Parameers to Input File
+    /// </summary>
+    /// <returns></returns>
     public List<string> WriteAgeproGeneralParameters()
     {
 
