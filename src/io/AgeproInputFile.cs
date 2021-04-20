@@ -71,24 +71,7 @@ namespace Nmfs.Agepro.CoreLib
     private void ReadInputFileLineValues(StreamReader sr)
     {
       string line;
-      line = sr.ReadLine();
-
-      //Version: AGEPRO (Input File) Version
-      var supportedINPVer = new[] { "AGEPRO VERSION 4.0", "AGEPRO VERSION 4.2" };
-      var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
-      if (supportedINPVer.Contains(line))
-      {
-        Version = line;
-      }
-      else if (incompatibleINPVer.Contains(line))
-      {
-        //Throw Error/Warning for incompatiability
-        throw new InvalidAgeproParameterException("This file format version is incompatible.");
-      }
-      else
-      {
-        throw new InvalidAgeproParameterException("Invaild AGEPRO input file.");
-      }
+      _ = CheckINPVersion(sr);
 
       while (!sr.EndOfStream)
       {
@@ -212,6 +195,30 @@ namespace Nmfs.Agepro.CoreLib
       }
     }
 
+    private string CheckINPVersion(StreamReader sr)
+    {
+      string line = sr.ReadLine();
+
+      //Version: AGEPRO (Input File) Version
+      var supportedINPVer = new[] { "AGEPRO VERSION 4.0", "AGEPRO VERSION 4.2" };
+      var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
+      if (supportedINPVer.Contains(line))
+      {
+        Version = line;
+      }
+      else if (incompatibleINPVer.Contains(line))
+      {
+        //Throw Error/Warning for incompatiability
+        throw new InvalidAgeproParameterException("This file format version is incompatible.");
+      }
+      else
+      {
+        throw new InvalidAgeproParameterException("Invaild AGEPRO input file.");
+      }
+
+      return line;
+    }
+
 
     /// <summary>
     /// Initiates the \code{WriteInputFileLines} function to write AGEPRO Input files.
@@ -241,6 +248,8 @@ namespace Nmfs.Agepro.CoreLib
     private List<string> WriteInputFileLines()
     {
       List<string> inpFile = new List<string>();
+      
+      //VERSION
       inpFile.Add(Version); //New cases will have "AGEPRO VERSION 4.2"
 
       //CASEID
