@@ -82,8 +82,8 @@ namespace Nmfs.Agepro.CoreLib
     public override ValidationResult ValidateInput()
     {
       List<string> errorMsgList = new List<string>();
-      int yrStart = obsYears[0];
-      int yrEnd = obsYears[(obsYears.Count() - 1)];
+      int yrStart = ObsYears[0];
+      int yrEnd = ObsYears[(ObsYears.Count() - 1)];
 
       //Rebulider Year
       if (TargetYear < yrStart || TargetYear > yrEnd)

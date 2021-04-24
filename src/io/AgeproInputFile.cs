@@ -142,7 +142,7 @@ namespace Nmfs.Agepro.CoreLib
         }
         else if (line.Equals("[REBUILD]"))
         {
-          Rebuild.obsYears = General.SeqYears();
+          Rebuild.ObsYears = General.SeqYears();
           Rebuild.ReadCalculationDataLines(sr);
           HarvestScenario.AnalysisType = HarvestScenarioAnalysis.Rebuilder;
         }
@@ -177,7 +177,7 @@ namespace Nmfs.Agepro.CoreLib
         }
         else if (line.Equals("[PSTAR]"))
         {
-          PStar.obsYears = General.SeqYears();
+          PStar.ObsYears = General.SeqYears();
           PStar.ReadCalculationDataLines(sr);
           HarvestScenario.AnalysisType = HarvestScenarioAnalysis.PStar;
         }

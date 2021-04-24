@@ -9,17 +9,28 @@ namespace Nmfs.Agepro.CoreLib
   /// Generalized, abstract represetion for (Non-Standard) Harvest Scenario Calculations
   /// </summary>
   abstract public class HarvestCalculation : AgeproCoreLibProperty, IValidatable
+  {
+    public HarvestScenarioAnalysis calculationType;
+
+    public int[] ObsYears { get; set; }
+
+    protected HarvestCalculation()
     {
-        public HarvestScenarioAnalysis calculationType;
-        public int[] obsYears;
-        public abstract void ReadCalculationDataLines(StreamReader sr);
-        public abstract List<string> WriteCalculationDataLines();
-
-
-
-        public virtual ValidationResult ValidateInput()
-        {
-            throw new NotImplementedException();
-        }
     }
+
+    protected HarvestCalculation(int[] obsYears)
+    {
+      ObsYears = obsYears;
+    }
+
+    public abstract void ReadCalculationDataLines(StreamReader sr);
+    public abstract List<string> WriteCalculationDataLines();
+
+
+
+    public virtual ValidationResult ValidateInput()
+    {
+      throw new NotImplementedException();
+    }
+  }
 }
