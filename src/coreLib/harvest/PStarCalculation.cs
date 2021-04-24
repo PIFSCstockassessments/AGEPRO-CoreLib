@@ -37,9 +37,11 @@ namespace Nmfs.Agepro.CoreLib
       
       //Create PStar Table
       PStarTable = CreateNewPStarTable();
-      PStarTable.Rows.Add();
-      Extensions.FillDBNullCellsWithZero(PStarTable);
+      _ = PStarTable.Rows.Add();
+      _ = Extensions.FillDBNullCellsWithZero(PStarTable);
     }
+
+
 
     /// <summary>
     /// Creates a new instance of a PStar Levels DataTable
