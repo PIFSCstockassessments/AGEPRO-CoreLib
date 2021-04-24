@@ -34,7 +34,10 @@ namespace Nmfs.Agepro.CoreLib
       PStarLevels = 1;
       PStarF = 0;
       TargetYear = 0;
-      
+
+      //Default Obs years
+      ObsYears = new int[] { 1 };
+
       //Create PStar Table
       PStarTable = CreateNewPStarTable();
       _ = PStarTable.Rows.Add();
