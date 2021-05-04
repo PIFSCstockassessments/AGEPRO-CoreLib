@@ -10,16 +10,16 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class AgeproWeightAgeTable : AgeproStochasticAgeTable
   {
-    public int weightOpt { get; set; }  //Weight Option
-    public int[] validOpt { get; set; } //Valid weight options
+    public int WeightOpt { get; set; }  //Weight Option
+    public int[] ValidOpt { get; set; } //Valid weight options
 
     public AgeproWeightAgeTable()
     {
-      validOpt = new int[] { 1, 0, -1, -2, -3, -4 };
+      ValidOpt = new int[] { 1, 0, -1, -2, -3, -4 };
     }
     public AgeproWeightAgeTable(int[] validOptions)
     {
-      validOpt = validOptions;
+      ValidOpt = validOptions;
     }
 
     /// <summary>
@@ -38,18 +38,18 @@ namespace Nmfs.Agepro.CoreLib
       if (optParam.Equals("0"))
       {
         FromFile = false; //0=User Spec by Age
-        weightOpt = Convert.ToInt32(optParam);
+        WeightOpt = Convert.ToInt32(optParam);
       }
       else if (optParam.Equals("1"))
       {
         FromFile = true; //1=From File
-        weightOpt = Convert.ToInt32(optParam);
+        WeightOpt = Convert.ToInt32(optParam);
       }
       else
       {
         FromFile = null;
         //Check if weightOpt is a valid one
-        weightOpt = validOpt.Contains(Convert.ToInt32(optParam))
+        WeightOpt = ValidOpt.Contains(Convert.ToInt32(optParam))
             ? Convert.ToInt32(optParam)
             : throw new InvalidOperationException("Weight option not valid for current Weights of Age Model");
 
@@ -65,7 +65,7 @@ namespace Nmfs.Agepro.CoreLib
     {
       //If Option 0=fromFile, read fromFile options
       //otherwise ignore and finish reading the current AGEPRO parameter
-      if (weightOpt == 0)
+      if (WeightOpt == 0)
       {
         base.ReadStochasticAgeTableFilename(sr);
       }
@@ -84,7 +84,7 @@ namespace Nmfs.Agepro.CoreLib
       List<string> outputLines = new List<string>
       {
         keyword, //[PARAMETER]
-        weightOpt.ToString() + new string(' ', 2) + Convert.ToInt32(TimeVarying).ToString() // WeightOpt, TimeVary
+        WeightOpt.ToString() + new string(' ', 2) + Convert.ToInt32(TimeVarying).ToString() // WeightOpt, TimeVary
       };
       //since fromFile is a nullable boolean, have to explicitly check if its true 
       if (FromFile == true)
@@ -92,7 +92,7 @@ namespace Nmfs.Agepro.CoreLib
         outputLines.Add(DataFile);
       }
       // 0 == User Specfied Weights at Age
-      else if (weightOpt == 0)
+      else if (WeightOpt == 0)
       {
 
         if (ByAgeData == null)
@@ -116,7 +116,7 @@ namespace Nmfs.Agepro.CoreLib
           outputLines.Add(string.Join(new string(' ', 2), cvRow.ItemArray));
         }
       }
-      else if (!validOpt.Contains(weightOpt))
+      else if (!ValidOpt.Contains(WeightOpt))
       {
         throw new InvalidOperationException("Invalid Weight option.");
       }
