@@ -31,11 +31,15 @@ namespace Nmfs.Agepro.CoreLib
     }
     public RebuilderTargetCalculation()
     {
+      //Default Rebuilder Target Values
       calculationType = HarvestScenarioAnalysis.Rebuilder;
       TargetYear = 0;
       TargetValue = 0;
       TargetType = 0;
       TargetPercent = 0;
+
+      //Default Obs years
+      ObsYears = new int[] { 1 };
     }
 
     /// <summary>

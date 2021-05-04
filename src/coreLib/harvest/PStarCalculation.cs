@@ -30,6 +30,7 @@ namespace Nmfs.Agepro.CoreLib
 
     public PStarCalculation()
     {
+      //Default PStar values
       calculationType = HarvestScenarioAnalysis.PStar;
       PStarLevels = 1;
       PStarF = 0;
