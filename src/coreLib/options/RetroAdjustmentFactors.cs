@@ -25,9 +25,9 @@ namespace Nmfs.Agepro.CoreLib
       _ = rafTable.Columns.Add(); //set column without name
 
       //Throw warning/error if 'rafLine' length doesn't match number of Ages
-      if (rafLine.Length == General.NumAges())
+      if (rafLine.Length != General.NumAges())
       {
-        throw new InvalidAgeproParameterException("Number of retro adjustment factors match number of ages");
+        throw new InvalidAgeproParameterException("Number of retro adjustment factors does not match number of ages");
       }
 
       for (int i = 0; i < General.NumAges(); i++)
