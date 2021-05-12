@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Nmfs.Agepro.CoreLib
 {
-  abstract public class AgeproCoreLibProperty : INotifyPropertyChanged
+  public abstract class AgeproCoreLibProperty : INotifyPropertyChanged
   {
     public event PropertyChangedEventHandler PropertyChanged;
 
