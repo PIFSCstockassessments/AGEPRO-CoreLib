@@ -90,7 +90,7 @@
     <Compile Include="src\coreLib\stochastic\AgeproStochasticAgeTable.cs" />
     <Compile Include="src\coreLib\stochastic\AgeproWeightAgeTable.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalRecruitment.cs" />
-    <Compile Include="src\coreLib\recruitment\RecruitModelDictionary.cs" />
+    <Compile Include="src\coreLib\recruitment\RecruitModelDictionaryContainer.cs" />
     <Compile Include="src\util\Extensions.cs" />
     <Compile Include="src\coreLib\options\AgeproOptionsProperty.cs" />
     <Compile Include="src\coreLib\recruitment\NullSelectRecruitment.cs" />

@@ -2,21 +2,25 @@
 
 namespace Nmfs.Agepro.CoreLib
 {
-  public class RecruitModelDictionary
+
+  public class RecruitModelDictionaryContainer
   {
-    public RecruitModelDictionary()
+    public Dictionary<int, string> RecruitDictionary { get; set; }
+
+    public RecruitModelDictionaryContainer()
     {
-      GetRecruitModelDictionary();
+      RecruitDictionary = GetRecruitModelDictionary();
     }
 
     /// <summary>
     /// Creates and sets the Recruitment Model Dictionary Object
     /// </summary>
     /// <returns>Returns the Recruitment Model Dictionary</returns>
-    private Dictionary<int, string> GetRecruitModelDictionary()
+    public Dictionary<int, string> GetRecruitModelDictionary()
     {
       //TODO: Generalize/Automate this Dictionary? (resx?)
-      Dictionary<int, string> recruitModelDictionary = new Dictionary<int, string>
+
+      return new Dictionary<int, string>
       {
         { 0, "None Selected" },
         { 1, "Model 1: Markov Matrix" },
@@ -41,8 +45,6 @@ namespace Nmfs.Agepro.CoreLib
         { 20, "Model 20: Fixed Recruitment" },
         { 21, "Model 21: Empirical Cumulative Distribution Function of Recruitment w/ Linear Decline to Zero" }
       };
-
-      return recruitModelDictionary;
     }
   }
 }
