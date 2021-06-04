@@ -14,8 +14,8 @@ namespace Nmfs.Agepro.CoreLib
     private int _Lv2NumObs;
     private int _SSBBreakVal;
 
-    public DataTable lv1Obs { get; set; }
-    public DataTable lv2Obs { get; set; }
+    public DataTable Lv1Obs { get; set; }
+    public DataTable Lv2Obs { get; set; }
 
     public int Lv1NumObs
     {
@@ -70,9 +70,9 @@ namespace Nmfs.Agepro.CoreLib
       Lv2NumObs = Convert.ToInt32(lineNumObsLvl[1]);
 
       //lv1Obs 
-      lv1Obs = ReadObsTable(sr, Lv1NumObs);
+      Lv1Obs = ReadObsTable(sr, Lv1NumObs);
       //lv2Obs
-      lv2Obs = ReadObsTable(sr, Lv2NumObs);
+      Lv2Obs = ReadObsTable(sr, Lv2NumObs);
 
       //SSBBReakVal
       line = sr.ReadLine();
@@ -91,8 +91,8 @@ namespace Nmfs.Agepro.CoreLib
         Lv1NumObs + new string(' ', 2) + Lv2NumObs
       };
 
-      outputLines.AddRange(WriteObsTableLines(lv1Obs, WithSSB));
-      outputLines.AddRange(WriteObsTableLines(lv2Obs, WithSSB));
+      outputLines.AddRange(WriteObsTableLines(Lv1Obs, WithSSB));
+      outputLines.AddRange(WriteObsTableLines(Lv2Obs, WithSSB));
 
       outputLines.Add(SSBBreakVal.ToString());
 
@@ -141,8 +141,8 @@ namespace Nmfs.Agepro.CoreLib
     {
       List<string> errorMsgList = new List<string>();
 
-      errorMsgList.AddRange(CheckTwoStageObsTable(lv1Obs, "Level 1 Observation"));
-      errorMsgList.AddRange(CheckTwoStageObsTable(lv2Obs, "Level 2 Observation"));
+      errorMsgList.AddRange(CheckTwoStageObsTable(Lv1Obs, "Level 1 Observation"));
+      errorMsgList.AddRange(CheckTwoStageObsTable(Lv2Obs, "Level 2 Observation"));
       if (string.IsNullOrWhiteSpace(SSBBreakVal.ToString()))
       {
         errorMsgList.Add("Missing SSB Break Value.");
