@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HarvestScenario_INP_Header" xml:space="preserve">
+    <value>[HARVEST]</value>
+  </data>
+  <data name="HarvestScenario_Text" xml:space="preserve">
+    <value>Harvest Scenario</value>
+  </data>
+  <data name="HarvestSpec_Case0" xml:space="preserve">
+    <value>F-MULT</value>
+  </data>
+  <data name="HarvestSpec_Case1" xml:space="preserve">
+    <value>LANDINGS</value>
+  </data>
+  <data name="HarvestSpec_Case2" xml:space="preserve">
+    <value>REMOVALS</value>
+  </data>
+  <data name="HarvestTable_Col_Spec" xml:space="preserve">
+    <value>Harvest Spec</value>
+  </data>
+  <data name="HarvestTable_Col_Value" xml:space="preserve">
+    <value>HARVEST VALUE</value>
+  </data>
+  <data name="HarvestTable_Col_ValueFleetSuffix" xml:space="preserve">
+    <value>FLEET-</value>
+  </data>
+  <data name="Program" xml:space="preserve">
+    <value>AGEPRO</value>
+  </data>
+  <data name="PStar_Error_DecendingLevels" xml:space="preserve">
+    <value>P-Star Levels must be in ascending order</value>
+  </data>
+  <data name="PStar_Error_InvalidF" xml:space="preserve">
+    <value>Invalid or missing overfishing value.</value>
+  </data>
+  <data name="PStar_Error_InvalidLevels" xml:space="preserve">
+    <value>Invalid or missing number of P-Star Levels.</value>
+  </data>
+  <data name="PStar_Error_InvalidYear" xml:space="preserve">
+    <value>Invalid P-Star Year Specification.</value>
+  </data>
+  <data name="PStar_Error_RowCount" xml:space="preserve">
+    <value>P-Star Data Table Has more than one row</value>
+  </data>
+  <data name="PStar_INP_Header" xml:space="preserve">
+    <value>[PSTAR]</value>
+  </data>
+  <data name="PStar_Text" xml:space="preserve">
+    <value>Pstar</value>
+  </data>
+  <data name="Rebuilder_Error_InvaildConf" xml:space="preserve">
+    <value>Invalid or missing rebuilder confidence level</value>
+  </data>
+  <data name="Rebuilder_Error_InvalidTarget" xml:space="preserve">
+    <value>Invalid or missing rebuilder target value.</value>
+  </data>
+  <data name="Rebuilder_Error_InvalidYear" xml:space="preserve">
+    <value>Invalid Rebuilder Year Specification.</value>
+  </data>
+  <data name="Rebuilder_Text" xml:space="preserve">
+    <value>Rebuilder</value>
+  </data>
+  <data name="Rebulider_INP_Header" xml:space="preserve">
+    <value>[REBUILD]</value>
+  </data>
+  <data name="Recruitment_Default_Int" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Recruitment_Default_Value" xml:space="preserve">
+    <value>0.000</value>
+  </data>
+  <data name="Recruitment_Error_InvaildCase" xml:space="preserve">
+    <value>Invalid Recruitment Model Number {0}</value>
+  </data>
+  <data name="Recruitment_Error_LowBound" xml:space="preserve">
+    <value>Insignificant values or values lower than {0} found in {1}</value>
+  </data>
+  <data name="Recruitment_Error_MissingObs" xml:space="preserve">
+    <value>Missing Data in {0}</value>
+  </data>
+  <data name="Recruitment_Error_ZeroRows" xml:space="preserve">
+    <value>{0} has 0 rows</value>
+  </data>
+  <data name="Recruitment_INP_Header" xml:space="preserve">
+    <value>[RECRUIT]</value>
+  </data>
+  <data name="Recruitment_Max_Obs" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="Recruitment_ObservationTable" xml:space="preserve">
+    <value>Observation Table</value>
+  </data>
+  <data name="Recruitment_ReadLine" xml:space="preserve">
+    <value>Reading Recruitment Data ...</value>
+  </data>
+  <data name="Recruitment_ReadLine_Error_NumRecruitModel" xml:space="preserve">
+    <value>Number of Recruit Models does not match input file recruitModel count</value>
+  </data>
+  <data name="Recruitment_ReadLine_Model" xml:space="preserve">
+    <value>Reading Recuitment Model Data ...</value>
+  </data>
+  <data name="Recruitment_Recruits" xml:space="preserve">
+    <value>Recruits</value>
+  </data>
+  <data name="Recruitment_SSB" xml:space="preserve">
+    <value>SSB</value>
+  </data>
+  <data name="Recruitment_Text" xml:space="preserve">
+    <value>Recruitment</value>
+  </data>
+  <data name="RecruitProb_ColName" xml:space="preserve">
+    <value>Selection {0}</value>
+  </data>
+  <data name="RecruitProb_Error_InvaildProb" xml:space="preserve">
+    <value>At row {0} of recruitment probablity:
+{1}{2}</value>
+  </data>
+  <data name="RecruitProb_Error_InvalidSum" xml:space="preserve">
+    <value>Recruitment probablity sum does not equal 1.0: Probability sum is {0}</value>
+  </data>
+  <data name="RecruitProb_Name" xml:space="preserve">
+    <value>Recruitment Probability</value>
+  </data>
+  <data name="Task_Complete" xml:space="preserve">
+    <value>Done.</value>
+  </data>
+  <data name="Task_Validation_Success" xml:space="preserve">
+    <value>Validation Successful</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>v{0}</value>
+  </data>
+</root>

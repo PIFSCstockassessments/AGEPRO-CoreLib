@@ -60,19 +60,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\coreLib\bio-tspawn\AgeproBiological.cs" />
+    <Compile Include="resources\agepro_strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>agepro_strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="src\coreLib\bio-tspawn\AgeproBioTSpawn.cs" />
     <Compile Include="src\coreLib\bootstrap\AgeproBootstrap.cs" />
     <Compile Include="src\coreLib\AgeproCoreLibProperty.cs" />
+    <Compile Include="src\coreLib\harvest\HarvestScenarioAnalysis.cs" />
     <Compile Include="src\coreLib\model-setup\AgeproGeneral.cs" />
     <Compile Include="src\coreLib\harvest\AgeproHarvestScenario.cs" />
+    <Compile Include="src\coreLib\options\Bounds.cs" />
+    <Compile Include="src\coreLib\options\Refpoint.cs" />
+    <Compile Include="src\coreLib\options\ReportPercentile.cs" />
+    <Compile Include="src\coreLib\options\RetroAdjustmentFactors.cs" />
+    <Compile Include="src\coreLib\options\ScaleFactors.cs" />
+    <Compile Include="src\coreLib\recruitment\EmpiricalCDFZero.cs" />
+    <Compile Include="src\coreLib\recruitment\EmpiricalFixedRecruitment.cs" />
+    <Compile Include="src\coreLib\recruitment\EmpiricalTwoStageRecruitment.cs" />
+    <Compile Include="src\coreLib\recruitment\EmpiricalType.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricCurve.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricLognormal.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricShepherdCurve.cs" />
+    <Compile Include="src\coreLib\recruitment\ParametricType.cs" />
     <Compile Include="src\io\AgeproInputFile.cs" />
     <Compile Include="src\coreLib\options\AgeproMiscOptions.cs" />
     <Compile Include="src\coreLib\recruitment\AgeproRecruitment.cs" />
     <Compile Include="src\coreLib\stochastic\AgeproStochasticAgeTable.cs" />
     <Compile Include="src\coreLib\stochastic\AgeproWeightAgeTable.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalRecruitment.cs" />
+    <Compile Include="src\coreLib\recruitment\RecruitModelDictionaryContainer.cs" />
     <Compile Include="src\util\Extensions.cs" />
-    <Compile Include="src\coreLib\options\MiscOptionsParameter.cs" />
+    <Compile Include="src\coreLib\options\AgeproOptionsProperty.cs" />
     <Compile Include="src\coreLib\recruitment\NullSelectRecruitment.cs" />
     <Compile Include="src\coreLib\harvest\HarvestCalculation.cs" />
     <Compile Include="src\validation\InvalidAgeproParameterException.cs" />
@@ -82,14 +102,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\coreLib\harvest\PStarCalculation.cs" />
     <Compile Include="src\coreLib\harvest\RebuilderTargetCalculation.cs" />
-    <Compile Include="src\coreLib\recruitment\RecruitmentModel.cs" />
+    <Compile Include="src\coreLib\recruitment\RecruitmentModelProperty.cs" />
     <Compile Include="src\validation\ValidatableExtensions.cs" />
     <Compile Include="src\validation\ValidationResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="resources\agepro_strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>agepro_strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
