@@ -333,7 +333,7 @@ namespace Nmfs.Agepro.CoreLib
       }
 
       //OPTIONS (Misc Options)
-      inpFile.AddRange(Options.WriteAgeproOptions());
+      inpFile.AddRange(Options.WriteAgepro40Options());
 
       //SCALE FACTORS
       if (Options.EnableScaleFactors)
