@@ -163,7 +163,7 @@ namespace Nmfs.Agepro.CoreLib
         }
         else if (line.Equals("[OPTIONS]"))
         {
-          _ = Options.ReadAgeproOptions(sr);
+          _ = Options.ReadAgepro40Options(sr);
         }
         else if (line.Equals("[SCALE]"))
         {

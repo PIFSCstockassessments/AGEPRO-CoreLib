@@ -28,7 +28,7 @@ namespace Nmfs.Agepro.CoreLib
       EnableRetroAdjustmentFactors = false;
     }
 
-    public string ReadAgeproOptions(StreamReader sr)
+    public string ReadAgepro40Options(StreamReader sr)
     {
       if (sr is null)
       {
