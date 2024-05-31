@@ -9,6 +9,8 @@ namespace Nmfs.Agepro.CoreLib
   /// </summary>
   public class AgeproMiscOptions
   {
+    private const string INP_keyword = "[OPTIONS]";
+
     public bool EnableSummaryReport { get; set; }
     public int OutputSummaryReport { get; set; }
     public bool EnableAuxStochasticFiles { get; set; }
@@ -72,7 +74,7 @@ namespace Nmfs.Agepro.CoreLib
     {
       return new List<string>
       {
-        "[OPTIONS]",
+        INP_keyword,
         Convert.ToInt32(EnableSummaryReport).ToString() + new string(' ', 2) +
           Convert.ToInt32(EnableAuxStochasticFiles).ToString() + new string(' ', 2) +
           Convert.ToInt32(EnableExportR).ToString()
@@ -83,10 +85,12 @@ namespace Nmfs.Agepro.CoreLib
     {
       return new List<string>
       {
-        "[OPTIONS]",
-        OutputSummaryReport.ToString() + new string(' ', 2) +
-          Convert.ToInt32(EnableAuxStochasticFiles).ToString() + new string(' ', 2) +
-          Convert.ToInt32(EnableExportR).ToString()
+        INP_keyword,
+        OutputSummaryReport.ToString()
+        + new string(' ', 2)
+        + Convert.ToInt32(EnableAuxStochasticFiles).ToString()
+        + new string(' ', 2)
+        + Convert.ToInt32(EnableExportR).ToString()
       };
     }
 
