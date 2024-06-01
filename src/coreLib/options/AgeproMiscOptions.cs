@@ -57,6 +57,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <exception cref="System.ArgumentNullException"></exception>
     public string ReadAgeproOutputOptions(StreamReader sr)
     {
+
       if (sr is null)
       {
         throw new System.ArgumentNullException(nameof(sr));
@@ -65,10 +66,13 @@ namespace Nmfs.Agepro.CoreLib
       // Read an addtional line from the file connection and split it to 3 substrings to
       // assign as OutputSummaryReport, AuxStochasticFiles, EnableExportR
       string line = sr.ReadLine();
-      string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-      OutputSummaryReport = Convert.ToInt32(optionOpt[0]);
-      EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
-      EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
+      string[] outputOptionsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      // Parse String Array as Int
+      int [] optionOpt = ParseInpLineToNumerical(outputOptionsLine);
+
+      OutputSummaryReport = optionOpt[0];
+      EnableAuxStochasticFiles = Convert.ToBoolean(optionOpt[1]);
+      EnableExportR = Convert.ToBoolean(optionOpt[2]);
       return line;
     }
 
@@ -98,20 +102,20 @@ namespace Nmfs.Agepro.CoreLib
       };
     }
 
-    private int[] ReadInpLineToNumerical(StreamReader sr, string x)
+    /// <summary>
+    /// Converts a array of numeric strings from the AGEPRO input file connection 
+    /// as an intger array.
+    /// </summary>
+    /// <param name="InpLine">Line read from the AGEPRO Input File </param>
+    /// <returns></returns>
+    private int[] ParseInpLineToNumerical(String[] InpLine)
     {
-      if (sr is null)
-      {
-        throw new System.ArgumentNullException(nameof(sr));
-      }
-      string line = sr.ReadLine();
-      string[] outputOptionsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-      int[] outputOptions = new int[outputOptionsLine.Length];
+      int[] NumericalValues = new int[InpLine.Length];
 
-      for (int i = 0; i < outputOptionsLine.Length; i++) {
-        int.TryParse(outputOptionsLine[i], out outputOptions[i]);
+      for (int i = 0; i < InpLine.Length; i++) {
+        int.TryParse(InpLine[i], out NumericalValues[i]);
       }
-      return outputOptions;
+      return NumericalValues;
 
     }
 
