@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Nmfs.Agepro.CoreLib
 {
@@ -25,6 +26,7 @@ namespace Nmfs.Agepro.CoreLib
     public AgeproMiscOptions()
     {
       EnableRefpoint = false;
+      OutputSummaryReport = 0;
       EnablePercentileReport = false;
       EnableScaleFactors = false;
       EnableBounds = false;
@@ -64,7 +66,7 @@ namespace Nmfs.Agepro.CoreLib
       // assign as OutputSummaryReport, AuxStochasticFiles, EnableExportR
       string line = sr.ReadLine();
       string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-      OutputSummaryReport = Convert.ToInt32(Convert.ToInt32(optionOpt[0]));
+      OutputSummaryReport = Convert.ToInt32(optionOpt[0]);
       EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
       EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
       return line;
@@ -75,9 +77,11 @@ namespace Nmfs.Agepro.CoreLib
       return new List<string>
       {
         INP_keyword,
-        Convert.ToInt32(EnableSummaryReport).ToString() + new string(' ', 2) +
-          Convert.ToInt32(EnableAuxStochasticFiles).ToString() + new string(' ', 2) +
-          Convert.ToInt32(EnableExportR).ToString()
+        Convert.ToInt32(EnableSummaryReport).ToString()
+        + new string(' ', 2)
+        + Convert.ToInt32(EnableAuxStochasticFiles).ToString()
+        + new string(' ', 2)
+        + Convert.ToInt32(EnableExportR).ToString()
       };
     }
 
@@ -92,6 +96,23 @@ namespace Nmfs.Agepro.CoreLib
         + new string(' ', 2)
         + Convert.ToInt32(EnableExportR).ToString()
       };
+    }
+
+    private int[] ReadInpLineToNumerical(StreamReader sr, string x)
+    {
+      if (sr is null)
+      {
+        throw new System.ArgumentNullException(nameof(sr));
+      }
+      string line = sr.ReadLine();
+      string[] outputOptionsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      int[] outputOptions = new int[outputOptionsLine.Length];
+
+      for (int i = 0; i < outputOptionsLine.Length; i++) {
+        int.TryParse(outputOptionsLine[i], out outputOptions[i]);
+      }
+      return outputOptions;
+
     }
 
   }
