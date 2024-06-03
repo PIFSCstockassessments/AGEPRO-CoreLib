@@ -11,7 +11,8 @@ namespace Nmfs.Agepro.CoreLib
   public class AgeproInputFile
   {
     public string Version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
-    public double NumVer { get; set; }
+    public string AGEPRO40Version { get; set; }
+    public string GUI_Version { get; set; }
     public string CaseID { get; set; }
     public AgeproGeneral General = new AgeproGeneral();
     public AgeproBootstrap Bootstrap = new AgeproBootstrap();
@@ -38,7 +39,11 @@ namespace Nmfs.Agepro.CoreLib
 
     public AgeproInputFile()
     {
-      CaseID = "";
+      this.CaseID = "";
+      this.Version = "AGEPRO VERSION 4.25";
+      this.AGEPRO40Version = "AGEPRO VERSION 4.0";
+      this.GUI_Version = "4.25-4.3.4";
+
     }
 
     /// <summary>
@@ -194,11 +199,11 @@ namespace Nmfs.Agepro.CoreLib
       string line = sr.ReadLine();
 
       //Version: AGEPRO (Input File) Version
-      var supportedINPVer = new[] { "AGEPRO VERSION 4.0", "AGEPRO VERSION 4.2" };
+      var supportedINPVer = new[] { "AGEPRO VERSION 4.0", "AGEPRO VERSION 4.25" };
       var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
       if (supportedINPVer.Contains(line))
       {
-        Version = line;
+        this.Version = line;
       }
       else if (incompatibleINPVer.Contains(line))
       {
@@ -244,7 +249,7 @@ namespace Nmfs.Agepro.CoreLib
       List<string> inpFile = new List<string>();
 
       //VERSION
-      inpFile.Add(Version); //New cases will have "AGEPRO VERSION 4.2"
+      inpFile.Add(this.Version); //New cases will have "AGEPRO VERSION 4.2"
 
       //CASEID
       inpFile.Add("[CASEID]");
