@@ -68,7 +68,7 @@ namespace Nmfs.Agepro.CoreLib
       string line = sr.ReadLine();
       string[] outputOptionsLine = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
       // Parse String Array as Int
-      int [] optionOpt = ParseInpLineToNumerical(outputOptionsLine);
+      int [] optionOpt = ParseInpLineToIntArray(outputOptionsLine);
 
       OutputSummaryReport = optionOpt[0];
       EnableAuxStochasticFiles = Convert.ToBoolean(optionOpt[1]);
@@ -108,7 +108,7 @@ namespace Nmfs.Agepro.CoreLib
     /// </summary>
     /// <param name="InpLine">Line read from the AGEPRO Input File </param>
     /// <returns></returns>
-    private int[] ParseInpLineToNumerical(String[] InpLine)
+    private int[] ParseInpLineToIntArray(String[] InpLine)
     {
       int[] NumericalValues = new int[InpLine.Length];
 
