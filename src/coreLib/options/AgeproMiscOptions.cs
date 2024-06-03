@@ -113,8 +113,9 @@ namespace Nmfs.Agepro.CoreLib
       int[] NumericalValues = new int[InpLine.Length];
 
       for (int i = 0; i < InpLine.Length; i++) {
-        int.TryParse(InpLine[i], out NumericalValues[i]);
+        NumericalValues[i] = int.Parse(InpLine[i]);
       }
+
       return NumericalValues;
 
     }
