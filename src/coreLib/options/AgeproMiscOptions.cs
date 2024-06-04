@@ -33,6 +33,8 @@ namespace Nmfs.Agepro.CoreLib
       EnableRetroAdjustmentFactors = false;
     }
 
+    [ObsoleteAttribute("This method is used for \"AGEPRO VERSION 4.0\" AGEPRO Input Files. " +
+      "Please use method ReadAgeproOutputOptions for newer AGEPRO Input File versions")]
     public string ReadAgepro40Options(StreamReader sr)
     {
       if (sr is null)
@@ -76,6 +78,8 @@ namespace Nmfs.Agepro.CoreLib
       return line;
     }
 
+    [ObsoleteAttribute("This method is used for \"AGEPRO VERSION 4.0\" AGEPRO Input Files. " +
+      "Please use method WriteAgeproOutputOptions for newer AGEPRO Input File versions")]
     public List<string> WriteAgepro40Options()
     {
       return new List<string>
