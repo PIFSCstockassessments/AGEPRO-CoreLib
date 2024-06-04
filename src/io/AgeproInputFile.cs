@@ -15,7 +15,8 @@ namespace Nmfs.Agepro.CoreLib
     public string CaseID { get; set; }
 
     // Version Constants
-    private const string AGEPRO40Version = "AGEPRO VERSION 4.0"; //"AGEPRO VERSION 4.0" Version String 
+    // Look for "AGEPRO VERSION 4.0" Version String for backwards-compat
+    private const string AGEPRO40Version = "AGEPRO VERSION 4.0"; 
     public const string CurrentVersion = "AGEPRO VERSION 4.25";
     public const string GUIVersion = "4.25-4.3.4";
     public static readonly string[] INPSupportedVersions = { AgeproInputFile.AGEPRO40Version, AgeproInputFile.CurrentVersion };
