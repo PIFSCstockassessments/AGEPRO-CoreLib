@@ -168,7 +168,8 @@ namespace Nmfs.Agepro.CoreLib
         }
         else if (line.Equals("[OPTIONS]"))
         {
-          _ = Options.ReadAgepro40Options(sr);
+          ReadOutputOptions(sr);
+
         }
         else if (line.Equals("[SCALE]"))
         {
@@ -190,9 +191,28 @@ namespace Nmfs.Agepro.CoreLib
     }
 
     /// <summary>
+    /// Helper function to read OPTIONS keyword parameter for the AGEPRO Input File, 
+    /// depending on version. AGEPRO input file formated to version 4.0 will read stock 
+    /// summary flags as a boolean. Stock summary flags for the AGEPRO input file 4.25 
+    /// format will be read as an integer.
+    /// </summary>
+    /// <param name="sr">Streamreader object to the file connection</param>
+    private void ReadOutputOptions(StreamReader sr)
+    {
+      if (this.Version == "AGEPRO VERSION 4.0")
+      {
+        _ = Options.ReadAgepro40Options(sr);
+      }
+      else
+      {
+        _ = Options.ReadAgeproOutputOptions(sr);
+      }
+    }
+
+    /// <summary>
     /// Checks Printed AGEPRO Input File Version
     /// </summary>
-    /// <param name="sr"></param>
+    /// <param name="sr">Streamreader object to the file connection</param>
     /// <returns></returns>
     private string CheckINPVersion(StreamReader sr)
     {
@@ -338,7 +358,15 @@ namespace Nmfs.Agepro.CoreLib
       }
 
       //OPTIONS (Misc Options)
-      inpFile.AddRange(Options.WriteAgepro40Options());
+      if (this.Version == "AGEPRO VERSION 4.0")
+      {
+        inpFile.AddRange(Options.WriteAgepro40Options());
+      }
+      else
+      {
+        inpFile.AddRange(Options.WriteAgeproOutputOptions());
+      }
+
 
       //SCALE FACTORS
       if (Options.EnableScaleFactors)
