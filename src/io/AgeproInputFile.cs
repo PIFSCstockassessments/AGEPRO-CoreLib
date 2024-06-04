@@ -224,9 +224,10 @@ namespace Nmfs.Agepro.CoreLib
       string line = sr.ReadLine();
 
       //Version: AGEPRO (Input File) Version
-      var supportedINPVer = new[] { AgeproInputFile.AGEPRO40Version, AgeproInputFile.CurrentVersion };
+      //var supportedINPVer = new[] { AgeproInputFile.AGEPRO40Version, AgeproInputFile.CurrentVersion };
       var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
-      if (supportedINPVer.Contains(line))
+      //if (supportedINPVer.Contains(line))
+      if(AgeproInputFile.INPSupportedVersions.Contains(line))
       {
         this.Version = line;
       }
