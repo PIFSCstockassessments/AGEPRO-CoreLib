@@ -11,9 +11,15 @@ namespace Nmfs.Agepro.CoreLib
   public class AgeproInputFile
   {
     public string Version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
-    public string AGEPRO40Version { get; set; }
     public string GUI_Version { get; set; }
     public string CaseID { get; set; }
+
+    // Version Constants
+    private const string AGEPRO40Version = "AGEPRO VERSION 4.0"; //"AGEPRO VERSION 4.0" Version String 
+    public const string CurrentVersion = "AGEPRO VERSION 4.25";
+    public const string GUIVersion = "4.25-4.3.4";
+    public static readonly string[] INPSupportedVersions = { AgeproInputFile.AGEPRO40Version, AgeproInputFile.CurrentVersion };
+    
     public AgeproGeneral General = new AgeproGeneral();
     public AgeproBootstrap Bootstrap = new AgeproBootstrap();
     public AgeproRecruitment Recruitment = new AgeproRecruitment();
@@ -40,9 +46,8 @@ namespace Nmfs.Agepro.CoreLib
     public AgeproInputFile()
     {
       this.CaseID = "";
-      this.Version = "AGEPRO VERSION 4.25";
-      this.AGEPRO40Version = "AGEPRO VERSION 4.0";
-      this.GUI_Version = "4.25-4.3.4";
+      this.Version = AgeproInputFile.CurrentVersion;
+      this.GUI_Version = AgeproInputFile.GUIVersion;
 
     }
 
@@ -199,7 +204,7 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="sr">Streamreader object to the file connection</param>
     private void ReadOutputOptions(StreamReader sr)
     {
-      if (this.Version == "AGEPRO VERSION 4.0")
+      if (this.Version == AgeproInputFile.AGEPRO40Version)
       {
         _ = Options.ReadAgepro40Options(sr);
       }
@@ -219,7 +224,7 @@ namespace Nmfs.Agepro.CoreLib
       string line = sr.ReadLine();
 
       //Version: AGEPRO (Input File) Version
-      var supportedINPVer = new[] { "AGEPRO VERSION 4.0", "AGEPRO VERSION 4.25" };
+      var supportedINPVer = new[] { AgeproInputFile.AGEPRO40Version, AgeproInputFile.CurrentVersion };
       var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
       if (supportedINPVer.Contains(line))
       {
@@ -358,7 +363,7 @@ namespace Nmfs.Agepro.CoreLib
       }
 
       //OPTIONS (Misc Options)
-      if (this.Version == "AGEPRO VERSION 4.0")
+      if (this.Version == AgeproInputFile.AGEPRO40Version)
       {
         inpFile.AddRange(Options.WriteAgepro40Options());
       }
