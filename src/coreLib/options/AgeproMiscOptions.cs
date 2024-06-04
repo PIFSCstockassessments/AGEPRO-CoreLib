@@ -33,6 +33,12 @@ namespace Nmfs.Agepro.CoreLib
       EnableRetroAdjustmentFactors = false;
     }
 
+    /// <summary>
+    /// Reads in the values from the keyword parameter OPTIONS from the "AGEPRO VERSION 4.0" version of AGEPRO Input files
+    /// </summary>
+    /// <param name="sr">File Connection to AGEPRO Input File</param>
+    /// <returns></returns>
+    /// <exception cref="System.ArgumentNullException"></exception>
     [Obsolete("This method is used for \"AGEPRO VERSION 4.0\" AGEPRO Input Files. " +
       "Please use method ReadAgeproOutputOptions for newer AGEPRO Input File versions")]
     public string ReadAgepro40Options(StreamReader sr)
@@ -51,10 +57,9 @@ namespace Nmfs.Agepro.CoreLib
     }
 
     /// <summary>
-    /// Reads in the values from the keyword parameter OPTIONS from the 
-    /// AGEPRO Input file
+    /// Reads in the values from the keyword parameter OPTIONS from the AGEPRO Input file
     /// </summary>
-    /// <param name="sr">File reader</param>
+    /// <param name="sr">File Connection to AGEPRO Input File</param>
     /// <returns></returns>
     /// <exception cref="System.ArgumentNullException"></exception>
     public string ReadAgeproOutputOptions(StreamReader sr)
@@ -78,6 +83,10 @@ namespace Nmfs.Agepro.CoreLib
       return line;
     }
 
+    /// <summary>
+    /// Returns a list of strings to be formatted as OPTIONS keyword parameter of the "AGEPRO Version 4.0" AGEPRO input file.
+    /// </summary>
+    /// <returns></returns>
     [Obsolete("This method is used for \"AGEPRO VERSION 4.0\" AGEPRO Input Files. " +
       "Please use method WriteAgeproOutputOptions for newer AGEPRO Input File versions")]
     public List<string> WriteAgepro40Options()
@@ -93,6 +102,10 @@ namespace Nmfs.Agepro.CoreLib
       };
     }
 
+    /// <summary>
+    /// Returns a list of strings to be formatted as OPTIONS keyword parameter of the AGEPRO input file.
+    /// </summary>
+    /// <returns></returns>
     public List<string> WriteAgeproOutputOptions()
     {
       return new List<string>
