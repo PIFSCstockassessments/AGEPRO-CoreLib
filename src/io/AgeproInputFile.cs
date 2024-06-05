@@ -272,7 +272,8 @@ namespace Nmfs.Agepro.CoreLib
       List<string> inpFile = new List<string>();
 
       //VERSION
-      inpFile.Add(this.Version); //New cases will have "AGEPRO VERSION 4.2"
+      //Saved cases will be saved with AGEPRO's current version INP_VersionString ("AGEPRO VERSION 4.25")
+      inpFile.Add(Resources.Version.INP_VersionString); 
 
       //CASEID
       inpFile.Add("[CASEID]");
