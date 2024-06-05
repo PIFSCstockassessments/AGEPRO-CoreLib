@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="resources\agepro_strings.Designer.cs">
+    <Compile Include="Resources\agepro_strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>agepro_strings.resx</DependentUpon>
@@ -111,7 +111,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resources\agepro_strings.resx">
+    <EmbeddedResource Include="Resources\agepro_strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>agepro_strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
