@@ -15,11 +15,7 @@ namespace Nmfs.Agepro.CoreLib
     public string CaseID { get; set; }
 
     // Version Constants
-    // Look for "AGEPRO VERSION 4.0" Version String for backwards-compat
-    private const string AGEPRO40Version = "AGEPRO VERSION 4.0"; 
-    public const string CurrentVersion = "AGEPRO VERSION 4.25";
-    public const string GUIVersion = "4.25-4.3.4";
-    public static readonly string[] INPSupportedVersions = { AgeproInputFile.AGEPRO40Version, AgeproInputFile.CurrentVersion };
+    public static readonly string[] INPSupportedVersions = { Resources.Version.INP_AGEPRO40_VersionString, Resources.Version.INP_VersionString};
     
     public AgeproGeneral General = new AgeproGeneral();
     public AgeproBootstrap Bootstrap = new AgeproBootstrap();
@@ -47,8 +43,8 @@ namespace Nmfs.Agepro.CoreLib
     public AgeproInputFile()
     {
       this.CaseID = "";
-      this.Version = AgeproInputFile.CurrentVersion;
-      this.GUI_Version = AgeproInputFile.GUIVersion;
+      this.Version = Resources.Version.INP_VersionString;
+      this.GUI_Version = Resources.Version.GUI_Version;
 
     }
 
@@ -205,9 +201,11 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="sr">Streamreader object to the file connection</param>
     private void ReadOutputOptions(StreamReader sr)
     {
-      if (this.Version == AgeproInputFile.AGEPRO40Version)
+      if (this.Version == Resources.Version.INP_AGEPRO40_VersionString)
       {
+#pragma warning disable CS0618 // Type or member is obsolete
         _ = Options.ReadAgepro40Options(sr);
+#pragma warning restore CS0618 // Type or member is obsolete
       }
       else
       {
@@ -225,9 +223,7 @@ namespace Nmfs.Agepro.CoreLib
       string line = sr.ReadLine();
 
       //Version: AGEPRO (Input File) Version
-      //var supportedINPVer = new[] { AgeproInputFile.AGEPRO40Version, AgeproInputFile.CurrentVersion };
       var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
-      //if (supportedINPVer.Contains(line))
       if(AgeproInputFile.INPSupportedVersions.Contains(line))
       {
         this.Version = line;
@@ -365,9 +361,11 @@ namespace Nmfs.Agepro.CoreLib
       }
 
       //OPTIONS (Misc Options)
-      if (this.Version == AgeproInputFile.AGEPRO40Version)
+      if (this.Version == Resources.Version.INP_AGEPRO40_VersionString)
       {
+#pragma warning disable CS0618 // Type or member is obsolete
         inpFile.AddRange(Options.WriteAgepro40Options());
+#pragma warning restore CS0618 // Type or member is obsolete
       }
       else
       {
