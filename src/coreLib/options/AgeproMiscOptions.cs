@@ -51,6 +51,7 @@ namespace Nmfs.Agepro.CoreLib
       string line = sr.ReadLine();
       string[] optionOpt = line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
       EnableSummaryReport = Convert.ToBoolean(Convert.ToInt32(optionOpt[0]));
+      OutputSummaryReport = EnableSummaryReport ? 1 : 0;
       EnableAuxStochasticFiles = Convert.ToBoolean(Convert.ToInt32(optionOpt[1]));
       EnableExportR = Convert.ToBoolean(Convert.ToInt32(optionOpt[2]));
       return line;
