@@ -16,6 +16,6 @@ namespace Nmfs.Agepro.CoreLib
 
   public interface IStockSummary
   {
-    void MyMethod(StockSummaryFlag flag);
+    StockSummaryFlag SummaryAuxFileOutputFlag { get; }
   }
 }
