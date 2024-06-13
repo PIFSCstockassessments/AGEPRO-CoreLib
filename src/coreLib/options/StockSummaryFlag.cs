@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nmfs.Agepro.CoreLib.src.coreLib.options
+namespace Nmfs.Agepro.CoreLib
 {
   public enum StockSummaryFlag
   {
@@ -12,5 +12,10 @@ namespace Nmfs.Agepro.CoreLib.src.coreLib.options
     SummaryOnly = 1,
     SummaryPlusAux2_10 = 2,
     SummaryPlusAllAux = 3
+  }
+
+  public interface IStockSummary
+  {
+    void MyMethod(StockSummaryFlag flag);
   }
 }
