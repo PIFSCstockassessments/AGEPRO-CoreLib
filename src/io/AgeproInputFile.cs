@@ -29,7 +29,7 @@ namespace Nmfs.Agepro.CoreLib
     public AgeproStochasticAgeTable BiologicalMaturity = new AgeproStochasticAgeTable(); //Maturity in Biological
     public AgeproStochasticAgeTable Fishery = new AgeproStochasticAgeTable();
     public AgeproStochasticAgeTable NaturalMortality = new AgeproStochasticAgeTable();
-    public RetroAdjustmentFactors RetroAdjustments = new RetroAdjustmentFactors(); //retroAdjust
+    public RetroAdjustmentFactors RetroAdjustment = new RetroAdjustmentFactors(); //retroAdjust
     public AgeproHarvestScenario HarvestScenario = new AgeproHarvestScenario();
     public AgeproStochasticAgeTable DiscardFraction = new AgeproStochasticAgeTable(); //discard fraction
     public Bounds Bounds = new Bounds(); //bounds
@@ -166,7 +166,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[RETROADJUST]"))
         {
           Options.EnableRetroAdjustmentFactors = true;
-          _ = RetroAdjustments.ReadRetroAdjustmentFactorsTable(sr, General);
+          _ = RetroAdjustment.ReadRetroAdjustmentFactorsTable(sr, General);
         }
         else if (line.Equals("[OPTIONS]"))
         {
@@ -358,7 +358,7 @@ namespace Nmfs.Agepro.CoreLib
       //RETROADJUST (Misc Options: Retro Adjustment Factors)
       if (Options.EnableRetroAdjustmentFactors)
       {
-        inpFile.AddRange(RetroAdjustments.WriteRetroAdjustmentFactorsTable());
+        inpFile.AddRange(RetroAdjustment.WriteRetroAdjustmentFactorsTable());
       }
 
       //OPTIONS (Misc Options)
