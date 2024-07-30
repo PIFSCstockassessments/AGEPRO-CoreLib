@@ -8,10 +8,10 @@ namespace Nmfs.Agepro.CoreLib
 {
   public enum StockSummaryFlag
   {
-    None = 0,
-    SummaryOnly = 1,
-    SummaryPlusAux2_10 = 2,
-    SummaryPlusAllAux = 3
+    NoStockDistAllAux = 0,
+    StockDistAllAux = 1,
+    StockDistNoAux = 2,
+    StockDistExceptAuxStockVector = 3
   }
 
   public interface IStockSummary
