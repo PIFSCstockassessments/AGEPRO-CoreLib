@@ -273,6 +273,7 @@ namespace Nmfs.Agepro.CoreLib
 
       //VERSION
       //Saved cases will be saved with AGEPRO's current version INP_VersionString ("AGEPRO VERSION 4.25")
+      //To DEBUG for the "AGEPRO VERSION 4.0" input file format, replace w/ Resources.Version.INP_AGEPRO40_VersionString
       inpFile.Add(Resources.Version.INP_VersionString); 
 
       //CASEID
