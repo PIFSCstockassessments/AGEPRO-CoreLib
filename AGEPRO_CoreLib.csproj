@@ -81,7 +81,7 @@
     <Compile Include="src\coreLib\options\ReportPercentile.cs" />
     <Compile Include="src\coreLib\options\RetroAdjustmentFactors.cs" />
     <Compile Include="src\coreLib\options\ScaleFactors.cs" />
-    <Compile Include="src\coreLib\options\StockSummaryFlag.cs" />
+    <Compile Include="src\coreLib\options\AuxiliaryOutputFlag.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalCDFZero.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalFixedRecruitment.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalTwoStageRecruitment.cs" />
