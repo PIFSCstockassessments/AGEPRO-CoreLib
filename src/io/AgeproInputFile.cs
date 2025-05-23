@@ -91,7 +91,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[GENERAL]"))
         {
           _ = General.ReadGeneralModelParameters(sr);
-
+          General.InputFile = (sr.BaseStream as FileStream)?.Name;
         }
         else if (line.Equals("[RECRUIT]"))
         {
