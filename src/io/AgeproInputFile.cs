@@ -363,7 +363,7 @@ namespace Nmfs.Agepro.CoreLib
       }
 
       //OPTIONS (Misc Options)
-      if (this.Version == Resources.Version.INP_AGEPRO40_VersionString)
+      if (Version == Resources.Version.INP_AGEPRO40_VersionString)
       {
 #pragma warning disable CS0618 // Type or member is obsolete
         inpFile.AddRange(Options.WriteAgepro40Options());
