@@ -8,11 +8,11 @@ namespace Nmfs.Agepro.CoreLib
 {
   public enum AuxiliaryOutputFlag
   {
-    OutfileNoStockExcludeStockAux = 0,
-    OutfileAppendStockAllAux = 1,
-    OnlyOutfileNoStock = 2,
-    OnlyOutfileAppendStock = 3,
-    OutfileAppendStockExcludeStockAux = 4
+    NoStockAge_ExcludeStockNumAuxFile = 0,
+    StockAge_AllAuxFiles = 1,
+    NoStockAge_NoAuxFiles = 2,
+    StockAge_NoAuxFiles = 3,
+    StockAge_ExcludeStockNumAuxFile = 4
   }
 
   public interface IStockSummary
