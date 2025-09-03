@@ -15,6 +15,9 @@ namespace Nmfs.Agepro.CoreLib
     StockAge_ExcludeStockNumAuxFile = 4
   }
 
+  /// <summary>
+  /// Interface to the AuxiliaryOutputFlag Enum. Refernenced by ControlMiscOptions to set Auxiliary Output Flags
+  /// </summary>
   public interface IStockSummary
   {
     AuxiliaryOutputFlag SummaryAuxFileOutputFlag { get; }
