@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Nmfs.Agepro.CoreLib
 {
@@ -76,8 +77,9 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="sr">SreamReader Object</param>
     private void ReadInputFileLineValues(StreamReader sr)
     {
-      string line;
-      _ = CheckINPVersion(sr);
+      //Line 1 - Version
+      string line = sr.ReadLine();
+      _ = CheckINPVersion(line);
 
       while (!sr.EndOfStream)
       {
@@ -216,12 +218,10 @@ namespace Nmfs.Agepro.CoreLib
     /// <summary>
     /// Checks Printed AGEPRO Input File Version
     /// </summary>
-    /// <param name="sr">Streamreader object to the file connection</param>
+    /// <param name="line">String for AGEPRO Input File Version</param>
     /// <returns></returns>
-    private string CheckINPVersion(StreamReader sr)
+    private string CheckINPVersion(string line)
     {
-      string line = sr.ReadLine();
-
       //Version: AGEPRO (Input File) Version
       var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
       if(AgeproInputFile.INPSupportedVersions.Contains(line))
@@ -274,7 +274,10 @@ namespace Nmfs.Agepro.CoreLib
       //VERSION
       //Saved cases will be saved with AGEPRO's current version INP_VersionString ("AGEPRO VERSION 4.25")
       //To DEBUG for the "AGEPRO VERSION 4.0" input file format, replace w/ Resources.Version.INP_AGEPRO40_VersionString
-      inpFile.Add(Resources.Version.INP_AGEPRO40_VersionString); 
+
+      //TODO: Check to see if VERSION 4.0 Format is Enabled
+      //inpFile.Add(Resources.Version.INP_AGEPRO40_VersionString); 
+      inpFile.Add(Version);
 
       //CASEID
       inpFile.Add("[CASEID]");
