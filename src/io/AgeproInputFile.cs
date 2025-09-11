@@ -9,14 +9,27 @@ namespace Nmfs.Agepro.CoreLib
   /// <summary>
   /// AGEPRO Input File 
   /// </summary>
-  public class AgeproInputFile
+  public class AgeproInputFile : AgeproCoreLibProperty
   {
-    public string Version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
+
+    #region Version
+    //AGEPRO Reference Manual-Calculation Engine Version
+    private string _Version;
+
+    public string Version 
+    { 
+      get => _Version; 
+      set => SetProperty(ref _Version, value);
+    } 
     public string GUI_Version { get; set; }
-    public string CaseID { get; set; }
 
     // Version Constants
-    public static readonly string[] INPSupportedVersions = { Resources.Version.INP_AGEPRO40_VersionString, Resources.Version.INP_VersionString};
+    public static readonly string[] INPSupportedVersions = { Resources.Version.INP_AGEPRO40_VersionString, Resources.Version.INP_VersionString };
+
+    #endregion 
+
+    public string CaseID { get; set; }
+
     
     public AgeproGeneral General = new AgeproGeneral();
     public AgeproBootstrap Bootstrap = new AgeproBootstrap();
