@@ -120,6 +120,7 @@
     <EmbeddedResource Include="Resources\agepro_strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>agepro_strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Version.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
