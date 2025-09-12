@@ -92,6 +92,23 @@ namespace Nmfs.Agepro.CoreLib
       "Please use method WriteAgeproOutputOptions for newer AGEPRO Input File versions")]
     public List<string> WriteAgepro40Options()
     {
+      // Validate and Catch Non Compatible AGEPRO VERSION 4.0 values (Only 0 and 1)
+      if (OutputSummaryReport > 1 || OutputSummaryReport < 0)
+      {
+        throw new InvalidAgeproParameterException("Auxiliary Output flag parameter of "
+          + OutputSummaryReport
+          + " is invalid with the AGEPRO VERSION 4.0 input file format.");
+      }
+      // Fallback incompat check. Impelementation of EnableSummaryReport and OutuptSummaryReport may affect this.
+      if (Convert.ToInt32(EnableSummaryReport) != OutputSummaryReport)
+      {
+        throw new InvalidAgeproParameterException("Auxiliary Output flag parameter of "
+          + OutputSummaryReport
+          + " does not match value of "
+          + Convert.ToInt32(EnableSummaryReport));
+      }
+
+
       return new List<string>
       {
         INP_keyword,

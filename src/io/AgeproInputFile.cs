@@ -381,20 +381,6 @@ namespace Nmfs.Agepro.CoreLib
       //Misc OPTIONS (For AGEPRO VERSION 4.0 input file format)
       if (Version == Resources.Version.INP_AGEPRO40_VersionString)
       {
-        if (Options.OutputSummaryReport > 1 || Options.OutputSummaryReport < 0)
-        {
-          throw new InvalidAgeproParameterException("Auxiliary Output flag parameter of "
-            + Options.OutputSummaryReport
-            + " is invalid with the AGEPRO VERSION 4.0 input file format.");
-        }
-        if (Convert.ToInt32(Options.EnableSummaryReport) != Options.OutputSummaryReport)
-        {
-          throw new InvalidAgeproParameterException("Auxiliary Output flag parameter of "
-            + Options.OutputSummaryReport
-            + " does not match value of "
-            + Convert.ToInt32(Options.EnableSummaryReport));
-        }
-
         //Deprecation note
 #pragma warning disable CS0618 // Type or member is obsolete
         Options.WriteAgepro40Options();
