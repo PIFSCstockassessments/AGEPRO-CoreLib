@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nmfs.Agepro.CoreLib</RootNamespace>
     <AssemblyName>AGEPRO_CoreLib</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,10 +61,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="resources\agepro_strings.Designer.cs">
+    <Compile Include="Resources\agepro_strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>agepro_strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Version.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Version.resx</DependentUpon>
     </Compile>
     <Compile Include="src\coreLib\bio-tspawn\AgeproBioTSpawn.cs" />
     <Compile Include="src\coreLib\bootstrap\AgeproBootstrap.cs" />
@@ -76,6 +82,7 @@
     <Compile Include="src\coreLib\options\ReportPercentile.cs" />
     <Compile Include="src\coreLib\options\RetroAdjustmentFactors.cs" />
     <Compile Include="src\coreLib\options\ScaleFactors.cs" />
+    <Compile Include="src\coreLib\options\AuxiliaryOutputFlag.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalCDFZero.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalFixedRecruitment.cs" />
     <Compile Include="src\coreLib\recruitment\EmpiricalTwoStageRecruitment.cs" />
@@ -110,9 +117,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resources\agepro_strings.resx">
+    <EmbeddedResource Include="Resources\agepro_strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>agepro_strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Version.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Version.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

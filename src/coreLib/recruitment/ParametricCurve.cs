@@ -78,14 +78,19 @@ namespace Nmfs.Agepro.CoreLib
     {
       List<string> outputLines = new List<string>
       {
-        Alpha.ToString().PadRight(12) +
-          Beta.ToString().PadRight(12) +
-          Variance.ToString().PadRight(12)
+        Alpha.ToString().PadRight(12)
+        + new string(' ', 2)
+        + Beta.ToString().PadRight(12)
+        + new string(' ', 2)
+        + Variance.ToString().PadRight(12)
       };
 
       if (Autocorrelated)
       {
-        outputLines.Add(Phi.ToString().PadRight(12) + LastResidual.ToString().PadRight(12));
+        outputLines.Add(new string(' ', 2)
+          + Phi.ToString().PadRight(12)
+          + new string(' ', 2)
+          + LastResidual.ToString().PadRight(12));
       }
 
       return outputLines;

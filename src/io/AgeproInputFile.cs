@@ -2,17 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Nmfs.Agepro.CoreLib
 {
   /// <summary>
   /// AGEPRO Input File 
   /// </summary>
-  public class AgeproInputFile
+  public class AgeproInputFile : AgeproCoreLibProperty
   {
-    public string Version { get; set; } //AGEPRO Reference Manual-Calculation Engine Version
-    public double NumVer { get; set; }
+
+    #region Version
+    //AGEPRO Reference Manual-Calculation Engine Version
+    private string _Version;
+
+    public string Version 
+    { 
+      get => _Version; 
+      set => SetProperty(ref _Version, value);
+    } 
+    public string GUI_Version { get; set; }
+
+    // Version Constants
+    public static readonly string[] INPSupportedVersions = { Resources.Version.INP_AGEPRO40_VersionString, Resources.Version.INP_VersionString };
+
+    #endregion 
+
     public string CaseID { get; set; }
+
+    
     public AgeproGeneral General = new AgeproGeneral();
     public AgeproBootstrap Bootstrap = new AgeproBootstrap();
     public AgeproRecruitment Recruitment = new AgeproRecruitment();
@@ -25,7 +43,7 @@ namespace Nmfs.Agepro.CoreLib
     public AgeproStochasticAgeTable BiologicalMaturity = new AgeproStochasticAgeTable(); //Maturity in Biological
     public AgeproStochasticAgeTable Fishery = new AgeproStochasticAgeTable();
     public AgeproStochasticAgeTable NaturalMortality = new AgeproStochasticAgeTable();
-    public RetroAdjustmentFactors RetroAdjustments = new RetroAdjustmentFactors(); //retroAdjust
+    public RetroAdjustmentFactors RetroAdjustment = new RetroAdjustmentFactors(); //retroAdjust
     public AgeproHarvestScenario HarvestScenario = new AgeproHarvestScenario();
     public AgeproStochasticAgeTable DiscardFraction = new AgeproStochasticAgeTable(); //discard fraction
     public Bounds Bounds = new Bounds(); //bounds
@@ -38,7 +56,10 @@ namespace Nmfs.Agepro.CoreLib
 
     public AgeproInputFile()
     {
-      CaseID = "";
+      this.CaseID = "";
+      this.Version = Resources.Version.INP_VersionString;
+      this.GUI_Version = Resources.Version.GUI_Version;
+
     }
 
     /// <summary>
@@ -69,8 +90,9 @@ namespace Nmfs.Agepro.CoreLib
     /// <param name="sr">SreamReader Object</param>
     private void ReadInputFileLineValues(StreamReader sr)
     {
-      string line;
-      _ = CheckINPVersion(sr);
+      //Line 1 - Version
+      string line = sr.ReadLine();
+      _ = CheckINPVersion(line);
 
       while (!sr.EndOfStream)
       {
@@ -84,7 +106,7 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[GENERAL]"))
         {
           _ = General.ReadGeneralModelParameters(sr);
-
+          General.InputFile = (sr.BaseStream as FileStream)?.Name;
         }
         else if (line.Equals("[RECRUIT]"))
         {
@@ -159,11 +181,12 @@ namespace Nmfs.Agepro.CoreLib
         else if (line.Equals("[RETROADJUST]"))
         {
           Options.EnableRetroAdjustmentFactors = true;
-          _ = RetroAdjustments.ReadRetroAdjustmentFactorsTable(sr, General);
+          _ = RetroAdjustment.ReadRetroAdjustmentFactorsTable(sr, General);
         }
         else if (line.Equals("[OPTIONS]"))
         {
-          _ = Options.ReadAgeproOptions(sr);
+          ReadOutputOptions(sr);
+
         }
         else if (line.Equals("[SCALE]"))
         {
@@ -185,20 +208,38 @@ namespace Nmfs.Agepro.CoreLib
     }
 
     /// <summary>
+    /// Helper function to read OPTIONS keyword parameter for the AGEPRO Input File, 
+    /// depending on version. AGEPRO input file formated to version 4.0 will read stock 
+    /// summary flags as a boolean. Stock summary flags for the AGEPRO input file 4.25 
+    /// format will be read as an integer.
+    /// </summary>
+    /// <param name="sr">Streamreader object to the file connection</param>
+    private void ReadOutputOptions(StreamReader sr)
+    {
+      if (this.Version == Resources.Version.INP_AGEPRO40_VersionString)
+      {
+#pragma warning disable CS0618 // Type or member is obsolete
+        _ = Options.ReadAgepro40Options(sr);
+#pragma warning restore CS0618 // Type or member is obsolete
+      }
+      else
+      {
+        _ = Options.ReadAgeproOutputOptions(sr);
+      }
+    }
+
+    /// <summary>
     /// Checks Printed AGEPRO Input File Version
     /// </summary>
-    /// <param name="sr"></param>
+    /// <param name="line">String for AGEPRO Input File Version</param>
     /// <returns></returns>
-    private string CheckINPVersion(StreamReader sr)
+    private string CheckINPVersion(string line)
     {
-      string line = sr.ReadLine();
-
       //Version: AGEPRO (Input File) Version
-      var supportedINPVer = new[] { "AGEPRO VERSION 4.0", "AGEPRO VERSION 4.2" };
       var incompatibleINPVer = new[] { "AGEPRO VERSION 3.2", "AGEPRO VERSION 3.3" };
-      if (supportedINPVer.Contains(line))
+      if(AgeproInputFile.INPSupportedVersions.Contains(line))
       {
-        Version = line;
+        this.Version = line;
       }
       else if (incompatibleINPVer.Contains(line))
       {
@@ -244,7 +285,12 @@ namespace Nmfs.Agepro.CoreLib
       List<string> inpFile = new List<string>();
 
       //VERSION
-      inpFile.Add(Version); //New cases will have "AGEPRO VERSION 4.2"
+      //Saved cases will be saved with AGEPRO's current version INP_VersionString ("AGEPRO VERSION 4.25")
+      //To DEBUG for the "AGEPRO VERSION 4.0" input file format, replace w/ Resources.Version.INP_AGEPRO40_VersionString
+
+      //TODO: Check to see if VERSION 4.0 Format is Enabled
+      //inpFile.Add(Resources.Version.INP_AGEPRO40_VersionString); 
+      inpFile.Add(Version);
 
       //CASEID
       inpFile.Add("[CASEID]");
@@ -329,11 +375,23 @@ namespace Nmfs.Agepro.CoreLib
       //RETROADJUST (Misc Options: Retro Adjustment Factors)
       if (Options.EnableRetroAdjustmentFactors)
       {
-        inpFile.AddRange(RetroAdjustments.WriteRetroAdjustmentFactorsTable());
+        inpFile.AddRange(RetroAdjustment.WriteRetroAdjustmentFactorsTable());
       }
 
-      //OPTIONS (Misc Options)
-      inpFile.AddRange(Options.WriteAgeproOptions());
+      //Misc OPTIONS (For AGEPRO VERSION 4.0 input file format)
+      if (Version == Resources.Version.INP_AGEPRO40_VersionString)
+      {
+        //Deprecation note
+#pragma warning disable CS0618 // Type or member is obsolete
+        Options.WriteAgepro40Options();
+#pragma warning restore CS0618 // Type or member is obsolete
+      }
+      //Misc OPTIONS (For AGEPRO VERSION 4.25+ input file format)
+      else
+      {
+        inpFile.AddRange(Options.WriteAgeproOutputOptions());
+      }
+
 
       //SCALE FACTORS
       if (Options.EnableScaleFactors)
